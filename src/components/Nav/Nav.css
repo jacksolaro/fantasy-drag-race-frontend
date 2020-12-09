@@ -1,0 +1,106 @@
+/* ========================================
+NAV STYLING
+======================================== */
+
+.nav {
+  width: 100%;
+  padding: 10px;
+  height: 45px;
+  z-index: 2;
+  display: flex;
+  justify-content: space-between;
+  background-color: transparent;
+  position: absolute;
+}
+
+.nav-hamburger {
+  display: none;
+}
+
+.nav-logo {
+  display: block;
+  color: white;
+  text-align: center;
+  text-decoration: none;
+  padding: 7.5px;
+}
+
+.nav-logo:hover {
+  text-decoration: none;
+  color: rgba(235, 126, 62, 1);
+}
+
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+li {
+  float: right;
+  margin-right: 15px;
+}
+
+li a {
+  display: block;
+  color: white;
+  text-align: center;
+  text-decoration: none;
+}
+
+li a:hover {
+  display: block;
+  color: rgba(235, 126, 62, 1);
+  text-align: center;
+  text-decoration: none;
+}
+
+.active {
+  display: block;
+}
+
+.MuiPaper-root {
+  background-color: #424242 !important;
+}
+
+.drawer__list {
+  display: flex;
+  flex-direction: column;
+}
+
+.drawer__item {
+  padding: 15px;
+  width: 200px;
+  color: white;
+  font-weight: 500;
+  /* border: 1px gray solid; */
+}
+
+.drawer__list > a {
+  text-decoration: none;
+}
+.drawer__list > a:hover {
+  text-decoration: none;
+  font: black !important;
+}
+
+.drawer__item:hover {
+  background-color: gray;
+}
+
+.nav__hamburger {
+  display: none;
+}
+
+/* MEDIA QUERIES */
+
+/* When the screen is less than 600 pixels wide, hide all links, except for the first one ("Home"). Show the link that contains should open and close the topnav (.icon) */
+@media screen and (max-width: 600px) {
+  .nav-item {
+    display: none;
+  }
+  .nav__hamburger {
+    float: right;
+    display: block;
+  }
+}
