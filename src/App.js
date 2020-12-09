@@ -5,6 +5,8 @@ import Nav from "./components/Nav/Nav.js";
 import Footer from "./components/Footer/Footer.js";
 import Leagues from "./pages/Leagues/Leagues.js";
 import Home from "./pages/Home/Home.js";
+import CreateLeague from "./pages/CreateLeague/CreateLeague";
+import JoinLeague from "./pages/JoinLeague/JoinLeague";
 
 function App() {
   return (
@@ -17,6 +19,12 @@ function App() {
         <Switch>
           <Route path={`${process.env.PUBLIC_URL}/leagues`}>
             <Leagues />
+          </Route>
+          <Route path={`${process.env.PUBLIC_URL}/createleague`}>
+            <CreateLeague />
+          </Route>
+          <Route path={`${process.env.PUBLIC_URL}/joinleague`}>
+            <JoinLeague />
           </Route>
           <Route path={`${process.env.PUBLIC_URL}/`}>
             <Home />

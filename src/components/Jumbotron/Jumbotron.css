@@ -1,0 +1,39 @@
+.jumbotron__main {
+  position: relative;
+  /* background-image: url("../../images/jumbo_bkg.jpg"); */
+  height: 90vh;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.jumbotron__content {
+  position: absolute;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 95%;
+  text-align: center;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.jumbotron__title {
+  font-size: 5rem;
+  color: white;
+  /* background: -webkit-linear-gradient(
+    339deg,
+    rgba(255, 74, 118, 1) 0%,
+    rgba(235, 126, 62, 1) 50%,
+    rgba(245, 51, 78, 1) 100%
+  );
+  -webkit-background-clip: text;
+  background-clip: none;
+  -webkit-text-fill-color: transparent; */
+}
+
+.jumbotron__subtitle {
+  font-size: 2rem;
+  color: lightgray;
+}

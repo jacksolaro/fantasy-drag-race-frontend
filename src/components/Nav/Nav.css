@@ -4,7 +4,6 @@ NAV STYLING
 
 .nav {
   width: 100%;
-  padding: 10px;
   height: 45px;
   z-index: 2;
   display: flex;
