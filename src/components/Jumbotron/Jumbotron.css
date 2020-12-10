@@ -1,7 +1,7 @@
 .jumbotron__main {
   position: relative;
   /* background-image: url("../../images/jumbo_bkg.jpg"); */
-  height: 90vh;
+  /* height: 90vh; */
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
@@ -22,6 +22,7 @@
 .jumbotron__title {
   font-size: 5rem;
   color: white;
+  margin-top: 0px;
   /* background: -webkit-linear-gradient(
     339deg,
     rgba(255, 74, 118, 1) 0%,
@@ -34,6 +35,11 @@
 }
 
 .jumbotron__subtitle {
+  margin: 0px;
   font-size: 2rem;
-  color: lightgray;
+  color: white;
+}
+
+.jumbotron__logo {
+  max-height: 300px;
 }

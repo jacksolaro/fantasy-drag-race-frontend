@@ -1,0 +1,11 @@
+.Home__SeasonCard {
+  height: 500px;
+  width: 400px;
+  background-color: white !important;
+}
+
+.Home__SeasonCardImg {
+  height: 350px;
+  width: 400px;
+  object-fit: cover;
+}

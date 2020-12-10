@@ -18,7 +18,11 @@ function CreateLeague() {
 
   return (
     <div>
-      <Jumbotron image={createLeagueBkg} headline="CREATE A LEAGUE"></Jumbotron>
+      <Jumbotron
+        image={createLeagueBkg}
+        height="300"
+        headline="CREATE A LEAGUE"
+      ></Jumbotron>
       <Container maxWidth="md">
         <h1>Create a League</h1>
         <p>

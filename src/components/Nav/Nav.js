@@ -48,13 +48,18 @@ function Nav() {
         {/* <MenuIcon className="nav-hamburger" onClick={openNav}></MenuIcon> */}
         <ul>
           <li className="nav-item">
-            <Link className="nav-link" to="/">
-              Home
+            <Link className="nav-link" to="/profile">
+              Profile
             </Link>
           </li>
           <li className="nav-item">
             <Link className="nav-link" to="/leagues">
               Leagues
+            </Link>
+          </li>
+          <li className="nav-item">
+            <Link className="nav-link" to="/">
+              Home
             </Link>
           </li>
         </ul>
