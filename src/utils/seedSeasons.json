@@ -1,0 +1,9 @@
+[
+    {
+        "id": 1,
+        "name": "RuPaul's Drag Race",
+        "season": 13,
+        "image": "../../assets/images/rpdr_s13_poster.jpg",
+        "active": true
+    }
+]
