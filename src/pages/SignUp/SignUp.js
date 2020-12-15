@@ -9,6 +9,7 @@ import Link from "@material-ui/core/Link";
 import Paper from "@material-ui/core/Paper";
 import Box from "@material-ui/core/Box";
 import Grid from "@material-ui/core/Grid";
+import Alert from "@material-ui/lab/Alert";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
@@ -62,24 +63,38 @@ const useStyles = makeStyles((theme) => ({
 
 export default function SignUp() {
   const classes = useStyles();
-  const emailRef = useRef();
-  const passwordRef = useRef();
-  const passwordConfirmRef = useRef();
-  const { signup } = useAuth();
+  const [signUpFormState, setSignUpFormState] = useState({
+    firstName: "",
+    lastName: "",
+    email: "",
+    password: "",
+    passwordConfirm: "",
+  });
+
+  const { signup, currentUser } = useAuth();
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
+
+  const handleInputChange = (event) => {
+    event.preventDefault();
+    const { name, value } = event.target;
+    setSignUpFormState({
+      ...signUpFormState,
+      [name]: value,
+    });
+  };
 
   async function handleSubmit(e) {
     e.preventDefault();
 
-    if (passwordRef.current.value !== passwordConfirmRef.current.value) {
+    if (signUpFormState.password !== signUpFormState.passwordConfirm) {
       return setError("Passwords do not match");
     }
 
     try {
       setError("");
       setLoading(true);
-      await signup(emailRef.current.value, passwordRef.current.value);
+      await signup(signUpFormState.email, signUpFormState.password);
     } catch {
       setError("Failed to create an account");
     }
@@ -98,7 +113,8 @@ export default function SignUp() {
           <Typography component="h1" variant="h5">
             Sign up
           </Typography>
-          {error && <p>Error Something Happened</p>}
+          {JSON.stringify(currentUser)}
+          {error && <Alert severity="error">{error}</Alert>}
           <form className={classes.form} noValidate onSubmit={handleSubmit}>
             <Grid container spacing={2}>
               <Grid item xs={12} sm={6}>
@@ -110,6 +126,7 @@ export default function SignUp() {
                   fullWidth
                   id="firstName"
                   label="First Name"
+                  onChange={handleInputChange}
                   autoFocus
                 />
               </Grid>
@@ -122,6 +139,7 @@ export default function SignUp() {
                   label="Last Name"
                   name="lastName"
                   autoComplete="lname"
+                  onChange={handleInputChange}
                 />
               </Grid>
               <Grid item xs={12}>
@@ -133,7 +151,7 @@ export default function SignUp() {
                   label="Email Address"
                   name="email"
                   autoComplete="email"
-                  ref={emailRef}
+                  onChange={handleInputChange}
                 />
               </Grid>
               <Grid item xs={12}>
@@ -146,7 +164,7 @@ export default function SignUp() {
                   type="password"
                   id="password"
                   autoComplete="current-password"
-                  ref={passwordRef}
+                  onChange={handleInputChange}
                 />
               </Grid>
               <Grid item xs={12}>
@@ -158,7 +176,7 @@ export default function SignUp() {
                   label="Confirm Password"
                   type="password"
                   id="passwordConfirm"
-                  ref={passwordConfirmRef}
+                  onChange={handleInputChange}
                 />
               </Grid>
               <Grid item xs={12}>
