@@ -6,7 +6,6 @@ import derbyLogo from "../../assets/images/derby_logo_pink-01.png";
 import Typography from "@material-ui/core/Typography";
 import Container from "@material-ui/core/Container";
 import ShowCard from "../../components/ShowCard/ShowCard";
-import Authentication from "../SignIn/SignIn";
 
 function Home() {
   return (

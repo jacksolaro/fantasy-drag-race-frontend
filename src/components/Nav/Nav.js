@@ -48,8 +48,8 @@ function Nav() {
         {/* <MenuIcon className="nav-hamburger" onClick={openNav}></MenuIcon> */}
         <ul>
           <li className="nav-item">
-            <Link className="nav-link" to="/profile">
-              Profile
+            <Link className="nav-link" to="/signup">
+              Sign Up
             </Link>
           </li>
           <li className="nav-item">

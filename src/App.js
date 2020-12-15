@@ -7,6 +7,8 @@ import Leagues from "./pages/Leagues/Leagues.js";
 import Home from "./pages/Home/Home.js";
 import CreateLeague from "./pages/CreateLeague/CreateLeague";
 import JoinLeague from "./pages/JoinLeague/JoinLeague";
+import SignUp from "./pages/SignUp/SignUp";
+import { AuthProvider } from "./contexts/AuthContext";
 
 function App() {
   return (
@@ -16,21 +18,26 @@ function App() {
           <Nav></Nav>
         </nav>
 
-        <Switch>
-          <Route path={`${process.env.PUBLIC_URL}/leagues`}>
-            <Leagues />
-          </Route>
-          <Route path={`${process.env.PUBLIC_URL}/createleague`}>
-            <CreateLeague />
-          </Route>
-          <Route path={`${process.env.PUBLIC_URL}/joinleague`}>
-            <JoinLeague />
-          </Route>
-          <Route path={`${process.env.PUBLIC_URL}/`}>
-            <Home />
-          </Route>
-          <Route component={Home} />
-        </Switch>
+        <AuthProvider>
+          <Switch>
+            <Route path={`${process.env.PUBLIC_URL}/signup`}>
+              <SignUp />
+            </Route>
+            <Route path={`${process.env.PUBLIC_URL}/leagues`}>
+              <Leagues />
+            </Route>
+            <Route path={`${process.env.PUBLIC_URL}/createleague`}>
+              <CreateLeague />
+            </Route>
+            <Route path={`${process.env.PUBLIC_URL}/joinleague`}>
+              <JoinLeague />
+            </Route>
+            <Route path={`${process.env.PUBLIC_URL}/`}>
+              <Home />
+            </Route>
+            <Route component={Home} />
+          </Switch>
+        </AuthProvider>
 
         <footer>
           <Footer></Footer>
