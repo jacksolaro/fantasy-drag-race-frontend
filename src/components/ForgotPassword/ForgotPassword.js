@@ -14,8 +14,6 @@ import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import { useAuth } from "../../contexts/AuthContext";
-import { useHistory } from "react-router-dom";
-import { HistoryRounded } from "@material-ui/icons";
 
 function Copyright() {
   return (
@@ -63,19 +61,16 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function Login() {
+export default function ForgotPassword() {
   const classes = useStyles();
   const [loginFormState, setLoginFormState] = useState({
-    firstName: "",
-    lastName: "",
     email: "",
-    password: "",
   });
 
-  const { login } = useAuth();
+  const { resetPassword } = useAuth();
   const [error, setError] = useState("");
+  const [message, setMessage] = useState("");
   const [loading, setLoading] = useState(false);
-  const history = useHistory();
 
   const handleInputChange = (event) => {
     event.preventDefault();
@@ -90,12 +85,13 @@ export default function Login() {
     e.preventDefault();
 
     try {
+      setMessage("");
       setError("");
       setLoading(true);
-      await login(loginFormState.email, loginFormState.password);
-      history.push("/");
+      await resetPassword(loginFormState.email);
+      setMessage("Check your inbox for further instructions");
     } catch {
-      setError("Failed to sign in");
+      setError("Failed to reset password");
       console.log(loginFormState.email, loginFormState.password);
     }
     setLoading(false);
@@ -111,9 +107,10 @@ export default function Login() {
             <LockOutlinedIcon />
           </Avatar>
           <Typography component="h1" variant="h5">
-            Log In
+            Password Reset
           </Typography>
           {error && <Alert severity="error">{error}</Alert>}
+          {message && <Alert severity="success">{message}</Alert>}
           <form className={classes.form} noValidate onSubmit={handleSubmit}>
             <Grid container spacing={2}>
               <Grid item xs={12}>
@@ -128,24 +125,11 @@ export default function Login() {
                   onChange={handleInputChange}
                 />
               </Grid>
-              <Grid item xs={12}>
-                <TextField
-                  variant="outlined"
-                  required
-                  fullWidth
-                  name="password"
-                  label="Password"
-                  type="password"
-                  id="password"
-                  autoComplete="current-password"
-                  onChange={handleInputChange}
-                />
-              </Grid>
             </Grid>
             <Grid container justify="flex-end">
               <Grid item>
-                <Link href="/forgot-password" variant="body2">
-                  Forgot Password?
+                <Link href="/login" variant="body2">
+                  Login?
                 </Link>
               </Grid>
             </Grid>
@@ -158,7 +142,7 @@ export default function Login() {
               className={classes.submit}
               disabled={loading}
             >
-              Log In
+              Reset Password
             </Button>
             <Grid container justify="flex-end">
               <Grid item>

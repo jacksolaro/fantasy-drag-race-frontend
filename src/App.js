@@ -10,6 +10,8 @@ import SignUp from "./pages/SignUp/SignUp";
 import Login from "./pages/Login/Login";
 import { AuthProvider } from "./contexts/AuthContext";
 import Nav from "./components/Nav/Nav";
+import ForgotPassword from "./components/ForgotPassword/ForgotPassword";
+import LeagueDetails from "./pages/LeagueDetails/LeagueDetails";
 
 function App() {
   return (
@@ -20,8 +22,14 @@ function App() {
             <Nav></Nav>
           </nav>
           <Switch>
+            <Route path={`${process.env.PUBLIC_URL}/leagues/:id`}>
+              <LeagueDetails />
+            </Route>
             <Route path={`${process.env.PUBLIC_URL}/signup`}>
               <SignUp />
+            </Route>
+            <Route path={`${process.env.PUBLIC_URL}/forgot-password`}>
+              <ForgotPassword />
             </Route>
             <Route path={`${process.env.PUBLIC_URL}/login`}>
               <Login />
