@@ -8,6 +8,7 @@ import Home from "./pages/Home/Home.js";
 import CreateLeague from "./pages/CreateLeague/CreateLeague";
 import JoinLeague from "./pages/JoinLeague/JoinLeague";
 import SignUp from "./pages/SignUp/SignUp";
+import Login from "./pages/Login/Login";
 import { AuthProvider } from "./contexts/AuthContext";
 
 function App() {
@@ -22,6 +23,9 @@ function App() {
           <Switch>
             <Route path={`${process.env.PUBLIC_URL}/signup`}>
               <SignUp />
+            </Route>
+            <Route path={`${process.env.PUBLIC_URL}/login`}>
+              <Login />
             </Route>
             <Route path={`${process.env.PUBLIC_URL}/leagues`}>
               <Leagues />

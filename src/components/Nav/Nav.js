@@ -3,9 +3,12 @@ import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import MenuIcon from "@material-ui/icons/Menu";
 import Drawer from "@material-ui/core/SwipeableDrawer";
 import "./Nav.css";
+import { useAuth } from "../../contexts/AuthContext";
 
 function Nav() {
   const [isExpanded, setIsExpanded] = useState(false);
+
+  const { currentUser } = useAuth();
 
   const toggleDrawer = (anchor, open) => (event) => {
     if (typeof event === "undefined") {
@@ -47,11 +50,13 @@ function Nav() {
 
         {/* <MenuIcon className="nav-hamburger" onClick={openNav}></MenuIcon> */}
         <ul>
-          <li className="nav-item">
-            <Link className="nav-link" to="/signup">
-              Sign Up
-            </Link>
-          </li>
+          {!currentUser && (
+            <li className="nav-item">
+              <Link className="nav-link" to="/signup">
+                Sign Up
+              </Link>
+            </li>
+          )}
           <li className="nav-item">
             <Link className="nav-link" to="/leagues">
               Leagues

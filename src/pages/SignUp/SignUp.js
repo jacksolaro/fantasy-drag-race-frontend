@@ -14,6 +14,7 @@ import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import { useAuth } from "../../contexts/AuthContext";
+import { useHistory } from "react-router-dom";
 
 function Copyright() {
   return (
@@ -71,9 +72,10 @@ export default function SignUp() {
     passwordConfirm: "",
   });
 
-  const { signup, currentUser } = useAuth();
+  const { signup } = useAuth();
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
+  const history = useHistory();
 
   const handleInputChange = (event) => {
     event.preventDefault();
@@ -95,8 +97,10 @@ export default function SignUp() {
       setError("");
       setLoading(true);
       await signup(signUpFormState.email, signUpFormState.password);
+      history.push("/");
     } catch {
       setError("Failed to create an account");
+      console.log(signUpFormState.email, signUpFormState.password);
     }
     setLoading(false);
   }
@@ -113,7 +117,6 @@ export default function SignUp() {
           <Typography component="h1" variant="h5">
             Sign up
           </Typography>
-          {JSON.stringify(currentUser)}
           {error && <Alert severity="error">{error}</Alert>}
           <form className={classes.form} noValidate onSubmit={handleSubmit}>
             <Grid container spacing={2}>
@@ -201,7 +204,7 @@ export default function SignUp() {
             </Button>
             <Grid container justify="flex-end">
               <Grid item>
-                <Link href="#" variant="body2">
+                <Link href="/login" variant="body2">
                   Already have an account? Sign in
                 </Link>
               </Grid>
