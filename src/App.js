@@ -1,7 +1,6 @@
 import "./App.css";
 import React from "react";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
-import Nav from "./components/Nav/Nav.js";
 import Footer from "./components/Footer/Footer.js";
 import Leagues from "./pages/Leagues/Leagues.js";
 import Home from "./pages/Home/Home.js";
@@ -10,16 +9,16 @@ import JoinLeague from "./pages/JoinLeague/JoinLeague";
 import SignUp from "./pages/SignUp/SignUp";
 import Login from "./pages/Login/Login";
 import { AuthProvider } from "./contexts/AuthContext";
+import Nav from "./components/Nav/Nav";
 
 function App() {
   return (
     <Router>
       <div>
-        <nav>
-          <Nav></Nav>
-        </nav>
-
         <AuthProvider>
+          <nav>
+            <Nav></Nav>
+          </nav>
           <Switch>
             <Route path={`${process.env.PUBLIC_URL}/signup`}>
               <SignUp />
