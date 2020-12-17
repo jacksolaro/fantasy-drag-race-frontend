@@ -58,6 +58,7 @@ function SelectSeasonRoster() {
       db.collection(`leagues`).doc(params.id).collection("picks").add({
         userID: currentUser.uid,
         seasonPicks: { seasonPicks },
+        episodePicks: [],
       });
       history.push(`/leagues/${params.id}`);
     } catch {

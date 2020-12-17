@@ -1,0 +1,21 @@
+.SelectEpisodeRoster__selectImg {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+}
+
+.SelectEpisodeRoster__selectName {
+  font-size: 2rem;
+}
+
+.SelectEpisodeRoster__MenuItem {
+  display: block;
+  /* background-color: blue; */
+  /* width: 300px; */
+  float: left;
+}
+
+.SelectEpisodeRoster__Select {
+  display: inline;
+  /* background-color: red; */
+}

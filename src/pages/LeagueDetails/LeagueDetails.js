@@ -46,7 +46,9 @@ function LeagueDetails() {
       <Link to={`/leagues/${params.id}/selectseasonroster`}>
         Select Season Roster
       </Link>
-      <Link>Select Episode Roster</Link>
+      <Link to={`/leagues/${params.id}/selectepisoderoster`}>
+        Select Episode Roster
+      </Link>
 
       {/* League Details */}
       <h3>Next Episode Airs: 1/1/2021</h3>

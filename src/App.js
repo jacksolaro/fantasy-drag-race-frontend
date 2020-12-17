@@ -13,6 +13,7 @@ import Nav from "./components/Nav/Nav";
 import ForgotPassword from "./components/ForgotPassword/ForgotPassword";
 import LeagueDetails from "./pages/LeagueDetails/LeagueDetails";
 import SelectSeasonRoster from "./pages/SelectSeasonRoster/SelectSeasonRoster";
+import SelectEpisodeRoster from "./pages/SelectEpisodeRoster/SelectEpisodeRoster";
 
 function App() {
   return (
@@ -27,6 +28,11 @@ function App() {
               path={`${process.env.PUBLIC_URL}/leagues/:id/selectseasonroster`}
             >
               <SelectSeasonRoster />
+            </Route>
+            <Route
+              path={`${process.env.PUBLIC_URL}/leagues/:id/selectepisoderoster`}
+            >
+              <SelectEpisodeRoster />
             </Route>
             <Route path={`${process.env.PUBLIC_URL}/leagues/:id`}>
               <LeagueDetails />
