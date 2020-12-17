@@ -1,0 +1,21 @@
+.SelectSeasonRoster__selectImg {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+}
+
+.SelectSeasonRoster__selectName {
+  font-size: 2rem;
+}
+
+.SelectSeasonRoster__MenuItem {
+  display: block;
+  /* background-color: blue; */
+  /* width: 300px; */
+  float: left;
+}
+
+.SelectSeasonRoster__Select {
+  display: inline;
+  /* background-color: red; */
+}

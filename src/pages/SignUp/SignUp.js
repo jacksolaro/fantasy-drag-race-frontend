@@ -100,7 +100,6 @@ export default function SignUp() {
       history.push("/");
     } catch {
       setError("Failed to create an account");
-      console.log(signUpFormState.email, signUpFormState.password);
     }
     setLoading(false);
   }

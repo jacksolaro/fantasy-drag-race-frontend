@@ -12,6 +12,7 @@ import { AuthProvider } from "./contexts/AuthContext";
 import Nav from "./components/Nav/Nav";
 import ForgotPassword from "./components/ForgotPassword/ForgotPassword";
 import LeagueDetails from "./pages/LeagueDetails/LeagueDetails";
+import SelectSeasonRoster from "./pages/SelectSeasonRoster/SelectSeasonRoster";
 
 function App() {
   return (
@@ -22,6 +23,11 @@ function App() {
             <Nav></Nav>
           </nav>
           <Switch>
+            <Route
+              path={`${process.env.PUBLIC_URL}/leagues/:id/selectseasonroster`}
+            >
+              <SelectSeasonRoster />
+            </Route>
             <Route path={`${process.env.PUBLIC_URL}/leagues/:id`}>
               <LeagueDetails />
             </Route>
