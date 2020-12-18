@@ -126,6 +126,7 @@ function SelectEpisodeRoster() {
             This is the winner of the episode. If there is more than one winner,
             points will be assigned if you have selected one of the winners.
           </p>
+
           <div>
             <FormControl className={classes.formControl}>
               <InputLabel id="demo-simple-select-label">
@@ -139,46 +140,19 @@ function SelectEpisodeRoster() {
                 onChange={handleChange}
                 className="SelectEpisodeRoster__Select"
               >
-                <div value={10}>
-                  <MenuItem className="SelectEpisodeRoster__MenuItem">
-                    <img
-                      className="SelectEpisodeRoster__selectImg"
-                      src={s13Poster}
-                    ></img>
-                    <p className="SelectEpisodeRoster__selectName">
-                      Miss Vangie
-                    </p>
-                  </MenuItem>
-                </div>
-                <div value={20}>
-                  <MenuItem className="SelectEpisodeRoster__MenuItem">
-                    <img
-                      className="SelectEpisodeRoster__selectImg"
-                      src={s13Poster}
-                    ></img>
-                    <p className="SelectEpisodeRoster__selectName">Trixie</p>
-                  </MenuItem>
-                </div>
-                <div value={30}>
-                  <MenuItem className="SelectEpisodeRoster__MenuItem">
-                    <img
-                      className="SelectEpisodeRoster__selectImg"
-                      src={s13Poster}
-                    ></img>
-                    <p className="SelectEpisodeRoster__selectName">Katya</p>
-                  </MenuItem>
-                </div>
-                <div value={40}>
-                  <MenuItem className="SelectEpisodeRoster__MenuItem">
-                    <img
-                      className="SelectEpisodeRoster__selectImg"
-                      src={s13Poster}
-                    ></img>
-                    <p className="SelectEpisodeRoster__selectName">
-                      Delta Work
-                    </p>
-                  </MenuItem>
-                </div>
+                {queens.map((queen) => (
+                  <div value={10}>
+                    <MenuItem className="SelectEpisodeRoster__MenuItem">
+                      <img
+                        className="SelectEpisodeRoster__selectImg"
+                        src={queen.imageURL}
+                      ></img>
+                      <p className="SelectEpisodeRoster__selectName">
+                        {queen.name}
+                      </p>
+                    </MenuItem>
+                  </div>
+                ))}
               </Select>
             </FormControl>
           </div>
