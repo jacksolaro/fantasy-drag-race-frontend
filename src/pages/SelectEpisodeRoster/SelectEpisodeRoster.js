@@ -9,7 +9,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import React, { useEffect, useState } from "react";
 import s13Poster from "../../assets/images/rpdr_s13_poster.jpg";
 import "./SelectEpisodeRoster.css";
-import { db } from "../../firebase";
+import { db, storage } from "../../firebase";
 import { useAuth } from "../../contexts/AuthContext";
 import { useParams } from "react-router-dom";
 import { useHistory } from "react-router-dom";
@@ -55,7 +55,15 @@ function SelectEpisodeRoster() {
       .get()
       .then(function (querySnapshot) {
         querySnapshot.forEach(function (doc) {
+          //   storage
+          //     .refFromURL(doc.data().imageURL)
+          //     .getDownloadURL()
+          //     .then(function (url) {
+          //       tempQueen.imageURL = url;
+          //     });
           queensArr.push(doc.data());
+          console.log("queens", queens);
+          console.log("queensArr", queensArr);
         });
         setQueens(queensArr);
       });
@@ -119,7 +127,7 @@ function SelectEpisodeRoster() {
       </p>
 
       <form onSubmit={handleSubmit}>
-        {/* Season Winner Select */}
+        {/* Episode Winner Select */}
         <div>
           <h2>Episode Winner</h2>
           <p>
@@ -141,7 +149,225 @@ function SelectEpisodeRoster() {
                 className="SelectEpisodeRoster__Select"
               >
                 {queens.map((queen) => (
-                  <div value={10}>
+                  <div value={10} key={queen.name}>
+                    <MenuItem className="SelectEpisodeRoster__MenuItem">
+                      <img
+                        className="SelectEpisodeRoster__selectImg"
+                        src={queen.imageURL}
+                      ></img>
+                      <p className="SelectEpisodeRoster__selectName">
+                        {queen.name}
+                      </p>
+                    </MenuItem>
+                  </div>
+                ))}
+              </Select>
+            </FormControl>
+          </div>
+        </div>
+
+        {/* Maxi Challenge Winner Select */}
+        <div>
+          <h2>Maxi Challenge Winner</h2>
+          <p>
+            This is the winner of the main challenge of the episode. If there is
+            more than one winner, points will be awarded if you have selected
+            one of the winners.
+          </p>
+
+          <div>
+            <FormControl className={classes.formControl}>
+              <InputLabel id="demo-simple-select-label">
+                Maxi Challenge Winner
+              </InputLabel>
+              <Select
+                labelId="maxiChallengeWinner"
+                id="maxiChallengeWinner"
+                name="maxiChallengeWinner"
+                value={episodePicks.maxiChallengeWinner}
+                onChange={handleChange}
+                className="SelectEpisodeRoster__Select"
+              >
+                {queens.map((queen) => (
+                  <div value={10} key={queen.name}>
+                    <MenuItem className="SelectEpisodeRoster__MenuItem">
+                      <img
+                        className="SelectEpisodeRoster__selectImg"
+                        src={queen.imageURL}
+                      ></img>
+                      <p className="SelectEpisodeRoster__selectName">
+                        {queen.name}
+                      </p>
+                    </MenuItem>
+                  </div>
+                ))}
+              </Select>
+            </FormControl>
+          </div>
+        </div>
+
+        {/* Mini Challenge Winner Select */}
+        <div>
+          <h2>Mini Challenge Winner</h2>
+          <p>
+            This is the winner of the main challenge of the episode. If there is
+            more than one winner, points will be awarded if you have selected
+            one of the winners.
+          </p>
+
+          <div>
+            <FormControl className={classes.formControl}>
+              <InputLabel id="demo-simple-select-label">
+                Mini Challenge Winner
+              </InputLabel>
+              <Select
+                labelId="miniChallengeWinner"
+                id="miniChallengeWinner"
+                name="miniChallengeWinner"
+                value={episodePicks.miniChallengeWinner}
+                onChange={handleChange}
+                className="SelectEpisodeRoster__Select"
+              >
+                {queens.map((queen) => (
+                  <div value={10} key={queen.name}>
+                    <MenuItem className="SelectEpisodeRoster__MenuItem">
+                      <img
+                        className="SelectEpisodeRoster__selectImg"
+                        src={queen.imageURL}
+                      ></img>
+                      <p className="SelectEpisodeRoster__selectName">
+                        {queen.name}
+                      </p>
+                    </MenuItem>
+                  </div>
+                ))}
+              </Select>
+            </FormControl>
+          </div>
+        </div>
+
+        {/* Top 2 of the Week Select */}
+        <div>
+          <h2>Top 2 of the Week</h2>
+          <p>
+            This is the top two queens of the week (in no particular order). If
+            there is a number of queens in the top other than 2, you will
+            receive points for each queen you have that is in the top.
+          </p>
+
+          <div>
+            <FormControl className={classes.formControl}>
+              <InputLabel id="demo-simple-select-label">
+                Top Queen of the Week #1
+              </InputLabel>
+              <Select
+                labelId="topQueen1"
+                id="topQueen1"
+                name="topQueen1"
+                value={episodePicks.topQueen1}
+                onChange={handleChange}
+                className="SelectEpisodeRoster__Select"
+              >
+                {queens.map((queen) => (
+                  <div value={10} key={queen.name}>
+                    <MenuItem className="SelectEpisodeRoster__MenuItem">
+                      <img
+                        className="SelectEpisodeRoster__selectImg"
+                        src={queen.imageURL}
+                      ></img>
+                      <p className="SelectEpisodeRoster__selectName">
+                        {queen.name}
+                      </p>
+                    </MenuItem>
+                  </div>
+                ))}
+              </Select>
+            </FormControl>
+          </div>
+          <div>
+            <FormControl className={classes.formControl}>
+              <InputLabel id="demo-simple-select-label">
+                Top Queen of the Week #2
+              </InputLabel>
+              <Select
+                labelId="topQueen2"
+                id="topQueen2"
+                name="topQueen2"
+                value={episodePicks.topQueen2}
+                onChange={handleChange}
+                className="SelectEpisodeRoster__Select"
+              >
+                {queens.map((queen) => (
+                  <div value={10} key={queen.name}>
+                    <MenuItem className="SelectEpisodeRoster__MenuItem">
+                      <img
+                        className="SelectEpisodeRoster__selectImg"
+                        src={queen.imageURL}
+                      ></img>
+                      <p className="SelectEpisodeRoster__selectName">
+                        {queen.name}
+                      </p>
+                    </MenuItem>
+                  </div>
+                ))}
+              </Select>
+            </FormControl>
+          </div>
+        </div>
+
+        {/* Bottom 2 of the Week Select */}
+        <div>
+          <h2>Bottom 2 of the Week</h2>
+          <p>
+            This is the bottom two queens of the week (in no particular order).
+            If there is a number of queens in the bottom other than 2, you will
+            receive points for each queen you have that is in the bottom.
+          </p>
+
+          <div>
+            <FormControl className={classes.formControl}>
+              <InputLabel id="demo-simple-select-label">
+                Bottom Queen of the Week #1
+              </InputLabel>
+              <Select
+                labelId="bottomQueen1"
+                id="bottomQueen1"
+                name="bottomQueen1"
+                value={episodePicks.bottomQueen1}
+                onChange={handleChange}
+                className="SelectEpisodeRoster__Select"
+              >
+                {queens.map((queen) => (
+                  <div value={10} key={queen.name}>
+                    <MenuItem className="SelectEpisodeRoster__MenuItem">
+                      <img
+                        className="SelectEpisodeRoster__selectImg"
+                        src={queen.imageURL}
+                      ></img>
+                      <p className="SelectEpisodeRoster__selectName">
+                        {queen.name}
+                      </p>
+                    </MenuItem>
+                  </div>
+                ))}
+              </Select>
+            </FormControl>
+          </div>
+          <div>
+            <FormControl className={classes.formControl}>
+              <InputLabel id="demo-simple-select-label">
+                Bottom Queen of the Week #2
+              </InputLabel>
+              <Select
+                labelId="bottomQueen2"
+                id="bottomQueen2"
+                name="bottomQueen2"
+                value={episodePicks.bottomQueen2}
+                onChange={handleChange}
+                className="SelectEpisodeRoster__Select"
+              >
+                {queens.map((queen) => (
+                  <div value={10} key={queen.name}>
                     <MenuItem className="SelectEpisodeRoster__MenuItem">
                       <img
                         className="SelectEpisodeRoster__selectImg"
