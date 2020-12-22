@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import Jumbotron from "../../components/Jumbotron/Jumbotron";
 import leaguePageBkg from "../../assets/images/bkg-3.jpg";
@@ -13,6 +13,7 @@ import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
 import { Link } from "react-router-dom";
 import { Grid } from "@material-ui/core";
+import { db } from "../../firebase";
 
 const useStyles = makeStyles({
   table: {
@@ -20,21 +21,51 @@ const useStyles = makeStyles({
   },
 });
 
-function createData(name, e1, e2, e3, e4, e5, e6, e7, e8, e9, e10, total) {
-  return { name, e1, e2, e3, e4, e5, e6, e7, e8, e9, e10, total };
-}
+const CURRENT_EPISODE = {
+  episodeNum: 1,
+  airDate: Date(1 / 1 / 2020),
+};
 
-const rows = [
-  createData("Jack Solaro", 20, 0, 0, 0, 0, 0, 0, 0, 0, 0, 20),
-  createData("Gabe Ohlsen", 15, 0, 0, 0, 0, 0, 0, 0, 0, 0, 15),
-  createData("Peter Popek", 10, 0, 0, 0, 0, 0, 0, 0, 0, 0, 10),
-  createData("David Schwartz", 10, 0, 0, 0, 0, 0, 0, 0, 0, 0, 10),
-  createData("John Smith", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
-];
+const LEAGUE_DATA = {
+  scores: [
+    {
+      name: "Jack Solaro",
+      score: 20,
+    },
+    {
+      name: "Gabe Ohlsen",
+      score: 15,
+    },
+    {
+      name: "Peter Popek",
+      score: 10,
+    },
+    {
+      name: "David Schwartz",
+      score: 10,
+    },
+  ],
+};
 
 function LeagueDetails() {
   let params = useParams();
   const classes = useStyles();
+  const [leagueData, setLeagueData] = useState();
+
+  useEffect(() => {
+    const fetchData = async () => {
+      db.collection("leagues")
+        .doc(params.id)
+        .get()
+        .then((doc) => {
+          console.log(doc.data());
+          setLeagueData(doc.data());
+        });
+    };
+    fetchData();
+    console.log("leagueData", leagueData);
+  }, []);
+
   return (
     <div>
       {/* TODO: redirect or show 404 if there is no league */}
@@ -62,46 +93,27 @@ function LeagueDetails() {
             <Table className={classes.table} aria-label="simple table">
               <TableHead>
                 <TableRow>
-                  <TableCell>Name</TableCell>
-                  <TableCell align="right">Episode 1</TableCell>
-                  <TableCell align="right">Episode 2</TableCell>
-                  <TableCell align="right">Episode 3</TableCell>
-                  <TableCell align="right">Episode 4</TableCell>
-                  <TableCell align="right">Episode 5</TableCell>
-                  <TableCell align="right">Episode 6</TableCell>
-                  <TableCell align="right">Episode 7</TableCell>
-                  <TableCell align="right">Episode 8</TableCell>
-                  <TableCell align="right">Episode 9</TableCell>
-                  <TableCell align="right">Episode 10</TableCell>
-                  <TableCell align="right">TOTAL</TableCell>
+                  <TableCell>NAME</TableCell>
+                  <TableCell align="right">SCORE</TableCell>
                 </TableRow>
               </TableHead>
               <TableBody>
-                {rows.map((row) => (
-                  <TableRow key={row.name}>
+                {/* {leagueData.scores.map((user) => (
+                  <TableRow key={user.name}>
                     <TableCell component="th" scope="row">
-                      {row.name}
+                      {user.name}
                     </TableCell>
-                    <TableCell align="right">{row.e1}</TableCell>
-                    <TableCell align="right">{row.e2}</TableCell>
-                    <TableCell align="right">{row.e3}</TableCell>
-                    <TableCell align="right">{row.e4}</TableCell>
-                    <TableCell align="right">{row.e5}</TableCell>
-                    <TableCell align="right">{row.e6}</TableCell>
-                    <TableCell align="right">{row.e7}</TableCell>
-                    <TableCell align="right">{row.e8}</TableCell>
-                    <TableCell align="right">{row.e9}</TableCell>
-                    <TableCell align="right">{row.e10}</TableCell>
-                    <TableCell align="right">{row.total}</TableCell>
+                    <TableCell align="right">{user.score}</TableCell>
                   </TableRow>
-                ))}
+                ))} */}
               </TableBody>
             </Table>
           </TableContainer>
         </Grid>
         <Grid item xs={12} md={4}>
           <div>
-            <h2>Weekly Recap</h2>
+            <h2>YOUR ROSTER</h2>
+            <h3>EPISODE: {CURRENT_EPISODE.episodeNum}</h3>
           </div>
         </Grid>
       </Grid>

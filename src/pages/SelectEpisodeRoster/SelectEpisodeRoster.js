@@ -55,12 +55,6 @@ function SelectEpisodeRoster() {
       .get()
       .then(function (querySnapshot) {
         querySnapshot.forEach(function (doc) {
-          //   storage
-          //     .refFromURL(doc.data().imageURL)
-          //     .getDownloadURL()
-          //     .then(function (url) {
-          //       tempQueen.imageURL = url;
-          //     });
           queensArr.push(doc.data());
           console.log("queens", queens);
           console.log("queensArr", queensArr);
@@ -149,11 +143,12 @@ function SelectEpisodeRoster() {
                 className="SelectEpisodeRoster__Select"
               >
                 {queens.map((queen) => (
-                  <div value={10} key={queen.name}>
+                  <div value={queen.name} key={queen.name}>
                     <MenuItem className="SelectEpisodeRoster__MenuItem">
                       <img
                         className="SelectEpisodeRoster__selectImg"
                         src={queen.imageURL}
+                        alt={`image of ${queen.name}`}
                       ></img>
                       <p className="SelectEpisodeRoster__selectName">
                         {queen.name}
@@ -189,11 +184,12 @@ function SelectEpisodeRoster() {
                 className="SelectEpisodeRoster__Select"
               >
                 {queens.map((queen) => (
-                  <div value={10} key={queen.name}>
+                  <div value={queen.name} key={queen.name}>
                     <MenuItem className="SelectEpisodeRoster__MenuItem">
                       <img
                         className="SelectEpisodeRoster__selectImg"
                         src={queen.imageURL}
+                        alt={`image of ${queen.name}`}
                       ></img>
                       <p className="SelectEpisodeRoster__selectName">
                         {queen.name}
@@ -229,11 +225,12 @@ function SelectEpisodeRoster() {
                 className="SelectEpisodeRoster__Select"
               >
                 {queens.map((queen) => (
-                  <div value={10} key={queen.name}>
+                  <div value={queen.name} key={queen.name}>
                     <MenuItem className="SelectEpisodeRoster__MenuItem">
                       <img
                         className="SelectEpisodeRoster__selectImg"
                         src={queen.imageURL}
+                        alt={`image of ${queen.name}`}
                       ></img>
                       <p className="SelectEpisodeRoster__selectName">
                         {queen.name}
@@ -269,11 +266,12 @@ function SelectEpisodeRoster() {
                 className="SelectEpisodeRoster__Select"
               >
                 {queens.map((queen) => (
-                  <div value={10} key={queen.name}>
+                  <div value={queen.name} key={queen.name}>
                     <MenuItem className="SelectEpisodeRoster__MenuItem">
                       <img
                         className="SelectEpisodeRoster__selectImg"
                         src={queen.imageURL}
+                        alt={`image of ${queen.name}`}
                       ></img>
                       <p className="SelectEpisodeRoster__selectName">
                         {queen.name}
@@ -298,11 +296,12 @@ function SelectEpisodeRoster() {
                 className="SelectEpisodeRoster__Select"
               >
                 {queens.map((queen) => (
-                  <div value={10} key={queen.name}>
+                  <div value={queen.name} key={queen.name}>
                     <MenuItem className="SelectEpisodeRoster__MenuItem">
                       <img
                         className="SelectEpisodeRoster__selectImg"
                         src={queen.imageURL}
+                        alt={`image of ${queen.name}`}
                       ></img>
                       <p className="SelectEpisodeRoster__selectName">
                         {queen.name}
@@ -338,11 +337,12 @@ function SelectEpisodeRoster() {
                 className="SelectEpisodeRoster__Select"
               >
                 {queens.map((queen) => (
-                  <div value={10} key={queen.name}>
+                  <div value={queen.name} key={queen.name}>
                     <MenuItem className="SelectEpisodeRoster__MenuItem">
                       <img
                         className="SelectEpisodeRoster__selectImg"
                         src={queen.imageURL}
+                        alt={`image of ${queen.name}`}
                       ></img>
                       <p className="SelectEpisodeRoster__selectName">
                         {queen.name}
@@ -367,11 +367,54 @@ function SelectEpisodeRoster() {
                 className="SelectEpisodeRoster__Select"
               >
                 {queens.map((queen) => (
-                  <div value={10} key={queen.name}>
+                  <div value={queen.name} key={queen.name}>
                     <MenuItem className="SelectEpisodeRoster__MenuItem">
                       <img
                         className="SelectEpisodeRoster__selectImg"
                         src={queen.imageURL}
+                        alt={`image of ${queen.name}`}
+                      ></img>
+                      <p className="SelectEpisodeRoster__selectName">
+                        {queen.name}
+                      </p>
+                    </MenuItem>
+                  </div>
+                ))}
+              </Select>
+            </FormControl>
+          </div>
+        </div>
+
+        {/* Eliminated Queen Select */}
+        <div>
+          <h2>Eliminated Queen</h2>
+          <p>
+            This is the queen that you think will get eliminated this episode.
+            If there is more than one queens eliminated, points will be awarded
+            if you have selected one of the winners. If double shantay, no
+            points will be awarded.
+          </p>
+
+          <div>
+            <FormControl className={classes.formControl}>
+              <InputLabel id="demo-simple-select-label">
+                Mini Challenge Winner
+              </InputLabel>
+              <Select
+                labelId="eliminated"
+                id="eliminated"
+                name="eliminated"
+                value={episodePicks.eliminated}
+                onChange={handleChange}
+                className="SelectEpisodeRoster__Select"
+              >
+                {queens.map((queen) => (
+                  <div value={queen.name} key={queen.name}>
+                    <MenuItem className="SelectEpisodeRoster__MenuItem">
+                      <img
+                        className="SelectEpisodeRoster__selectImg"
+                        src={queen.imageURL}
+                        alt={`image of ${queen.name}`}
                       ></img>
                       <p className="SelectEpisodeRoster__selectName">
                         {queen.name}
