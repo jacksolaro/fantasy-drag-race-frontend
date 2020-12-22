@@ -19,6 +19,16 @@ export function AuthProvider({ children }) {
     });
   }
 
+  async function signupUser(email, password, displayName) {
+    return auth.createUserWithEmailAndPassword(email, password).then((user) => {
+      if (user) {
+        user.updateProfile({
+          displayName: "Test",
+        });
+      }
+    });
+  }
+
   function login(email, password) {
     return auth.signInWithEmailAndPassword(email, password);
   }
@@ -52,6 +62,7 @@ export function AuthProvider({ children }) {
     currentUser,
     login,
     signup,
+    signupUser,
     logout,
     resetPassword,
     updateEmail,

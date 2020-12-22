@@ -72,7 +72,7 @@ export default function SignUp() {
     passwordConfirm: "",
   });
 
-  const { signup } = useAuth();
+  const { signup, signupUser } = useAuth();
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const history = useHistory();
@@ -96,7 +96,11 @@ export default function SignUp() {
     try {
       setError("");
       setLoading(true);
-      await signup(signUpFormState.email, signUpFormState.password);
+      await signup(
+        signUpFormState.email,
+        signUpFormState.password,
+        `${signUpFormState.firstName} ${signUpFormState.lastName}`
+      );
       history.push("/");
     } catch {
       setError("Failed to create an account");

@@ -26,6 +26,13 @@ function CreateLeague() {
     db.collection("leagues").add({
       leagueName: formData.leagueName,
       members: [currentUser.uid],
+      scores: [
+        {
+          email: currentUser.email,
+          score: 0,
+          userID: currentUser.uid,
+        },
+      ],
     });
   };
 

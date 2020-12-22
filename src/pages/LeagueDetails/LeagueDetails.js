@@ -52,18 +52,6 @@ function LeagueDetails() {
   const classes = useStyles();
   const [leagueData, setLeagueData] = useState([{}]);
 
-  //   const fetchData = React.useCallback(() => {
-
-  // db.collection("leagues")
-  //   .doc(params.id)
-  //   .get()
-  //   .then((doc) => {
-  //     console.log(doc.data());
-  //     setLeagueData(doc.data());
-  //   })
-  //   .catch((error) => console.log("Error", error));
-  //   });
-
   useEffect(() => {
     db.collection("leagues")
       .doc(params.id)
@@ -100,7 +88,7 @@ function LeagueDetails() {
       <Grid container spacing={2}>
         <Grid item xs={12} md={8}>
           <h2>Leaderboard</h2>
-          <TableContainer component={Paper}>
+          <TableContainer>
             <Table className={classes.table} aria-label="simple table">
               <TableHead>
                 <TableRow>
@@ -111,9 +99,9 @@ function LeagueDetails() {
               <TableBody>
                 {leagueData.scores ? (
                   leagueData.scores.map((user) => (
-                    <TableRow key={user.name}>
+                    <TableRow key={user.email}>
                       <TableCell component="th" scope="row">
-                        {user.name}
+                        {user.email}
                       </TableCell>
                       <TableCell align="right">{user.score}</TableCell>
                     </TableRow>
