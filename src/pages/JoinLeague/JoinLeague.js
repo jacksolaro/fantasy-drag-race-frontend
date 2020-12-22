@@ -3,17 +3,38 @@ import Jumbotron from "../../components/Jumbotron/Jumbotron";
 import joinLeagueBkg from "../../assets/images/bkg-2.jpg";
 import Container from "@material-ui/core/Container";
 import TextField from "@material-ui/core/TextField";
+import { useParams } from "react-router-dom";
+import { db } from "../../firebase";
+import firebase from "firebase/app";
+import { useAuth } from "../../contexts/AuthContext";
 
 function JoinLeague() {
+  let params = useParams();
+  const { currentUser } = useAuth();
   const [formData, setFormData] = React.useState({
-    leagueName: "",
-    leagueDescription: "",
+    leagueID: "",
   });
 
   const handleChange = (event) => {
     event.preventDefault();
     const { name, value } = event.target;
     setFormData({ ...formData, [name]: value });
+  };
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+
+    db.collection("leagues")
+      .doc(formData.leagueID)
+      .update({
+        members: firebase.firestore.FieldValue.arrayUnion(currentUser.uid),
+        scores: firebase.firestore.FieldValue.arrayUnion({
+          email: currentUser.email,
+          score: 0,
+          userID: currentUser.uid,
+        }),
+        // leagueName: "schwoop",
+      });
   };
 
   return (
@@ -30,13 +51,13 @@ function JoinLeague() {
           eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
           minim veniam
         </p>
-        <form>
+        <form onSubmit={handleSubmit}>
           <div>
             <TextField
               required
-              name="leagueCode"
-              id="leagueCode"
-              label="League Code"
+              name="leagueID"
+              id="leagueID"
+              label="League ID"
               defaultValue=""
               onChange={handleChange}
             />
