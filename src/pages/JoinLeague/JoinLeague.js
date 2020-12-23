@@ -33,7 +33,6 @@ function JoinLeague() {
           score: 0,
           userID: currentUser.uid,
         }),
-        // leagueName: "schwoop",
       });
   };
 
