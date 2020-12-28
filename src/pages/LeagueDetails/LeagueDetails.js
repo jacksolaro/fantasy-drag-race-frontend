@@ -63,6 +63,16 @@ function LeagueDetails() {
       .catch((error) => console.log("Error", error));
 
     console.log("leagueData", leagueData);
+
+    db.collection("shows")
+      //   TODO: Need to automate what show and what season
+      .doc("RPDR")
+      .collection("seasons")
+      .doc("US_Reg_13")
+      .get()
+      .then((doc) => {
+        console.log("TEST", doc.data());
+      });
   }, []);
 
   return (

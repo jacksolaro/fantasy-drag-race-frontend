@@ -19,15 +19,10 @@ export function AuthProvider({ children }) {
     });
   }
 
-  async function signupUser(email, password, displayName) {
-    return auth.createUserWithEmailAndPassword(email, password).then((user) => {
-      if (user) {
-        user.updateProfile({
-          displayName: "Test",
-        });
-      }
-    });
-  }
+  const signupUser = async (email, password, firstName, lastName) => {
+    const resp = await auth.createUserWithEmailAndPassword(email, password);
+    await resp.user.updateProfile({ displayName: `${firstName} ${lastName}` });
+  };
 
   function login(email, password) {
     return auth.signInWithEmailAndPassword(email, password);

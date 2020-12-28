@@ -96,10 +96,11 @@ export default function SignUp() {
     try {
       setError("");
       setLoading(true);
-      await signup(
+      await signupUser(
         signUpFormState.email,
         signUpFormState.password,
-        `${signUpFormState.firstName} ${signUpFormState.lastName}`
+        signUpFormState.firstName,
+        signUpFormState.lastName
       );
       history.push("/");
     } catch {
