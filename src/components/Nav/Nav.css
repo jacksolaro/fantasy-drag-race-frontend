@@ -8,8 +8,8 @@ NAV STYLING
   z-index: 2;
   display: flex;
   justify-content: space-between;
-  background-color: transparent;
-  position: absolute;
+  background-color: #00bbf9;
+  /* position: absolute; */
 }
 
 .nav-hamburger {
@@ -21,18 +21,19 @@ NAV STYLING
   color: white;
   text-align: center;
   text-decoration: none;
-  padding: 7.5px;
+  padding: 10px;
+  font-weight: bold;
 }
 
 .nav-logo:hover {
   text-decoration: none;
-  color: rgba(235, 126, 62, 1);
+  color: #f15bb5;
 }
 
 ul {
   list-style-type: none;
   margin: 0;
-  padding: 0;
+  padding: 10px;
 }
 
 li {
@@ -45,11 +46,12 @@ li a {
   color: white;
   text-align: center;
   text-decoration: none;
+  font-weight: bold;
 }
 
 li a:hover {
   display: block;
-  color: rgba(235, 126, 62, 1);
+  color: #f15bb5;
   text-align: center;
   text-decoration: none;
 }
