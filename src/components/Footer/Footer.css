@@ -3,15 +3,22 @@ FOOTER STYLING
 ======================================== */
 
 footer {
-  height: 6vh;
+  /* height: 6vh; */
   width: 100%;
   bottom: 0;
-  color: white;
-  background-color: #0b0b0b;
+  /* color: white; */
+  background-color: lightgray;
   text-align: center;
 }
 
-.footer-accent {
+.footer__ul {
+  float: left;
+}
+.footer__li {
+  float: left;
+}
+
+/* .footer-accent {
   background: -webkit-linear-gradient(
     339deg,
     rgba(255, 74, 118, 1) 0%,
@@ -20,4 +27,4 @@ footer {
   );
   height: 1vh;
   margin-bottom: 1vh;
-}
+} */
