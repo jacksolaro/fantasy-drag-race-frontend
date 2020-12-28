@@ -7,3 +7,11 @@
   width: 200px;
   border-radius: 20%;
 }
+
+.correctGuess {
+  border: 5px solid green;
+}
+
+.incorrectGuess {
+  border: 5px solid red;
+}
