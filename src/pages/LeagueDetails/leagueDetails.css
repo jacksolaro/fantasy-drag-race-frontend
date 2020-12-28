@@ -1,0 +1,9 @@
+.leagueDetails__header {
+  align-items: center;
+  text-align: center;
+}
+
+.leagueDetails__rosterIMG {
+  width: 200px;
+  border-radius: 20%;
+}

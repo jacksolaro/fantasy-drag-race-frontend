@@ -123,7 +123,8 @@ function SelectEpisodeRoster() {
       <form onSubmit={handleSubmit}>
         {/* Episode Winner Select */}
         <div>
-          <h2>Episode Winner</h2>
+          <h2>Episode Winner </h2>
+          <h3>20 Points</h3>
           <p>
             This is the winner of the episode. If there is more than one winner,
             points will be assigned if you have selected one of the winners.
@@ -164,6 +165,7 @@ function SelectEpisodeRoster() {
         {/* Maxi Challenge Winner Select */}
         <div>
           <h2>Maxi Challenge Winner</h2>
+          <h3>10 Points</h3>
           <p>
             This is the winner of the main challenge of the episode. If there is
             more than one winner, points will be awarded if you have selected
@@ -205,6 +207,7 @@ function SelectEpisodeRoster() {
         {/* Mini Challenge Winner Select */}
         <div>
           <h2>Mini Challenge Winner</h2>
+          <h3>10 Points</h3>
           <p>
             This is the winner of the main challenge of the episode. If there is
             more than one winner, points will be awarded if you have selected
@@ -246,6 +249,7 @@ function SelectEpisodeRoster() {
         {/* Top 2 of the Week Select */}
         <div>
           <h2>Top 2 of the Week</h2>
+          <h3>5 Points Each</h3>
           <p>
             This is the top two queens of the week (in no particular order). If
             there is a number of queens in the top other than 2, you will
@@ -317,6 +321,7 @@ function SelectEpisodeRoster() {
         {/* Bottom 2 of the Week Select */}
         <div>
           <h2>Bottom 2 of the Week</h2>
+          <h3>5 Points Each</h3>
           <p>
             This is the bottom two queens of the week (in no particular order).
             If there is a number of queens in the bottom other than 2, you will
@@ -388,6 +393,7 @@ function SelectEpisodeRoster() {
         {/* Eliminated Queen Select */}
         <div>
           <h2>Eliminated Queen</h2>
+          <h3>10 Points</h3>
           <p>
             This is the queen that you think will get eliminated this episode.
             If there is more than one queens eliminated, points will be awarded
