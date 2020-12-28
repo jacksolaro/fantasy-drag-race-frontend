@@ -65,29 +65,38 @@ function Nav() {
 
         <ul>
           {!currentUser && (
-            <li className="nav-item">
-              <Link className="nav-link" to="/signup">
-                Sign Up
-              </Link>
-            </li>
+            <>
+              <li className="nav-item">
+                <Link className="nav-link" to="/signup">
+                  Sign Up
+                </Link>
+              </li>
+              <li className="nav-item">
+                <Link className="nav-link" to="/login">
+                  Log In
+                </Link>
+              </li>
+            </>
           )}
           {currentUser && (
-            <li className="nav-item">
-              <Link className="nav-link" to="/" onClick={handleLogout}>
-                Log Out
-              </Link>
-            </li>
+            <>
+              <li className="nav-item">
+                <Link className="nav-link" to="/" onClick={handleLogout}>
+                  Log Out
+                </Link>
+              </li>
+              <li className="nav-item">
+                <Link className="nav-link" to="/leagues">
+                  Leagues
+                </Link>
+              </li>
+              <li className="nav-item">
+                <Link className="nav-link" to="/">
+                  Home
+                </Link>
+              </li>
+            </>
           )}
-          <li className="nav-item">
-            <Link className="nav-link" to="/leagues">
-              Leagues
-            </Link>
-          </li>
-          <li className="nav-item">
-            <Link className="nav-link" to="/">
-              Home
-            </Link>
-          </li>
         </ul>
         <div className="nav__hamburger">
           <MenuIcon
