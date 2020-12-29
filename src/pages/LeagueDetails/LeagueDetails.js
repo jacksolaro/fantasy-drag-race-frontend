@@ -184,7 +184,7 @@ function LeagueDetails() {
       })
       .catch((error) => console.log("Error", error));
 
-    // console.log("leagueData", leagueData);
+    console.log("leagueData", leagueData);
 
     db.collection("shows")
       //   TODO: Need to automate what show and what season
