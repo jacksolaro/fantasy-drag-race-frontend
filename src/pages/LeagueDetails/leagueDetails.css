@@ -15,3 +15,8 @@
 .incorrectGuess {
   border: 5px solid red;
 }
+
+.episodePagination {
+  margin: auto;
+  width: 50%;
+}

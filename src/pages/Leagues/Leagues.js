@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import Jumbotron from "../../components/Jumbotron/Jumbotron";
 import leaguePageBkg from "../../assets/images/bkg-3.jpg";
 import { useAuth } from "../../contexts/AuthContext";
-import { db } from "../../firebase";
+import { db } from "../../firebase.js";
 import { Link } from "react-router-dom";
 
 function Leagues() {

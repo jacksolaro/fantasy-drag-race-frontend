@@ -11,7 +11,7 @@ import Login from "./pages/Login/Login";
 import { AuthProvider } from "./contexts/AuthContext";
 import Nav from "./components/Nav/Nav";
 import ForgotPassword from "./components/ForgotPassword/ForgotPassword";
-import LeagueDetails from "./pages/LeagueDetails/LeagueDetails";
+import LeagueDetails from "./pages/LeagueDetails/LeagueDetails.js";
 import SelectSeasonRoster from "./pages/SelectSeasonRoster/SelectSeasonRoster";
 import SelectEpisodeRoster from "./pages/SelectEpisodeRoster/SelectEpisodeRoster";
 

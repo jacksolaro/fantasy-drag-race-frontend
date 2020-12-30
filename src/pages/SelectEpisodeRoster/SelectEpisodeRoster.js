@@ -9,7 +9,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import React, { useEffect, useState } from "react";
 import s13Poster from "../../assets/images/rpdr_s13_poster.jpg";
 import "./SelectEpisodeRoster.css";
-import { db, storage } from "../../firebase";
+import { db, storage } from "../../firebase.js";
 import { useAuth } from "../../contexts/AuthContext";
 import { useParams } from "react-router-dom";
 import { useHistory } from "react-router-dom";

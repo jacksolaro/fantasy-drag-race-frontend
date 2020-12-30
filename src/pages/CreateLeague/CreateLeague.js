@@ -4,7 +4,7 @@ import createLeagueBkg from "../../assets/images/bkg-2.jpg";
 import Container from "@material-ui/core/Container";
 import TextField from "@material-ui/core/TextField";
 import { useAuth } from "../../contexts/AuthContext";
-import { db } from "../../firebase";
+import { db } from "../../firebase.js";
 
 function CreateLeague() {
   const [formData, setFormData] = React.useState({

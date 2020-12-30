@@ -4,7 +4,7 @@ import joinLeagueBkg from "../../assets/images/bkg-2.jpg";
 import Container from "@material-ui/core/Container";
 import TextField from "@material-ui/core/TextField";
 import { useParams } from "react-router-dom";
-import { db } from "../../firebase";
+import { db } from "../../firebase.js";
 import firebase from "firebase/app";
 import { useAuth } from "../../contexts/AuthContext";
 

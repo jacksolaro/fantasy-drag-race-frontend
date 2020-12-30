@@ -12,10 +12,11 @@ import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
 import { Link } from "react-router-dom";
-import { Grid, Typography } from "@material-ui/core";
-import { db } from "../../firebase";
+import { Container, Grid, Typography } from "@material-ui/core";
+import { db } from "../../firebase.js";
 import firebase from "firebase";
 import "./leagueDetails.css";
+import { Pagination } from "@material-ui/lab";
 
 const useStyles = makeStyles({
   table: {
@@ -33,7 +34,7 @@ const EPISODE_PICKS = {
     {
       id: "seasonWinner",
       title: "Season Winner",
-      queenID: "Test",
+      queenID: "G5hMj6BwbtsnqTG6XB9U",
       queenName: "Kandy Muse",
       queenIMG:
         "https://firebasestorage.googleapis.com/v0/b/derby-584f8.appspot.com/o/rpdr_s13_reg_queens%2FKandyMuseS13Promo.jpg?alt=media&token=083e7124-bd37-4edc-aff5-7edecdb12a79",
@@ -44,7 +45,7 @@ const EPISODE_PICKS = {
     {
       id: "missCongeniality",
       title: "Miss Congeniality Winner",
-      queenID: "Test",
+      queenID: "G5hMj6BwbtsnqTG6XB9U",
       queenName: "Kandy Muse",
       queenIMG:
         "https://firebasestorage.googleapis.com/v0/b/derby-584f8.appspot.com/o/rpdr_s13_reg_queens%2FKandyMuseS13Promo.jpg?alt=media&token=083e7124-bd37-4edc-aff5-7edecdb12a79",
@@ -154,6 +155,145 @@ const EPISODE_PICKS = {
       scoreActual: 0,
     },
   ],
+  episode2: [
+    {
+      id: "episodeWinner",
+      title: "Episode Winner",
+      queenID: "Test",
+      queenName: "Joey Jay",
+      queenIMG:
+        "https://firebasestorage.googleapis.com/v0/b/derby-584f8.appspot.com/o/rpdr_s13_reg_queens%2FJoeyJayS13Promo.jpg?alt=media&token=df2669ac-67c2-4029-9f43-17384b163438",
+      result: "TBD",
+      scorePossible: 20,
+      scoreActual: 0,
+    },
+    {
+      id: "maxiChallengeWinner",
+      title: "Maxi Challenge Winner",
+      queenID: "Test",
+      queenName: "Gottmik",
+      queenIMG:
+        "https://firebasestorage.googleapis.com/v0/b/derby-584f8.appspot.com/o/rpdr_s13_reg_queens%2FGottmikS13Promo.jpg?alt=media&token=8c2481c6-e1e3-49d5-a30b-ef14403b2661",
+      result: "TBD",
+      scorePossible: 10,
+      scoreActual: 0,
+    },
+    {
+      id: "miniChallengeWinner",
+      title: "Mini Challenge Winner",
+      queenID: "Test",
+      queenName: "Joey Jay",
+      queenIMG:
+        "https://firebasestorage.googleapis.com/v0/b/derby-584f8.appspot.com/o/rpdr_s13_reg_queens%2FJoeyJayS13Promo.jpg?alt=media&token=df2669ac-67c2-4029-9f43-17384b163438",
+      result: "TBD",
+      scorePossible: 10,
+      scoreActual: 0,
+    },
+    {
+      id: "eliminated",
+      title: "Eliminated Queen",
+      queenID: "Test",
+      queenName: "Gottmik",
+      queenIMG:
+        "https://firebasestorage.googleapis.com/v0/b/derby-584f8.appspot.com/o/rpdr_s13_reg_queens%2FGottmikS13Promo.jpg?alt=media&token=8c2481c6-e1e3-49d5-a30b-ef14403b2661",
+      result: "TBD",
+      scorePossible: 10,
+      scoreActual: 0,
+    },
+    {
+      id: "topQueen1",
+      title: "Top Queen #1",
+      queenID: "Test",
+      queenName: "Denali",
+      queenIMG:
+        "https://firebasestorage.googleapis.com/v0/b/derby-584f8.appspot.com/o/rpdr_s13_reg_queens%2FDenaliS13Promo.jpg?alt=media&token=c30fba33-4d09-45f0-b329-87c2535ea3b1",
+      result: "TBD",
+      scorePossible: 5,
+      scoreActual: 0,
+    },
+    {
+      id: "topQueen2",
+      title: "Top Queen #2",
+      queenID: "Test",
+      queenName: "Denali",
+      queenIMG:
+        "https://firebasestorage.googleapis.com/v0/b/derby-584f8.appspot.com/o/rpdr_s13_reg_queens%2FDenaliS13Promo.jpg?alt=media&token=c30fba33-4d09-45f0-b329-87c2535ea3b1",
+      result: "TBD",
+      scorePossible: 5,
+      scoreActual: 0,
+    },
+    {
+      id: "bottomQueen1",
+      title: "Bottom Queen #1",
+      queenID: "Test",
+      queenName: "Kahmora Hall",
+      queenIMG:
+        "https://firebasestorage.googleapis.com/v0/b/derby-584f8.appspot.com/o/rpdr_s13_reg_queens%2FKahmoraHallS13Promo.jpg?alt=media&token=298e371a-11bb-42ee-b663-ef3f13ece25f",
+      result: "TBD",
+      scorePossible: 5,
+      scoreActual: 0,
+    },
+    {
+      id: "bottomQueen2",
+      title: "Bottom Queen #2",
+      queenID: "Test",
+      queenName: "Joey Jay",
+      queenIMG:
+        "https://firebasestorage.googleapis.com/v0/b/derby-584f8.appspot.com/o/rpdr_s13_reg_queens%2FJoeyJayS13Promo.jpg?alt=media&token=df2669ac-67c2-4029-9f43-17384b163438",
+      result: "TBD",
+      scorePossible: 5,
+      scoreActual: 0,
+    },
+  ],
+};
+
+const RESULTS = {
+  season: {
+    seasonWinner: "G5hMj6BwbtsnqTG6XB9U",
+    missCongeniality: "G5hMj6BwbtsnqTG6XB9U",
+    firstEliminated: "G5qTG6XB9U",
+  },
+};
+
+const SCORES = {
+  totals: [
+    {
+      userID: "1",
+      username: "Joe Schmo",
+      score: 55,
+    },
+    {
+      userID: "2",
+      username: "Sally Something",
+      score: 70,
+    },
+    {
+      userID: "3",
+      username: "Cindy Lou Who",
+      score: 65,
+    },
+  ],
+  episodes: [
+    {
+      episode1: [
+        {
+          userID: "1",
+          username: "Joe Schmo",
+          score: 55,
+        },
+        {
+          userID: "2",
+          username: "Sally Something",
+          score: 70,
+        },
+        {
+          userID: "3",
+          username: "Cindy Lou Who",
+          score: 65,
+        },
+      ],
+    },
+  ],
 };
 
 function LeagueDetails() {
@@ -184,21 +324,22 @@ function LeagueDetails() {
       })
       .catch((error) => console.log("Error", error));
 
-    console.log("leagueData", leagueData);
+    // console.log("leagueData", leagueData);
 
-    db.collection("shows")
-      //   TODO: Need to automate what show and what season
-      .doc("RPDR")
-      .collection("seasons")
-      .doc("US_Reg_13")
-      .get()
-      .then((doc) => {
-        // console.log("TEST", doc.data());
-      });
+    console.log("TESTING", RESULTS.season.seasonWinner);
+    // db.collection("shows")
+    //   //   TODO: Need to automate what show and what season
+    //   .doc("RPDR")
+    //   .collection("seasons")
+    //   .doc("US_Reg_13")
+    //   .get()
+    //   .then((doc) => {
+    //     // console.log("TEST", doc.data());
+    //   });
   }, []);
 
   return (
-    <div>
+    <Container>
       {/* TODO: redirect or show 404 if there is no league */}
       <div className="leagueDetails__header">
         <h1>You Betta Werk!</h1>
@@ -208,7 +349,7 @@ function LeagueDetails() {
 
       {/* dashboard */}
       <Grid container container align="center" justify="center">
-        <Grid item xs={12} md={3}>
+        <Grid item xs={12} md={12}>
           <Typography align="center" variant="h4">
             LEADERBOARD
           </Typography>
@@ -221,7 +362,7 @@ function LeagueDetails() {
                 </TableRow>
               </TableHead>
               <TableBody>
-                {leagueData.scores ? (
+                {/* {leagueData.scores ? (
                   leagueData.scores.map((user) => (
                     <TableRow key={user.email}>
                       <TableCell component="th" scope="row">
@@ -232,12 +373,26 @@ function LeagueDetails() {
                   ))
                 ) : (
                   <p>loading</p>
+                )} */}
+                {SCORES ? (
+                  SCORES.totals
+                    .sort((a, b) => (a.score < b.score ? 1 : -1))
+                    .map((row) => (
+                      <TableRow key={row.userID}>
+                        <TableCell component="th" scope="row">
+                          {row.username}
+                        </TableCell>
+                        <TableCell align="right">{row.score}</TableCell>
+                      </TableRow>
+                    ))
+                ) : (
+                  <p>loading</p>
                 )}
               </TableBody>
             </Table>
           </TableContainer>
         </Grid>
-        <Grid item xs={12} md={9}>
+        <Grid item xs={12} md={12}>
           <Typography align="center" variant="h4">
             YOUR ROSTER
           </Typography>
@@ -245,9 +400,13 @@ function LeagueDetails() {
             <Typography align="center" variant="h5">
               EPISODE PICKS
             </Typography>
-            <Typography align="center" variant="subtitle2">
-              EPISODE: {CURRENT_EPISODE.episodeNum}
-            </Typography>
+            <Pagination
+              className="episodePagination"
+              count={12}
+              defaultPage={1}
+              boundaryCount={2}
+              color="primary"
+            />
             <Grid container container align="center" justify="center">
               {EPISODE_PICKS.episode1.map((pick) => (
                 <Grid item xs={12} md={3}>
@@ -296,6 +455,12 @@ function LeagueDetails() {
                         src={pick.queenIMG}
                       ></img>
                       <p>{pick.queenName}</p>
+                      <p>
+                        {RESULTS["season"][`${pick.id}`] === pick.queenID
+                          ? "correct"
+                          : "incorrect"}
+                      </p>
+                      <p>{pick.id}</p>
                     </Grid>
                   ))
                 : "Make your season selection! [INSERT BUTTON HERE]"}
@@ -311,7 +476,7 @@ function LeagueDetails() {
       <Link to={`/leagues/${params.id}/selectepisoderoster`}>
         Select Episode Roster
       </Link>
-    </div>
+    </Container>
   );
 }
 
