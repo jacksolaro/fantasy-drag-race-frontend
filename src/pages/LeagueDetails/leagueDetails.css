@@ -8,6 +8,11 @@
   border-radius: 20%;
 }
 
+.leagueDetails__rosterIMG2 {
+  width: 100px;
+  border-radius: 20%;
+}
+
 .correctGuess {
   border: 5px solid green;
 }

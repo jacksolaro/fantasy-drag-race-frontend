@@ -95,7 +95,7 @@ const EPISODE_PICKS = {
       queenName: "Joey Jay",
       queenIMG:
         "https://firebasestorage.googleapis.com/v0/b/derby-584f8.appspot.com/o/rpdr_s13_reg_queens%2FJoeyJayS13Promo.jpg?alt=media&token=df2669ac-67c2-4029-9f43-17384b163438",
-      result: "TBD",
+      result: "correct",
       scorePossible: 10,
       scoreActual: 0,
     },
@@ -300,6 +300,11 @@ function LeagueDetails() {
   let params = useParams();
   const classes = useStyles();
   const [leagueData, setLeagueData] = useState([{}]);
+  const [page, setPage] = React.useState(1);
+
+  const handlePageChange = (event, value) => {
+    setPage(value);
+  };
 
   //   useEffect(() => {
   //     console.log("tried for function");
@@ -402,27 +407,76 @@ function LeagueDetails() {
             </Typography>
             <Pagination
               className="episodePagination"
+              page={page}
+              onChange={handlePageChange}
               count={12}
               defaultPage={1}
               boundaryCount={2}
               color="primary"
             />
             <Grid container container align="center" justify="center">
-              {EPISODE_PICKS.episode1.map((pick) => (
-                <Grid item xs={12} md={3}>
-                  <Typography align="center" variant="h6">
-                    {pick.title}
-                  </Typography>
-                  <Typography align="center" variant="subtitle2">
-                    {pick.scorePossible} POINTS POSSIBLE
-                  </Typography>
-                  <img
-                    className="leagueDetails__rosterIMG"
-                    src={pick.queenIMG}
-                  ></img>
-                  <p>{pick.queenName}</p>
-                </Grid>
-              ))}
+              <TableContainer>
+                <Table aria-label="simple table" size="small">
+                  <TableHead>
+                    <TableRow>
+                      <TableCell>Category</TableCell>
+                      <TableCell>Queen Image</TableCell>
+                      <TableCell>Your Pick</TableCell>
+                      <TableCell>Points Awarded</TableCell>
+                      <TableCell>Points Possible</TableCell>
+                    </TableRow>
+                  </TableHead>
+                  <TableBody>
+                    {EPISODE_PICKS[`episode${page}`] ? (
+                      EPISODE_PICKS[`episode${page}`].map((pick) => (
+                        <TableRow key={pick.queenID}>
+                          <TableCell component="th" scope="row">
+                            {pick.title}
+                          </TableCell>
+                          <TableCell>
+                            <img
+                              className="leagueDetails__rosterIMG2"
+                              src={pick.queenIMG}
+                            ></img>
+                          </TableCell>
+                          <TableCell>{pick.queenName}</TableCell>
+                          <TableCell>
+                            {pick.result === "correct" ? pick.scorePossible : 0}
+                          </TableCell>
+                          <TableCell>{pick.scorePossible}</TableCell>
+                        </TableRow>
+
+                        // <Grid item xs={12} md={3}>
+                        //   <Typography align="center" variant="h6">
+                        //     {pick.title}
+                        //   </Typography>
+                        //   <Typography align="center" variant="subtitle2">
+                        //     {pick.scorePossible} POINTS POSSIBLE
+                        //   </Typography>
+                        //   <img
+                        //     className="leagueDetails__rosterIMG"
+                        //     src={pick.queenIMG}
+                        //   ></img>
+                        //   <p>{pick.queenName}</p>
+                        // </Grid>
+                      ))
+                    ) : (
+                      <div>
+                        No Picks for this Episode {page} yet! Select them here
+                      </div>
+                    )}
+                    <TableRow key="total">
+                      <TableCell component="th" scope="row">
+                        EPISODE TOTAL
+                      </TableCell>
+                      <TableCell></TableCell>
+                      <TableCell></TableCell>
+                      <TableCell>150</TableCell>
+                      <TableCell>200</TableCell>
+                    </TableRow>
+                  </TableBody>
+                </Table>
+              </TableContainer>
             </Grid>
           </div>
           <div>
