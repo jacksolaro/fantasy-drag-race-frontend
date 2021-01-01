@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import Jumbotron from "../../components/Jumbotron/Jumbotron";
 import leaguePageBkg from "../../assets/images/bkg-3.jpg";
+import { useAuth } from "../../contexts/AuthContext";
 
 import { makeStyles } from "@material-ui/core/styles";
 import Table from "@material-ui/core/Table";
@@ -24,228 +25,428 @@ const useStyles = makeStyles({
   },
 });
 
-const CURRENT_EPISODE = {
-  episodeNum: 1,
-  airDate: Date(1 / 1 / 2020),
-};
-
-const EPISODE_PICKS = {
-  season: [
-    {
-      id: "seasonWinner",
-      title: "Season Winner",
-      queenID: "G5hMj6BwbtsnqTG6XB9U",
-      queenName: "Kandy Muse",
-      queenIMG:
-        "https://firebasestorage.googleapis.com/v0/b/derby-584f8.appspot.com/o/rpdr_s13_reg_queens%2FKandyMuseS13Promo.jpg?alt=media&token=083e7124-bd37-4edc-aff5-7edecdb12a79",
-      result: "correct",
-      scorePossible: 50,
-      scoreActual: 0,
-    },
-    {
-      id: "missCongeniality",
-      title: "Miss Congeniality Winner",
-      queenID: "G5hMj6BwbtsnqTG6XB9U",
-      queenName: "Kandy Muse",
-      queenIMG:
-        "https://firebasestorage.googleapis.com/v0/b/derby-584f8.appspot.com/o/rpdr_s13_reg_queens%2FKandyMuseS13Promo.jpg?alt=media&token=083e7124-bd37-4edc-aff5-7edecdb12a79",
-      result: "TBD",
-      scorePossible: 50,
-      scoreActual: 0,
-    },
-    {
-      id: "firstEliminated",
-      title: "First Eliminated",
-      queenID: "test",
-      queenName: "Eliott with 2 T's",
-      queenIMG:
-        "https://firebasestorage.googleapis.com/v0/b/derby-584f8.appspot.com/o/rpdr_s13_reg_queens%2FElliottS13Promo.jpg?alt=media&token=d00551fc-5f85-4c71-b2ca-426ab975aa6d",
-      result: "incorrect",
-      scorePossible: 50,
-      scoreActual: 0,
-    },
-  ],
-  episode1: [
-    {
-      id: "episodeWinner",
-      title: "Episode Winner",
-      queenID: "Test",
-      queenName: "Joey Jay",
-      queenIMG:
-        "https://firebasestorage.googleapis.com/v0/b/derby-584f8.appspot.com/o/rpdr_s13_reg_queens%2FJoeyJayS13Promo.jpg?alt=media&token=df2669ac-67c2-4029-9f43-17384b163438",
-      result: "TBD",
-      scorePossible: 20,
-      scoreActual: 0,
-    },
-    {
-      id: "maxiChallengeWinner",
-      title: "Maxi Challenge Winner",
-      queenID: "Test",
-      queenName: "Gottmik",
-      queenIMG:
-        "https://firebasestorage.googleapis.com/v0/b/derby-584f8.appspot.com/o/rpdr_s13_reg_queens%2FGottmikS13Promo.jpg?alt=media&token=8c2481c6-e1e3-49d5-a30b-ef14403b2661",
-      result: "TBD",
-      scorePossible: 10,
-      scoreActual: 0,
-    },
-    {
-      id: "miniChallengeWinner",
-      title: "Mini Challenge Winner",
-      queenID: "Test",
-      queenName: "Joey Jay",
-      queenIMG:
-        "https://firebasestorage.googleapis.com/v0/b/derby-584f8.appspot.com/o/rpdr_s13_reg_queens%2FJoeyJayS13Promo.jpg?alt=media&token=df2669ac-67c2-4029-9f43-17384b163438",
-      result: "correct",
-      scorePossible: 10,
-      scoreActual: 0,
-    },
-    {
-      id: "eliminated",
-      title: "Eliminated Queen",
-      queenID: "Test",
-      queenName: "Joey Jay",
-      queenIMG:
-        "https://firebasestorage.googleapis.com/v0/b/derby-584f8.appspot.com/o/rpdr_s13_reg_queens%2FJoeyJayS13Promo.jpg?alt=media&token=df2669ac-67c2-4029-9f43-17384b163438",
-      result: "TBD",
-      scorePossible: 10,
-      scoreActual: 0,
-    },
-    {
-      id: "topQueen1",
-      title: "Top Queen #1",
-      queenID: "Test",
-      queenName: "Denali",
-      queenIMG:
-        "https://firebasestorage.googleapis.com/v0/b/derby-584f8.appspot.com/o/rpdr_s13_reg_queens%2FDenaliS13Promo.jpg?alt=media&token=c30fba33-4d09-45f0-b329-87c2535ea3b1",
-      result: "TBD",
-      scorePossible: 5,
-      scoreActual: 0,
-    },
-    {
-      id: "topQueen2",
-      title: "Top Queen #2",
-      queenID: "Test",
-      queenName: "Denali",
-      queenIMG:
-        "https://firebasestorage.googleapis.com/v0/b/derby-584f8.appspot.com/o/rpdr_s13_reg_queens%2FDenaliS13Promo.jpg?alt=media&token=c30fba33-4d09-45f0-b329-87c2535ea3b1",
-      result: "TBD",
-      scorePossible: 5,
-      scoreActual: 0,
-    },
-    {
-      id: "bottomQueen1",
-      title: "Bottom Queen #1",
-      queenID: "Test",
-      queenName: "Kahmora Hall",
-      queenIMG:
-        "https://firebasestorage.googleapis.com/v0/b/derby-584f8.appspot.com/o/rpdr_s13_reg_queens%2FKahmoraHallS13Promo.jpg?alt=media&token=298e371a-11bb-42ee-b663-ef3f13ece25f",
-      result: "TBD",
-      scorePossible: 5,
-      scoreActual: 0,
-    },
-    {
-      id: "bottomQueen2",
-      title: "Bottom Queen #2",
-      queenID: "Test",
-      queenName: "Joey Jay",
-      queenIMG:
-        "https://firebasestorage.googleapis.com/v0/b/derby-584f8.appspot.com/o/rpdr_s13_reg_queens%2FJoeyJayS13Promo.jpg?alt=media&token=df2669ac-67c2-4029-9f43-17384b163438",
-      result: "TBD",
-      scorePossible: 5,
-      scoreActual: 0,
-    },
-  ],
-  episode2: [
-    {
-      id: "episodeWinner",
-      title: "Episode Winner",
-      queenID: "Test",
-      queenName: "Joey Jay",
-      queenIMG:
-        "https://firebasestorage.googleapis.com/v0/b/derby-584f8.appspot.com/o/rpdr_s13_reg_queens%2FJoeyJayS13Promo.jpg?alt=media&token=df2669ac-67c2-4029-9f43-17384b163438",
-      result: "TBD",
-      scorePossible: 20,
-      scoreActual: 0,
-    },
-    {
-      id: "maxiChallengeWinner",
-      title: "Maxi Challenge Winner",
-      queenID: "Test",
-      queenName: "Gottmik",
-      queenIMG:
-        "https://firebasestorage.googleapis.com/v0/b/derby-584f8.appspot.com/o/rpdr_s13_reg_queens%2FGottmikS13Promo.jpg?alt=media&token=8c2481c6-e1e3-49d5-a30b-ef14403b2661",
-      result: "TBD",
-      scorePossible: 10,
-      scoreActual: 0,
-    },
-    {
-      id: "miniChallengeWinner",
-      title: "Mini Challenge Winner",
-      queenID: "Test",
-      queenName: "Joey Jay",
-      queenIMG:
-        "https://firebasestorage.googleapis.com/v0/b/derby-584f8.appspot.com/o/rpdr_s13_reg_queens%2FJoeyJayS13Promo.jpg?alt=media&token=df2669ac-67c2-4029-9f43-17384b163438",
-      result: "TBD",
-      scorePossible: 10,
-      scoreActual: 0,
-    },
-    {
-      id: "eliminated",
-      title: "Eliminated Queen",
-      queenID: "Test",
-      queenName: "Gottmik",
-      queenIMG:
-        "https://firebasestorage.googleapis.com/v0/b/derby-584f8.appspot.com/o/rpdr_s13_reg_queens%2FGottmikS13Promo.jpg?alt=media&token=8c2481c6-e1e3-49d5-a30b-ef14403b2661",
-      result: "TBD",
-      scorePossible: 10,
-      scoreActual: 0,
-    },
-    {
-      id: "topQueen1",
-      title: "Top Queen #1",
-      queenID: "Test",
-      queenName: "Denali",
-      queenIMG:
-        "https://firebasestorage.googleapis.com/v0/b/derby-584f8.appspot.com/o/rpdr_s13_reg_queens%2FDenaliS13Promo.jpg?alt=media&token=c30fba33-4d09-45f0-b329-87c2535ea3b1",
-      result: "TBD",
-      scorePossible: 5,
-      scoreActual: 0,
-    },
-    {
-      id: "topQueen2",
-      title: "Top Queen #2",
-      queenID: "Test",
-      queenName: "Denali",
-      queenIMG:
-        "https://firebasestorage.googleapis.com/v0/b/derby-584f8.appspot.com/o/rpdr_s13_reg_queens%2FDenaliS13Promo.jpg?alt=media&token=c30fba33-4d09-45f0-b329-87c2535ea3b1",
-      result: "TBD",
-      scorePossible: 5,
-      scoreActual: 0,
-    },
-    {
-      id: "bottomQueen1",
-      title: "Bottom Queen #1",
-      queenID: "Test",
-      queenName: "Kahmora Hall",
-      queenIMG:
-        "https://firebasestorage.googleapis.com/v0/b/derby-584f8.appspot.com/o/rpdr_s13_reg_queens%2FKahmoraHallS13Promo.jpg?alt=media&token=298e371a-11bb-42ee-b663-ef3f13ece25f",
-      result: "TBD",
-      scorePossible: 5,
-      scoreActual: 0,
-    },
-    {
-      id: "bottomQueen2",
-      title: "Bottom Queen #2",
-      queenID: "Test",
-      queenName: "Joey Jay",
-      queenIMG:
-        "https://firebasestorage.googleapis.com/v0/b/derby-584f8.appspot.com/o/rpdr_s13_reg_queens%2FJoeyJayS13Promo.jpg?alt=media&token=df2669ac-67c2-4029-9f43-17384b163438",
-      result: "TBD",
-      scorePossible: 5,
-      scoreActual: 0,
-    },
-  ],
-};
+const EPISODE_PICKS = [
+  {
+    event: "season",
+    picks: [
+      {
+        id: "seasonWinner",
+        title: "Season Winner",
+        queenID: "G5hMj6BwbtsnqTG6XB9U",
+        queenName: "Kandy Muse",
+        queenIMG:
+          "https://firebasestorage.googleapis.com/v0/b/derby-584f8.appspot.com/o/rpdr_s13_reg_queens%2FKandyMuseS13Promo.jpg?alt=media&token=083e7124-bd37-4edc-aff5-7edecdb12a79",
+        result: "correct",
+        scorePossible: 50,
+        scoreActual: 0,
+      },
+      {
+        id: "missCongeniality",
+        title: "Miss Congeniality Winner",
+        queenID: "G5hMj6BwbtsnqTG6XB9U",
+        queenName: "Kandy Muse",
+        queenIMG:
+          "https://firebasestorage.googleapis.com/v0/b/derby-584f8.appspot.com/o/rpdr_s13_reg_queens%2FKandyMuseS13Promo.jpg?alt=media&token=083e7124-bd37-4edc-aff5-7edecdb12a79",
+        result: "TBD",
+        scorePossible: 50,
+        scoreActual: 0,
+      },
+      {
+        id: "firstEliminated",
+        title: "First Eliminated",
+        queenID: "test",
+        queenName: "Eliott with 2 T's",
+        queenIMG:
+          "https://firebasestorage.googleapis.com/v0/b/derby-584f8.appspot.com/o/rpdr_s13_reg_queens%2FElliottS13Promo.jpg?alt=media&token=d00551fc-5f85-4c71-b2ca-426ab975aa6d",
+        result: "incorrect",
+        scorePossible: 50,
+        scoreActual: 0,
+      },
+    ],
+  },
+  {
+    event: "episode1",
+    picks: [
+      {
+        userID: "SallyPicks",
+        picks: [
+          {
+            id: "episodeWinner",
+            title: "Episode Winner",
+            queenID: "Test",
+            queenName: "Joey Jay",
+            queenIMG:
+              "https://firebasestorage.googleapis.com/v0/b/derby-584f8.appspot.com/o/rpdr_s13_reg_queens%2FJoeyJayS13Promo.jpg?alt=media&token=df2669ac-67c2-4029-9f43-17384b163438",
+            result: "TBD",
+            scorePossible: 20,
+            scoreActual: 0,
+          },
+          {
+            id: "maxiChallengeWinner",
+            title: "Maxi Challenge Winner",
+            queenID: "Test",
+            queenName: "Gottmik",
+            queenIMG:
+              "https://firebasestorage.googleapis.com/v0/b/derby-584f8.appspot.com/o/rpdr_s13_reg_queens%2FGottmikS13Promo.jpg?alt=media&token=8c2481c6-e1e3-49d5-a30b-ef14403b2661",
+            result: "TBD",
+            scorePossible: 10,
+            scoreActual: 0,
+          },
+          {
+            id: "miniChallengeWinner",
+            title: "Mini Challenge Winner",
+            queenID: "Test",
+            queenName: "Joey Jay",
+            queenIMG:
+              "https://firebasestorage.googleapis.com/v0/b/derby-584f8.appspot.com/o/rpdr_s13_reg_queens%2FJoeyJayS13Promo.jpg?alt=media&token=df2669ac-67c2-4029-9f43-17384b163438",
+            result: "correct",
+            scorePossible: 10,
+            scoreActual: 0,
+          },
+          {
+            id: "eliminated",
+            title: "Eliminated Queen",
+            queenID: "Test",
+            queenName: "Joey Jay",
+            queenIMG:
+              "https://firebasestorage.googleapis.com/v0/b/derby-584f8.appspot.com/o/rpdr_s13_reg_queens%2FJoeyJayS13Promo.jpg?alt=media&token=df2669ac-67c2-4029-9f43-17384b163438",
+            result: "TBD",
+            scorePossible: 10,
+            scoreActual: 0,
+          },
+          {
+            id: "topQueen1",
+            title: "Top Queen #1",
+            queenID: "Test",
+            queenName: "Denali",
+            queenIMG:
+              "https://firebasestorage.googleapis.com/v0/b/derby-584f8.appspot.com/o/rpdr_s13_reg_queens%2FDenaliS13Promo.jpg?alt=media&token=c30fba33-4d09-45f0-b329-87c2535ea3b1",
+            result: "TBD",
+            scorePossible: 5,
+            scoreActual: 0,
+          },
+          {
+            id: "topQueen2",
+            title: "Top Queen #2",
+            queenID: "Test",
+            queenName: "Denali",
+            queenIMG:
+              "https://firebasestorage.googleapis.com/v0/b/derby-584f8.appspot.com/o/rpdr_s13_reg_queens%2FDenaliS13Promo.jpg?alt=media&token=c30fba33-4d09-45f0-b329-87c2535ea3b1",
+            result: "TBD",
+            scorePossible: 5,
+            scoreActual: 0,
+          },
+          {
+            id: "bottomQueen1",
+            title: "Bottom Queen #1",
+            queenID: "Test",
+            queenName: "Kahmora Hall",
+            queenIMG:
+              "https://firebasestorage.googleapis.com/v0/b/derby-584f8.appspot.com/o/rpdr_s13_reg_queens%2FKahmoraHallS13Promo.jpg?alt=media&token=298e371a-11bb-42ee-b663-ef3f13ece25f",
+            result: "TBD",
+            scorePossible: 5,
+            scoreActual: 0,
+          },
+          {
+            id: "bottomQueen2",
+            title: "Bottom Queen #2",
+            queenID: "Test",
+            queenName: "Joey Jay",
+            queenIMG:
+              "https://firebasestorage.googleapis.com/v0/b/derby-584f8.appspot.com/o/rpdr_s13_reg_queens%2FJoeyJayS13Promo.jpg?alt=media&token=df2669ac-67c2-4029-9f43-17384b163438",
+            result: "TBD",
+            scorePossible: 5,
+            scoreActual: 0,
+          },
+        ],
+      },
+      {
+        userID: "nDGwS8Ia2oO2S9SPdZiCs9Rr93I2",
+        picks: [
+          {
+            id: "episodeWinner",
+            title: "Episode Winner",
+            queenID: "Test",
+            queenName: "Joey Jay",
+            queenIMG:
+              "https://firebasestorage.googleapis.com/v0/b/derby-584f8.appspot.com/o/rpdr_s13_reg_queens%2FJoeyJayS13Promo.jpg?alt=media&token=df2669ac-67c2-4029-9f43-17384b163438",
+            result: "TBD",
+            scorePossible: 20,
+            scoreActual: 0,
+          },
+          {
+            id: "maxiChallengeWinner",
+            title: "Maxi Challenge Winner",
+            queenID: "Test",
+            queenName: "Gottmik",
+            queenIMG:
+              "https://firebasestorage.googleapis.com/v0/b/derby-584f8.appspot.com/o/rpdr_s13_reg_queens%2FGottmikS13Promo.jpg?alt=media&token=8c2481c6-e1e3-49d5-a30b-ef14403b2661",
+            result: "TBD",
+            scorePossible: 10,
+            scoreActual: 0,
+          },
+          {
+            id: "miniChallengeWinner",
+            title: "Mini Challenge Winner",
+            queenID: "Test",
+            queenName: "Joey Jay",
+            queenIMG:
+              "https://firebasestorage.googleapis.com/v0/b/derby-584f8.appspot.com/o/rpdr_s13_reg_queens%2FJoeyJayS13Promo.jpg?alt=media&token=df2669ac-67c2-4029-9f43-17384b163438",
+            result: "correct",
+            scorePossible: 10,
+            scoreActual: 0,
+          },
+          {
+            id: "eliminated",
+            title: "Eliminated Queen",
+            queenID: "Test",
+            queenName: "Joey Jay",
+            queenIMG:
+              "https://firebasestorage.googleapis.com/v0/b/derby-584f8.appspot.com/o/rpdr_s13_reg_queens%2FJoeyJayS13Promo.jpg?alt=media&token=df2669ac-67c2-4029-9f43-17384b163438",
+            result: "TBD",
+            scorePossible: 10,
+            scoreActual: 0,
+          },
+          {
+            id: "topQueen1",
+            title: "Top Queen #1",
+            queenID: "Test",
+            queenName: "Denali",
+            queenIMG:
+              "https://firebasestorage.googleapis.com/v0/b/derby-584f8.appspot.com/o/rpdr_s13_reg_queens%2FDenaliS13Promo.jpg?alt=media&token=c30fba33-4d09-45f0-b329-87c2535ea3b1",
+            result: "TBD",
+            scorePossible: 5,
+            scoreActual: 0,
+          },
+          {
+            id: "topQueen2",
+            title: "Top Queen #2",
+            queenID: "Test",
+            queenName: "Denali",
+            queenIMG:
+              "https://firebasestorage.googleapis.com/v0/b/derby-584f8.appspot.com/o/rpdr_s13_reg_queens%2FDenaliS13Promo.jpg?alt=media&token=c30fba33-4d09-45f0-b329-87c2535ea3b1",
+            result: "TBD",
+            scorePossible: 5,
+            scoreActual: 0,
+          },
+          {
+            id: "bottomQueen1",
+            title: "Bottom Queen #1",
+            queenID: "Test",
+            queenName: "Kahmora Hall",
+            queenIMG:
+              "https://firebasestorage.googleapis.com/v0/b/derby-584f8.appspot.com/o/rpdr_s13_reg_queens%2FKahmoraHallS13Promo.jpg?alt=media&token=298e371a-11bb-42ee-b663-ef3f13ece25f",
+            result: "TBD",
+            scorePossible: 5,
+            scoreActual: 0,
+          },
+          {
+            id: "bottomQueen2",
+            title: "Bottom Queen #2",
+            queenID: "Test",
+            queenName: "Joey Jay",
+            queenIMG:
+              "https://firebasestorage.googleapis.com/v0/b/derby-584f8.appspot.com/o/rpdr_s13_reg_queens%2FJoeyJayS13Promo.jpg?alt=media&token=df2669ac-67c2-4029-9f43-17384b163438",
+            result: "TBD",
+            scorePossible: 5,
+            scoreActual: 0,
+          },
+        ],
+      },
+    ],
+  },
+  {
+    event: "episode2",
+    picks: [
+      {
+        userID: "nDGwS8Ia2oO2S9SPdZiCs9Rr93I2",
+        picks: [
+          {
+            id: "episodeWinner",
+            title: "Episode Winner",
+            queenID: "Test",
+            queenName: "Joey Jay",
+            queenIMG:
+              "https://firebasestorage.googleapis.com/v0/b/derby-584f8.appspot.com/o/rpdr_s13_reg_queens%2FJoeyJayS13Promo.jpg?alt=media&token=df2669ac-67c2-4029-9f43-17384b163438",
+            result: "TBD",
+            scorePossible: 20,
+            scoreActual: 0,
+          },
+          {
+            id: "maxiChallengeWinner",
+            title: "Maxi Challenge Winner",
+            queenID: "Test",
+            queenName: "Gottmik",
+            queenIMG:
+              "https://firebasestorage.googleapis.com/v0/b/derby-584f8.appspot.com/o/rpdr_s13_reg_queens%2FGottmikS13Promo.jpg?alt=media&token=8c2481c6-e1e3-49d5-a30b-ef14403b2661",
+            result: "TBD",
+            scorePossible: 10,
+            scoreActual: 0,
+          },
+          {
+            id: "miniChallengeWinner",
+            title: "Mini Challenge Winner",
+            queenID: "Test",
+            queenName: "Joey Jay",
+            queenIMG:
+              "https://firebasestorage.googleapis.com/v0/b/derby-584f8.appspot.com/o/rpdr_s13_reg_queens%2FJoeyJayS13Promo.jpg?alt=media&token=df2669ac-67c2-4029-9f43-17384b163438",
+            result: "correct",
+            scorePossible: 10,
+            scoreActual: 0,
+          },
+          {
+            id: "eliminated",
+            title: "Eliminated Queen",
+            queenID: "Test",
+            queenName: "Joey Jay",
+            queenIMG:
+              "https://firebasestorage.googleapis.com/v0/b/derby-584f8.appspot.com/o/rpdr_s13_reg_queens%2FJoeyJayS13Promo.jpg?alt=media&token=df2669ac-67c2-4029-9f43-17384b163438",
+            result: "TBD",
+            scorePossible: 10,
+            scoreActual: 0,
+          },
+          {
+            id: "topQueen1",
+            title: "Top Queen #1",
+            queenID: "Test",
+            queenName: "Denali",
+            queenIMG:
+              "https://firebasestorage.googleapis.com/v0/b/derby-584f8.appspot.com/o/rpdr_s13_reg_queens%2FDenaliS13Promo.jpg?alt=media&token=c30fba33-4d09-45f0-b329-87c2535ea3b1",
+            result: "TBD",
+            scorePossible: 5,
+            scoreActual: 0,
+          },
+          {
+            id: "topQueen2",
+            title: "Top Queen #2",
+            queenID: "Test",
+            queenName: "Denali",
+            queenIMG:
+              "https://firebasestorage.googleapis.com/v0/b/derby-584f8.appspot.com/o/rpdr_s13_reg_queens%2FDenaliS13Promo.jpg?alt=media&token=c30fba33-4d09-45f0-b329-87c2535ea3b1",
+            result: "TBD",
+            scorePossible: 5,
+            scoreActual: 0,
+          },
+          {
+            id: "bottomQueen1",
+            title: "Bottom Queen #1",
+            queenID: "Test",
+            queenName: "Kahmora Hall",
+            queenIMG:
+              "https://firebasestorage.googleapis.com/v0/b/derby-584f8.appspot.com/o/rpdr_s13_reg_queens%2FKahmoraHallS13Promo.jpg?alt=media&token=298e371a-11bb-42ee-b663-ef3f13ece25f",
+            result: "TBD",
+            scorePossible: 5,
+            scoreActual: 0,
+          },
+          {
+            id: "bottomQueen2",
+            title: "Bottom Queen #2",
+            queenID: "Test",
+            queenName: "Joey Jay",
+            queenIMG:
+              "https://firebasestorage.googleapis.com/v0/b/derby-584f8.appspot.com/o/rpdr_s13_reg_queens%2FJoeyJayS13Promo.jpg?alt=media&token=df2669ac-67c2-4029-9f43-17384b163438",
+            result: "TBD",
+            scorePossible: 5,
+            scoreActual: 0,
+          },
+        ],
+      },
+      {
+        userID: "CindyPicks",
+        picks: [
+          {
+            id: "episodeWinner",
+            title: "Episode Winner",
+            queenID: "Test",
+            queenName: "Joey Jay",
+            queenIMG:
+              "https://firebasestorage.googleapis.com/v0/b/derby-584f8.appspot.com/o/rpdr_s13_reg_queens%2FJoeyJayS13Promo.jpg?alt=media&token=df2669ac-67c2-4029-9f43-17384b163438",
+            result: "TBD",
+            scorePossible: 20,
+            scoreActual: 0,
+          },
+          {
+            id: "maxiChallengeWinner",
+            title: "Maxi Challenge Winner",
+            queenID: "Test",
+            queenName: "Gottmik",
+            queenIMG:
+              "https://firebasestorage.googleapis.com/v0/b/derby-584f8.appspot.com/o/rpdr_s13_reg_queens%2FGottmikS13Promo.jpg?alt=media&token=8c2481c6-e1e3-49d5-a30b-ef14403b2661",
+            result: "TBD",
+            scorePossible: 10,
+            scoreActual: 0,
+          },
+          {
+            id: "miniChallengeWinner",
+            title: "Mini Challenge Winner",
+            queenID: "Test",
+            queenName: "Joey Jay",
+            queenIMG:
+              "https://firebasestorage.googleapis.com/v0/b/derby-584f8.appspot.com/o/rpdr_s13_reg_queens%2FJoeyJayS13Promo.jpg?alt=media&token=df2669ac-67c2-4029-9f43-17384b163438",
+            result: "correct",
+            scorePossible: 10,
+            scoreActual: 0,
+          },
+          {
+            id: "eliminated",
+            title: "Eliminated Queen",
+            queenID: "Test",
+            queenName: "Joey Jay",
+            queenIMG:
+              "https://firebasestorage.googleapis.com/v0/b/derby-584f8.appspot.com/o/rpdr_s13_reg_queens%2FJoeyJayS13Promo.jpg?alt=media&token=df2669ac-67c2-4029-9f43-17384b163438",
+            result: "TBD",
+            scorePossible: 10,
+            scoreActual: 0,
+          },
+          {
+            id: "topQueen1",
+            title: "Top Queen #1",
+            queenID: "Test",
+            queenName: "Denali",
+            queenIMG:
+              "https://firebasestorage.googleapis.com/v0/b/derby-584f8.appspot.com/o/rpdr_s13_reg_queens%2FDenaliS13Promo.jpg?alt=media&token=c30fba33-4d09-45f0-b329-87c2535ea3b1",
+            result: "TBD",
+            scorePossible: 5,
+            scoreActual: 0,
+          },
+          {
+            id: "topQueen2",
+            title: "Top Queen #2",
+            queenID: "Test",
+            queenName: "Denali",
+            queenIMG:
+              "https://firebasestorage.googleapis.com/v0/b/derby-584f8.appspot.com/o/rpdr_s13_reg_queens%2FDenaliS13Promo.jpg?alt=media&token=c30fba33-4d09-45f0-b329-87c2535ea3b1",
+            result: "TBD",
+            scorePossible: 5,
+            scoreActual: 0,
+          },
+          {
+            id: "bottomQueen1",
+            title: "Bottom Queen #1",
+            queenID: "Test",
+            queenName: "Kahmora Hall",
+            queenIMG:
+              "https://firebasestorage.googleapis.com/v0/b/derby-584f8.appspot.com/o/rpdr_s13_reg_queens%2FKahmoraHallS13Promo.jpg?alt=media&token=298e371a-11bb-42ee-b663-ef3f13ece25f",
+            result: "TBD",
+            scorePossible: 5,
+            scoreActual: 0,
+          },
+          {
+            id: "bottomQueen2",
+            title: "Bottom Queen #2",
+            queenID: "Test",
+            queenName: "Joey Jay",
+            queenIMG:
+              "https://firebasestorage.googleapis.com/v0/b/derby-584f8.appspot.com/o/rpdr_s13_reg_queens%2FJoeyJayS13Promo.jpg?alt=media&token=df2669ac-67c2-4029-9f43-17384b163438",
+            result: "TBD",
+            scorePossible: 5,
+            scoreActual: 0,
+          },
+        ],
+      },
+    ],
+  },
+];
 
 const RESULTS = {
   season: {
@@ -296,30 +497,60 @@ const SCORES = {
   ],
 };
 
+// const getScores = () => {
+//   let scores = [];
+//   let episodeSum, totalSum;
+
+//     EPISODE_PICKS.map((event) => {
+//       event.picks.map((user) => {
+//         episodeSum = 0;
+//         user.picks.map((pick) => {
+//           if (pick.result === "correct") {
+//             episodeSum += pick.scorePossible;
+//           }
+//         });
+//         scores.push({
+//           userID: user.userID,
+//           score: episodeSum,
+//         });
+
+//       })
+//     });
+//   // if (EPISODE_PICKS[`episode1`]) {
+//   //   EPISODE_PICKS[`episode1`].map((user) => {
+//   //     episodeSum = 0;
+//   //     user.picks.map((pick) => {
+//   //       if (pick.result === "correct") {
+//   //         episodeSum += pick.scorePossible;
+//   //       }
+//   //     });
+//   //     scores.push({
+//   //       userID: user.userID,
+//   //       score: episodeSum,
+//   //     });
+//   //   });
+//   // }
+
+//   console.log("EPISODE PICKS", EPISODE_PICKS);
+//   console.log("Scores", scores);
+//   return scores;
+// };
+
 function LeagueDetails() {
   let params = useParams();
   const classes = useStyles();
+  const { currentUser } = useAuth();
   const [leagueData, setLeagueData] = useState([{}]);
   const [page, setPage] = React.useState(1);
+  // const [scores, setScores] = useState(getScores());
 
   const handlePageChange = (event, value) => {
     setPage(value);
   };
 
-  //   useEffect(() => {
-  //     console.log("tried for function");
-  //     const loadScores = firebase.functions().httpsCallable("loadScores");
-  //     loadScores({ test: "test" })
-  //       .then((response) => {
-  //         console.log("testing response");
-  //         console.log(response);
-  //       })
-  //       .catch((error) => {
-  //         console.log("error occurred");
-  //       });
-  //   }, []);
-
   useEffect(() => {
+    // getScores();
+
     db.collection("leagues")
       .doc(params.id)
       .get()
@@ -328,20 +559,36 @@ function LeagueDetails() {
         setLeagueData(doc.data());
       })
       .catch((error) => console.log("Error", error));
-
-    // console.log("leagueData", leagueData);
-
-    console.log("TESTING", RESULTS.season.seasonWinner);
-    // db.collection("shows")
-    //   //   TODO: Need to automate what show and what season
-    //   .doc("RPDR")
-    //   .collection("seasons")
-    //   .doc("US_Reg_13")
-    //   .get()
-    //   .then((doc) => {
-    //     // console.log("TEST", doc.data());
-    //   });
   }, []);
+
+  function renderEpisodePicks(episodeNum) {
+    const episodePicks = JSON.parse(JSON.stringify(EPISODE_PICKS)).filter(
+      (list) => list.event === `episode${episodeNum}`
+    );
+
+    const userPicksForEpisode = JSON.parse(
+      JSON.stringify(episodePicks[0].picks)
+    ).filter((user) => user.userID === currentUser.uid);
+
+    console.log("episodePicks", episodePicks[0]);
+    console.log("userPicksForEpisode", userPicksForEpisode[0]);
+
+    return userPicksForEpisode[0].picks.map((pick) => (
+      <TableRow key={pick.queenID}>
+        <TableCell component="th" scope="row">
+          {pick.title}
+        </TableCell>
+        <TableCell>
+          <img className="leagueDetails__rosterIMG2" src={pick.queenIMG}></img>
+        </TableCell>
+        <TableCell>{pick.queenName}</TableCell>
+        <TableCell>
+          {pick.result === "correct" ? pick.scorePossible : 0}
+        </TableCell>
+        <TableCell>{pick.scorePossible}</TableCell>
+      </TableRow>
+    ));
+  }
 
   return (
     <Container>
@@ -367,18 +614,6 @@ function LeagueDetails() {
                 </TableRow>
               </TableHead>
               <TableBody>
-                {/* {leagueData.scores ? (
-                  leagueData.scores.map((user) => (
-                    <TableRow key={user.email}>
-                      <TableCell component="th" scope="row">
-                        {user.email}
-                      </TableCell>
-                      <TableCell align="right">{user.score}</TableCell>
-                    </TableRow>
-                  ))
-                ) : (
-                  <p>loading</p>
-                )} */}
                 {SCORES ? (
                   SCORES.totals
                     .sort((a, b) => (a.score < b.score ? 1 : -1))
@@ -427,8 +662,11 @@ function LeagueDetails() {
                     </TableRow>
                   </TableHead>
                   <TableBody>
-                    {EPISODE_PICKS[`episode${page}`] ? (
-                      EPISODE_PICKS[`episode${page}`].map((pick) => (
+                    {renderEpisodePicks(page)}
+
+                    {/* {JSON.parse(JSON.stringify(EPISODE_PICKS))
+                      .filter((event) => (event.event = `episode${page}`))
+                      .map((pick) => (
                         <TableRow key={pick.queenID}>
                           <TableCell component="th" scope="row">
                             {pick.title}
@@ -445,26 +683,33 @@ function LeagueDetails() {
                           </TableCell>
                           <TableCell>{pick.scorePossible}</TableCell>
                         </TableRow>
+                      ))} */}
 
-                        // <Grid item xs={12} md={3}>
-                        //   <Typography align="center" variant="h6">
-                        //     {pick.title}
-                        //   </Typography>
-                        //   <Typography align="center" variant="subtitle2">
-                        //     {pick.scorePossible} POINTS POSSIBLE
-                        //   </Typography>
-                        //   <img
-                        //     className="leagueDetails__rosterIMG"
-                        //     src={pick.queenIMG}
-                        //   ></img>
-                        //   <p>{pick.queenName}</p>
-                        // </Grid>
-                      ))
+                    {/* .picks.map((pick) => (
+                          <TableRow key={pick.queenID}>
+                            <TableCell component="th" scope="row">
+                              {pick.title}
+                            </TableCell>
+                            <TableCell>
+                              <img
+                                className="leagueDetails__rosterIMG2"
+                                src={pick.queenIMG}
+                              ></img>
+                            </TableCell>
+                            <TableCell>{pick.queenName}</TableCell>
+                            <TableCell>
+                              {pick.result === "correct"
+                                ? pick.scorePossible
+                                : 0}
+                            </TableCell>
+                            <TableCell>{pick.scorePossible}</TableCell>
+                          </TableRow>
+                        ))
                     ) : (
                       <div>
                         No Picks for this Episode {page} yet! Select them here
                       </div>
-                    )}
+                    )} */}
                     <TableRow key="total">
                       <TableCell component="th" scope="row">
                         EPISODE TOTAL
