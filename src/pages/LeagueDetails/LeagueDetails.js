@@ -30,37 +30,80 @@ const EPISODE_PICKS = [
     event: "season",
     picks: [
       {
-        id: "seasonWinner",
-        title: "Season Winner",
-        queenID: "G5hMj6BwbtsnqTG6XB9U",
-        queenName: "Kandy Muse",
-        queenIMG:
-          "https://firebasestorage.googleapis.com/v0/b/derby-584f8.appspot.com/o/rpdr_s13_reg_queens%2FKandyMuseS13Promo.jpg?alt=media&token=083e7124-bd37-4edc-aff5-7edecdb12a79",
-        result: "correct",
-        scorePossible: 50,
-        scoreActual: 0,
+        userID: "SallyPicks",
+        picks: [
+          {
+            id: "seasonWinner",
+            title: "Season Winner",
+            queenID: "G5hMj6BwbtsnqTG6XB9U",
+            queenName: "Kandy Muse",
+            queenIMG:
+              "https://firebasestorage.googleapis.com/v0/b/derby-584f8.appspot.com/o/rpdr_s13_reg_queens%2FKandyMuseS13Promo.jpg?alt=media&token=083e7124-bd37-4edc-aff5-7edecdb12a79",
+            result: "correct",
+            scorePossible: 50,
+            scoreActual: 0,
+          },
+          {
+            id: "missCongeniality",
+            title: "Miss Congeniality Winner",
+            queenID: "G5hMj6BwbtsnqTG6XB9U",
+            queenName: "Kandy Muse",
+            queenIMG:
+              "https://firebasestorage.googleapis.com/v0/b/derby-584f8.appspot.com/o/rpdr_s13_reg_queens%2FKandyMuseS13Promo.jpg?alt=media&token=083e7124-bd37-4edc-aff5-7edecdb12a79",
+            result: "TBD",
+            scorePossible: 50,
+            scoreActual: 0,
+          },
+          {
+            id: "firstEliminated",
+            title: "First Eliminated",
+            queenID: "test",
+            queenName: "Eliott with 2 T's",
+            queenIMG:
+              "https://firebasestorage.googleapis.com/v0/b/derby-584f8.appspot.com/o/rpdr_s13_reg_queens%2FElliottS13Promo.jpg?alt=media&token=d00551fc-5f85-4c71-b2ca-426ab975aa6d",
+            result: "incorrect",
+            scorePossible: 50,
+            scoreActual: 0,
+          },
+        ],
       },
       {
-        id: "missCongeniality",
-        title: "Miss Congeniality Winner",
-        queenID: "G5hMj6BwbtsnqTG6XB9U",
-        queenName: "Kandy Muse",
-        queenIMG:
-          "https://firebasestorage.googleapis.com/v0/b/derby-584f8.appspot.com/o/rpdr_s13_reg_queens%2FKandyMuseS13Promo.jpg?alt=media&token=083e7124-bd37-4edc-aff5-7edecdb12a79",
-        result: "TBD",
-        scorePossible: 50,
-        scoreActual: 0,
-      },
-      {
-        id: "firstEliminated",
-        title: "First Eliminated",
-        queenID: "test",
-        queenName: "Eliott with 2 T's",
-        queenIMG:
-          "https://firebasestorage.googleapis.com/v0/b/derby-584f8.appspot.com/o/rpdr_s13_reg_queens%2FElliottS13Promo.jpg?alt=media&token=d00551fc-5f85-4c71-b2ca-426ab975aa6d",
-        result: "incorrect",
-        scorePossible: 50,
-        scoreActual: 0,
+        userID: "nDGwS8Ia2oO2S9SPdZiCs9Rr93I2",
+        picks: [
+          {
+            id: "seasonWinner",
+            title: "Season Winner",
+            queenID: "G5hMj6BwbtsnqTG6XB9U",
+            queenName: "Kandy Muse",
+            queenIMG:
+              "https://firebasestorage.googleapis.com/v0/b/derby-584f8.appspot.com/o/rpdr_s13_reg_queens%2FKandyMuseS13Promo.jpg?alt=media&token=083e7124-bd37-4edc-aff5-7edecdb12a79",
+            result: "correct",
+            scorePossible: 50,
+            scoreActual: 0,
+          },
+          {
+            id: "missCongeniality",
+            title: "Miss Congeniality Winner",
+            queenID: "G5hMj6BwbtsnqTG6XB9U",
+            queenName: "Kandy Muse",
+            queenIMG:
+              "https://firebasestorage.googleapis.com/v0/b/derby-584f8.appspot.com/o/rpdr_s13_reg_queens%2FKandyMuseS13Promo.jpg?alt=media&token=083e7124-bd37-4edc-aff5-7edecdb12a79",
+            result: "TBD",
+            scorePossible: 50,
+            scoreActual: 0,
+          },
+          {
+            id: "firstEliminated",
+            title: "First Eliminated",
+            queenID: "test",
+            queenName: "Eliott with 2 T's",
+            queenIMG:
+              "https://firebasestorage.googleapis.com/v0/b/derby-584f8.appspot.com/o/rpdr_s13_reg_queens%2FElliottS13Promo.jpg?alt=media&token=d00551fc-5f85-4c71-b2ca-426ab975aa6d",
+            result: "incorrect",
+            scorePossible: 50,
+            scoreActual: 0,
+          },
+        ],
       },
     ],
   },
@@ -566,28 +609,65 @@ function LeagueDetails() {
       (list) => list.event === `episode${episodeNum}`
     );
 
-    const userPicksForEpisode = JSON.parse(
-      JSON.stringify(episodePicks[0].picks)
-    ).filter((user) => user.userID === currentUser.uid);
+    if (episodePicks.length > 0) {
+      const userPicksForEpisode = JSON.parse(
+        JSON.stringify(episodePicks[0].picks)
+      ).filter((user) => user.userID === currentUser.uid);
 
-    console.log("episodePicks", episodePicks[0]);
-    console.log("userPicksForEpisode", userPicksForEpisode[0]);
+      return userPicksForEpisode[0].picks.map((pick) => (
+        <TableRow key={pick.queenID}>
+          <TableCell component="th" scope="row">
+            {pick.title}
+          </TableCell>
+          <TableCell>
+            <img
+              className="leagueDetails__rosterIMG2"
+              src={pick.queenIMG}
+            ></img>
+          </TableCell>
+          <TableCell>{pick.queenName}</TableCell>
+          <TableCell>
+            {pick.result === "correct" ? pick.scorePossible : 0}
+          </TableCell>
+          <TableCell>{pick.scorePossible}</TableCell>
+        </TableRow>
+      ));
+    } else {
+      return <div>Not currently available</div>;
+    }
+  }
 
-    return userPicksForEpisode[0].picks.map((pick) => (
-      <TableRow key={pick.queenID}>
-        <TableCell component="th" scope="row">
-          {pick.title}
-        </TableCell>
-        <TableCell>
-          <img className="leagueDetails__rosterIMG2" src={pick.queenIMG}></img>
-        </TableCell>
-        <TableCell>{pick.queenName}</TableCell>
-        <TableCell>
-          {pick.result === "correct" ? pick.scorePossible : 0}
-        </TableCell>
-        <TableCell>{pick.scorePossible}</TableCell>
-      </TableRow>
-    ));
+  function renderSeasonPicks() {
+    const seasonPicks = JSON.parse(JSON.stringify(EPISODE_PICKS)).filter(
+      (list) => list.event === `season`
+    );
+
+    if (seasonPicks.length > 0) {
+      const userSeasonPicks = JSON.parse(
+        JSON.stringify(seasonPicks[0].picks)
+      ).filter((user) => user.userID === currentUser.uid);
+
+      return userSeasonPicks[0].picks.map((pick) => (
+        <TableRow key={pick.queenID}>
+          <TableCell component="th" scope="row">
+            {pick.title}
+          </TableCell>
+          <TableCell>
+            <img
+              className="leagueDetails__rosterIMG2"
+              src={pick.queenIMG}
+            ></img>
+          </TableCell>
+          <TableCell>{pick.queenName}</TableCell>
+          <TableCell>
+            {pick.result === "correct" ? pick.scorePossible : 0}
+          </TableCell>
+          <TableCell>{pick.scorePossible}</TableCell>
+        </TableRow>
+      ));
+    } else {
+      return <div>Not currently available</div>;
+    }
   }
 
   return (
@@ -663,53 +743,6 @@ function LeagueDetails() {
                   </TableHead>
                   <TableBody>
                     {renderEpisodePicks(page)}
-
-                    {/* {JSON.parse(JSON.stringify(EPISODE_PICKS))
-                      .filter((event) => (event.event = `episode${page}`))
-                      .map((pick) => (
-                        <TableRow key={pick.queenID}>
-                          <TableCell component="th" scope="row">
-                            {pick.title}
-                          </TableCell>
-                          <TableCell>
-                            <img
-                              className="leagueDetails__rosterIMG2"
-                              src={pick.queenIMG}
-                            ></img>
-                          </TableCell>
-                          <TableCell>{pick.queenName}</TableCell>
-                          <TableCell>
-                            {pick.result === "correct" ? pick.scorePossible : 0}
-                          </TableCell>
-                          <TableCell>{pick.scorePossible}</TableCell>
-                        </TableRow>
-                      ))} */}
-
-                    {/* .picks.map((pick) => (
-                          <TableRow key={pick.queenID}>
-                            <TableCell component="th" scope="row">
-                              {pick.title}
-                            </TableCell>
-                            <TableCell>
-                              <img
-                                className="leagueDetails__rosterIMG2"
-                                src={pick.queenIMG}
-                              ></img>
-                            </TableCell>
-                            <TableCell>{pick.queenName}</TableCell>
-                            <TableCell>
-                              {pick.result === "correct"
-                                ? pick.scorePossible
-                                : 0}
-                            </TableCell>
-                            <TableCell>{pick.scorePossible}</TableCell>
-                          </TableRow>
-                        ))
-                    ) : (
-                      <div>
-                        No Picks for this Episode {page} yet! Select them here
-                      </div>
-                    )} */}
                     <TableRow key="total">
                       <TableCell component="th" scope="row">
                         EPISODE TOTAL
@@ -729,7 +762,9 @@ function LeagueDetails() {
               SEASON PICKS
             </Typography>
             <Grid container align="center" justify="center">
-              {EPISODE_PICKS.season
+              {renderSeasonPicks()}
+
+              {/* {EPISODE_PICKS.season
                 ? EPISODE_PICKS.season.map((pick) => (
                     <Grid
                       className={
@@ -762,7 +797,7 @@ function LeagueDetails() {
                       <p>{pick.id}</p>
                     </Grid>
                   ))
-                : "Make your season selection! [INSERT BUTTON HERE]"}
+                : "Make your season selection! [INSERT BUTTON HERE]"} */}
             </Grid>
           </div>
         </Grid>
