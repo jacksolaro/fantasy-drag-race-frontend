@@ -687,18 +687,7 @@ function LeagueDetails() {
                       <TableCell>Points Possible</TableCell>
                     </TableRow>
                   </TableHead>
-                  <TableBody>
-                    {renderEpisodePicks(page)}
-                    <TableRow key="total">
-                      <TableCell component="th" scope="row">
-                        EPISODE TOTAL
-                      </TableCell>
-                      <TableCell></TableCell>
-                      <TableCell></TableCell>
-                      <TableCell>150</TableCell>
-                      <TableCell>200</TableCell>
-                    </TableRow>
-                  </TableBody>
+                  <TableBody>{renderEpisodePicks(page)}</TableBody>
                 </Table>
               </TableContainer>
             </Grid>
