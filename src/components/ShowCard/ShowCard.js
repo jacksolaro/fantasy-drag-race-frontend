@@ -7,46 +7,60 @@ import CardMedia from "@material-ui/core/CardMedia";
 import Typography from "@material-ui/core/Typography";
 import s13Poster from "../../assets/images/rpdr_s13_poster.jpg";
 import { Grid, Button } from "@material-ui/core/";
+import "./ShowCard.css";
 
-function ShowCard() {
+function ShowCard(props) {
   return (
     <Card className="Home__SeasonCard">
       <CardActionArea className="Home__SeasonCardWrap">
-        <img className="Home__SeasonCardImg" src={s13Poster}></img>
+        <img className="Home__SeasonCardImg" src={props.posterIMG}></img>
         <CardMedia image={s13Poster} title="S13 Poster" />
         <CardContent>
           <Typography gutterBottom variant="h5" component="h2">
-            RuPaul's Drag Race
+            {props.title}
           </Typography>
           <Typography variant="body2" color="textSecondary" component="p">
-            Season 13
+            {props.season}
           </Typography>
         </CardContent>
       </CardActionArea>
       <CardActions>
         <Grid container spacing={0} justify="center" alignItems="center">
-          <Grid item xs={6} align="center">
-            <Button
-              variant="contained"
-              color="primary"
-              href="/createleague"
-              target=""
-              className="leagueBtn"
+          {props.isActive ? (
+            <>
+              <Grid item xs={6} align="center">
+                <Button
+                  variant="contained"
+                  color="primary"
+                  href="/createleague"
+                  target=""
+                  className="leagueBtn"
+                >
+                  Create A League
+                </Button>
+              </Grid>
+              <Grid item xs={6} align="center">
+                <Button
+                  variant="contained"
+                  color="secondary"
+                  href="/joinleague"
+                  target=""
+                  className="leagueBtn"
+                >
+                  Join a League
+                </Button>
+              </Grid>
+            </>
+          ) : (
+            <Typography
+              variant="h5"
+              color="textSecondary"
+              component="h5"
+              align="center"
             >
-              Create A League
-            </Button>
-          </Grid>
-          <Grid item xs={6} align="center">
-            <Button
-              variant="contained"
-              color="secondary"
-              href="/joinleague"
-              target=""
-              className="leagueBtn"
-            >
-              Join a League
-            </Button>
-          </Grid>
+              COMING SOON
+            </Typography>
+          )}
         </Grid>
       </CardActions>
     </Card>
