@@ -1,20 +1,20 @@
 import React from "react";
-import "./Jumbotron.css";
+import "./HomeJumbotron.css";
 
-function Jumbotron(props) {
+function HomeJumbotron(props) {
   const jumbotron__style = {
-    backgroundImage: `url(${props.image})`,
+    backgroundColor: `#0099ff`,
     height: `${props.height}px`,
   };
   return (
-    <div>
-      <div className="jumbotron__main" style={jumbotron__style}>
-        <div className="jumbotron__content">
-          <h1 className="jumbotron__title">
+    <div style={{ marginBottom: "-75px" }}>
+      <div className="homeJumbotron__main" style={jumbotron__style}>
+        <div className="homeJumbotron__content">
+          <h1 className="homeJumbotron__title">
             <strong>{props.headline}</strong>
           </h1>
-          <img className="jumbotron__logo" src={props.logo}></img>
-          <p className="jumbotron__subtitle">{props.subtitle}</p>
+          {/* <img className="homeJumbotron__logo" src={props.logo}></img> */}
+          <p className="homeJumbotron__subtitle">{props.subtitle}</p>
         </div>
       </div>
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
@@ -28,4 +28,4 @@ function Jumbotron(props) {
   );
 }
 
-export default Jumbotron;
+export default HomeJumbotron;

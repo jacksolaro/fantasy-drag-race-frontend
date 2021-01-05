@@ -1,6 +1,6 @@
 import React from "react";
 import "./Home.css";
-import Jumbotron from "../../components/Jumbotron/Jumbotron";
+import HomeJumbotron from "../../components/HomeJumbotron/HomeJumbotron";
 import homeBkg from "../../assets/images/bkg-1.png";
 import derbyLogo from "../../assets/images/derby_logo_pink-01.png";
 import Typography from "@material-ui/core/Typography";
@@ -11,16 +11,20 @@ import { Grid } from "@material-ui/core";
 function Home() {
   return (
     <div>
-      <Jumbotron
+      <HomeJumbotron
         image={homeBkg}
-        headline="- Welcome to -"
+        headline="Welcome to Derby"
         subtitle="Competitive, Fantasy-Style TV Bracket Play"
-        height="700"
+        height="400"
         logo={derbyLogo}
-      ></Jumbotron>
+      ></HomeJumbotron>
       <Container maxWidth="lg">
         <Typography gutterBottom variant="h4" component="h2" align="center">
-          CURRENT & UPCOMING
+          CURRENT & UPCOMING SHOWS
+        </Typography>
+        <Typography gutterBottom variant="h6" component="h6" align="center">
+          Are you ready to get off to the races? Check out the shows below to
+          create or join a league!
         </Typography>
         <Grid container spacing={0} justify="center" alignItems="center">
           <Grid item xs={12} md={6} align="center">
@@ -41,13 +45,15 @@ function Home() {
           </Grid>
         </Grid>
       </Container>
-      <h2>HOW DOES DERBY WORK?</h2>
-      <p>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-        veniam
-      </p>
-      <h2>INSTRUCTIONS</h2>
+      <Typography gutterBottom variant="h4" component="h2" align="center">
+        HOW DOES DERBY WORK?
+      </Typography>
+      <Typography gutterBottom variant="h6" component="h6" align="center">
+        It's simple, really! All you have to do is Create, Choose, and Compete!
+        You just create or join a league. Then, each week you select a roster of
+        your favorite reality contestants and earn points based on how they
+        stack up in that episode!
+      </Typography>
     </div>
   );
 }

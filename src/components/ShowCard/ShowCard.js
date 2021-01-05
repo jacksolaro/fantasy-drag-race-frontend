@@ -11,7 +11,7 @@ import "./ShowCard.css";
 
 function ShowCard(props) {
   return (
-    <Card className="Home__SeasonCard">
+    <Card className="Home__SeasonCard" style={{ backgroundColor: "#EEE" }}>
       <CardActionArea className="Home__SeasonCardWrap">
         <img className="Home__SeasonCardImg" src={props.posterIMG}></img>
         <CardMedia image={s13Poster} title="S13 Poster" />
