@@ -7,6 +7,7 @@ import Typography from "@material-ui/core/Typography";
 import Container from "@material-ui/core/Container";
 import ShowCard from "../../components/ShowCard/ShowCard";
 import { Grid } from "@material-ui/core";
+import HomeInstructions from "../../components/HomeInstructions/HomeInstructions";
 
 function Home() {
   return (
@@ -44,16 +45,8 @@ function Home() {
             />
           </Grid>
         </Grid>
+        <HomeInstructions></HomeInstructions>
       </Container>
-      <Typography gutterBottom variant="h4" component="h2" align="center">
-        HOW DOES DERBY WORK?
-      </Typography>
-      <Typography gutterBottom variant="h6" component="h6" align="center">
-        It's simple, really! All you have to do is Create, Choose, and Compete!
-        You just create or join a league. Then, each week you select a roster of
-        your favorite reality contestants and earn points based on how they
-        stack up in that episode!
-      </Typography>
     </div>
   );
 }
