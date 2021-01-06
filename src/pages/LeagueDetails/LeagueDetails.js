@@ -18,6 +18,7 @@ import { db } from "../../firebase.js";
 import firebase from "firebase";
 import "./leagueDetails.css";
 import { Pagination } from "@material-ui/lab";
+import AddCircleOutlineRoundedIcon from "@material-ui/icons/AddCircleOutlineRounded";
 
 const useStyles = makeStyles({
   table: {
@@ -535,26 +536,51 @@ function LeagueDetails() {
     );
 
     if (episodePicks.length > 0) {
-      return episodePicks[0].picks.map((pick) => (
-        <TableRow key={pick.queenID}>
-          <TableCell component="th" scope="row">
-            {pick.title}
-          </TableCell>
-          <TableCell>
-            <img
-              className="leagueDetails__rosterIMG2"
-              src={pick.queenIMG}
-            ></img>
-          </TableCell>
-          <TableCell>{pick.queenName}</TableCell>
-          <TableCell>
-            {pick.result === "correct" ? pick.scorePossible : 0}
-          </TableCell>
-          <TableCell>{pick.scorePossible}</TableCell>
-        </TableRow>
-      ));
+      return (
+        <TableContainer>
+          <Table aria-label="simple table" size="small">
+            <TableHead>
+              <TableRow>
+                <TableCell>Category</TableCell>
+                <TableCell>Queen Image</TableCell>
+                <TableCell>Your Pick</TableCell>
+                <TableCell>Points Awarded</TableCell>
+                <TableCell>Points Possible</TableCell>
+              </TableRow>
+            </TableHead>
+            {episodePicks[0].picks.map((pick) => (
+              <TableBody>
+                <TableRow key={pick.queenID}>
+                  <TableCell component="th" scope="row">
+                    {pick.title}
+                  </TableCell>
+                  <TableCell>
+                    <img
+                      className="leagueDetails__rosterIMG2"
+                      src={pick.queenIMG}
+                    ></img>
+                  </TableCell>
+                  <TableCell>{pick.queenName}</TableCell>
+                  <TableCell>
+                    {pick.result === "correct" ? pick.scorePossible : 0}
+                  </TableCell>
+                  <TableCell>{pick.scorePossible}</TableCell>
+                </TableRow>
+              </TableBody>
+            ))}
+          </Table>
+        </TableContainer>
+      );
     } else {
-      return <div>Not currently available</div>;
+      return (
+        <div className="episodePaginationNoResultBox">
+          <div>
+            <AddCircleOutlineRoundedIcon />
+          </div>
+
+          <p>&ensp; Select Roster for Episode {page}</p>
+        </div>
+      );
     }
   }
 
@@ -598,7 +624,11 @@ function LeagueDetails() {
         </Grid>
       ));
     } else {
-      return <div>Not currently available</div>;
+      return (
+        <div className="episodePaginationNoResultBox">
+          Not currently available
+        </div>
+      );
     }
   }
 
@@ -686,7 +716,7 @@ function LeagueDetails() {
               color="primary"
             />
             <Grid container container align="center" justify="center">
-              <TableContainer>
+              {/* <TableContainer>
                 <Table aria-label="simple table" size="small">
                   <TableHead>
                     <TableRow>
@@ -699,7 +729,8 @@ function LeagueDetails() {
                   </TableHead>
                   <TableBody>{renderEpisodePicks(page)}</TableBody>
                 </Table>
-              </TableContainer>
+              </TableContainer> */}
+              {renderEpisodePicks(page)}
             </Grid>
           </div>
           <div>
