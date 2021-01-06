@@ -512,7 +512,7 @@ function LeagueDetails() {
       .doc(params.id)
       .get()
       .then((doc) => {
-        // console.log(doc.data());
+        console.log(doc.data());
         setLeagueData(doc.data());
       })
       .catch((error) => console.log("Error", error));
@@ -623,7 +623,9 @@ function LeagueDetails() {
             <TableCell component="th" scope="row">
               {row.username}
             </TableCell>
-            <TableCell align="right">{row.score}</TableCell>
+            <TableCell align="right">
+              <Typography variant="h5">{row.score}</Typography>
+            </TableCell>
           </TableRow>
         ));
     } else {
@@ -635,7 +637,7 @@ function LeagueDetails() {
     <Container>
       {/* TODO: redirect or show 404 if there is no league */}
       <div className="leagueDetails__header">
-        <h1>You Betta Werk!</h1>
+        <h1>{leagueData.leagueName}</h1>
         <h3>RuPaul's Drag Race, Season 13</h3>
         <h3>LEAGUE CODE: {params.id}</h3>
       </div>
