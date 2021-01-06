@@ -502,6 +502,7 @@ function LeagueDetails() {
   const { currentUser } = useAuth();
   const [leagueData, setLeagueData] = useState([{}]);
   const [page, setPage] = React.useState(1);
+  const [currTime, setCurrTime] = useState();
 
   const handlePageChange = (event, value) => {
     setPage(value);
@@ -517,6 +518,12 @@ function LeagueDetails() {
       })
       .catch((error) => console.log("Error", error));
   }, []);
+
+  // useEffect(() => {
+  //   setInterval(() => {
+  //     setCurrTime(Date().toLocaleString());
+  //   }, 12000);
+  // });
 
   function renderEpisodePicks(episodeNum) {
     const userData = JSON.parse(JSON.stringify(LEAGUE_MEMBERS_DATA)).filter(
@@ -638,6 +645,7 @@ function LeagueDetails() {
       {/* TODO: redirect or show 404 if there is no league */}
       <div className="leagueDetails__header">
         <h1>{leagueData.leagueName}</h1>
+        <h1>{currTime}</h1>
         <h3>RuPaul's Drag Race, Season 13</h3>
         <h3>LEAGUE CODE: {params.id}</h3>
       </div>
