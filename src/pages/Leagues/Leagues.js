@@ -7,6 +7,7 @@ import { Link } from "react-router-dom";
 import { Box, Card, Container, Grid, Typography } from "@material-ui/core";
 import "./Leagues.css";
 import AddCircleOutlineRoundedIcon from "@material-ui/icons/AddCircleOutlineRounded";
+import AssignmentTwoToneIcon from "@material-ui/icons/AssignmentTwoTone";
 
 function Leagues() {
   const { currentUser } = useAuth();
@@ -36,10 +37,10 @@ function Leagues() {
         </p>
         <Grid container spacing={4}>
           <Grid item xs={12} md={3} align="center">
-            <div className="League__Card">
+            <div className="Leagues__Card">
               <AddCircleOutlineRoundedIcon
-                color="primary"
-                className="League__AddIcon"
+                className="Leagues__Icon"
+                style={{ fontSize: 100 }}
               ></AddCircleOutlineRoundedIcon>
               <Typography
                 gutterBottom
@@ -55,11 +56,24 @@ function Leagues() {
           </Grid>
           {leagues.map((league) => (
             <Grid item xs={12} md={3} align="center">
-              <div className="League__Card">
-                <Link to={`/leagues/${league.id}`}>
-                  <div>{league.data().leagueName}</div>
-                </Link>
-              </div>
+              <Link to={`/leagues/${league.id}`}>
+                <div className="Leagues__Card">
+                  <AssignmentTwoToneIcon
+                    className="Leagues__Icon"
+                    style={{ fontSize: 100 }}
+                  ></AssignmentTwoToneIcon>
+                  <Typography
+                    gutterBottom
+                    variant="h4"
+                    component="h2"
+                    align="center"
+                  >
+                    <Box fontWeight="fontWeightBold" m={1}>
+                      {league.data().leagueName}
+                    </Box>
+                  </Typography>
+                </div>
+              </Link>
             </Grid>
           ))}
         </Grid>
