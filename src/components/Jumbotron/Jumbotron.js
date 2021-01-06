@@ -3,7 +3,7 @@ import "./Jumbotron.css";
 
 function Jumbotron(props) {
   const jumbotron__style = {
-    backgroundImage: `url(${props.image})`,
+    // backgroundImage: `url(${props.image})`,
     height: `${props.height}px`,
   };
   return (

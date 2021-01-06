@@ -4,6 +4,9 @@ import leaguePageBkg from "../../assets/images/bkg-3.jpg";
 import { useAuth } from "../../contexts/AuthContext";
 import { db } from "../../firebase.js";
 import { Link } from "react-router-dom";
+import { Box, Card, Container, Grid, Typography } from "@material-ui/core";
+import "./Leagues.css";
+import AddCircleOutlineRoundedIcon from "@material-ui/icons/AddCircleOutlineRounded";
 
 function Leagues() {
   const { currentUser } = useAuth();
@@ -24,17 +27,43 @@ function Leagues() {
         height="300"
         headline="YOUR LEAGUES"
       ></Jumbotron>
-      <h1>YOUR LEAGUES</h1>
-      <p>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-        veniam
-      </p>
-      {leagues.map((league) => (
-        <Link to={`/leagues/${league.id}`}>
-          <div>{league.data().leagueName}</div>
-        </Link>
-      ))}
+      <Container>
+        <h1>YOUR LEAGUES</h1>
+        <p>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+          eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
+          minim veniam
+        </p>
+        <Grid container spacing={4}>
+          <Grid item xs={12} md={3} align="center">
+            <div className="League__Card">
+              <AddCircleOutlineRoundedIcon
+                color="primary"
+                className="League__AddIcon"
+              ></AddCircleOutlineRoundedIcon>
+              <Typography
+                gutterBottom
+                variant="h4"
+                component="h2"
+                align="center"
+              >
+                <Box fontWeight="fontWeightBold" m={1}>
+                  CREATE A LEAGUE
+                </Box>
+              </Typography>
+            </div>
+          </Grid>
+          {leagues.map((league) => (
+            <Grid item xs={12} md={3} align="center">
+              <div className="League__Card">
+                <Link to={`/leagues/${league.id}`}>
+                  <div>{league.data().leagueName}</div>
+                </Link>
+              </div>
+            </Grid>
+          ))}
+        </Grid>
+      </Container>
     </div>
   );
 }
