@@ -1,5 +1,5 @@
 import React from "react";
-import { Grid, Typography } from "@material-ui/core";
+import { Grid, Hidden, Typography } from "@material-ui/core";
 import "./HomeInstructions.css";
 
 function HomeInstructions() {
@@ -13,7 +13,7 @@ function HomeInstructions() {
       </Typography>
       <div>
         <Grid container spacing={0} justify="center" alignItems="center">
-          <Grid item xs={4} align="left">
+          <Grid item xs={12} md={4} align="left">
             <Typography gutterBottom variant="h4" component="h2" align="left">
               1. CREATE
             </Typography>
@@ -23,13 +23,15 @@ function HomeInstructions() {
               points!
             </Typography>
           </Grid>
-          <Grid item xs={8} align="center">
-            <img src={"http://placekitten.com/401/300"}></img>
-          </Grid>
-          <Grid item xs={8} align="center">
-            <img src={"http://placekitten.com/405/300"}></img>
-          </Grid>
-          <Grid item xs={4} align="right">
+          <Hidden only="xs">
+            <Grid item xs={12} md={8} align="center">
+              <img src={"http://placekitten.com/401/300"}></img>
+            </Grid>
+            <Grid item xs={12} md={8} align="center">
+              <img src={"http://placekitten.com/405/300"}></img>
+            </Grid>
+          </Hidden>
+          <Grid item xs={12} md={4} align="right">
             <Typography gutterBottom variant="h4" component="h2" align="left">
               2. CHOOSE
             </Typography>
@@ -39,7 +41,7 @@ function HomeInstructions() {
               your selected contestants perform!
             </Typography>
           </Grid>
-          <Grid item xs={4} align="right">
+          <Grid item xs={12} md={4} align="right">
             <Typography gutterBottom variant="h4" component="h2" align="left">
               3. COMPETE
             </Typography>
@@ -47,9 +49,11 @@ function HomeInstructions() {
               And that's it! You're ready to compete against your friends!
             </Typography>
           </Grid>
-          <Grid item xs={8} align="center">
-            <img src={"http://placekitten.com/400/300"}></img>
-          </Grid>
+          <Hidden only="xs">
+            <Grid item xs={12} md={8} align="center">
+              <img src={"http://placekitten.com/400/300"}></img>
+            </Grid>
+          </Hidden>
         </Grid>
       </div>
     </section>
