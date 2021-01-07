@@ -689,7 +689,7 @@ function LeagueDetails() {
   }
 
   return (
-    <Container>
+    <div className="leagueDetails__wrapper">
       {/* TODO: redirect or show 404 if there is no league */}
       <div className="leagueDetails__header">
         <h1>{leagueData.leagueName}</h1>
@@ -698,54 +698,64 @@ function LeagueDetails() {
         <p>LEAGUE CODE: {params.id}</p>
       </div>
 
-      {/* dashboard */}
-      <Grid container container align="center" justify="center">
-        <Grid item xs={12} md={12}>
-          <Typography align="center" variant="h4">
-            LEADERBOARD
-          </Typography>
-          {renderScores()}
+      <div className="leagueDetails__dashboard">
+        {/* dashboard */}
+        <Grid container container align="center" justify="center">
+          <Grid item xs={12} md={3}>
+            <div className="leagueDetails__leaderboard">
+              <Grid item xs={12} md={12}>
+                <Typography align="center" variant="h4">
+                  LEADERBOARD
+                </Typography>
+                {renderScores()}
+              </Grid>
+            </div>
+          </Grid>
+          <Grid item xs={12} md={9}>
+            <div className="leagueDetails__leaderboard">
+              <Grid item xs={12} md={12}>
+                <Typography align="center" variant="h4">
+                  YOUR ROSTER
+                </Typography>
+                <div>
+                  <Typography align="center" variant="h5">
+                    EPISODE PICKS
+                  </Typography>
+                  <Pagination
+                    className="episodePagination"
+                    page={page}
+                    onChange={handlePageChange}
+                    count={12}
+                    defaultPage={1}
+                    boundaryCount={1}
+                    color="primary"
+                  />
+                  <Grid container container align="center" justify="center">
+                    {renderEpisodePicks(page)}
+                  </Grid>
+                </div>
+                <div>
+                  <Typography align="center" variant="h5">
+                    SEASON PICKS
+                  </Typography>
+                  <Grid container align="center" justify="center">
+                    {renderSeasonPicks()}
+                  </Grid>
+                </div>
+              </Grid>
+            </div>
+          </Grid>
         </Grid>
-        <Grid item xs={12} md={12}>
-          <Typography align="center" variant="h4">
-            YOUR ROSTER
-          </Typography>
-          <div>
-            <Typography align="center" variant="h5">
-              EPISODE PICKS
-            </Typography>
-            <Pagination
-              className="episodePagination"
-              page={page}
-              onChange={handlePageChange}
-              count={12}
-              defaultPage={1}
-              boundaryCount={2}
-              color="primary"
-            />
-            <Grid container container align="center" justify="center">
-              {renderEpisodePicks(page)}
-            </Grid>
-          </div>
-          <div>
-            <Typography align="center" variant="h5">
-              SEASON PICKS
-            </Typography>
-            <Grid container align="center" justify="center">
-              {renderSeasonPicks()}
-            </Grid>
-          </div>
-        </Grid>
-      </Grid>
 
-      {/* ACTIONS */}
-      <Link to={`/leagues/${params.id}/selectseasonroster`}>
-        Select Season Roster
-      </Link>
-      <Link to={`/leagues/${params.id}/selectepisoderoster`}>
-        Select Episode Roster
-      </Link>
-    </Container>
+        {/* ACTIONS */}
+        <Link to={`/leagues/${params.id}/selectseasonroster`}>
+          Select Season Roster
+        </Link>
+        <Link to={`/leagues/${params.id}/selectepisoderoster`}>
+          Select Episode Roster
+        </Link>
+      </div>
+    </div>
   );
 }
 
