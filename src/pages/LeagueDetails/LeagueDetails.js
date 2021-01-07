@@ -556,7 +556,11 @@ function LeagueDetails() {
                   </TableCell>
                   <TableCell>
                     <img
-                      className="leagueDetails__rosterIMG2"
+                      className={
+                        pick.result === "correct"
+                          ? "leagueDetails__rosterIMG2"
+                          : "leagueDetails__rosterIMG"
+                      }
                       src={pick.queenIMG}
                     ></img>
                   </TableCell>
