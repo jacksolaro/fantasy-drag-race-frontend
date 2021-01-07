@@ -43,7 +43,7 @@ const LEAGUE_MEMBERS_DATA = [
               "https://firebasestorage.googleapis.com/v0/b/derby-584f8.appspot.com/o/rpdr_s13_reg_queens%2FKandyMuseS13Promo.jpg?alt=media&token=083e7124-bd37-4edc-aff5-7edecdb12a79",
             result: "correct",
             scorePossible: 50,
-            scoreActual: 0,
+            scoreActual: 50,
           },
           {
             id: "missCongeniality",
@@ -52,9 +52,9 @@ const LEAGUE_MEMBERS_DATA = [
             queenName: "Kandy Muse",
             queenIMG:
               "https://firebasestorage.googleapis.com/v0/b/derby-584f8.appspot.com/o/rpdr_s13_reg_queens%2FKandyMuseS13Promo.jpg?alt=media&token=083e7124-bd37-4edc-aff5-7edecdb12a79",
-            result: "TBD",
+            result: "correct",
             scorePossible: 50,
-            scoreActual: 0,
+            scoreActual: 50,
           },
           {
             id: "firstEliminated",
@@ -597,11 +597,9 @@ function LeagueDetails() {
       return seasonPicks[0].picks.map((pick) => (
         <Grid
           className={
-            pick.result === "correct"
-              ? "correctGuess"
-              : pick.result === "incorrect"
-              ? "incorrectGuess"
-              : ""
+            RESULTS["season"][`${pick.id}`] === pick.queenID
+              ? "leagueDetails__rosterIMG2"
+              : "leagueDetails__rosterIMG"
           }
           item
           xs={12}
@@ -613,14 +611,13 @@ function LeagueDetails() {
           <Typography align="center" variant="subtitle2">
             {pick.scorePossible} POINTS POSSIBLE
           </Typography>
-          <img className="leagueDetails__rosterIMG" src={pick.queenIMG}></img>
+          <img className="leagueDetails__rosterIMG2" src={pick.queenIMG}></img>
           <p>{pick.queenName}</p>
-          <p>
+          <p className="pointsBadge">
             {RESULTS["season"][`${pick.id}`] === pick.queenID
-              ? "correct"
-              : "incorrect"}
+              ? pick.scorePossible
+              : 0}
           </p>
-          <p>{pick.id}</p>
         </Grid>
       ));
     } else {

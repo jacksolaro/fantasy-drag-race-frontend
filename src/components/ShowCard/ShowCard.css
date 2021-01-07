@@ -1,3 +1,7 @@
+.card {
+  background-color: white;
+}
+
 .Home__SeasonCard {
   height: 500px;
   width: 400px;
@@ -8,4 +12,8 @@
   height: 350px;
   width: 400px;
   object-fit: cover;
+}
+
+.cardContent {
+  background-color: white;
 }

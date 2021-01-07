@@ -12,10 +12,14 @@ import "./ShowCard.css";
 function ShowCard(props) {
   return (
     <Card className="Home__SeasonCard" style={{ backgroundColor: "#EEE" }}>
-      <CardActionArea className="Home__SeasonCardWrap">
+      <CardActionArea className="Home__SeasonCardWrap cardContent">
         <img className="Home__SeasonCardImg" src={props.posterIMG}></img>
-        <CardMedia image={s13Poster} title="S13 Poster" />
-        <CardContent>
+        <CardMedia
+          className="cardContent"
+          image={s13Poster}
+          title="S13 Poster"
+        />
+        <CardContent className="cardContent">
           <Typography gutterBottom variant="h5" component="h2">
             {props.title}
           </Typography>
