@@ -713,10 +713,16 @@ function LeagueDetails() {
           </Grid>
           <Grid item xs={12} md={9}>
             <div className="leagueDetails__leaderboard">
+              <Typography align="center" variant="h5">
+                SEASON PICKS
+              </Typography>
+              <Grid container align="center" justify="center">
+                {renderSeasonPicks()}
+              </Grid>
+            </div>
+            <br></br>
+            <div className="leagueDetails__leaderboard">
               <Grid item xs={12} md={12}>
-                <Typography align="center" variant="h4">
-                  YOUR ROSTER
-                </Typography>
                 <div>
                   <Typography align="center" variant="h5">
                     EPISODE PICKS
@@ -732,14 +738,6 @@ function LeagueDetails() {
                   />
                   <Grid container container align="center" justify="center">
                     {renderEpisodePicks(page)}
-                  </Grid>
-                </div>
-                <div>
-                  <Typography align="center" variant="h5">
-                    SEASON PICKS
-                  </Typography>
-                  <Grid container align="center" justify="center">
-                    {renderSeasonPicks()}
                   </Grid>
                 </div>
               </Grid>
