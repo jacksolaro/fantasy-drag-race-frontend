@@ -653,18 +653,36 @@ function LeagueDetails() {
     });
 
     if (scores) {
-      return scores
-        .sort((a, b) => (a.score < b.score ? 1 : -1))
-        .map((row) => (
-          <TableRow key={row.userID}>
-            <TableCell component="th" scope="row">
-              {row.username}
-            </TableCell>
-            <TableCell align="right">
-              <Typography variant="h5">{row.score}</Typography>
-            </TableCell>
-          </TableRow>
-        ));
+      return (
+        <TableContainer>
+          <Table aria-label="simple table">
+            <TableHead>
+              <TableRow>
+                <TableCell>#</TableCell>
+                <TableCell>NAME</TableCell>
+                <TableCell align="right">SCORE</TableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {scores
+                .sort((a, b) => (a.score < b.score ? 1 : -1))
+                .map((row, index) => (
+                  <TableRow key={row.userID}>
+                    <TableCell component="th" scope="row">
+                      {index + 1}
+                    </TableCell>
+                    <TableCell component="th" scope="row">
+                      {row.username}
+                    </TableCell>
+                    <TableCell align="right">
+                      <Typography variant="h5">{row.score}</Typography>
+                    </TableCell>
+                  </TableRow>
+                ))}
+            </TableBody>
+          </Table>
+        </TableContainer>
+      );
     } else {
       return <p>LOADING</p>;
     }
@@ -675,9 +693,9 @@ function LeagueDetails() {
       {/* TODO: redirect or show 404 if there is no league */}
       <div className="leagueDetails__header">
         <h1>{leagueData.leagueName}</h1>
-        <h1>{currTime}</h1>
-        <h3>RuPaul's Drag Race, Season 13</h3>
-        <h3>LEAGUE CODE: {params.id}</h3>
+        {/* <h1>{currTime}</h1> */}
+        <p>RuPaul's Drag Race, Season 13</p>
+        <p>LEAGUE CODE: {params.id}</p>
       </div>
 
       {/* dashboard */}
@@ -686,17 +704,7 @@ function LeagueDetails() {
           <Typography align="center" variant="h4">
             LEADERBOARD
           </Typography>
-          <TableContainer>
-            <Table aria-label="simple table">
-              <TableHead>
-                <TableRow>
-                  <TableCell>NAME</TableCell>
-                  <TableCell align="right">SCORE</TableCell>
-                </TableRow>
-              </TableHead>
-              <TableBody>{renderScores()}</TableBody>
-            </Table>
-          </TableContainer>
+          {renderScores()}
         </Grid>
         <Grid item xs={12} md={12}>
           <Typography align="center" variant="h4">
@@ -716,20 +724,6 @@ function LeagueDetails() {
               color="primary"
             />
             <Grid container container align="center" justify="center">
-              {/* <TableContainer>
-                <Table aria-label="simple table" size="small">
-                  <TableHead>
-                    <TableRow>
-                      <TableCell>Category</TableCell>
-                      <TableCell>Queen Image</TableCell>
-                      <TableCell>Your Pick</TableCell>
-                      <TableCell>Points Awarded</TableCell>
-                      <TableCell>Points Possible</TableCell>
-                    </TableRow>
-                  </TableHead>
-                  <TableBody>{renderEpisodePicks(page)}</TableBody>
-                </Table>
-              </TableContainer> */}
               {renderEpisodePicks(page)}
             </Grid>
           </div>
