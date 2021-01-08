@@ -71,11 +71,12 @@ function SelectEpisodeRoster() {
       });
   }, []);
 
-  const handleChange = (event) => {
+  const handleChange = (pointCategory, event) => {
     event.preventDefault();
     const { name, value } = event.target;
-    console.log(event.target.pointValue);
-    // setEpisodePicks({ ...episodePicks, [name]: { ...value, id: name } });
+    value.id = name;
+    value.pointCategory = pointCategory;
+    console.log(event.target);
     setEpisodePicks({ ...episodePicks, [name]: value });
     console.log("episodePicks", Object.values(episodePicks));
     console.log("actual episode picks", episodePicks);
@@ -88,6 +89,12 @@ function SelectEpisodeRoster() {
     // if (signUpFormState.password !== signUpFormState.passwordConfirm) {
     //   return setError("Passwords do not match");
     // }
+
+    const submittedArr = {
+      category: `episode${EPISODE_NUM}`,
+      picks: Object.values(episodePicks),
+    };
+    console.log("SUBMITTING: ", submittedArr);
 
     // try {
     console.log("STEP 1");
@@ -105,7 +112,8 @@ function SelectEpisodeRoster() {
             .collection("picks")
             .doc(doc.id)
             .update({
-              picks: firebase.firestore.FieldValue.arrayUnion(episodePicks),
+              picks: firebase.firestore.FieldValue.arrayUnion(submittedArr),
+              username: "Josh",
             });
           console.log("Success ", doc.id, " => ", doc.data());
           console.log("STEP 2");
@@ -133,7 +141,7 @@ function SelectEpisodeRoster() {
         {/* Episode Winner Select */}
         <QueenSelect
           queensArr={queens}
-          handleChange={handleChange}
+          handleChange={(event) => handleChange("Episode Winner", event)}
           currPickValue={episodePicks.episodeWinner}
           pointCategory="Episode Winner"
           pointCategoryId="episodeWinner"
@@ -145,7 +153,7 @@ function SelectEpisodeRoster() {
         {/* Maxi Challenge Winner Select */}
         <QueenSelect
           queensArr={queens}
-          handleChange={handleChange}
+          handleChange={(event) => handleChange("Maxi Challenge Winner", event)}
           currPickValue={episodePicks.maxiChallengeWinner}
           pointCategory="Maxi Challenge Winner"
           pointCategoryId="maxiChallengeWinner"
@@ -158,7 +166,7 @@ function SelectEpisodeRoster() {
         {/* Mini Challenge Winner Select */}
         <QueenSelect
           queensArr={queens}
-          handleChange={handleChange}
+          handleChange={(event) => handleChange("Mini Challenge Winner", event)}
           currPickValue={episodePicks.miniChallengeWinner}
           pointCategory="Mini Challenge Winner"
           pointCategoryId="miniChallengeWinner"
@@ -188,7 +196,7 @@ function SelectEpisodeRoster() {
                 id="topQueen1"
                 name="topQueen1"
                 value={episodePicks.topQueen1}
-                onChange={handleChange}
+                onChange={(event) => handleChange("Top Queen #1", event)}
                 className="SelectEpisodeRoster__Select"
               >
                 {queens.map((queen) => (
@@ -218,7 +226,7 @@ function SelectEpisodeRoster() {
                 id="topQueen2"
                 name="topQueen2"
                 value={episodePicks.topQueen2}
-                onChange={handleChange}
+                onChange={(event) => handleChange("Top Queen #2", event)}
                 className="SelectEpisodeRoster__Select"
               >
                 {queens.map((queen) => (
@@ -260,7 +268,7 @@ function SelectEpisodeRoster() {
                 id="bottomQueen1"
                 name="bottomQueen1"
                 value={episodePicks.bottomQueen1}
-                onChange={handleChange}
+                onChange={(event) => handleChange("Bottom Queen #1", event)}
                 className="SelectEpisodeRoster__Select"
               >
                 {queens.map((queen) => (
@@ -290,7 +298,7 @@ function SelectEpisodeRoster() {
                 id="bottomQueen2"
                 name="bottomQueen2"
                 value={episodePicks.bottomQueen2}
-                onChange={handleChange}
+                onChange={(event) => handleChange("Bottom Queen #2", event)}
                 className="SelectEpisodeRoster__Select"
               >
                 {queens.map((queen) => (
@@ -312,10 +320,10 @@ function SelectEpisodeRoster() {
           </div>
         </div>
 
-        {/* Mini Challenge Winner Select */}
+        {/* Eliminated Queen Select */}
         <QueenSelect
           queensArr={queens}
-          handleChange={handleChange}
+          handleChange={(event) => handleChange("Eliminated Queen", event)}
           currPickValue={episodePicks.eliminated}
           pointCategory="Eliminated Queen"
           pointCategoryId="eliminated"
