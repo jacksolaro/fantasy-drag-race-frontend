@@ -36,9 +36,9 @@ function QueenSelect(props) {
               {props.pointCategory}
             </InputLabel>
             <Select
-              labelId="episodeWinner"
-              id="episodeWinner"
-              name="episodeWinner"
+              labelId={props.pointCategoryId}
+              id={props.pointCategoryId}
+              name={props.pointCategoryId}
               value={props.currPickValue}
               onChange={props.handleChange}
             >
