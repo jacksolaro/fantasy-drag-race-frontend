@@ -42,7 +42,7 @@ const LEAGUE_MEMBERS_DATA = [
             queenIMG:
               "https://firebasestorage.googleapis.com/v0/b/derby-584f8.appspot.com/o/rpdr_s13_reg_queens%2FKandyMuseS13Promo.jpg?alt=media&token=083e7124-bd37-4edc-aff5-7edecdb12a79",
             result: "correct",
-            scorePossible: 50,
+            pointValue: 50,
             scoreActual: 50,
           },
           {
@@ -53,7 +53,7 @@ const LEAGUE_MEMBERS_DATA = [
             queenIMG:
               "https://firebasestorage.googleapis.com/v0/b/derby-584f8.appspot.com/o/rpdr_s13_reg_queens%2FKandyMuseS13Promo.jpg?alt=media&token=083e7124-bd37-4edc-aff5-7edecdb12a79",
             result: "correct",
-            scorePossible: 50,
+            pointValue: 50,
             scoreActual: 50,
           },
           {
@@ -64,7 +64,7 @@ const LEAGUE_MEMBERS_DATA = [
             queenIMG:
               "https://firebasestorage.googleapis.com/v0/b/derby-584f8.appspot.com/o/rpdr_s13_reg_queens%2FElliottS13Promo.jpg?alt=media&token=d00551fc-5f85-4c71-b2ca-426ab975aa6d",
             result: "incorrect",
-            scorePossible: 50,
+            pointValue: 50,
             scoreActual: 0,
           },
         ],
@@ -80,7 +80,7 @@ const LEAGUE_MEMBERS_DATA = [
             queenIMG:
               "https://firebasestorage.googleapis.com/v0/b/derby-584f8.appspot.com/o/rpdr_s13_reg_queens%2FJoeyJayS13Promo.jpg?alt=media&token=df2669ac-67c2-4029-9f43-17384b163438",
             result: "TBD",
-            scorePossible: 20,
+            pointValue: 20,
             scoreActual: 0,
           },
           {
@@ -91,7 +91,7 @@ const LEAGUE_MEMBERS_DATA = [
             queenIMG:
               "https://firebasestorage.googleapis.com/v0/b/derby-584f8.appspot.com/o/rpdr_s13_reg_queens%2FGottmikS13Promo.jpg?alt=media&token=8c2481c6-e1e3-49d5-a30b-ef14403b2661",
             result: "TBD",
-            scorePossible: 10,
+            pointValue: 10,
             scoreActual: 0,
           },
           {
@@ -102,7 +102,7 @@ const LEAGUE_MEMBERS_DATA = [
             queenIMG:
               "https://firebasestorage.googleapis.com/v0/b/derby-584f8.appspot.com/o/rpdr_s13_reg_queens%2FJoeyJayS13Promo.jpg?alt=media&token=df2669ac-67c2-4029-9f43-17384b163438",
             result: "correct",
-            scorePossible: 10,
+            pointValue: 10,
             scoreActual: 0,
           },
           {
@@ -113,7 +113,7 @@ const LEAGUE_MEMBERS_DATA = [
             queenIMG:
               "https://firebasestorage.googleapis.com/v0/b/derby-584f8.appspot.com/o/rpdr_s13_reg_queens%2FJoeyJayS13Promo.jpg?alt=media&token=df2669ac-67c2-4029-9f43-17384b163438",
             result: "TBD",
-            scorePossible: 10,
+            pointValue: 10,
             scoreActual: 0,
           },
           {
@@ -124,7 +124,7 @@ const LEAGUE_MEMBERS_DATA = [
             queenIMG:
               "https://firebasestorage.googleapis.com/v0/b/derby-584f8.appspot.com/o/rpdr_s13_reg_queens%2FDenaliS13Promo.jpg?alt=media&token=c30fba33-4d09-45f0-b329-87c2535ea3b1",
             result: "TBD",
-            scorePossible: 5,
+            pointValue: 5,
             scoreActual: 0,
           },
           {
@@ -135,7 +135,7 @@ const LEAGUE_MEMBERS_DATA = [
             queenIMG:
               "https://firebasestorage.googleapis.com/v0/b/derby-584f8.appspot.com/o/rpdr_s13_reg_queens%2FDenaliS13Promo.jpg?alt=media&token=c30fba33-4d09-45f0-b329-87c2535ea3b1",
             result: "correct",
-            scorePossible: 5,
+            pointValue: 5,
             scoreActual: 0,
           },
           {
@@ -146,7 +146,7 @@ const LEAGUE_MEMBERS_DATA = [
             queenIMG:
               "https://firebasestorage.googleapis.com/v0/b/derby-584f8.appspot.com/o/rpdr_s13_reg_queens%2FKahmoraHallS13Promo.jpg?alt=media&token=298e371a-11bb-42ee-b663-ef3f13ece25f",
             result: "TBD",
-            scorePossible: 5,
+            pointValue: 5,
             scoreActual: 0,
           },
           {
@@ -157,7 +157,7 @@ const LEAGUE_MEMBERS_DATA = [
             queenIMG:
               "https://firebasestorage.googleapis.com/v0/b/derby-584f8.appspot.com/o/rpdr_s13_reg_queens%2FJoeyJayS13Promo.jpg?alt=media&token=df2669ac-67c2-4029-9f43-17384b163438",
             result: "TBD",
-            scorePossible: 5,
+            pointValue: 5,
             scoreActual: 0,
           },
         ],
@@ -173,7 +173,7 @@ const LEAGUE_MEMBERS_DATA = [
             queenIMG:
               "https://firebasestorage.googleapis.com/v0/b/derby-584f8.appspot.com/o/rpdr_s13_reg_queens%2FJoeyJayS13Promo.jpg?alt=media&token=df2669ac-67c2-4029-9f43-17384b163438",
             result: "TBD",
-            scorePossible: 20,
+            pointValue: 20,
             scoreActual: 0,
           },
           {
@@ -184,7 +184,7 @@ const LEAGUE_MEMBERS_DATA = [
             queenIMG:
               "https://firebasestorage.googleapis.com/v0/b/derby-584f8.appspot.com/o/rpdr_s13_reg_queens%2FGottmikS13Promo.jpg?alt=media&token=8c2481c6-e1e3-49d5-a30b-ef14403b2661",
             result: "TBD",
-            scorePossible: 10,
+            pointValue: 10,
             scoreActual: 0,
           },
           {
@@ -195,7 +195,7 @@ const LEAGUE_MEMBERS_DATA = [
             queenIMG:
               "https://firebasestorage.googleapis.com/v0/b/derby-584f8.appspot.com/o/rpdr_s13_reg_queens%2FJoeyJayS13Promo.jpg?alt=media&token=df2669ac-67c2-4029-9f43-17384b163438",
             result: "correct",
-            scorePossible: 10,
+            pointValue: 10,
             scoreActual: 0,
           },
           {
@@ -206,7 +206,7 @@ const LEAGUE_MEMBERS_DATA = [
             queenIMG:
               "https://firebasestorage.googleapis.com/v0/b/derby-584f8.appspot.com/o/rpdr_s13_reg_queens%2FJoeyJayS13Promo.jpg?alt=media&token=df2669ac-67c2-4029-9f43-17384b163438",
             result: "TBD",
-            scorePossible: 10,
+            pointValue: 10,
             scoreActual: 0,
           },
           {
@@ -217,7 +217,7 @@ const LEAGUE_MEMBERS_DATA = [
             queenIMG:
               "https://firebasestorage.googleapis.com/v0/b/derby-584f8.appspot.com/o/rpdr_s13_reg_queens%2FDenaliS13Promo.jpg?alt=media&token=c30fba33-4d09-45f0-b329-87c2535ea3b1",
             result: "TBD",
-            scorePossible: 5,
+            pointValue: 5,
             scoreActual: 0,
           },
           {
@@ -228,7 +228,7 @@ const LEAGUE_MEMBERS_DATA = [
             queenIMG:
               "https://firebasestorage.googleapis.com/v0/b/derby-584f8.appspot.com/o/rpdr_s13_reg_queens%2FDenaliS13Promo.jpg?alt=media&token=c30fba33-4d09-45f0-b329-87c2535ea3b1",
             result: "TBD",
-            scorePossible: 5,
+            pointValue: 5,
             scoreActual: 0,
           },
           {
@@ -239,7 +239,7 @@ const LEAGUE_MEMBERS_DATA = [
             queenIMG:
               "https://firebasestorage.googleapis.com/v0/b/derby-584f8.appspot.com/o/rpdr_s13_reg_queens%2FKahmoraHallS13Promo.jpg?alt=media&token=298e371a-11bb-42ee-b663-ef3f13ece25f",
             result: "TBD",
-            scorePossible: 5,
+            pointValue: 5,
             scoreActual: 0,
           },
           {
@@ -250,7 +250,7 @@ const LEAGUE_MEMBERS_DATA = [
             queenIMG:
               "https://firebasestorage.googleapis.com/v0/b/derby-584f8.appspot.com/o/rpdr_s13_reg_queens%2FJoeyJayS13Promo.jpg?alt=media&token=df2669ac-67c2-4029-9f43-17384b163438",
             result: "TBD",
-            scorePossible: 5,
+            pointValue: 5,
             scoreActual: 0,
           },
         ],
@@ -272,7 +272,7 @@ const LEAGUE_MEMBERS_DATA = [
             queenIMG:
               "https://firebasestorage.googleapis.com/v0/b/derby-584f8.appspot.com/o/rpdr_s13_reg_queens%2FKandyMuseS13Promo.jpg?alt=media&token=083e7124-bd37-4edc-aff5-7edecdb12a79",
             result: "correct",
-            scorePossible: 50,
+            pointValue: 50,
             scoreActual: 0,
           },
           {
@@ -283,7 +283,7 @@ const LEAGUE_MEMBERS_DATA = [
             queenIMG:
               "https://firebasestorage.googleapis.com/v0/b/derby-584f8.appspot.com/o/rpdr_s13_reg_queens%2FKandyMuseS13Promo.jpg?alt=media&token=083e7124-bd37-4edc-aff5-7edecdb12a79",
             result: "TBD",
-            scorePossible: 50,
+            pointValue: 50,
             scoreActual: 0,
           },
           {
@@ -294,7 +294,7 @@ const LEAGUE_MEMBERS_DATA = [
             queenIMG:
               "https://firebasestorage.googleapis.com/v0/b/derby-584f8.appspot.com/o/rpdr_s13_reg_queens%2FElliottS13Promo.jpg?alt=media&token=d00551fc-5f85-4c71-b2ca-426ab975aa6d",
             result: "incorrect",
-            scorePossible: 50,
+            pointValue: 50,
             scoreActual: 0,
           },
         ],
@@ -310,7 +310,7 @@ const LEAGUE_MEMBERS_DATA = [
             queenIMG:
               "https://firebasestorage.googleapis.com/v0/b/derby-584f8.appspot.com/o/rpdr_s13_reg_queens%2FJoeyJayS13Promo.jpg?alt=media&token=df2669ac-67c2-4029-9f43-17384b163438",
             result: "TBD",
-            scorePossible: 20,
+            pointValue: 20,
             scoreActual: 0,
           },
           {
@@ -321,7 +321,7 @@ const LEAGUE_MEMBERS_DATA = [
             queenIMG:
               "https://firebasestorage.googleapis.com/v0/b/derby-584f8.appspot.com/o/rpdr_s13_reg_queens%2FGottmikS13Promo.jpg?alt=media&token=8c2481c6-e1e3-49d5-a30b-ef14403b2661",
             result: "TBD",
-            scorePossible: 10,
+            pointValue: 10,
             scoreActual: 0,
           },
           {
@@ -332,7 +332,7 @@ const LEAGUE_MEMBERS_DATA = [
             queenIMG:
               "https://firebasestorage.googleapis.com/v0/b/derby-584f8.appspot.com/o/rpdr_s13_reg_queens%2FJoeyJayS13Promo.jpg?alt=media&token=df2669ac-67c2-4029-9f43-17384b163438",
             result: "correct",
-            scorePossible: 10,
+            pointValue: 10,
             scoreActual: 0,
           },
           {
@@ -343,7 +343,7 @@ const LEAGUE_MEMBERS_DATA = [
             queenIMG:
               "https://firebasestorage.googleapis.com/v0/b/derby-584f8.appspot.com/o/rpdr_s13_reg_queens%2FJoeyJayS13Promo.jpg?alt=media&token=df2669ac-67c2-4029-9f43-17384b163438",
             result: "TBD",
-            scorePossible: 10,
+            pointValue: 10,
             scoreActual: 0,
           },
           {
@@ -354,7 +354,7 @@ const LEAGUE_MEMBERS_DATA = [
             queenIMG:
               "https://firebasestorage.googleapis.com/v0/b/derby-584f8.appspot.com/o/rpdr_s13_reg_queens%2FDenaliS13Promo.jpg?alt=media&token=c30fba33-4d09-45f0-b329-87c2535ea3b1",
             result: "TBD",
-            scorePossible: 5,
+            pointValue: 5,
             scoreActual: 0,
           },
           {
@@ -365,7 +365,7 @@ const LEAGUE_MEMBERS_DATA = [
             queenIMG:
               "https://firebasestorage.googleapis.com/v0/b/derby-584f8.appspot.com/o/rpdr_s13_reg_queens%2FDenaliS13Promo.jpg?alt=media&token=c30fba33-4d09-45f0-b329-87c2535ea3b1",
             result: "TBD",
-            scorePossible: 5,
+            pointValue: 5,
             scoreActual: 0,
           },
           {
@@ -376,7 +376,7 @@ const LEAGUE_MEMBERS_DATA = [
             queenIMG:
               "https://firebasestorage.googleapis.com/v0/b/derby-584f8.appspot.com/o/rpdr_s13_reg_queens%2FKahmoraHallS13Promo.jpg?alt=media&token=298e371a-11bb-42ee-b663-ef3f13ece25f",
             result: "TBD",
-            scorePossible: 5,
+            pointValue: 5,
             scoreActual: 0,
           },
           {
@@ -387,7 +387,7 @@ const LEAGUE_MEMBERS_DATA = [
             queenIMG:
               "https://firebasestorage.googleapis.com/v0/b/derby-584f8.appspot.com/o/rpdr_s13_reg_queens%2FJoeyJayS13Promo.jpg?alt=media&token=df2669ac-67c2-4029-9f43-17384b163438",
             result: "TBD",
-            scorePossible: 5,
+            pointValue: 5,
             scoreActual: 0,
           },
         ],
@@ -403,7 +403,7 @@ const LEAGUE_MEMBERS_DATA = [
             queenIMG:
               "https://firebasestorage.googleapis.com/v0/b/derby-584f8.appspot.com/o/rpdr_s13_reg_queens%2FJoeyJayS13Promo.jpg?alt=media&token=df2669ac-67c2-4029-9f43-17384b163438",
             result: "TBD",
-            scorePossible: 20,
+            pointValue: 20,
             scoreActual: 0,
           },
           {
@@ -414,7 +414,7 @@ const LEAGUE_MEMBERS_DATA = [
             queenIMG:
               "https://firebasestorage.googleapis.com/v0/b/derby-584f8.appspot.com/o/rpdr_s13_reg_queens%2FGottmikS13Promo.jpg?alt=media&token=8c2481c6-e1e3-49d5-a30b-ef14403b2661",
             result: "TBD",
-            scorePossible: 10,
+            pointValue: 10,
             scoreActual: 0,
           },
           {
@@ -425,7 +425,7 @@ const LEAGUE_MEMBERS_DATA = [
             queenIMG:
               "https://firebasestorage.googleapis.com/v0/b/derby-584f8.appspot.com/o/rpdr_s13_reg_queens%2FJoeyJayS13Promo.jpg?alt=media&token=df2669ac-67c2-4029-9f43-17384b163438",
             result: "correct",
-            scorePossible: 10,
+            pointValue: 10,
             scoreActual: 0,
           },
           {
@@ -436,7 +436,7 @@ const LEAGUE_MEMBERS_DATA = [
             queenIMG:
               "https://firebasestorage.googleapis.com/v0/b/derby-584f8.appspot.com/o/rpdr_s13_reg_queens%2FJoeyJayS13Promo.jpg?alt=media&token=df2669ac-67c2-4029-9f43-17384b163438",
             result: "TBD",
-            scorePossible: 10,
+            pointValue: 10,
             scoreActual: 0,
           },
           {
@@ -447,7 +447,7 @@ const LEAGUE_MEMBERS_DATA = [
             queenIMG:
               "https://firebasestorage.googleapis.com/v0/b/derby-584f8.appspot.com/o/rpdr_s13_reg_queens%2FDenaliS13Promo.jpg?alt=media&token=c30fba33-4d09-45f0-b329-87c2535ea3b1",
             result: "TBD",
-            scorePossible: 5,
+            pointValue: 5,
             scoreActual: 0,
           },
           {
@@ -458,7 +458,7 @@ const LEAGUE_MEMBERS_DATA = [
             queenIMG:
               "https://firebasestorage.googleapis.com/v0/b/derby-584f8.appspot.com/o/rpdr_s13_reg_queens%2FDenaliS13Promo.jpg?alt=media&token=c30fba33-4d09-45f0-b329-87c2535ea3b1",
             result: "TBD",
-            scorePossible: 5,
+            pointValue: 5,
             scoreActual: 0,
           },
           {
@@ -469,7 +469,7 @@ const LEAGUE_MEMBERS_DATA = [
             queenIMG:
               "https://firebasestorage.googleapis.com/v0/b/derby-584f8.appspot.com/o/rpdr_s13_reg_queens%2FKahmoraHallS13Promo.jpg?alt=media&token=298e371a-11bb-42ee-b663-ef3f13ece25f",
             result: "TBD",
-            scorePossible: 5,
+            pointValue: 5,
             scoreActual: 0,
           },
           {
@@ -480,7 +480,7 @@ const LEAGUE_MEMBERS_DATA = [
             queenIMG:
               "https://firebasestorage.googleapis.com/v0/b/derby-584f8.appspot.com/o/rpdr_s13_reg_queens%2FJoeyJayS13Promo.jpg?alt=media&token=df2669ac-67c2-4029-9f43-17384b163438",
             result: "TBD",
-            scorePossible: 5,
+            pointValue: 5,
             scoreActual: 0,
           },
         ],
@@ -566,9 +566,9 @@ function LeagueDetails() {
                   </TableCell>
                   <TableCell>{pick.queenName}</TableCell>
                   <TableCell>
-                    {pick.result === "correct" ? pick.scorePossible : 0}
+                    {pick.result === "correct" ? pick.pointValue : 0}
                   </TableCell>
-                  <TableCell>{pick.scorePossible}</TableCell>
+                  <TableCell>{pick.pointValue}</TableCell>
                 </TableRow>
               </TableBody>
             ))}
@@ -613,13 +613,13 @@ function LeagueDetails() {
             {pick.title}
           </Typography>
           <Typography align="center" variant="subtitle2">
-            {pick.scorePossible} POINTS POSSIBLE
+            {pick.pointValue} POINTS POSSIBLE
           </Typography>
           <img className="leagueDetails__rosterIMG2" src={pick.queenIMG}></img>
           <p>{pick.queenName}</p>
           <p className="pointsBadge">
             {RESULTS["season"][`${pick.id}`] === pick.queenID
-              ? pick.scorePossible
+              ? pick.pointValue
               : 0}
           </p>
         </Grid>
@@ -642,7 +642,7 @@ function LeagueDetails() {
       user.picks.map((scoreEvent) => {
         scoreEvent.picks.map((pick) => {
           if (pick.result === "correct") {
-            totalSum += pick.scorePossible;
+            totalSum += pick.pointValue;
           }
         });
       });
