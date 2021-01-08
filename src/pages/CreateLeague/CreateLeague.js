@@ -23,17 +23,34 @@ function CreateLeague() {
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    db.collection("leagues").add({
-      leagueName: formData.leagueName,
-      members: [currentUser.uid],
-      scores: [
-        {
-          email: currentUser.email,
-          score: 0,
-          userID: currentUser.uid,
-        },
-      ],
-    });
+    db.collection("leagues")
+      .add({
+        leagueName: formData.leagueName,
+        members: [currentUser.uid],
+        scores: [
+          {
+            email: currentUser.email,
+            score: 0,
+            userID: currentUser.uid,
+          },
+        ],
+      })
+      .then(function (docRef) {
+        db.collection("leagues")
+          .doc(docRef.id)
+          .collection("picks")
+          .add({
+            userID: currentUser.uid,
+            username: currentUser.displayName,
+          })
+          .then(function (docRef) {
+            console.log("Document written with ID: ", docRef.id);
+          })
+          .catch(function (error) {
+            // setError("Error writing document: ", error);
+            console.log("ERROR ", error);
+          });
+      });
   };
 
   return (

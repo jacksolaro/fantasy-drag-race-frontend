@@ -34,6 +34,21 @@ function JoinLeague() {
           userID: currentUser.uid,
         }),
       });
+
+    db.collection(`leagues`)
+      .doc(formData.leagueID)
+      .collection("picks")
+      .add({
+        userID: currentUser.uid,
+        username: currentUser.displayName,
+      })
+      .then(function (docRef) {
+        console.log("Document written with ID: ", docRef.id);
+      })
+      .catch(function (error) {
+        // setError("Error writing document: ", error);
+        console.log("ERROR ", error);
+      });
   };
 
   return (

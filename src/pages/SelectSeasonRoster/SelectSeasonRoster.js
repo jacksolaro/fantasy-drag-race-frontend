@@ -6,13 +6,15 @@ import {
   Select,
 } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import s13Poster from "../../assets/images/rpdr_s13_poster.jpg";
 import "./SelectSeasonRoster.css";
-import { db } from "../../firebase.js";
+import { db, storage } from "../../firebase.js";
 import { useAuth } from "../../contexts/AuthContext";
 import { useParams } from "react-router-dom";
 import { useHistory } from "react-router-dom";
+import firebase from "firebase/app";
+import QueenSelect from "../../components/QueenSelect/QueenSelect";
 
 const useStyles = makeStyles((theme) => ({
   formControl: {
@@ -24,24 +26,51 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+const EPISODE_NUM = "season";
+
 function SelectSeasonRoster() {
   const classes = useStyles();
+  const [queens, setQueens] = React.useState([]);
   const [seasonPicks, setSeasonPicks] = React.useState({
     seasonWinner: "",
     missCongeniality: "",
     firstEliminated: "",
   });
+
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const history = useHistory();
   const { currentUser } = useAuth();
   let params = useParams();
 
-  const handleChange = (event) => {
+  useEffect(() => {
+    const queensArr = [];
+    db.collection("shows")
+      .doc("RPDR")
+      .collection("seasons")
+      .doc("US_Reg_13")
+      .collection("queens")
+      .get()
+      .then(function (querySnapshot) {
+        querySnapshot.forEach(function (doc) {
+          queensArr.push(doc.data());
+          console.log("queens", queens);
+          console.log("queensArr", queensArr);
+        });
+        setQueens(queensArr);
+      });
+  }, []);
+
+  const handleChange = (pointValue, pointCategory, event) => {
     event.preventDefault();
     const { name, value } = event.target;
+    value.id = name;
+    value.pointCategory = pointCategory;
+    value.pointValue = pointValue;
     console.log(event.target);
     setSeasonPicks({ ...seasonPicks, [name]: value });
+    console.log("seasonPicks", Object.values(seasonPicks));
+    console.log("actual season picks", seasonPicks);
   };
 
   async function handleSubmit(e) {
@@ -52,221 +81,88 @@ function SelectSeasonRoster() {
     //   return setError("Passwords do not match");
     // }
 
-    try {
-      setError("");
-      setLoading(true);
-      db.collection(`leagues`).doc(params.id).collection("picks").add({
-        userID: currentUser.uid,
-        seasonPicks: { seasonPicks },
-        episodePicks: [],
+    const submittedArr = {
+      category: `season`,
+      picks: Object.values(seasonPicks),
+    };
+    console.log("SUBMITTING: ", submittedArr);
+
+    // try {
+    console.log("STEP 1");
+    setError("");
+    setLoading(true);
+    db.collection(`leagues`)
+      .doc(params.id)
+      .collection("picks")
+      .where("userID", "==", currentUser.uid)
+      .get()
+      .then(function (querySnapshot) {
+        querySnapshot.forEach(function (doc) {
+          db.collection("leagues")
+            .doc(params.id)
+            .collection("picks")
+            .doc(doc.id)
+            .update({
+              picks: firebase.firestore.FieldValue.arrayUnion(submittedArr),
+            });
+          console.log("Success ", doc.id, " => ", doc.data());
+          console.log("STEP 2");
+        });
+      })
+      .catch(function (error) {
+        setError("Error writing document: ", error);
+        console.log("ERROR ", error);
       });
-      history.push(`/leagues/${params.id}`);
-    } catch {
-      setError("Failed to save Season Picks");
-      console.log("something went wrong");
-    }
+
+    history.push(`/leagues/${params.id}`);
     setLoading(false);
+    console.log("STEP 3");
   }
 
   return (
     <div>
       <h1>Select Season Roster</h1>
       <p>
-        These are your picks for the season. Once you lock these in, you cannot
+        These are your picks for this season. Once you lock these in, you cannot
         change them for the remainder of the season.
       </p>
 
       <form onSubmit={handleSubmit}>
         {/* Season Winner Select */}
-        <div>
-          <h2>Season Winner</h2>
-          <p>
-            This is the winner of the season. If there is more than one winner,
-            points will be assigned if you have selected one of the winners.
-          </p>
-          <div>
-            <FormControl className={classes.formControl}>
-              <InputLabel id="demo-simple-select-label">
-                Season Winner
-              </InputLabel>
-              <Select
-                labelId="seasonWinner"
-                id="seasonWinner"
-                name="seasonWinner"
-                value={seasonPicks.seasonWinner}
-                onChange={handleChange}
-                className="SelectSeasonRoster__Select"
-              >
-                <div value={10}>
-                  <MenuItem className="SelectSeasonRoster__MenuItem">
-                    <img
-                      className="SelectSeasonRoster__selectImg"
-                      src={s13Poster}
-                    ></img>
-                    <p className="SelectSeasonRoster__selectName">
-                      Miss Vangie
-                    </p>
-                  </MenuItem>
-                </div>
-                <div value={20}>
-                  <MenuItem className="SelectSeasonRoster__MenuItem">
-                    <img
-                      className="SelectSeasonRoster__selectImg"
-                      src={s13Poster}
-                    ></img>
-                    <p className="SelectSeasonRoster__selectName">Trixie</p>
-                  </MenuItem>
-                </div>
-                <div value={30}>
-                  <MenuItem className="SelectSeasonRoster__MenuItem">
-                    <img
-                      className="SelectSeasonRoster__selectImg"
-                      src={s13Poster}
-                    ></img>
-                    <p className="SelectSeasonRoster__selectName">Katya</p>
-                  </MenuItem>
-                </div>
-                <div value={40}>
-                  <MenuItem className="SelectSeasonRoster__MenuItem">
-                    <img
-                      className="SelectSeasonRoster__selectImg"
-                      src={s13Poster}
-                    ></img>
-                    <p className="SelectSeasonRoster__selectName">Delta Work</p>
-                  </MenuItem>
-                </div>
-              </Select>
-            </FormControl>
-          </div>
-        </div>
+        <QueenSelect
+          queensArr={queens}
+          handleChange={(event) => handleChange(50, "Season Winner", event)}
+          currPickValue={seasonPicks.seasonWinner}
+          pointCategory="Season Winner"
+          pointCategoryId="seasonWinner"
+          pointValue="50"
+          pointCategoryDescription="This is the winner of the season. If there is more than one winner,
+          points will be assigned if you have selected one of the winners."
+        />
 
-        {/* Miss Congeniality Select */}
-        <div>
-          <h2>Miss Congeniality</h2>
-          <p>
-            Miss Congeniality award goes to the Fan Favorite of the season on
-            the final episode.
-          </p>
-          <div>
-            <FormControl className={classes.formControl}>
-              <InputLabel id="demo-simple-select-label">
-                Miss Congeniality
-              </InputLabel>
-              <Select
-                labelId="missCongeniality"
-                id="missCongeniality"
-                name="missCongeniality"
-                value={seasonPicks.missCongeniality}
-                onChange={handleChange}
-                className="SelectSeasonRoster__Select"
-              >
-                <div value={10}>
-                  <MenuItem className="SelectSeasonRoster__MenuItem">
-                    <img
-                      className="SelectSeasonRoster__selectImg"
-                      src={s13Poster}
-                    ></img>
-                    <p className="SelectSeasonRoster__selectName">
-                      Miss Vangie
-                    </p>
-                  </MenuItem>
-                </div>
-                <div value={20}>
-                  <MenuItem className="SelectSeasonRoster__MenuItem">
-                    <img
-                      className="SelectSeasonRoster__selectImg"
-                      src={s13Poster}
-                    ></img>
-                    <p className="SelectSeasonRoster__selectName">Trixie</p>
-                  </MenuItem>
-                </div>
-                <div value={30}>
-                  <MenuItem className="SelectSeasonRoster__MenuItem">
-                    <img
-                      className="SelectSeasonRoster__selectImg"
-                      src={s13Poster}
-                    ></img>
-                    <p className="SelectSeasonRoster__selectName">Katya</p>
-                  </MenuItem>
-                </div>
-                <div value={40}>
-                  <MenuItem className="SelectSeasonRoster__MenuItem">
-                    <img
-                      className="SelectSeasonRoster__selectImg"
-                      src={s13Poster}
-                    ></img>
-                    <p className="SelectSeasonRoster__selectName">Delta Work</p>
-                  </MenuItem>
-                </div>
-              </Select>
-            </FormControl>
-          </div>
-        </div>
+        {/* Miss Congeniality */}
+        <QueenSelect
+          queensArr={queens}
+          handleChange={(event) => handleChange(50, "Miss Congeniality", event)}
+          currPickValue={seasonPicks.missCongeniality}
+          pointCategory="Miss Congeniality"
+          pointCategoryId="missCongeniality"
+          pointValue="50"
+          pointCategoryDescription="Miss Congeniality award goes to the Fan Favorite of the season on
+          the final episode."
+        />
 
-        {/* First Eliminated Select */}
-        <div>
-          <h2>First Eliminated</h2>
-          <p>
-            Select who you think will be the first eliminated. You will get
-            points if you guess this correctly. If there is no elimination on
-            episode one, points will be assigned when the first queen is
-            eliminated.
-          </p>
-          <div>
-            <FormControl className={classes.formControl}>
-              <InputLabel id="demo-simple-select-label">
-                First Eliminated
-              </InputLabel>
-              <Select
-                labelId="firstEliminated"
-                id="firstEliminated"
-                name="firstEliminated"
-                value={seasonPicks.firstEliminated}
-                onChange={handleChange}
-                className="SelectSeasonRoster__Select"
-              >
-                <div value={10}>
-                  <MenuItem className="SelectSeasonRoster__MenuItem">
-                    <img
-                      className="SelectSeasonRoster__selectImg"
-                      src={s13Poster}
-                    ></img>
-                    <p className="SelectSeasonRoster__selectName">
-                      Miss Vangie
-                    </p>
-                  </MenuItem>
-                </div>
-                <div value={20}>
-                  <MenuItem className="SelectSeasonRoster__MenuItem">
-                    <img
-                      className="SelectSeasonRoster__selectImg"
-                      src={s13Poster}
-                    ></img>
-                    <p className="SelectSeasonRoster__selectName">Trixie</p>
-                  </MenuItem>
-                </div>
-                <div value={30}>
-                  <MenuItem className="SelectSeasonRoster__MenuItem">
-                    <img
-                      className="SelectSeasonRoster__selectImg"
-                      src={s13Poster}
-                    ></img>
-                    <p className="SelectSeasonRoster__selectName">Katya</p>
-                  </MenuItem>
-                </div>
-                <div value={40}>
-                  <MenuItem className="SelectSeasonRoster__MenuItem">
-                    <img
-                      className="SelectSeasonRoster__selectImg"
-                      src={s13Poster}
-                    ></img>
-                    <p className="SelectSeasonRoster__selectName">Delta Work</p>
-                  </MenuItem>
-                </div>
-              </Select>
-            </FormControl>
-          </div>
-        </div>
+        {/* Miss Congeniality */}
+        <QueenSelect
+          queensArr={queens}
+          handleChange={(event) => handleChange(50, "First Eliminated", event)}
+          currPickValue={seasonPicks.firstEliminated}
+          pointCategory="First Eliminated"
+          pointCategoryId="firstEliminated"
+          pointValue="50"
+          pointCategoryDescription="Select who you think will be the first eliminated. You will get points if you guess this correctly. If there is no elimination on episode one, points will be assigned when the first queen is eliminated."
+        />
+
         <Button type="submit" variant="contained" color="primary">
           Submit Season Picks
         </Button>

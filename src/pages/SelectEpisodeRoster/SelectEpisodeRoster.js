@@ -42,11 +42,6 @@ function SelectEpisodeRoster() {
     eliminated: "",
   });
 
-  const [pickData, setPickData] = React.useState({
-    category: `episode${EPISODE_NUM}`,
-    picks: [],
-  });
-
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const history = useHistory();
