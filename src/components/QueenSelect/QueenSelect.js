@@ -1,19 +1,27 @@
 import { FormControl, InputLabel, MenuItem, Select } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import React from "react";
+import "./QueenSelect.css";
 
-// const useStyles = makeStyles((theme) => ({
-//   formControl: {
-//     margin: theme.spacing(1),
-//     minWidth: 400,
-//   },
-//   selectEmpty: {
-//     marginTop: theme.spacing(2),
-//   },
-// }));
+const useStyles = makeStyles({
+  root: {
+    backgroundColor: "white",
+    minWidth: 400,
+    "& .MuiPaper-root": {
+      backgroundColor: "white",
+    },
+    "& .MuiMenu-list": {
+      backgroundColor: "white",
+    },
+    formControl: {
+      minWidth: 400,
+      backgroundColor: "white",
+    },
+  },
+});
 
 function QueenSelect(props) {
-  //   const classes = useStyles();
+  const classes = useStyles();
   return (
     <div>
       {/* Episode Winner Select */}
@@ -23,7 +31,7 @@ function QueenSelect(props) {
         <p>{props.pointCategoryDescription}</p>
 
         <div>
-          <FormControl>
+          <FormControl className={classes.root}>
             <InputLabel id="demo-simple-select-label">
               Episode Winner
             </InputLabel>
@@ -33,11 +41,11 @@ function QueenSelect(props) {
               name="episodeWinner"
               value={props.currPickValue}
               onChange={props.handleChange}
-              className="SelectEpisodeRoster__Select"
+              className={classes.root}
             >
               {props.queensArr.map((queen) => (
                 <div value={queen} key={queen.name}>
-                  <MenuItem className="SelectEpisodeRoster__MenuItem">
+                  <MenuItem className={classes.root}>
                     <img
                       className="SelectEpisodeRoster__selectImg"
                       src={queen.imageURL}
