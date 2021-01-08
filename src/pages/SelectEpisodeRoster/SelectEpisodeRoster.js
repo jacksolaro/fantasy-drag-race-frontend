@@ -113,7 +113,6 @@ function SelectEpisodeRoster() {
             .doc(doc.id)
             .update({
               picks: firebase.firestore.FieldValue.arrayUnion(submittedArr),
-              username: "Josh",
             });
           console.log("Success ", doc.id, " => ", doc.data());
           console.log("STEP 2");
@@ -200,15 +199,15 @@ function SelectEpisodeRoster() {
                 className="SelectEpisodeRoster__Select"
               >
                 {queens.map((queen) => (
-                  <div value={queen} key={queen.name}>
+                  <div value={queen} key={queen.queenName}>
                     <MenuItem className="SelectEpisodeRoster__MenuItem">
                       <img
                         className="SelectEpisodeRoster__selectImg"
-                        src={queen.imageURL}
-                        alt={`image of ${queen.name}`}
+                        src={queen.queenIMG}
+                        alt={`image of ${queen.queenName}`}
                       ></img>
                       <p className="SelectEpisodeRoster__selectName">
-                        {queen.name}
+                        {queen.queenName}
                       </p>
                     </MenuItem>
                   </div>
@@ -230,15 +229,15 @@ function SelectEpisodeRoster() {
                 className="SelectEpisodeRoster__Select"
               >
                 {queens.map((queen) => (
-                  <div value={queen} key={queen.name}>
+                  <div value={queen} key={queen.queenName}>
                     <MenuItem className="SelectEpisodeRoster__MenuItem">
                       <img
                         className="SelectEpisodeRoster__selectImg"
-                        src={queen.imageURL}
-                        alt={`image of ${queen.name}`}
+                        src={queen.queenIMG}
+                        alt={`image of ${queen.queenName}`}
                       ></img>
                       <p className="SelectEpisodeRoster__selectName">
-                        {queen.name}
+                        {queen.queenName}
                       </p>
                     </MenuItem>
                   </div>
@@ -272,15 +271,15 @@ function SelectEpisodeRoster() {
                 className="SelectEpisodeRoster__Select"
               >
                 {queens.map((queen) => (
-                  <div value={queen} key={queen.name}>
+                  <div value={queen} key={queen.queenName}>
                     <MenuItem className="SelectEpisodeRoster__MenuItem">
                       <img
                         className="SelectEpisodeRoster__selectImg"
-                        src={queen.imageURL}
-                        alt={`image of ${queen.name}`}
+                        src={queen.queenIMG}
+                        alt={`image of ${queen.queenName}`}
                       ></img>
                       <p className="SelectEpisodeRoster__selectName">
-                        {queen.name}
+                        {queen.queenName}
                       </p>
                     </MenuItem>
                   </div>
@@ -302,15 +301,15 @@ function SelectEpisodeRoster() {
                 className="SelectEpisodeRoster__Select"
               >
                 {queens.map((queen) => (
-                  <div value={queen} key={queen.name}>
+                  <div value={queen} key={queen.queenName}>
                     <MenuItem className="SelectEpisodeRoster__MenuItem">
                       <img
                         className="SelectEpisodeRoster__selectImg"
-                        src={queen.imageURL}
-                        alt={`image of ${queen.name}`}
+                        src={queen.queenIMG}
+                        alt={`image of ${queen.queenName}`}
                       ></img>
                       <p className="SelectEpisodeRoster__selectName">
-                        {queen.name}
+                        {queen.queenName}
                       </p>
                     </MenuItem>
                   </div>

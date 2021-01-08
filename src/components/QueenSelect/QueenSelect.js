@@ -43,15 +43,15 @@ function QueenSelect(props) {
               onChange={props.handleChange}
             >
               {props.queensArr.map((queen) => (
-                <div value={queen} key={queen.name}>
+                <div value={queen} key={queen.queenName}>
                   <MenuItem className={classes.root}>
                     <img
                       className="SelectEpisodeRoster__selectImg"
-                      src={queen.imageURL}
-                      alt={`image of ${queen.name}`}
+                      src={queen.queenIMG}
+                      alt={`image of ${queen.queenName}`}
                     ></img>
                     <p className="SelectEpisodeRoster__selectName">
-                      {queen.name}
+                      {queen.queenName}
                     </p>
                   </MenuItem>
                 </div>
