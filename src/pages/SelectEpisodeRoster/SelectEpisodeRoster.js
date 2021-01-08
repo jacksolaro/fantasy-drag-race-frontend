@@ -14,6 +14,7 @@ import { useAuth } from "../../contexts/AuthContext";
 import { useParams } from "react-router-dom";
 import { useHistory } from "react-router-dom";
 import firebase from "firebase/app";
+import QueenSelect from "../../components/QueenSelect/QueenSelect";
 
 const useStyles = makeStyles((theme) => ({
   formControl: {
@@ -73,7 +74,7 @@ function SelectEpisodeRoster() {
   const handleChange = (event) => {
     event.preventDefault();
     const { name, value } = event.target;
-    console.log(event.target);
+    console.log(event.target.pointValue);
     // setEpisodePicks({ ...episodePicks, [name]: { ...value, id: name } });
     setEpisodePicks({ ...episodePicks, [name]: value });
     console.log("episodePicks", Object.values(episodePicks));
@@ -130,7 +131,17 @@ function SelectEpisodeRoster() {
 
       <form onSubmit={handleSubmit}>
         {/* Episode Winner Select */}
-        <div>
+        <QueenSelect
+          queensArr={queens}
+          handleChange={handleChange}
+          currPickValue={episodePicks.episodeWinner}
+          pointCategory="Episode Winner"
+          pointValue="20"
+          pointCategoryDescription="This is the winner of the episode. If there is more than one winner,
+        points will be assigned if you have selected one of the winners."
+        ></QueenSelect>
+
+        {/* <div>
           <h2>Episode Winner </h2>
           <h3>20 Points</h3>
           <p>
@@ -147,7 +158,6 @@ function SelectEpisodeRoster() {
                 labelId="episodeWinner"
                 id="episodeWinner"
                 name="episodeWinner"
-                pointValue="20"
                 value={episodePicks.episodeWinner}
                 onChange={handleChange}
                 className="SelectEpisodeRoster__Select"
@@ -169,7 +179,7 @@ function SelectEpisodeRoster() {
               </Select>
             </FormControl>
           </div>
-        </div>
+        </div> */}
 
         {/* Maxi Challenge Winner Select */}
         <div>
