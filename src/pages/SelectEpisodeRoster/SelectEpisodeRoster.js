@@ -31,8 +31,6 @@ function SelectEpisodeRoster() {
   const classes = useStyles();
   const [queens, setQueens] = React.useState([]);
   const [episodePicks, setEpisodePicks] = React.useState({
-    category: `episode${EPISODE_NUM}`,
-    picks: [],
     episodeWinner: "",
     maxiChallengeWinner: "",
     miniChallengeWinner: "",
@@ -42,6 +40,12 @@ function SelectEpisodeRoster() {
     bottomQueen2: "",
     eliminated: "",
   });
+
+  const [pickData, setPickData] = React.useState({
+    category: `episode${EPISODE_NUM}`,
+    picks: [],
+  });
+
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const history = useHistory();
@@ -66,30 +70,12 @@ function SelectEpisodeRoster() {
       });
   }, []);
 
-  useEffect(() => {
-    db.collection(`leagues`)
-      .doc(params.id)
-      // .collection("picks")
-      // .where("userID", "==", currentUser.uid)
-      .get()
-      .then(function (querySnapshot) {
-        querySnapshot.forEach(function (doc) {
-          console.log("DATA", doc.data());
-        });
-      })
-      .catch(function (error) {
-        setError("Error writing document: ", error);
-        console.log("ERROR ", error);
-      });
-  }, []);
-
   const handleChange = (event) => {
     event.preventDefault();
     const { name, value } = event.target;
     console.log(event.target);
-    let newArr = episodePicks.picks;
     setEpisodePicks({ ...episodePicks, [name]: value });
-    setEpisodePicks({ ...episodePicks, picks: newArr });
+    console.log("episodePicks", Object.values(episodePicks));
   };
 
   async function handleSubmit(e) {
@@ -159,6 +145,7 @@ function SelectEpisodeRoster() {
                 labelId="episodeWinner"
                 id="episodeWinner"
                 name="episodeWinner"
+                pointValue="20"
                 value={episodePicks.episodeWinner}
                 onChange={handleChange}
                 className="SelectEpisodeRoster__Select"
@@ -206,7 +193,7 @@ function SelectEpisodeRoster() {
                 className="SelectEpisodeRoster__Select"
               >
                 {queens.map((queen) => (
-                  <div value={queen.name} key={queen.name}>
+                  <div value={queen} key={queen.name}>
                     <MenuItem className="SelectEpisodeRoster__MenuItem">
                       <img
                         className="SelectEpisodeRoster__selectImg"
@@ -248,7 +235,7 @@ function SelectEpisodeRoster() {
                 className="SelectEpisodeRoster__Select"
               >
                 {queens.map((queen) => (
-                  <div value={queen.name} key={queen.name}>
+                  <div value={queen} key={queen.name}>
                     <MenuItem className="SelectEpisodeRoster__MenuItem">
                       <img
                         className="SelectEpisodeRoster__selectImg"
@@ -290,7 +277,7 @@ function SelectEpisodeRoster() {
                 className="SelectEpisodeRoster__Select"
               >
                 {queens.map((queen) => (
-                  <div value={queen.name} key={queen.name}>
+                  <div value={queen} key={queen.name}>
                     <MenuItem className="SelectEpisodeRoster__MenuItem">
                       <img
                         className="SelectEpisodeRoster__selectImg"
@@ -320,7 +307,7 @@ function SelectEpisodeRoster() {
                 className="SelectEpisodeRoster__Select"
               >
                 {queens.map((queen) => (
-                  <div value={queen.name} key={queen.name}>
+                  <div value={queen} key={queen.name}>
                     <MenuItem className="SelectEpisodeRoster__MenuItem">
                       <img
                         className="SelectEpisodeRoster__selectImg"
@@ -362,7 +349,7 @@ function SelectEpisodeRoster() {
                 className="SelectEpisodeRoster__Select"
               >
                 {queens.map((queen) => (
-                  <div value={queen.name} key={queen.name}>
+                  <div value={queen} key={queen.name}>
                     <MenuItem className="SelectEpisodeRoster__MenuItem">
                       <img
                         className="SelectEpisodeRoster__selectImg"
@@ -392,7 +379,7 @@ function SelectEpisodeRoster() {
                 className="SelectEpisodeRoster__Select"
               >
                 {queens.map((queen) => (
-                  <div value={queen.name} key={queen.name}>
+                  <div value={queen} key={queen.name}>
                     <MenuItem className="SelectEpisodeRoster__MenuItem">
                       <img
                         className="SelectEpisodeRoster__selectImg"
@@ -435,7 +422,7 @@ function SelectEpisodeRoster() {
                 className="SelectEpisodeRoster__Select"
               >
                 {queens.map((queen) => (
-                  <div value={queen.name} key={queen.name}>
+                  <div value={queen} key={queen.name}>
                     <MenuItem className="SelectEpisodeRoster__MenuItem">
                       <img
                         className="SelectEpisodeRoster__selectImg"
