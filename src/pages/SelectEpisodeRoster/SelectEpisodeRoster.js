@@ -74,8 +74,10 @@ function SelectEpisodeRoster() {
     event.preventDefault();
     const { name, value } = event.target;
     console.log(event.target);
+    // setEpisodePicks({ ...episodePicks, [name]: { ...value, id: name } });
     setEpisodePicks({ ...episodePicks, [name]: value });
     console.log("episodePicks", Object.values(episodePicks));
+    console.log("actual episode picks", episodePicks);
   };
 
   async function handleSubmit(e) {
