@@ -25,11 +25,14 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+const EPISODE_NUM = 1;
+
 function SelectEpisodeRoster() {
   const classes = useStyles();
   const [queens, setQueens] = React.useState([]);
   const [episodePicks, setEpisodePicks] = React.useState({
-    episodeNum: 1,
+    category: `episode${EPISODE_NUM}`,
+    picks: [],
     episodeWinner: "",
     maxiChallengeWinner: "",
     miniChallengeWinner: "",
@@ -63,11 +66,30 @@ function SelectEpisodeRoster() {
       });
   }, []);
 
+  useEffect(() => {
+    db.collection(`leagues`)
+      .doc(params.id)
+      // .collection("picks")
+      // .where("userID", "==", currentUser.uid)
+      .get()
+      .then(function (querySnapshot) {
+        querySnapshot.forEach(function (doc) {
+          console.log("DATA", doc.data());
+        });
+      })
+      .catch(function (error) {
+        setError("Error writing document: ", error);
+        console.log("ERROR ", error);
+      });
+  }, []);
+
   const handleChange = (event) => {
     event.preventDefault();
     const { name, value } = event.target;
-    // console.log(event.target);
+    console.log(event.target);
+    let newArr = episodePicks.picks;
     setEpisodePicks({ ...episodePicks, [name]: value });
+    setEpisodePicks({ ...episodePicks, picks: newArr });
   };
 
   async function handleSubmit(e) {
@@ -94,9 +116,7 @@ function SelectEpisodeRoster() {
             .collection("picks")
             .doc(doc.id)
             .update({
-              episodePicks: firebase.firestore.FieldValue.arrayUnion(
-                episodePicks
-              ),
+              picks: firebase.firestore.FieldValue.arrayUnion(episodePicks),
             });
           console.log("Success ", doc.id, " => ", doc.data());
           console.log("STEP 2");
@@ -116,8 +136,8 @@ function SelectEpisodeRoster() {
     <div>
       <h1>Select Episode Roster</h1>
       <p>
-        These are your picks for the season. Once you lock these in, you cannot
-        change them for the remainder of the season.
+        These are your picks for this episode. Once you lock these in, you
+        cannot change them for the remainder of the season.
       </p>
 
       <form onSubmit={handleSubmit}>
@@ -144,7 +164,7 @@ function SelectEpisodeRoster() {
                 className="SelectEpisodeRoster__Select"
               >
                 {queens.map((queen) => (
-                  <div value={queen.name} key={queen.name}>
+                  <div value={queen} key={queen.name}>
                     <MenuItem className="SelectEpisodeRoster__MenuItem">
                       <img
                         className="SelectEpisodeRoster__selectImg"
