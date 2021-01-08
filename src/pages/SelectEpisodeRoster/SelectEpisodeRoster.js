@@ -139,47 +139,19 @@ function SelectEpisodeRoster() {
           pointValue="20"
           pointCategoryDescription="This is the winner of the episode. If there is more than one winner,
         points will be assigned if you have selected one of the winners."
-        ></QueenSelect>
+        />
 
-        {/* <div>
-          <h2>Episode Winner </h2>
-          <h3>20 Points</h3>
-          <p>
-            This is the winner of the episode. If there is more than one winner,
-            points will be assigned if you have selected one of the winners.
-          </p>
-
-          <div>
-            <FormControl className={classes.formControl}>
-              <InputLabel id="demo-simple-select-label">
-                Episode Winner
-              </InputLabel>
-              <Select
-                labelId="episodeWinner"
-                id="episodeWinner"
-                name="episodeWinner"
-                value={episodePicks.episodeWinner}
-                onChange={handleChange}
-                className="SelectEpisodeRoster__Select"
-              >
-                {queens.map((queen) => (
-                  <div value={queen} key={queen.name}>
-                    <MenuItem className="SelectEpisodeRoster__MenuItem">
-                      <img
-                        className="SelectEpisodeRoster__selectImg"
-                        src={queen.imageURL}
-                        alt={`image of ${queen.name}`}
-                      ></img>
-                      <p className="SelectEpisodeRoster__selectName">
-                        {queen.name}
-                      </p>
-                    </MenuItem>
-                  </div>
-                ))}
-              </Select>
-            </FormControl>
-          </div>
-        </div> */}
+        {/* Maxi Challenge Winner Select */}
+        <QueenSelect
+          queensArr={queens}
+          handleChange={handleChange}
+          currPickValue={episodePicks.maxiChallengeWinner}
+          pointCategory="Maxi Challenge Winner"
+          pointValue="10"
+          pointCategoryDescription="This is the winner of the main challenge of the episode. If there is
+          more than one winner, points will be awarded if you have selected
+          one of the winners."
+        />
 
         {/* Maxi Challenge Winner Select */}
         <div>

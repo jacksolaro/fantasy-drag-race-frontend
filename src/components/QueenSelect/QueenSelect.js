@@ -33,7 +33,7 @@ function QueenSelect(props) {
         <div>
           <FormControl className={classes.root}>
             <InputLabel id="demo-simple-select-label">
-              Episode Winner
+              {props.pointCategory}
             </InputLabel>
             <Select
               labelId="episodeWinner"
@@ -41,7 +41,6 @@ function QueenSelect(props) {
               name="episodeWinner"
               value={props.currPickValue}
               onChange={props.handleChange}
-              className={classes.root}
             >
               {props.queensArr.map((queen) => (
                 <div value={queen} key={queen.name}>
