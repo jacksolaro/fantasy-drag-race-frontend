@@ -22,7 +22,7 @@ function Leagues() {
   }, []);
 
   return (
-    <div>
+    <div className="Leagues__Wrapper">
       <Jumbotron
         image={leaguePageBkg}
         height="300"

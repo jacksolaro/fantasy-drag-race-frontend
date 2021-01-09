@@ -6,6 +6,7 @@ import TextField from "@material-ui/core/TextField";
 import { useAuth } from "../../contexts/AuthContext";
 import { db } from "../../firebase.js";
 import { useHistory } from "react-router-dom";
+import "./CreateLeague.css";
 
 function CreateLeague() {
   const [formData, setFormData] = React.useState({
@@ -56,7 +57,7 @@ function CreateLeague() {
   };
 
   return (
-    <div>
+    <div className="CreateLeague__Wrapper">
       <Jumbotron
         image={createLeagueBkg}
         height="300"

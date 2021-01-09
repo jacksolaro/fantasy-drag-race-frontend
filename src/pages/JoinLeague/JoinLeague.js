@@ -7,6 +7,7 @@ import { useParams } from "react-router-dom";
 import { db } from "../../firebase.js";
 import firebase from "firebase/app";
 import { useAuth } from "../../contexts/AuthContext";
+import "./JoinLeague.css";
 
 function JoinLeague() {
   let params = useParams();
@@ -52,7 +53,7 @@ function JoinLeague() {
   };
 
   return (
-    <div>
+    <div className="JoinLeague__Wrapper">
       <Jumbotron
         image={joinLeagueBkg}
         height="300"
