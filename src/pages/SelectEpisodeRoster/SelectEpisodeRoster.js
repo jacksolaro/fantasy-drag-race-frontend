@@ -31,16 +31,7 @@ const EPISODE_NUM = 1;
 function SelectEpisodeRoster() {
   const classes = useStyles();
   const [queens, setQueens] = React.useState([]);
-  const [episodePicks, setEpisodePicks] = React.useState({
-    episodeWinner: "",
-    maxiChallengeWinner: "",
-    miniChallengeWinner: "",
-    topQueen1: "",
-    topQueen2: "",
-    bottomQueen1: "",
-    bottomQueen2: "",
-    eliminated: "",
-  });
+  const [episodePicks, setEpisodePicks] = React.useState({});
 
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
@@ -69,13 +60,11 @@ function SelectEpisodeRoster() {
   const handleChange = (pointValue, pointCategory, event) => {
     event.preventDefault();
     const { name, value } = event.target;
-    value.id = name;
-    value.pointCategory = pointCategory;
-    value.pointValue = pointValue;
-    console.log(event.target);
-    setEpisodePicks({ ...episodePicks, [name]: value });
-    console.log("episodePicks", Object.values(episodePicks));
-    console.log("actual episode picks", episodePicks);
+    setEpisodePicks({
+      ...episodePicks,
+      [name]: { ...value, id: name, pointValue, pointCategory },
+    });
+    console.log("EPISODE PICKS", episodePicks);
   };
 
   async function handleSubmit(e) {
@@ -175,149 +164,53 @@ function SelectEpisodeRoster() {
           one of the winners."
         />
 
-        {/* Top 2 of the Week Select */}
-        <div>
-          <h2>Top 2 of the Week</h2>
-          <h3>5 Points Each</h3>
-          <p>
-            This is the top two queens of the week (in no particular order). If
-            there is a number of queens in the top other than 2, you will
-            receive points for each queen you have that is in the top.
-          </p>
+        {/* Top #1 Select */}
+        <QueenSelect
+          queensArr={queens}
+          handleChange={(event) => handleChange(5, "Top Queen #1", event)}
+          currPickValue={episodePicks.topQueen1}
+          pointCategory="Top Queen #1"
+          pointCategoryId="topQueen1"
+          pointValue="5"
+          pointCategoryDescription="This is the top two queens of the week (in no particular order). If
+          there is a number of queens in the top other than 2, you will
+          receive points for each queen you have that is in the top."
+        />
 
-          <div>
-            <FormControl className={classes.formControl}>
-              <InputLabel id="demo-simple-select-label">
-                Top Queen of the Week #1
-              </InputLabel>
-              <Select
-                labelId="topQueen1"
-                id="topQueen1"
-                name="topQueen1"
-                value={episodePicks.topQueen1}
-                onChange={(event) => handleChange(5, "Top Queen #1", event)}
-                className="SelectEpisodeRoster__Select"
-              >
-                {queens.map((queen) => (
-                  <div value={queen} key={queen.queenName}>
-                    <MenuItem className="SelectEpisodeRoster__MenuItem">
-                      <img
-                        className="SelectEpisodeRoster__selectImg"
-                        src={queen.queenIMG}
-                        alt={`image of ${queen.queenName}`}
-                      ></img>
-                      <p className="SelectEpisodeRoster__selectName">
-                        {queen.queenName}
-                      </p>
-                    </MenuItem>
-                  </div>
-                ))}
-              </Select>
-            </FormControl>
-          </div>
-          <div>
-            <FormControl className={classes.formControl}>
-              <InputLabel id="demo-simple-select-label">
-                Top Queen of the Week #2
-              </InputLabel>
-              <Select
-                labelId="topQueen2"
-                id="topQueen2"
-                name="topQueen2"
-                value={episodePicks.topQueen2}
-                onChange={(event) => handleChange(5, "Top Queen #2", event)}
-                className="SelectEpisodeRoster__Select"
-              >
-                {queens.map((queen) => (
-                  <div value={queen} key={queen.queenName}>
-                    <MenuItem className="SelectEpisodeRoster__MenuItem">
-                      <img
-                        className="SelectEpisodeRoster__selectImg"
-                        src={queen.queenIMG}
-                        alt={`image of ${queen.queenName}`}
-                      ></img>
-                      <p className="SelectEpisodeRoster__selectName">
-                        {queen.queenName}
-                      </p>
-                    </MenuItem>
-                  </div>
-                ))}
-              </Select>
-            </FormControl>
-          </div>
-        </div>
+        {/* Top #2 Select */}
+        <QueenSelect
+          queensArr={queens}
+          handleChange={(event) => handleChange(5, "Top Queen #2", event)}
+          currPickValue={episodePicks.topQueen2}
+          pointCategory="Top Queen #2"
+          pointCategoryId="topQueen2"
+          pointValue="5"
+          pointCategoryDescription=""
+        />
 
-        {/* Bottom 2 of the Week Select */}
-        <div>
-          <h2>Bottom 2 of the Week</h2>
-          <h3>5 Points Each</h3>
-          <p>
-            This is the bottom two queens of the week (in no particular order).
-            If there is a number of queens in the bottom other than 2, you will
-            receive points for each queen you have that is in the bottom.
-          </p>
+        {/* Bottom #1 Select */}
+        <QueenSelect
+          queensArr={queens}
+          handleChange={(event) => handleChange(5, "Bottom Queen #1", event)}
+          currPickValue={episodePicks.bottomQueen1}
+          pointCategory="Bottom Queen #1"
+          pointCategoryId="bottomQueen1"
+          pointValue="5"
+          pointCategoryDescription="This is the bottom two queens of the week (in no particular order).
+          If there is a number of queens in the bottom other than 2, you will
+          receive points for each queen you have that is in the bottom."
+        />
 
-          <div>
-            <FormControl className={classes.formControl}>
-              <InputLabel id="demo-simple-select-label">
-                Bottom Queen of the Week #1
-              </InputLabel>
-              <Select
-                labelId="bottomQueen1"
-                id="bottomQueen1"
-                name="bottomQueen1"
-                value={episodePicks.bottomQueen1}
-                onChange={(event) => handleChange(5, "Bottom Queen #1", event)}
-                className="SelectEpisodeRoster__Select"
-              >
-                {queens.map((queen) => (
-                  <div value={queen} key={queen.queenName}>
-                    <MenuItem className="SelectEpisodeRoster__MenuItem">
-                      <img
-                        className="SelectEpisodeRoster__selectImg"
-                        src={queen.queenIMG}
-                        alt={`image of ${queen.queenName}`}
-                      ></img>
-                      <p className="SelectEpisodeRoster__selectName">
-                        {queen.queenName}
-                      </p>
-                    </MenuItem>
-                  </div>
-                ))}
-              </Select>
-            </FormControl>
-          </div>
-          <div>
-            <FormControl className={classes.formControl}>
-              <InputLabel id="demo-simple-select-label">
-                Bottom Queen of the Week #2
-              </InputLabel>
-              <Select
-                labelId="bottomQueen2"
-                id="bottomQueen2"
-                name="bottomQueen2"
-                value={episodePicks.bottomQueen2}
-                onChange={(event) => handleChange(5, "Bottom Queen #2", event)}
-                className="SelectEpisodeRoster__Select"
-              >
-                {queens.map((queen) => (
-                  <div value={queen} key={queen.queenName}>
-                    <MenuItem className="SelectEpisodeRoster__MenuItem">
-                      <img
-                        className="SelectEpisodeRoster__selectImg"
-                        src={queen.queenIMG}
-                        alt={`image of ${queen.queenName}`}
-                      ></img>
-                      <p className="SelectEpisodeRoster__selectName">
-                        {queen.queenName}
-                      </p>
-                    </MenuItem>
-                  </div>
-                ))}
-              </Select>
-            </FormControl>
-          </div>
-        </div>
+        {/* Bottom #2 Select */}
+        <QueenSelect
+          queensArr={queens}
+          handleChange={(event) => handleChange(5, "Bottom Queen #2", event)}
+          currPickValue={episodePicks.bottomQueen2}
+          pointCategory="Bottom Queen #2"
+          pointCategoryId="bottomQueen2"
+          pointValue="5"
+          pointCategoryDescription=""
+        />
 
         {/* Eliminated Queen Select */}
         <QueenSelect
@@ -334,7 +227,7 @@ function SelectEpisodeRoster() {
         />
 
         <Button type="submit" variant="contained" color="primary">
-          Submit Season Picks
+          Submit Episode Picks
         </Button>
       </form>
     </div>

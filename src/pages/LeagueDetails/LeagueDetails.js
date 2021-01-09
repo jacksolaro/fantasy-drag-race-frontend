@@ -547,64 +547,72 @@ function LeagueDetails() {
   // });
 
   function renderEpisodePicks(episodeNum) {
-    const userData = JSON.parse(JSON.stringify(LEAGUE_MEMBERS_DATA)).filter(
-      (user) => user.userID === currentUser.uid
-    );
-
-    const episodePicks = JSON.parse(JSON.stringify(userData[0].picks)).filter(
-      (list) => list.category === `episode${episodeNum}`
-    );
-
-    if (episodePicks.length > 0) {
-      return (
-        <TableContainer>
-          <Table aria-label="simple table" size="small">
-            <TableHead>
-              <TableRow>
-                <TableCell>Category</TableCell>
-                <TableCell>Queen Image</TableCell>
-                <TableCell>Your Pick</TableCell>
-                <TableCell>Points Awarded</TableCell>
-                <TableCell>Points Possible</TableCell>
-              </TableRow>
-            </TableHead>
-            {episodePicks[0].picks.map((pick) => (
-              <TableBody>
-                <TableRow key={pick.queenID}>
-                  <TableCell component="th" scope="row">
-                    {pick.title}
-                  </TableCell>
-                  <TableCell>
-                    <img
-                      className={
-                        pick.result === "correct"
-                          ? "leagueDetails__rosterIMG2"
-                          : "leagueDetails__rosterIMG"
-                      }
-                      src={pick.queenIMG}
-                    ></img>
-                  </TableCell>
-                  <TableCell>{pick.queenName}</TableCell>
-                  <TableCell>
-                    {pick.result === "correct" ? pick.pointValue : 0}
-                  </TableCell>
-                  <TableCell>{pick.pointValue}</TableCell>
-                </TableRow>
-              </TableBody>
-            ))}
-          </Table>
-        </TableContainer>
-      );
+    // If page is loading, display Loading
+    if (loading) {
+      return <div className="episodePaginationNoResultBox">LOADING</div>;
+      // If not loading, do the following
     } else {
-      return (
-        <div className="episodePaginationNoResultBox">
-          <div>
-            <AddCircleOutlineRoundedIcon />
-          </div>
-
-          <p>&ensp; Select Roster for Episode {page}</p>
-        </div>
+      // retrieve user data
+      const userData = JSON.parse(JSON.stringify(pickData)).filter(
+        (user) => user.userID === currentUser.uid
       );
+
+      if (pickData[0].picks !== undefined) {
+        // set episodePicks to the array of the users picks for that episode
+        const episodePicks = JSON.parse(
+          JSON.stringify(userData[0].picks)
+        ).filter((list) => list.category === `episode${episodeNum}`);
+        if (episodePicks.length > 0) {
+          return (
+            <TableContainer>
+              <Table aria-label="simple table" size="small">
+                <TableHead>
+                  <TableRow>
+                    <TableCell>Category</TableCell>
+                    <TableCell>Queen Image</TableCell>
+                    <TableCell>Your Pick</TableCell>
+                    <TableCell>Points Awarded</TableCell>
+                    <TableCell>Points Possible</TableCell>
+                  </TableRow>
+                </TableHead>
+                {episodePicks[0].picks.map((pick) => (
+                  <TableBody>
+                    <TableRow key={pick.queenID}>
+                      <TableCell component="th" scope="row">
+                        {pick.pointCategory}
+                      </TableCell>
+                      <TableCell>
+                        <img
+                          className={
+                            pick.result === "correct"
+                              ? "leagueDetails__rosterIMG2"
+                              : "leagueDetails__rosterIMG"
+                          }
+                          src={pick.queenIMG}
+                        ></img>
+                      </TableCell>
+                      <TableCell>{pick.queenName}</TableCell>
+                      <TableCell>
+                        {pick.result === "correct" ? pick.pointValue : 0}
+                      </TableCell>
+                      <TableCell>{pick.pointValue}</TableCell>
+                    </TableRow>
+                  </TableBody>
+                ))}
+              </Table>
+            </TableContainer>
+          );
+        } else {
+          return (
+            <div className="episodePaginationNoResultBox">
+              <div>
+                <AddCircleOutlineRoundedIcon />
+              </div>
+              <p>&ensp; Select Roster for Episode {page}</p>
+            </div>
+          );
+        }
+      }
     }
   }
 
