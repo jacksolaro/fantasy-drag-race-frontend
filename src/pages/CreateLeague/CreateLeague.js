@@ -5,13 +5,14 @@ import Container from "@material-ui/core/Container";
 import TextField from "@material-ui/core/TextField";
 import { useAuth } from "../../contexts/AuthContext";
 import { db } from "../../firebase.js";
+import { useHistory } from "react-router-dom";
 
 function CreateLeague() {
   const [formData, setFormData] = React.useState({
     leagueName: "",
     leagueDescription: "",
   });
-
+  const history = useHistory();
   const { currentUser } = useAuth();
 
   const handleChange = (event) => {
@@ -51,6 +52,7 @@ function CreateLeague() {
             console.log("ERROR ", error);
           });
       });
+    history.push(`/leagues/`);
   };
 
   return (

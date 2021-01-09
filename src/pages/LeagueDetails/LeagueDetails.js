@@ -501,7 +501,9 @@ function LeagueDetails() {
   let params = useParams();
   const classes = useStyles();
   const { currentUser } = useAuth();
+  const [loading, setLoading] = useState(false);
   const [leagueData, setLeagueData] = useState([{}]);
+  const [pickData, setPickData] = useState([{}]);
   const [page, setPage] = React.useState(1);
   const [currTime, setCurrTime] = useState();
 
@@ -516,6 +518,24 @@ function LeagueDetails() {
       .then((doc) => {
         console.log(doc.data());
         setLeagueData(doc.data());
+      })
+      .catch((error) => console.log("Error", error));
+  }, []);
+
+  useEffect(() => {
+    setLoading(true);
+    let pickDataArr = [];
+    db.collection("leagues")
+      .doc(params.id)
+      .collection("picks")
+      .get()
+      .then(function (querySnapshot) {
+        querySnapshot.forEach(function (doc) {
+          pickDataArr.push(doc.data());
+          console.log("DOC DATA", doc.data());
+        });
+        setPickData(pickDataArr);
+        setLoading(false);
       })
       .catch((error) => console.log("Error", error));
   }, []);
@@ -589,47 +609,57 @@ function LeagueDetails() {
   }
 
   function renderSeasonPicks() {
-    const userData = JSON.parse(JSON.stringify(LEAGUE_MEMBERS_DATA)).filter(
-      (user) => user.userID === currentUser.uid
-    );
-
-    const seasonPicks = JSON.parse(JSON.stringify(userData[0].picks)).filter(
-      (list) => list.category === `season`
-    );
-
-    if (seasonPicks.length > 0) {
-      return seasonPicks[0].picks.map((pick) => (
-        <Grid
-          className={
-            RESULTS["season"][`${pick.id}`] === pick.queenID
-              ? "leagueDetails__rosterIMG2"
-              : "leagueDetails__rosterIMG"
-          }
-          item
-          xs={12}
-          md={3}
-        >
-          <Typography align="center" variant="h6">
-            {pick.title}
-          </Typography>
-          <Typography align="center" variant="subtitle2">
-            {pick.pointValue} POINTS POSSIBLE
-          </Typography>
-          <img className="leagueDetails__rosterIMG2" src={pick.queenIMG}></img>
-          <p>{pick.queenName}</p>
-          <p className="pointsBadge">
-            {RESULTS["season"][`${pick.id}`] === pick.queenID
-              ? pick.pointValue
-              : 0}
-          </p>
-        </Grid>
-      ));
+    if (loading) {
+      return <div className="episodePaginationNoResultBox">LOADING</div>;
     } else {
-      return (
-        <div className="episodePaginationNoResultBox">
-          Not currently available
-        </div>
-      );
+      console.log("pickData", pickData);
+      if (pickData[0].picks !== undefined) {
+        const userData = JSON.parse(JSON.stringify(pickData)).filter(
+          (user) => user.userID === currentUser.uid
+        );
+
+        const seasonPicks = JSON.parse(
+          JSON.stringify(userData[0].picks)
+        ).filter((list) => list.category === `season`);
+
+        if (seasonPicks.length > 0) {
+          return seasonPicks[0].picks.map((pick) => (
+            <Grid
+              className={
+                RESULTS["season"][`${pick.id}`] === pick.queenID
+                  ? "leagueDetails__rosterIMG2"
+                  : "leagueDetails__rosterIMG"
+              }
+              item
+              xs={12}
+              md={3}
+            >
+              <Typography align="center" variant="h6">
+                {pick.title}
+              </Typography>
+              <Typography align="center" variant="subtitle2">
+                {pick.pointValue} POINTS POSSIBLE
+              </Typography>
+              <img
+                className="leagueDetails__rosterIMG2"
+                src={pick.queenIMG}
+              ></img>
+              <p>{pick.queenName}</p>
+              <p className="pointsBadge">
+                {RESULTS["season"][`${pick.id}`] === pick.queenID
+                  ? pick.pointValue
+                  : 0}
+              </p>
+            </Grid>
+          ));
+        }
+      } else {
+        return (
+          <div className="episodePaginationNoResultBox">
+            Select Season Picks
+          </div>
+        );
+      }
     }
   }
 
