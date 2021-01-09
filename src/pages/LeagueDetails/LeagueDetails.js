@@ -612,6 +612,15 @@ function LeagueDetails() {
             </div>
           );
         }
+      } else {
+        return (
+          <div className="episodePaginationNoResultBox">
+            <div>
+              <AddCircleOutlineRoundedIcon />
+            </div>
+            <p>&ensp; Select Roster for Episode {page}</p>
+          </div>
+        );
       }
     }
   }
@@ -660,6 +669,12 @@ function LeagueDetails() {
               </p>
             </Grid>
           ));
+        } else {
+          return (
+            <div className="episodePaginationNoResultBox">
+              Select Season Picks
+            </div>
+          );
         }
       } else {
         return (
