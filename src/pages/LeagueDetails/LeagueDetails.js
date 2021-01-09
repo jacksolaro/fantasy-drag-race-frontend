@@ -677,13 +677,15 @@ function LeagueDetails() {
 
     pickData.map((user) => {
       totalSum = 0;
-      user.picks.map((scoreEvent) => {
-        scoreEvent.picks.map((pick) => {
-          if (pick.result === "correct") {
-            totalSum += pick.pointValue;
-          }
+      if (user.picks) {
+        user.picks.map((scoreEvent) => {
+          scoreEvent.picks.map((pick) => {
+            if (pick.result === "correct") {
+              totalSum += pick.pointValue;
+            }
+          });
         });
-      });
+      }
       scores.push({
         userID: user.userID,
         username: user.username,
