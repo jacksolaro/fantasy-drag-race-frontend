@@ -675,7 +675,7 @@ function LeagueDetails() {
     let scores = [];
     let episodeSum, totalSum;
 
-    LEAGUE_MEMBERS_DATA.map((user) => {
+    pickData.map((user) => {
       totalSum = 0;
       user.picks.map((scoreEvent) => {
         scoreEvent.picks.map((pick) => {
