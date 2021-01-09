@@ -643,7 +643,7 @@ function LeagueDetails() {
               md={3}
             >
               <Typography align="center" variant="h6">
-                {pick.title}
+                {pick.pointCategory}
               </Typography>
               <Typography align="center" variant="subtitle2">
                 {pick.pointValue} POINTS POSSIBLE

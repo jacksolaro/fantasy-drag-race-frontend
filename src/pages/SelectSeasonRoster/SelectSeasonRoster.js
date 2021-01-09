@@ -31,11 +31,7 @@ const EPISODE_NUM = "season";
 function SelectSeasonRoster() {
   const classes = useStyles();
   const [queens, setQueens] = React.useState([]);
-  const [seasonPicks, setSeasonPicks] = React.useState({
-    seasonWinner: "",
-    missCongeniality: "",
-    firstEliminated: "",
-  });
+  const [seasonPicks, setSeasonPicks] = React.useState({});
 
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
@@ -64,13 +60,10 @@ function SelectSeasonRoster() {
   const handleChange = (pointValue, pointCategory, event) => {
     event.preventDefault();
     const { name, value } = event.target;
-    value.id = name;
-    value.pointCategory = pointCategory;
-    value.pointValue = pointValue;
-    console.log(event.target);
-    setSeasonPicks({ ...seasonPicks, [name]: value });
-    console.log("seasonPicks", Object.values(seasonPicks));
-    console.log("actual season picks", seasonPicks);
+    setSeasonPicks({
+      ...seasonPicks,
+      [name]: { ...value, pointValue, pointCategory },
+    });
   };
 
   async function handleSubmit(e) {

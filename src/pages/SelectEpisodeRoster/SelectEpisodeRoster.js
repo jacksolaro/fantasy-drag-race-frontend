@@ -64,7 +64,6 @@ function SelectEpisodeRoster() {
       ...episodePicks,
       [name]: { ...value, id: name, pointValue, pointCategory },
     });
-    console.log("EPISODE PICKS", episodePicks);
   };
 
   async function handleSubmit(e) {
