@@ -32,6 +32,12 @@ const RESULTS = {
     missCongeniality: "G5hMj6BwbtsnqTG6XB9U",
     firstEliminated: "G5qTG6XB9U",
   },
+  episode1: {
+    episodeWinner: "G5hMj6BwbtsnqTG6XB9U",
+    maxiChallengeWinner: "G5hMj6BwbtsnqTG6XB9U",
+    miniChallengeWinner: "JOxpAR3tXdm5qOnDxIoq",
+    eliminated: "G5qTG6XB9U",
+  },
 };
 
 function LeagueDetails() {
@@ -121,16 +127,34 @@ function LeagueDetails() {
                       <TableCell>
                         <img
                           className={
+                            RESULTS[`${episodePicks[0].category}`][`${pick.id}`]
+                              ? pick.queenID ===
+                                RESULTS[`${episodePicks[0].category}`][
+                                  `${pick.id}`
+                                ]
+                                ? "leagueDetails__rosterIMG2"
+                                : "leagueDetails__rosterIMG"
+                              : "leagueDetails__rosterIMG"
+                          }
+                          src={pick.queenIMG}
+                        ></img>
+                        {/* <img
+                          className={
                             pick.result === "correct"
                               ? "leagueDetails__rosterIMG2"
                               : "leagueDetails__rosterIMG"
                           }
                           src={pick.queenIMG}
-                        ></img>
+                        ></img> */}
                       </TableCell>
                       <TableCell>{pick.queenName}</TableCell>
                       <TableCell>
-                        {pick.result === "correct" ? pick.pointValue : 0}
+                        {RESULTS[`${episodePicks[0].category}`][`${pick.id}`]
+                          ? pick.queenID ===
+                            RESULTS[`${episodePicks[0].category}`][`${pick.id}`]
+                            ? pick.pointValue
+                            : 0
+                          : "?"}
                       </TableCell>
                       <TableCell>{pick.pointValue}</TableCell>
                     </TableRow>
