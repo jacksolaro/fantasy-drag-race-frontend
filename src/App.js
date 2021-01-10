@@ -30,7 +30,7 @@ function App() {
               <SelectSeasonRoster />
             </Route>
             <Route
-              path={`${process.env.PUBLIC_URL}/leagues/:id/selectepisoderoster`}
+              path={`${process.env.PUBLIC_URL}/leagues/:id/selectepisoderoster/:episodeNum`}
             >
               <SelectEpisodeRoster />
             </Route>

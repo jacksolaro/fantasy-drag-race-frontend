@@ -75,7 +75,7 @@ function SelectEpisodeRoster() {
     // }
 
     const submittedArr = {
-      category: `episode${EPISODE_NUM}`,
+      category: `episode${params.episodeNum}`,
       picks: Object.values(episodePicks),
     };
     console.log("SUBMITTING: ", submittedArr);

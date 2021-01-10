@@ -608,7 +608,9 @@ function LeagueDetails() {
               <div>
                 <AddCircleOutlineRoundedIcon />
               </div>
-              <p>&ensp; Select Roster for Episode {page}</p>
+              <Link to={`/leagues/${params.id}/selectepisoderoster/${page}`}>
+                &ensp; Select Roster for Episode {page}
+              </Link>
             </div>
           );
         }
