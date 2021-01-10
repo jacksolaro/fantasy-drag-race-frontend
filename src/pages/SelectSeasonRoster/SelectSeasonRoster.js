@@ -62,7 +62,7 @@ function SelectSeasonRoster() {
     const { name, value } = event.target;
     setSeasonPicks({
       ...seasonPicks,
-      [name]: { ...value, pointValue, pointCategory },
+      [name]: { ...value, id: name, pointValue, pointCategory },
     });
   };
 

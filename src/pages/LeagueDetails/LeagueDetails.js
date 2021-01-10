@@ -221,7 +221,14 @@ function LeagueDetails() {
                 {pick.pointValue} POINTS POSSIBLE
               </Typography>
               <img
-                className="leagueDetails__rosterIMG2"
+                className={
+                  RESULTS[`${seasonPicks[0].category}`][`${pick.id}`]
+                    ? pick.queenID ===
+                      RESULTS[`${seasonPicks[0].category}`][`${pick.id}`]
+                      ? "leagueDetails__rosterIMG2"
+                      : "leagueDetails__rosterIMG"
+                    : "leagueDetails__rosterIMG"
+                }
                 src={pick.queenIMG}
               ></img>
               <p>{pick.queenName}</p>
