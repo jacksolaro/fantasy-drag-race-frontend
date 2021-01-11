@@ -26,20 +26,6 @@ const useStyles = makeStyles({
   },
 });
 
-const RESULTS = {
-  season: {
-    seasonWinner: [""],
-    missCongeniality: ["G5hMj6BwbtsnqTG6XB9U"],
-    firstEliminated: ["G5hMj6BwbtsnqTG6XB9U"],
-  },
-  episode1: {
-    episodeWinner: ["G5hMj6BwbtsnqTG6XB9U"],
-    maxiChallengeWinner: ["G5hMj6BwbtsnqTG6XB9U"],
-    miniChallengeWinner: ["JOxpAR3tXdm5qOnDxIoq"],
-    eliminated: ["G5qTG6XB9U", "G5hMj6BwbtsnqTG6XB9U"],
-  },
-};
-
 function LeagueDetails() {
   let params = useParams();
   const classes = useStyles();
@@ -55,7 +41,7 @@ function LeagueDetails() {
     setPage(value);
   };
 
-  // RETRIEVE THE LEAGUE DATA (NAME, MEMBERS, SHOW ID, ETC)
+  // RETRIEVE THE LEAGUE DATA (NAME, MEMBERS, SHOW ID, RESULTS, ETC)
   useEffect(() => {
     db.collection("leagues")
       .doc(params.id)
@@ -148,7 +134,7 @@ function LeagueDetails() {
                                   ? "leagueDetails__rosterIMG2"
                                   : "leagueDetails__rosterIMG"
                                 : "leagueDetails__rosterIMG"
-                              : ""
+                              : "leagueDetails__rosterIMG"
                           }
                           src={pick.queenIMG}
                         ></img>
@@ -165,7 +151,7 @@ function LeagueDetails() {
                               ? pick.pointValue
                               : 0
                             : "?"
-                          : "ERR"}
+                          : "?"}
                       </TableCell>
                       <TableCell>{pick.pointValue}</TableCell>
                     </TableRow>
@@ -222,7 +208,7 @@ function LeagueDetails() {
                   ? resultsData["season"][`${pick.id}`].includes(pick.queenID)
                     ? "leagueDetails__rosterIMG2"
                     : "leagueDetails__rosterIMG"
-                  : ""
+                  : "leagueDetails__rosterIMG"
               }
               item
               xs={12}
@@ -256,7 +242,7 @@ function LeagueDetails() {
                       ? pick.pointValue
                       : 0
                     : "?"
-                  : "ERR"}
+                  : "?"}
               </p>
             </Grid>
           ));
