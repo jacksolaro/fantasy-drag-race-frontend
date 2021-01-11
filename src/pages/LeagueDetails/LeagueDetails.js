@@ -172,7 +172,12 @@ function LeagueDetails() {
                 resultsData[`episode${page}`]["airDate"]["seconds"] <
                 new Date().getTime()
               ) {
-                return <p>Sorry this is past</p>;
+                return (
+                  <p>
+                    This episode has passed. You may no longer make selections
+                    for this episode.
+                  </p>
+                );
               } else {
                 return (
                   <div className="episodePaginationNoResultBox">
@@ -221,7 +226,12 @@ function LeagueDetails() {
               resultsData[`episode${page}`]["airDate"]["seconds"] <
               new Date().getTime()
             ) {
-              return <p>Sorry this is past</p>;
+              return (
+                <p>
+                  This episode has passed. You may no longer make selections for
+                  this episode.
+                </p>
+              );
             } else {
               return (
                 <div className="episodePaginationNoResultBox">
