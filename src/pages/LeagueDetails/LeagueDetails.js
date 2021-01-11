@@ -206,7 +206,7 @@ function LeagueDetails() {
           return seasonPicks[0].picks.map((pick) => (
             <Grid
               className={
-                RESULTS["season"][`${pick.id}`] === pick.queenID
+                RESULTS["season"][`${pick.id}`].includes(pick.queenID)
                   ? "leagueDetails__rosterIMG2"
                   : "leagueDetails__rosterIMG"
               }
@@ -223,8 +223,7 @@ function LeagueDetails() {
               <img
                 className={
                   RESULTS[`${seasonPicks[0].category}`][`${pick.id}`]
-                    ? pick.queenID ===
-                      RESULTS[`${seasonPicks[0].category}`][`${pick.id}`]
+                    ? RESULTS["season"][`${pick.id}`].includes(pick.queenID)
                       ? "leagueDetails__rosterIMG2"
                       : "leagueDetails__rosterIMG"
                     : "leagueDetails__rosterIMG"
@@ -234,8 +233,7 @@ function LeagueDetails() {
               <p>{pick.queenName}</p>
               <p className="pointsBadge">
                 {RESULTS[`${seasonPicks[0].category}`][`${pick.id}`]
-                  ? pick.queenID ===
-                    RESULTS[`${seasonPicks[0].category}`][`${pick.id}`]
+                  ? RESULTS["season"][`${pick.id}`].includes(pick.queenID)
                     ? pick.pointValue
                     : 0
                   : "?"}
