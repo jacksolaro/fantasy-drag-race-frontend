@@ -266,8 +266,19 @@ function LeagueDetails() {
       if (user.picks) {
         user.picks.map((scoreEvent) => {
           scoreEvent.picks.map((pick) => {
-            if (pick.result === "correct") {
-              totalSum += pick.pointValue;
+            console.log("Score Event", scoreEvent);
+            console.log("pick", pick);
+            if (RESULTS[`${scoreEvent.category}`]) {
+              if (RESULTS[`${scoreEvent.category}`][`${pick.id}`]) {
+                if (
+                  RESULTS[`${scoreEvent.category}`][`${pick.id}`].includes(
+                    pick.queenID
+                  )
+                ) {
+                  totalSum += pick.pointValue;
+                }
+              } else {
+              }
             }
           });
         });
