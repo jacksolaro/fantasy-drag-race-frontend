@@ -28,6 +28,8 @@ function CreateLeague() {
     db.collection("leagues")
       .add({
         leagueName: formData.leagueName,
+        // TODO: SHOW ID IS HARDCODED, NEED TO UPDATE EVENTUALLY
+        showID: "YhoWk1cQLR1WN3qAGgYG",
         members: [currentUser.uid],
         scores: [
           {

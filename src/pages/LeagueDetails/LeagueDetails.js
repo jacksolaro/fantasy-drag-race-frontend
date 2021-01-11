@@ -474,17 +474,8 @@ function LeagueDetails() {
                         : "NO INFO ON AIR DATE YET"
                       : "NO INFO ON AIR DATE YET"}
                   </p>
-                  <p>
-                    {resultsData
-                      ? resultsData[`episode${page}`]
-                        ? resultsData[`episode${page}`]["airDate"]["seconds"] *
-                          1000
-                        : "NO INFO ON AIR DATE YET"
-                      : "NO INFO ON AIR DATE YET"}
-                  </p>
-                  <p>{new Date().toLocaleDateString("en-us")}</p>
-                  <p>{new Date().getTime()}</p>
-                  <p>
+
+                  {/* <p>
                     {resultsData
                       ? resultsData[`episode${page}`]
                         ? resultsData[`episode${page}`]["airDate"]["seconds"] <
@@ -493,7 +484,7 @@ function LeagueDetails() {
                           : "GREATER"
                         : "NO INFO ON AIR DATE YET"
                       : "NO INFO ON AIR DATE YET"}
-                  </p>
+                  </p> */}
                   <Grid container container align="center" justify="center">
                     {renderEpisodePicks(page)}
                   </Grid>
