@@ -46,6 +46,7 @@ function LeagueDetails() {
   const { currentUser } = useAuth();
   const [loading, setLoading] = useState(false);
   const [leagueData, setLeagueData] = useState([{}]);
+  const [resultsData, setResultsData] = useState([{}]);
   const [pickData, setPickData] = useState([{}]);
   const [page, setPage] = React.useState(1);
   const [currTime, setCurrTime] = useState();
@@ -54,17 +55,26 @@ function LeagueDetails() {
     setPage(value);
   };
 
+  // RETRIEVE THE LEAGUE DATA (NAME, MEMBERS, SHOW ID, ETC)
   useEffect(() => {
     db.collection("leagues")
       .doc(params.id)
       .get()
       .then((doc) => {
-        console.log(doc.data());
+        console.log("LEAGUE DATA", doc.data());
         setLeagueData(doc.data());
+        db.collection("shows")
+          .doc(doc.data().showID)
+          .get()
+          .then((doc) => {
+            console.log("RESULTS DATA", doc.data().results);
+            setResultsData(doc.data().results);
+          });
       })
       .catch((error) => console.log("Error", error));
   }, []);
 
+  // RETRIEVE ALL PICK DATA FOR USERS IN LEAGUE
   useEffect(() => {
     setLoading(true);
     let pickDataArr = [];
@@ -89,6 +99,7 @@ function LeagueDetails() {
   //   }, 12000);
   // });
 
+  // TAKES ALL THE USERS EPISODE ROSTERS, RENDERS THEM ON PAGE AND DISPLAYS POINTS
   function renderEpisodePicks(episodeNum) {
     // If page is loading, display Loading
     if (loading) {
@@ -127,13 +138,17 @@ function LeagueDetails() {
                       <TableCell>
                         <img
                           className={
-                            RESULTS[`${episodePicks[0].category}`][`${pick.id}`]
-                              ? RESULTS[`${episodePicks[0].category}`][
+                            resultsData[`${episodePicks[0].category}`]
+                              ? resultsData[`${episodePicks[0].category}`][
                                   `${pick.id}`
-                                ].includes(pick.queenID)
-                                ? "leagueDetails__rosterIMG2"
+                                ]
+                                ? resultsData[`${episodePicks[0].category}`][
+                                    `${pick.id}`
+                                  ].includes(pick.queenID)
+                                  ? "leagueDetails__rosterIMG2"
+                                  : "leagueDetails__rosterIMG"
                                 : "leagueDetails__rosterIMG"
-                              : "leagueDetails__rosterIMG"
+                              : ""
                           }
                           src={pick.queenIMG}
                         ></img>
@@ -148,13 +163,17 @@ function LeagueDetails() {
                       </TableCell>
                       <TableCell>{pick.queenName}</TableCell>
                       <TableCell>
-                        {RESULTS[`${episodePicks[0].category}`][`${pick.id}`]
-                          ? RESULTS[`${episodePicks[0].category}`][
+                        {resultsData[`${episodePicks[0].category}`]
+                          ? resultsData[`${episodePicks[0].category}`][
                               `${pick.id}`
-                            ].includes(pick.queenID)
-                            ? pick.pointValue
-                            : 0
-                          : "?"}
+                            ]
+                            ? resultsData[`${episodePicks[0].category}`][
+                                `${pick.id}`
+                              ].includes(pick.queenID)
+                              ? pick.pointValue
+                              : 0
+                            : "?"
+                          : "ERR"}
                       </TableCell>
                       <TableCell>{pick.pointValue}</TableCell>
                     </TableRow>
@@ -188,6 +207,7 @@ function LeagueDetails() {
     }
   }
 
+  // TAKES ALL THE USERS SEASON ROSTERS, RENDERS THEM ON PAGE AND DISPLAYS POINTS
   function renderSeasonPicks() {
     if (loading) {
       return <div className="episodePaginationNoResultBox">LOADING</div>;
@@ -257,6 +277,7 @@ function LeagueDetails() {
     }
   }
 
+  // CALCULATES SCORES, SORTS THEM, AND RENDERS THEM ON PAGE
   function renderScores() {
     let scores = [];
     let episodeSum, totalSum;
@@ -266,8 +287,6 @@ function LeagueDetails() {
       if (user.picks) {
         user.picks.map((scoreEvent) => {
           scoreEvent.picks.map((pick) => {
-            console.log("Score Event", scoreEvent);
-            console.log("pick", pick);
             if (RESULTS[`${scoreEvent.category}`]) {
               if (RESULTS[`${scoreEvent.category}`][`${pick.id}`]) {
                 if (
