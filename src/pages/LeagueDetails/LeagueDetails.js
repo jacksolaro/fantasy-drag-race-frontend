@@ -99,10 +99,13 @@ function LeagueDetails() {
         const userData = JSON.parse(JSON.stringify(pickData)).filter(
           (user) => user.userID === currentUser.uid
         );
+
         // set episodePicks to the array of the users picks for that episode
         const episodePicks = JSON.parse(
           JSON.stringify(userData[0].picks)
         ).filter((list) => list.category === `episode${episodeNum}`);
+
+        // If episode picks is not empty, render the episode picks
         if (episodePicks.length > 0) {
           return (
             <TableContainer>
@@ -163,6 +166,89 @@ function LeagueDetails() {
             </TableContainer>
           );
         } else {
+          if (resultsData) {
+            if (resultsData[`episode${page}`]) {
+              if (
+                resultsData[`episode${page}`]["airDate"]["seconds"] <
+                new Date().getTime()
+              ) {
+                return <p>Sorry this is past</p>;
+              } else {
+                return (
+                  <div className="episodePaginationNoResultBox">
+                    <div>
+                      <AddCircleOutlineRoundedIcon />
+                    </div>
+                    <Link
+                      to={`/leagues/${params.id}/selectepisoderoster/${page}`}
+                    >
+                      &ensp; Select Roster for Episode {page}
+                    </Link>
+                  </div>
+                );
+              }
+            } else {
+              return (
+                <div className="episodePaginationNoResultBox">
+                  <div>
+                    <AddCircleOutlineRoundedIcon />
+                  </div>
+                  <Link
+                    to={`/leagues/${params.id}/selectepisoderoster/${page}`}
+                  >
+                    &ensp; Select Roster for Episode {page}
+                  </Link>
+                </div>
+              );
+            }
+          } else {
+            return (
+              <div className="episodePaginationNoResultBox">
+                <div>
+                  <AddCircleOutlineRoundedIcon />
+                </div>
+                <Link to={`/leagues/${params.id}/selectepisoderoster/${page}`}>
+                  &ensp; Select Roster for Episode {page}
+                </Link>
+              </div>
+            );
+          }
+        }
+      } else {
+        if (resultsData) {
+          if (resultsData[`episode${page}`]) {
+            if (
+              resultsData[`episode${page}`]["airDate"]["seconds"] <
+              new Date().getTime()
+            ) {
+              return <p>Sorry this is past</p>;
+            } else {
+              return (
+                <div className="episodePaginationNoResultBox">
+                  <div>
+                    <AddCircleOutlineRoundedIcon />
+                  </div>
+                  <Link
+                    to={`/leagues/${params.id}/selectepisoderoster/${page}`}
+                  >
+                    &ensp; Select Roster for Episode {page}
+                  </Link>
+                </div>
+              );
+            }
+          } else {
+            return (
+              <div className="episodePaginationNoResultBox">
+                <div>
+                  <AddCircleOutlineRoundedIcon />
+                </div>
+                <Link to={`/leagues/${params.id}/selectepisoderoster/${page}`}>
+                  &ensp; Select Roster for Episode {page}
+                </Link>
+              </div>
+            );
+          }
+        } else {
           return (
             <div className="episodePaginationNoResultBox">
               <div>
@@ -174,15 +260,6 @@ function LeagueDetails() {
             </div>
           );
         }
-      } else {
-        return (
-          <div className="episodePaginationNoResultBox">
-            <div>
-              <AddCircleOutlineRoundedIcon />
-            </div>
-            <p>&ensp; Select Roster for Episode {page}</p>
-          </div>
-        );
       }
     }
   }
