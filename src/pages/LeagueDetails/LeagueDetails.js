@@ -419,8 +419,8 @@ function LeagueDetails() {
               <div>
                 <AddCircleOutlineRoundedIcon />
               </div>
-              <Link to={`/leagues/${params.id}/selectseasonroster/${page}`}>
-                &ensp; Select Roster for Season {page}
+              <Link to={`/leagues/${params.id}/selectseasonroster/`}>
+                &ensp; Select Roster for Season
               </Link>
             </div>
           );
