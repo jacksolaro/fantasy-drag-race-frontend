@@ -3,3 +3,13 @@
   margin-bottom: 100px;
   /* background-color: #f15bb5; */
 }
+
+.HomeInstructions__Icon {
+  transform: scale(5);
+  padding: 50px;
+}
+
+.MuiIcon-fontSizeLarge {
+  width: 100px;
+  height: 100px;
+}

@@ -1,6 +1,9 @@
 import React from "react";
 import { Grid, Hidden, Typography } from "@material-ui/core";
 import "./HomeInstructions.css";
+import AddBoxIcon from "@material-ui/icons/AddBox";
+import BallotIcon from "@material-ui/icons/Ballot";
+import SupervisedUserCircleIcon from "@material-ui/icons/SupervisedUserCircle";
 
 function HomeInstructions() {
   return (
@@ -12,10 +15,11 @@ function HomeInstructions() {
         It's simple, really! All you have to do is Create, Choose, and Compete!
       </Typography>
       <div>
-        <Grid container spacing={0} justify="center" alignItems="center">
-          <Grid item xs={12} md={4} align="left">
-            <Typography gutterBottom variant="h4" component="h2" align="left">
-              1. CREATE
+        <Grid container spacing={5} justify="center" alignItems="flex=start">
+          <Grid item xs={12} md={4} align="center">
+            <AddBoxIcon className="HomeInstructions__Icon"></AddBoxIcon>
+            <Typography gutterBottom variant="h4" component="h2" align="center">
+              1. Create a League
             </Typography>
             <Typography gutterBottom variant="h6" component="h6" align="left">
               Start off by creating or joining a league. This creates a space
@@ -23,17 +27,10 @@ function HomeInstructions() {
               points!
             </Typography>
           </Grid>
-          <Hidden only="xs">
-            <Grid item xs={12} md={8} align="center">
-              <img src={"http://placekitten.com/401/300"}></img>
-            </Grid>
-            <Grid item xs={12} md={8} align="center">
-              <img src={"http://placekitten.com/405/300"}></img>
-            </Grid>
-          </Hidden>
-          <Grid item xs={12} md={4} align="right">
-            <Typography gutterBottom variant="h4" component="h2" align="left">
-              2. CHOOSE
+          <Grid item xs={12} md={4} align="center">
+            <BallotIcon className="HomeInstructions__Icon"></BallotIcon>
+            <Typography gutterBottom variant="h4" component="h2" align="center">
+              2. Choose Your Roster
             </Typography>
             <Typography gutterBottom variant="h6" component="h6" align="left">
               To earn points, you will select rosters of your favorite reality
@@ -41,19 +38,15 @@ function HomeInstructions() {
               your selected contestants perform!
             </Typography>
           </Grid>
-          <Grid item xs={12} md={4} align="right">
-            <Typography gutterBottom variant="h4" component="h2" align="left">
-              3. COMPETE
+          <Grid item xs={12} md={4} align="center">
+            <SupervisedUserCircleIcon className="HomeInstructions__Icon"></SupervisedUserCircleIcon>
+            <Typography gutterBottom variant="h4" component="h2" align="center">
+              3. Compete with Friends
             </Typography>
             <Typography gutterBottom variant="h6" component="h6" align="left">
               And that's it! You're ready to compete against your friends!
             </Typography>
           </Grid>
-          <Hidden only="xs">
-            <Grid item xs={12} md={8} align="center">
-              <img src={"http://placekitten.com/400/300"}></img>
-            </Grid>
-          </Hidden>
         </Grid>
       </div>
     </section>
