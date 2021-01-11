@@ -287,10 +287,10 @@ function LeagueDetails() {
       if (user.picks) {
         user.picks.map((scoreEvent) => {
           scoreEvent.picks.map((pick) => {
-            if (RESULTS[`${scoreEvent.category}`]) {
-              if (RESULTS[`${scoreEvent.category}`][`${pick.id}`]) {
+            if (resultsData[`${scoreEvent.category}`]) {
+              if (resultsData[`${scoreEvent.category}`][`${pick.id}`]) {
                 if (
-                  RESULTS[`${scoreEvent.category}`][`${pick.id}`].includes(
+                  resultsData[`${scoreEvent.category}`][`${pick.id}`].includes(
                     pick.queenID
                   )
                 ) {
