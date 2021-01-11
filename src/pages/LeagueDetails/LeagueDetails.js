@@ -28,15 +28,15 @@ const useStyles = makeStyles({
 
 const RESULTS = {
   season: {
-    seasonWinner: "G5hMj6BwbtsnqTG6XB9U",
-    missCongeniality: "G5hMj6BwbtsnqTG6XB9U",
-    firstEliminated: "G5qTG6XB9U",
+    seasonWinner: [""],
+    missCongeniality: ["G5hMj6BwbtsnqTG6XB9U"],
+    firstEliminated: ["G5hMj6BwbtsnqTG6XB9U"],
   },
   episode1: {
-    episodeWinner: "G5hMj6BwbtsnqTG6XB9U",
-    maxiChallengeWinner: "G5hMj6BwbtsnqTG6XB9U",
-    miniChallengeWinner: "JOxpAR3tXdm5qOnDxIoq",
-    eliminated: "G5qTG6XB9U",
+    episodeWinner: ["G5hMj6BwbtsnqTG6XB9U"],
+    maxiChallengeWinner: ["G5hMj6BwbtsnqTG6XB9U"],
+    miniChallengeWinner: ["JOxpAR3tXdm5qOnDxIoq"],
+    eliminated: ["G5qTG6XB9U", "G5hMj6BwbtsnqTG6XB9U"],
   },
 };
 
@@ -128,10 +128,9 @@ function LeagueDetails() {
                         <img
                           className={
                             RESULTS[`${episodePicks[0].category}`][`${pick.id}`]
-                              ? pick.queenID ===
-                                RESULTS[`${episodePicks[0].category}`][
+                              ? RESULTS[`${episodePicks[0].category}`][
                                   `${pick.id}`
-                                ]
+                                ].includes(pick.queenID)
                                 ? "leagueDetails__rosterIMG2"
                                 : "leagueDetails__rosterIMG"
                               : "leagueDetails__rosterIMG"
@@ -150,8 +149,9 @@ function LeagueDetails() {
                       <TableCell>{pick.queenName}</TableCell>
                       <TableCell>
                         {RESULTS[`${episodePicks[0].category}`][`${pick.id}`]
-                          ? pick.queenID ===
-                            RESULTS[`${episodePicks[0].category}`][`${pick.id}`]
+                          ? RESULTS[`${episodePicks[0].category}`][
+                              `${pick.id}`
+                            ].includes(pick.queenID)
                             ? pick.pointValue
                             : 0
                           : "?"}
@@ -233,9 +233,12 @@ function LeagueDetails() {
               ></img>
               <p>{pick.queenName}</p>
               <p className="pointsBadge">
-                {RESULTS["season"][`${pick.id}`] === pick.queenID
-                  ? pick.pointValue
-                  : 0}
+                {RESULTS[`${seasonPicks[0].category}`][`${pick.id}`]
+                  ? pick.queenID ===
+                    RESULTS[`${seasonPicks[0].category}`][`${pick.id}`]
+                    ? pick.pointValue
+                    : 0
+                  : "?"}
               </p>
             </Grid>
           ));
