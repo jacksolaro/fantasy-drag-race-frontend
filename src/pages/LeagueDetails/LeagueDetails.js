@@ -55,6 +55,7 @@ function LeagueDetails() {
           .then((doc) => {
             console.log("RESULTS DATA", doc.data().results);
             setResultsData(doc.data().results);
+            // console.log(resultsData.episode1.airDate);
           });
       })
       .catch((error) => console.log("Error", error));
@@ -79,10 +80,11 @@ function LeagueDetails() {
       .catch((error) => console.log("Error", error));
   }, []);
 
+  // // RETRIEVE CURRENT DATE AND TIME
   // useEffect(() => {
   //   setInterval(() => {
   //     setCurrTime(Date().toLocaleString());
-  //   }, 12000);
+  //   }, 1000);
   // });
 
   // TAKES ALL THE USERS EPISODE ROSTERS, RENDERS THEM ON PAGE AND DISPLAYS POINTS
@@ -105,6 +107,7 @@ function LeagueDetails() {
         if (episodePicks.length > 0) {
           return (
             <TableContainer>
+              {/* <p>{resultsData[`episode${episodeNum}`]["airDate"]}</p> */}
               <Table aria-label="simple table" size="small">
                 <TableHead>
                   <TableRow>
@@ -191,6 +194,7 @@ function LeagueDetails() {
       return <div className="episodePaginationNoResultBox">LOADING</div>;
     } else {
       console.log("pickData", pickData);
+
       if (pickData[0].picks !== undefined) {
         const userData = JSON.parse(JSON.stringify(pickData)).filter(
           (user) => user.userID === currentUser.uid
@@ -336,6 +340,7 @@ function LeagueDetails() {
       {/* TODO: redirect or show 404 if there is no league */}
       <div className="leagueDetails__header">
         <h1>{leagueData.leagueName}</h1>
+
         {/* <h1>{currTime}</h1> */}
         <p>RuPaul's Drag Race, Season 13</p>
         <p>LEAGUE CODE: {params.id}</p>
@@ -379,6 +384,20 @@ function LeagueDetails() {
                     boundaryCount={1}
                     color="primary"
                   />
+                  <Typography align="center" variant="p">
+                    EPISODE AIR DATE:
+                  </Typography>
+                  <p>
+                    {resultsData
+                      ? resultsData[`episode${page}`]
+                        ? new Date(
+                            resultsData[`episode${page}`]["airDate"][
+                              "seconds"
+                            ] * 1000
+                          ).toLocaleDateString("en-us")
+                        : "NO INFO ON AIR DATE YET"
+                      : "NO INFO ON AIR DATE YET"}
+                  </p>
                   <Grid container container align="center" justify="center">
                     {renderEpisodePicks(page)}
                   </Grid>
