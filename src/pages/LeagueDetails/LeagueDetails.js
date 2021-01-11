@@ -94,12 +94,11 @@ function LeagueDetails() {
       return <div className="episodePaginationNoResultBox">LOADING</div>;
       // If not loading, do the following
     } else {
-      // retrieve user data
-      const userData = JSON.parse(JSON.stringify(pickData)).filter(
-        (user) => user.userID === currentUser.uid
-      );
-
       if (pickData[0].picks !== undefined) {
+        // retrieve user data
+        const userData = JSON.parse(JSON.stringify(pickData)).filter(
+          (user) => user.userID === currentUser.uid
+        );
         // set episodePicks to the array of the users picks for that episode
         const episodePicks = JSON.parse(
           JSON.stringify(userData[0].picks)
@@ -395,6 +394,26 @@ function LeagueDetails() {
                               "seconds"
                             ] * 1000
                           ).toLocaleDateString("en-us")
+                        : "NO INFO ON AIR DATE YET"
+                      : "NO INFO ON AIR DATE YET"}
+                  </p>
+                  <p>
+                    {resultsData
+                      ? resultsData[`episode${page}`]
+                        ? resultsData[`episode${page}`]["airDate"]["seconds"] *
+                          1000
+                        : "NO INFO ON AIR DATE YET"
+                      : "NO INFO ON AIR DATE YET"}
+                  </p>
+                  <p>{new Date().toLocaleDateString("en-us")}</p>
+                  <p>{new Date().getTime()}</p>
+                  <p>
+                    {resultsData
+                      ? resultsData[`episode${page}`]
+                        ? resultsData[`episode${page}`]["airDate"]["seconds"] <
+                          new Date().getTime()
+                          ? "LESS"
+                          : "GREATER"
                         : "NO INFO ON AIR DATE YET"
                       : "NO INFO ON AIR DATE YET"}
                   </p>
