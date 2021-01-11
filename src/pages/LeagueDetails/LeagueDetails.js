@@ -327,18 +327,104 @@ function LeagueDetails() {
             </Grid>
           ));
         } else {
+          if (resultsData) {
+            if (resultsData[`episode1`]) {
+              if (
+                resultsData[`episode1`]["airDate"]["seconds"] <
+                new Date().getTime()
+              ) {
+                return (
+                  <p>
+                    Sorry this season has already begun. You may no longer make
+                    season selections
+                  </p>
+                );
+              } else {
+                return (
+                  <div className="episodePaginationNoResultBox">
+                    <div>
+                      <AddCircleOutlineRoundedIcon />
+                    </div>
+                    <Link to={`/leagues/${params.id}/selectseasonroster/`}>
+                      &ensp; Select Roster for Season
+                    </Link>
+                  </div>
+                );
+              }
+            } else {
+              return (
+                <div className="episodePaginationNoResultBox">
+                  <div>
+                    <AddCircleOutlineRoundedIcon />
+                  </div>
+                  <Link to={`/leagues/${params.id}/selectseasonroster/`}>
+                    &ensp; Select Roster for Episode
+                  </Link>
+                </div>
+              );
+            }
+          } else {
+            return (
+              <div className="episodePaginationNoResultBox">
+                <div>
+                  <AddCircleOutlineRoundedIcon />
+                </div>
+                <Link to={`/leagues/${params.id}/selectseasonroster/`}>
+                  &ensp; Select Roster for Season
+                </Link>
+              </div>
+            );
+          }
+        }
+      } else {
+        if (resultsData) {
+          if (resultsData[`episode1`]) {
+            if (
+              resultsData[`episode1`]["airDate"]["seconds"] <
+              new Date().getTime()
+            ) {
+              return (
+                <p>
+                  Sorry this season has already begun. You may no longer make
+                  season selections
+                </p>
+              );
+            } else {
+              return (
+                <div className="episodePaginationNoResultBox">
+                  <div>
+                    <AddCircleOutlineRoundedIcon />
+                  </div>
+                  <Link to={`/leagues/${params.id}/selectseasonroster/`}>
+                    &ensp; Select Roster for Season
+                  </Link>
+                </div>
+              );
+            }
+          } else {
+            return (
+              <div className="episodePaginationNoResultBox">
+                <div>
+                  <AddCircleOutlineRoundedIcon />
+                </div>
+                <Link to={`/leagues/${params.id}/selectseasonroster/`}>
+                  &ensp; Select Roster for Season
+                </Link>
+              </div>
+            );
+          }
+        } else {
           return (
             <div className="episodePaginationNoResultBox">
-              Select Season Picks
+              <div>
+                <AddCircleOutlineRoundedIcon />
+              </div>
+              <Link to={`/leagues/${params.id}/selectseasonroster/${page}`}>
+                &ensp; Select Roster for Season {page}
+              </Link>
             </div>
           );
         }
-      } else {
-        return (
-          <div className="episodePaginationNoResultBox">
-            Select Season Picks
-          </div>
-        );
       }
     }
   }
