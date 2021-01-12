@@ -589,14 +589,6 @@ function LeagueDetails() {
             </div>
           </Grid>
         </Grid>
-
-        {/* ACTIONS */}
-        <Link to={`/leagues/${params.id}/selectseasonroster`}>
-          Select Season Roster
-        </Link>
-        <Link to={`/leagues/${params.id}/selectepisoderoster`}>
-          Select Episode Roster
-        </Link>
       </div>
     </div>
   );
