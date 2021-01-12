@@ -15,7 +15,7 @@ function HomeInstructions() {
         It's simple, really! All you have to do is Create, Choose, and Compete!
       </Typography>
       <div>
-        <Grid container spacing={5} justify="center" alignItems="flex=start">
+        <Grid container spacing={6} justify="center" alignItems="flex=start">
           <Grid item xs={12} md={4} align="center">
             <AddBoxIcon className="HomeInstructions__Icon"></AddBoxIcon>
             <Typography gutterBottom variant="h4" component="h2" align="center">

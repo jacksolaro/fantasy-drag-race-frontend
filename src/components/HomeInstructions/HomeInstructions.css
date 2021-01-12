@@ -5,11 +5,8 @@
 }
 
 .HomeInstructions__Icon {
-  transform: scale(5);
-  padding: 50px;
-}
-
-.MuiIcon-fontSizeLarge {
-  width: 100px;
-  height: 100px;
+  width: 150px !important;
+  height: 150px !important;
+  padding: 20px;
+  /* transform: scale(5); */
 }
