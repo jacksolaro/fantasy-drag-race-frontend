@@ -38,40 +38,44 @@ function Leagues() {
         <Grid container spacing={4}>
           <Grid item xs={12} md={3} align="center">
             <div className="Leagues__Card">
-              <AddCircleOutlineRoundedIcon
-                className="Leagues__Icon"
-                style={{ fontSize: 100 }}
-              ></AddCircleOutlineRoundedIcon>
-              <Typography
-                gutterBottom
-                variant="h4"
-                component="h2"
-                align="center"
-              >
-                <Box fontWeight="fontWeightBold" m={1}>
-                  CREATE A LEAGUE
-                </Box>
-              </Typography>
+              <div>
+                <AddCircleOutlineRoundedIcon
+                  className="Leagues__Icon"
+                  style={{ fontSize: 100 }}
+                ></AddCircleOutlineRoundedIcon>
+                <Typography
+                  gutterBottom
+                  variant="h4"
+                  component="h2"
+                  align="center"
+                >
+                  <Box fontWeight="fontWeightBold" m={1}>
+                    CREATE A LEAGUE
+                  </Box>
+                </Typography>
+              </div>
             </div>
           </Grid>
           {leagues.map((league) => (
             <Grid item xs={12} md={3} align="center">
               <Link to={`/leagues/${league.id}`}>
                 <div className="Leagues__Card">
-                  <AssignmentTwoToneIcon
-                    className="Leagues__Icon"
-                    style={{ fontSize: 100 }}
-                  ></AssignmentTwoToneIcon>
-                  <Typography
-                    gutterBottom
-                    variant="h4"
-                    component="h2"
-                    align="center"
-                  >
-                    <Box fontWeight="fontWeightBold" m={1}>
-                      {league.data().leagueName}
-                    </Box>
-                  </Typography>
+                  <div>
+                    <AssignmentTwoToneIcon
+                      className="Leagues__Icon"
+                      style={{ fontSize: 100 }}
+                    ></AssignmentTwoToneIcon>
+                    <Typography
+                      gutterBottom
+                      variant="h4"
+                      component="h2"
+                      align="center"
+                    >
+                      <Box fontWeight="fontWeightBold" m={1}>
+                        {league.data().leagueName}
+                      </Box>
+                    </Typography>
+                  </div>
                 </div>
               </Link>
             </Grid>
