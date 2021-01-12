@@ -37,28 +37,36 @@ function Leagues() {
         </p>
         <Grid container spacing={4}>
           <Grid item xs={12} md={3} align="center">
-            <div className="Leagues__Card">
-              <div>
-                <AddCircleOutlineRoundedIcon
-                  className="Leagues__Icon"
-                  style={{ fontSize: 100 }}
-                ></AddCircleOutlineRoundedIcon>
-                <Typography
-                  gutterBottom
-                  variant="h4"
-                  component="h2"
-                  align="center"
-                >
-                  <Box fontWeight="fontWeightBold" m={1}>
-                    CREATE A LEAGUE
-                  </Box>
-                </Typography>
+            <Link to="/createleague" style={{ textDecoration: "none" }}>
+              <div
+                className="Leagues__Card Leagues__CreateLeagueCard"
+                style={{ backgroundColor: "#0099ff" }}
+              >
+                <div>
+                  <AddCircleOutlineRoundedIcon
+                    className="Leagues__Icon"
+                    style={{ fontSize: 100, color: "white" }}
+                  ></AddCircleOutlineRoundedIcon>
+                  <Typography
+                    gutterBottom
+                    variant="h4"
+                    component="h2"
+                    align="center"
+                  >
+                    <Box fontWeight="fontWeightBold" m={1}>
+                      CREATE A LEAGUE
+                    </Box>
+                  </Typography>
+                </div>
               </div>
-            </div>
+            </Link>
           </Grid>
           {leagues.map((league) => (
             <Grid item xs={12} md={3} align="center">
-              <Link to={`/leagues/${league.id}`}>
+              <Link
+                to={`/leagues/${league.id}`}
+                style={{ textDecoration: "none", color: "#0099ff" }}
+              >
                 <div className="Leagues__Card">
                   <div>
                     <AssignmentTwoToneIcon
@@ -73,6 +81,16 @@ function Leagues() {
                     >
                       <Box fontWeight="fontWeightBold" m={1}>
                         {league.data().leagueName}
+                      </Box>
+                    </Typography>
+                    <Typography
+                      gutterBottom
+                      variant="h6"
+                      component="h6"
+                      align="center"
+                    >
+                      <Box fontWeight="" m={1}>
+                        RuPaul's Drag Race US S13
                       </Box>
                     </Typography>
                   </div>

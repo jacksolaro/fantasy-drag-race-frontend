@@ -12,10 +12,20 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  transition: ease 0.25s;
+}
+
+.Leagues__Card:hover {
+  transform: scale(1.02);
+  transition: ease 0.25s;
 }
 
 .Leagues__Icon {
   /* padding-top: 40px; */
   color: #0099ff;
-  display: inline;
+}
+
+.Leagues__CreateLeagueCard {
+  color: white !important;
+  text-decoration: none;
 }
