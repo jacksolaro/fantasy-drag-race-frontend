@@ -4,7 +4,7 @@ NAV STYLING
 
 .nav {
   width: 100%;
-  height: 45px;
+  height: 54px;
   z-index: 2;
   display: flex;
   justify-content: space-between;
@@ -21,8 +21,10 @@ NAV STYLING
   color: white;
   text-align: center;
   text-decoration: none;
-  padding: 10px;
+  /* padding: 10px; */
   font-weight: bold;
+  width: 150px;
+  z-index: 2;
 }
 
 .nav-logo:hover {
@@ -91,6 +93,30 @@ li a:hover {
 
 .nav__hamburger {
   display: none;
+}
+
+.nav-item {
+  padding-top: 5px;
+  padding-bottom: 7px;
+  padding-left: 10px;
+  padding-right: 10px;
+
+  color: white;
+  text-align: center;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.button__logout {
+  border: 2px solid white;
+  border-radius: 5px;
+}
+
+.button__logout:hover {
+  border: 2px solid white;
+  background-color: white;
+  border-radius: 5px;
+  color: #0099ff;
 }
 
 /* MEDIA QUERIES */

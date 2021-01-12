@@ -4,6 +4,7 @@ import MenuIcon from "@material-ui/icons/Menu";
 import Drawer from "@material-ui/core/SwipeableDrawer";
 import { useHistory } from "react-router-dom";
 import "./Nav.css";
+import derbyLogo from "../../assets/images/derby_logo_white-01.png";
 
 import { useAuth } from "../../contexts/AuthContext";
 
@@ -43,7 +44,7 @@ function Nav() {
     <nav className="">
       <div className={`nav`}>
         <Link className="nav-logo" to="/">
-          Fantasy Drag Race
+          <img src={derbyLogo} alt="Derby Logo" className="nav-logo"></img>
         </Link>
 
         <Drawer
@@ -54,7 +55,7 @@ function Nav() {
           <div className="drawer">
             <ul className="drawer__list">
               <Link to="/" className="drawer__item">
-                Home
+                Shows
               </Link>
               <Link to="/leagues" className="drawer__item">
                 Leagues
@@ -80,11 +81,9 @@ function Nav() {
           )}
           {currentUser && (
             <>
-              <li className="nav-item">
-                <Link className="nav-link" to="/" onClick={handleLogout}>
-                  Log Out
-                </Link>
-              </li>
+              <Link className="nav-link" to="/" onClick={handleLogout}>
+                <li className="nav-item button__logout">Log Out</li>
+              </Link>
               <li className="nav-item">
                 <Link className="nav-link" to="/leagues">
                   Leagues
@@ -92,7 +91,7 @@ function Nav() {
               </li>
               <li className="nav-item">
                 <Link className="nav-link" to="/">
-                  Home
+                  Shows
                 </Link>
               </li>
             </>
