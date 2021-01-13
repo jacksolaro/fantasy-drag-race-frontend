@@ -1,21 +1,17 @@
 import React, { useRef, useState } from "react";
-import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import TextField from "@material-ui/core/TextField";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
-import Checkbox from "@material-ui/core/Checkbox";
-import Link from "@material-ui/core/Link";
+import { Link } from "react-router-dom";
 import Paper from "@material-ui/core/Paper";
-import Box from "@material-ui/core/Box";
 import Grid from "@material-ui/core/Grid";
 import Alert from "@material-ui/lab/Alert";
-import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import { useAuth } from "../../contexts/AuthContext";
 import { useHistory } from "react-router-dom";
-import { HistoryRounded } from "@material-ui/icons";
+
+import derbyLogoBlue from "../../assets/images/derby_logo_blue-01.png";
 
 function Copyright() {
   return (
@@ -35,7 +31,8 @@ const useStyles = makeStyles((theme) => ({
     height: "100vh",
   },
   image: {
-    backgroundImage: "url(https://source.unsplash.com/random)",
+    backgroundImage:
+      "url(https://firebasestorage.googleapis.com/v0/b/derby-584f8.appspot.com/o/assets%2Fderby_login_art-01.png?alt=media&token=4fcf4d51-7164-4a5c-bacc-3fdbc00ab900)",
     backgroundRepeat: "no-repeat",
     backgroundColor:
       theme.palette.type === "light"
@@ -60,6 +57,8 @@ const useStyles = makeStyles((theme) => ({
   },
   submit: {
     margin: theme.spacing(3, 0, 2),
+    height: 50,
+    backgroundColor: "#0099ff",
   },
 }));
 
@@ -107,9 +106,13 @@ export default function Login() {
       <Grid item xs={false} sm={4} md={7} className={classes.image} />
       <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
         <div className={classes.paper}>
-          <Avatar className={classes.avatar}>
-            <LockOutlinedIcon />
-          </Avatar>
+          <Link to="/">
+            <img
+              src={derbyLogoBlue}
+              alt="derby logo"
+              style={{ width: 400 }}
+            ></img>
+          </Link>
           <Typography component="h1" variant="h5">
             Log In
           </Typography>
@@ -144,7 +147,7 @@ export default function Login() {
             </Grid>
             <Grid container justify="flex-end">
               <Grid item>
-                <Link href="/forgot-password" variant="body2">
+                <Link to="/forgot-password" variant="body2">
                   Forgot Password?
                 </Link>
               </Grid>
@@ -162,7 +165,7 @@ export default function Login() {
             </Button>
             <Grid container justify="flex-end">
               <Grid item>
-                <Link href="/signup" variant="body2">
+                <Link to="/signup" variant="body2">
                   Need an account? Sign Up
                 </Link>
               </Grid>
