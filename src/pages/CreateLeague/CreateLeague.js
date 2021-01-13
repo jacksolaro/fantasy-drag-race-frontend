@@ -7,8 +7,19 @@ import { useAuth } from "../../contexts/AuthContext";
 import { db } from "../../firebase.js";
 import { useHistory } from "react-router-dom";
 import "./CreateLeague.css";
+import { makeStyles } from "@material-ui/core/styles";
+import { Button } from "@material-ui/core";
+
+const useStyles = makeStyles((theme) => ({
+  submit: {
+    margin: theme.spacing(3, 0, 2),
+    height: 50,
+    backgroundColor: "#0099ff",
+  },
+}));
 
 function CreateLeague() {
+  const classes = useStyles();
   const [formData, setFormData] = React.useState({
     leagueName: "",
     leagueDescription: "",
@@ -93,7 +104,14 @@ function CreateLeague() {
               onChange={handleChange}
             />
           </div>
-          <button>Create League</button>
+          <Button
+            type="submit"
+            variant="contained"
+            color="primary"
+            className={classes.submit}
+          >
+            Create League
+          </Button>
         </form>
       </Container>
     </div>
