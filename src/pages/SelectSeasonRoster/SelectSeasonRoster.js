@@ -100,6 +100,7 @@ function SelectSeasonRoster() {
               picks: firebase.firestore.FieldValue.arrayUnion(submittedArr),
             });
           console.log("Success ", doc.id, " => ", doc.data());
+          history.push(`/leagues/${params.id}`);
           console.log("STEP 2");
         });
       })
@@ -108,9 +109,7 @@ function SelectSeasonRoster() {
         console.log("ERROR ", error);
       });
 
-    history.push(`/leagues/${params.id}`);
     setLoading(false);
-    console.log("STEP 3");
   }
 
   return (
@@ -161,6 +160,7 @@ function SelectSeasonRoster() {
         <Button
           type="submit"
           variant="contained"
+          disabled={loading}
           style={{ backgroundColor: "#0099FF", color: "white" }}
         >
           Submit Season Picks

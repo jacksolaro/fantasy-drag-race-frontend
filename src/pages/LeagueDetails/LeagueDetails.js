@@ -44,7 +44,6 @@ function LeagueDetails() {
               console.log("RESULTS DATA", doc.data().results);
               setResultsData(doc.data().results);
             }
-            // console.log(resultsData.episode1.airDate);
           });
       })
       .catch((error) => console.log("Error", error));

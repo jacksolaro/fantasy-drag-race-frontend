@@ -101,6 +101,7 @@ function SelectEpisodeRoster() {
             });
           console.log("Success ", doc.id, " => ", doc.data());
           console.log("STEP 2");
+          history.push(`/leagues/${params.id}`);
         });
       })
       .catch(function (error) {
@@ -108,7 +109,6 @@ function SelectEpisodeRoster() {
         console.log("ERROR ", error);
       });
 
-    history.push(`/leagues/${params.id}`);
     setLoading(false);
     console.log("STEP 3");
   }
@@ -233,6 +233,7 @@ function SelectEpisodeRoster() {
         <Button
           type="submit"
           variant="contained"
+          disabled={loading}
           style={{ backgroundColor: "#0099FF", color: "white" }}
         >
           Submit Episode Picks

@@ -71,9 +71,9 @@ function JoinLeague() {
       <Container maxWidth="md">
         <h1>Join a League</h1>
         <p>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-          eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-          minim veniam
+          Enter the League Code for the league that you would like to join.
+          Don't have a league code? Ask a friend to share their league code with
+          you, or create a league!
         </p>
         <form onSubmit={handleSubmit}>
           <div>
