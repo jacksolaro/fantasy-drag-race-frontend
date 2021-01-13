@@ -1,41 +1,27 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import Jumbotron from "../../components/Jumbotron/Jumbotron";
-import leaguePageBkg from "../../assets/images/bkg-3.jpg";
 import { useAuth } from "../../contexts/AuthContext";
-
-import { makeStyles } from "@material-ui/core/styles";
 import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
 import TableCell from "@material-ui/core/TableCell";
 import TableContainer from "@material-ui/core/TableContainer";
 import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
-import Paper from "@material-ui/core/Paper";
 import { Link } from "react-router-dom";
-import { Container, Grid, Typography } from "@material-ui/core";
+import { Grid, Typography } from "@material-ui/core";
 import { db } from "../../firebase.js";
-import firebase from "firebase";
 import "./leagueDetails.css";
 import { Pagination } from "@material-ui/lab";
 import AddCircleOutlineRoundedIcon from "@material-ui/icons/AddCircleOutlineRounded";
 
-const useStyles = makeStyles({
-  table: {
-    minWidth: 650,
-  },
-});
-
 function LeagueDetails() {
   let params = useParams();
-  const classes = useStyles();
   const { currentUser } = useAuth();
   const [loading, setLoading] = useState(false);
   const [leagueData, setLeagueData] = useState([{}]);
   const [resultsData, setResultsData] = useState([{}]);
   const [pickData, setPickData] = useState([{}]);
   const [page, setPage] = React.useState(1);
-  const [currTime, setCurrTime] = useState();
 
   const handlePageChange = (event, value) => {
     setPage(value);
@@ -156,6 +142,7 @@ function LeagueDetails() {
                               : "leagueDetails__rosterIMG"
                           }
                           src={pick.queenIMG}
+                          alt={`${pick.queenName}`}
                         ></img>
                       </TableCell>
                       <TableCell>{pick.queenName}</TableCell>
@@ -338,6 +325,7 @@ function LeagueDetails() {
                     : "leagueDetails__rosterIMG"
                 }
                 src={pick.queenIMG}
+                alt={`${pick.queenName}`}
               ></img>
               <p>{pick.queenName}</p>
               <p className="pointsBadge">

@@ -33,7 +33,7 @@ function Home() {
               title="RuPaul's Drag Race"
               season="US Season 13"
               isActive={true}
-              posterIMG="https://firebasestorage.googleapis.com/v0/b/derby-584f8.appspot.com/o/seasonPosters%2FRDRUS13.jpg?alt=media&token=4ab72254-e40e-4dd9-8873-00bb81832269"
+              posterIMG="https://firebasestorage.googleapis.com/v0/b/derby-584f8.appspot.com/o/seasonPosters%2FRDRUS13.jpg?alt=media&token=5345c2a5-eedc-41f1-9685-084580638900"
             />
           </Grid>
           <Grid item xs={12} md={6} align="center">

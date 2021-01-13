@@ -1,19 +1,26 @@
-.card {
-  background-color: white;
-}
-
-.Home__SeasonCard {
+.Card {
   height: 500px;
   width: 400px;
-  background-color: white !important;
-}
-
-.Home__SeasonCardImg {
-  height: 350px;
-  width: 400px;
-  object-fit: cover;
-}
-
-.cardContent {
   background-color: white;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  overflow: hidden;
+  display: block;
+  padding: 0;
+  transition: ease 0.25s;
+}
+
+.Card:hover {
+  transform: scale(1.03);
+  transition: ease 0.25s;
+}
+
+.Card__Img {
+  height: 350px;
+  width: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.Card__Content {
+  padding: 20px;
 }
