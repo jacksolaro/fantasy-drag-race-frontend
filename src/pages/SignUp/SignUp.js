@@ -31,7 +31,7 @@ const useStyles = makeStyles((theme) => ({
   },
   image: {
     backgroundImage:
-      "url(https://firebasestorage.googleapis.com/v0/b/derby-584f8.appspot.com/o/assets%2Fderby_signup_art-01.png?alt=media&token=f3620c50-c597-4dd9-9439-adb577dece21)",
+      "url(https://firebasestorage.googleapis.com/v0/b/derby-584f8.appspot.com/o/assets%2Fderby_signup_art-01.png?alt=media&token=ad378c9b-a413-4a1b-9f55-6e60141b06c0)",
     backgroundRepeat: "no-repeat",
     backgroundColor:
       theme.palette.type === "light"

@@ -34,7 +34,8 @@ const useStyles = makeStyles((theme) => ({
     height: "100vh",
   },
   image: {
-    backgroundImage: "url(https://source.unsplash.com/random)",
+    backgroundImage:
+      "url(https://firebasestorage.googleapis.com/v0/b/derby-584f8.appspot.com/o/assets%2Fderby_resetpassword_art.png?alt=media&token=cc043ddf-da0c-4af2-8123-0f8848fae290)",
     backgroundRepeat: "no-repeat",
     backgroundColor:
       theme.palette.type === "light"
