@@ -5,28 +5,10 @@ import "./Footer.css";
 
 const footers = [
   {
-    title: "Company",
-    description: ["Team", "History", "Contact us", "Locations"],
+    title: "About",
+    description: ["Jack's GitHub"],
   },
-  {
-    title: "Features",
-    description: [
-      "Cool stuff",
-      "Random feature",
-      "Team feature",
-      "Developer stuff",
-      "Another one",
-    ],
-  },
-  {
-    title: "Resources",
-    description: [
-      "Resource",
-      "Resource name",
-      "Another resource",
-      "Final resource",
-    ],
-  },
+
   {
     title: "Legal",
     description: ["Privacy policy", "Terms of use"],
@@ -45,11 +27,13 @@ function Footer() {
               </Typography>
               <ul className="footer__ul">
                 {footer.description.map((item) => (
-                  <li key={item} className="footer__li">
-                    <Link href="#" variant="subtitle1" color="textSecondary">
-                      {item}
-                    </Link>
-                  </li>
+                  <div className="footer__liWrapper">
+                    <li key={item} className="footer__li">
+                      <Link href="#" variant="subtitle1" color="textSecondary">
+                        {item}
+                      </Link>
+                    </li>
+                  </div>
                 ))}
               </ul>
             </Grid>
@@ -57,6 +41,7 @@ function Footer() {
         </Grid>
         <Box mt={5}>
           <Copyright />
+          Derby Leagues 2020
         </Box>
       </Container>
     </footer>

@@ -16,6 +16,11 @@ footer {
 }
 .footer__li {
   float: left;
+  display: block;
+}
+
+.footer__liWrapper {
+  width: 100%;
 }
 
 /* .footer-accent {

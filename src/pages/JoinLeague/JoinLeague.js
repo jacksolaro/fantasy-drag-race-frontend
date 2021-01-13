@@ -7,14 +7,27 @@ import { useParams } from "react-router-dom";
 import { db } from "../../firebase.js";
 import firebase from "firebase/app";
 import { useAuth } from "../../contexts/AuthContext";
+import { useHistory } from "react-router-dom";
 import "./JoinLeague.css";
+import { makeStyles } from "@material-ui/core/styles";
+import { Button } from "@material-ui/core";
+
+const useStyles = makeStyles((theme) => ({
+  submit: {
+    margin: theme.spacing(3, 0, 2),
+    height: 50,
+    backgroundColor: "#0099ff",
+  },
+}));
 
 function JoinLeague() {
+  const classes = useStyles();
   let params = useParams();
   const { currentUser } = useAuth();
   const [formData, setFormData] = React.useState({
     leagueID: "",
   });
+  const history = useHistory();
 
   const handleChange = (event) => {
     event.preventDefault();
@@ -29,11 +42,6 @@ function JoinLeague() {
       .doc(formData.leagueID)
       .update({
         members: firebase.firestore.FieldValue.arrayUnion(currentUser.uid),
-        scores: firebase.firestore.FieldValue.arrayUnion({
-          email: currentUser.email,
-          score: 0,
-          userID: currentUser.uid,
-        }),
       });
 
     db.collection(`leagues`)
@@ -50,6 +58,7 @@ function JoinLeague() {
         // setError("Error writing document: ", error);
         console.log("ERROR ", error);
       });
+    history.push(`/leagues/`);
   };
 
   return (
@@ -77,7 +86,14 @@ function JoinLeague() {
               onChange={handleChange}
             />
           </div>
-          <button>JOIN LEAGUE</button>
+          <Button
+            type="submit"
+            variant="contained"
+            color="primary"
+            className={classes.submit}
+          >
+            Join League
+          </Button>
         </form>
       </Container>
     </div>
