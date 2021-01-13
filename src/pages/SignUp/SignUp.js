@@ -15,6 +15,7 @@ import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import { useAuth } from "../../contexts/AuthContext";
 import { useHistory } from "react-router-dom";
+import signupArt from "../../assets/images/derby_signup_art-01.png";
 
 function Copyright() {
   return (
@@ -34,7 +35,8 @@ const useStyles = makeStyles((theme) => ({
     height: "100vh",
   },
   image: {
-    backgroundImage: "url(https://source.unsplash.com/random)",
+    backgroundImage:
+      "url(https://firebasestorage.googleapis.com/v0/b/derby-584f8.appspot.com/o/assets%2Fderby_signup_art-01.png?alt=media&token=3193a2a5-6e2c-4449-a784-116395cfcdaa)",
     backgroundRepeat: "no-repeat",
     backgroundColor:
       theme.palette.type === "light"
@@ -118,7 +120,7 @@ export default function SignUp() {
           <Avatar className={classes.avatar}>
             <LockOutlinedIcon />
           </Avatar>
-          <Typography component="h1" variant="h5">
+          <Typography component="h1" variant="h3">
             Sign up
           </Typography>
           {error && <Alert severity="error">{error}</Alert>}
@@ -184,14 +186,6 @@ export default function SignUp() {
                   type="password"
                   id="passwordConfirm"
                   onChange={handleInputChange}
-                />
-              </Grid>
-              <Grid item xs={12}>
-                <FormControlLabel
-                  control={
-                    <Checkbox value="allowExtraEmails" color="primary" />
-                  }
-                  label="I want to receive inspiration, marketing promotions and updates via email."
                 />
               </Grid>
             </Grid>

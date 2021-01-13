@@ -1,6 +1,12 @@
 import "./App.css";
 import React from "react";
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link,
+  useLocation,
+} from "react-router-dom";
 import Footer from "./components/Footer/Footer.js";
 import Leagues from "./pages/Leagues/Leagues.js";
 import Home from "./pages/Home/Home.js";
@@ -16,57 +22,72 @@ import SelectSeasonRoster from "./pages/SelectSeasonRoster/SelectSeasonRoster";
 import SelectEpisodeRoster from "./pages/SelectEpisodeRoster/SelectEpisodeRoster";
 
 function App() {
-  return (
-    <Router>
-      <div>
-        <AuthProvider>
-          <nav>
-            <Nav></Nav>
-          </nav>
-          <Switch>
-            <Route
-              path={`${process.env.PUBLIC_URL}/leagues/:id/selectseasonroster`}
-            >
-              <SelectSeasonRoster />
-            </Route>
-            <Route
-              path={`${process.env.PUBLIC_URL}/leagues/:id/selectepisoderoster/:episodeNum`}
-            >
-              <SelectEpisodeRoster />
-            </Route>
-            <Route path={`${process.env.PUBLIC_URL}/leagues/:id`}>
-              <LeagueDetails />
-            </Route>
-            <Route path={`${process.env.PUBLIC_URL}/signup`}>
-              <SignUp />
-            </Route>
-            <Route path={`${process.env.PUBLIC_URL}/forgot-password`}>
-              <ForgotPassword />
-            </Route>
-            <Route path={`${process.env.PUBLIC_URL}/login`}>
-              <Login />
-            </Route>
-            <Route path={`${process.env.PUBLIC_URL}/leagues`}>
-              <Leagues />
-            </Route>
-            <Route path={`${process.env.PUBLIC_URL}/createleague`}>
-              <CreateLeague />
-            </Route>
-            <Route path={`${process.env.PUBLIC_URL}/joinleague`}>
-              <JoinLeague />
-            </Route>
-            <Route path={`${process.env.PUBLIC_URL}/`}>
-              <Home />
-            </Route>
-            <Route component={Home} />
-          </Switch>
-        </AuthProvider>
+  const location = useLocation();
 
-        <footer>
-          <Footer></Footer>
-        </footer>
-      </div>
-    </Router>
+  // FOR TESTING PURPOSES
+  // function HeaderView() {
+  //   console.log(location.pathname);
+  //   return <span>Path: {location.pathname}</span>;
+  // }
+
+  return (
+    // <Router>
+    <div>
+      <AuthProvider>
+        <nav>
+          {!(
+            location.pathname === "/login" || location.pathname === "/signup"
+          ) && <Nav></Nav>}
+          {/* <Nav></Nav> */}
+        </nav>
+        {/* FOR TESTING PURPOSES --- UNCOMMENT TO SEE CURRENT PAGE */}
+        {/* {HeaderView()} */}
+        <Switch>
+          <Route
+            path={`${process.env.PUBLIC_URL}/leagues/:id/selectseasonroster`}
+          >
+            <SelectSeasonRoster />
+          </Route>
+          <Route
+            path={`${process.env.PUBLIC_URL}/leagues/:id/selectepisoderoster/:episodeNum`}
+          >
+            <SelectEpisodeRoster />
+          </Route>
+          <Route path={`${process.env.PUBLIC_URL}/leagues/:id`}>
+            <LeagueDetails />
+          </Route>
+          <Route path={`${process.env.PUBLIC_URL}/signup`}>
+            <SignUp />
+          </Route>
+          <Route path={`${process.env.PUBLIC_URL}/forgot-password`}>
+            <ForgotPassword />
+          </Route>
+          <Route path={`${process.env.PUBLIC_URL}/login`}>
+            <Login />
+          </Route>
+          <Route path={`${process.env.PUBLIC_URL}/leagues`}>
+            <Leagues />
+          </Route>
+          <Route path={`${process.env.PUBLIC_URL}/createleague`}>
+            <CreateLeague />
+          </Route>
+          <Route path={`${process.env.PUBLIC_URL}/joinleague`}>
+            <JoinLeague />
+          </Route>
+          <Route path={`${process.env.PUBLIC_URL}/`}>
+            <Home />
+          </Route>
+          <Route component={Home} />
+        </Switch>
+      </AuthProvider>
+
+      <footer>
+        {!(
+          location.pathname === "/login" || location.pathname === "/signup"
+        ) && <Footer />}
+      </footer>
+    </div>
+    // </Router>
   );
 }
 
