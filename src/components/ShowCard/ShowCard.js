@@ -35,7 +35,7 @@ function ShowCard(props) {
                   target=""
                   className="leagueBtn"
                 >
-                  Create A League
+                  Create League
                 </Button>
               </Grid>
               <Grid item xs={6} align="center">
@@ -46,7 +46,7 @@ function ShowCard(props) {
                   target=""
                   className="leagueBtn"
                 >
-                  Join a League
+                  Join League
                 </Button>
               </Grid>
             </>

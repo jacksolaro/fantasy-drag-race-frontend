@@ -10,3 +10,7 @@
   padding: 20px;
   /* transform: scale(5); */
 }
+
+.HomeInstructions__Card {
+  padding: 40px;
+}

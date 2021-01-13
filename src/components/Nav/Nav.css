@@ -74,8 +74,9 @@ li a:hover {
 .drawer__item {
   padding: 15px;
   width: 200px;
-  color: white;
+  color: #0099ff;
   font-weight: 500;
+  float: left;
   /* border: 1px gray solid; */
 }
 

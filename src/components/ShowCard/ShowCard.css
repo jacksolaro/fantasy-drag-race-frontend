@@ -1,12 +1,13 @@
 .Card {
   height: 500px;
-  width: 400px;
+  width: 90%;
   background-color: white;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
   overflow: hidden;
   display: block;
   padding: 0;
   transition: ease 0.25s;
+  margin: 10px;
 }
 
 .Card:hover {

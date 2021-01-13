@@ -54,12 +54,31 @@ function Nav() {
         >
           <div className="drawer">
             <ul className="drawer__list">
-              <Link to="/" className="drawer__item">
-                Home
-              </Link>
-              <Link to="/leagues" className="drawer__item">
-                Leagues
-              </Link>
+              {!currentUser && (
+                <>
+                  <Link to="/login">
+                    <li className="drawer__item">Log In</li>
+                  </Link>
+                  <Link to="/signup">
+                    <li className="drawer__item">Sign Up</li>
+                  </Link>
+                </>
+              )}
+              {currentUser && (
+                <>
+                  <Link className="drawer__item" to="/">
+                    Home
+                  </Link>
+
+                  <Link className="drawer__item" to="/leagues">
+                    Leagues
+                  </Link>
+
+                  <Link className="drawer__item" to="/" onClick={handleLogout}>
+                    Log Out
+                  </Link>
+                </>
+              )}
             </ul>
           </div>
         </Drawer>
@@ -96,7 +115,8 @@ function Nav() {
         <div className="nav__hamburger">
           <MenuIcon
             onClick={toggleDrawer("right", true)}
-            style={{ color: "#FFFFFF" }}
+            style={{ color: "#FFFFFF", padding: 10 }}
+            fontSize="large"
           />
         </div>
       </div>

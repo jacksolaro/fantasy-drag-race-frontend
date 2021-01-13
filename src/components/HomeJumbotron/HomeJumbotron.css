@@ -35,3 +35,12 @@
 /* .homeJumbotron__logo {
   max-height: 150px;
 } */
+
+@media only screen and (max-width: 600px) {
+  .homeJumbotron__title {
+    font-size: 3rem;
+  }
+  .homeJumbotron__subtitle {
+    font-size: 1rem;
+  }
+}

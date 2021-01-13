@@ -15,8 +15,14 @@ function HomeInstructions() {
         It's simple, really! All you have to do is Create, Choose, and Compete!
       </Typography>
       <div>
-        <Grid container spacing={6} justify="center" alignItems="flex=start">
-          <Grid item xs={12} md={4} align="center">
+        <Grid container spacing={0} justify="center" alignItems="flex-start">
+          <Grid
+            item
+            xs={12}
+            md={4}
+            align="center"
+            className="HomeInstructions__Card"
+          >
             <AddBoxIcon className="HomeInstructions__Icon"></AddBoxIcon>
             <Typography gutterBottom variant="h4" component="h2" align="center">
               1. Create a League
@@ -27,7 +33,13 @@ function HomeInstructions() {
               points!
             </Typography>
           </Grid>
-          <Grid item xs={12} md={4} align="center">
+          <Grid
+            item
+            xs={12}
+            md={4}
+            align="center"
+            className="HomeInstructions__Card"
+          >
             <BallotIcon className="HomeInstructions__Icon"></BallotIcon>
             <Typography gutterBottom variant="h4" component="h2" align="center">
               2. Choose Your Roster
@@ -38,7 +50,13 @@ function HomeInstructions() {
               your selected contestants perform!
             </Typography>
           </Grid>
-          <Grid item xs={12} md={4} align="center">
+          <Grid
+            item
+            xs={12}
+            md={4}
+            align="center"
+            className="HomeInstructions__Card"
+          >
             <SupervisedUserCircleIcon className="HomeInstructions__Icon"></SupervisedUserCircleIcon>
             <Typography gutterBottom variant="h4" component="h2" align="center">
               3. Compete with Friends
