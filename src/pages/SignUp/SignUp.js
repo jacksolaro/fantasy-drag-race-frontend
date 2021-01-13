@@ -12,19 +12,6 @@ import { useAuth } from "../../contexts/AuthContext";
 import { useHistory } from "react-router-dom";
 import derbyLogoBlue from "../../assets/images/derby_logo_blue-01.png";
 
-function Copyright() {
-  return (
-    <Typography variant="body2" color="textSecondary" align="center">
-      {"Copyright © "}
-      <Link color="inherit" href="https://material-ui.com/">
-        Your Website
-      </Link>{" "}
-      {new Date().getFullYear()}
-      {"."}
-    </Typography>
-  );
-}
-
 const useStyles = makeStyles((theme) => ({
   root: {
     height: "100vh",
@@ -71,7 +58,7 @@ export default function SignUp() {
     passwordConfirm: "",
   });
 
-  const { signup, signupUser } = useAuth();
+  const { signupUser } = useAuth();
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const history = useHistory();
