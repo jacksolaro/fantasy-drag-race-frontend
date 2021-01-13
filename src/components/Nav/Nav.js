@@ -55,7 +55,7 @@ function Nav() {
           <div className="drawer">
             <ul className="drawer__list">
               <Link to="/" className="drawer__item">
-                Shows
+                Home
               </Link>
               <Link to="/leagues" className="drawer__item">
                 Leagues
@@ -87,7 +87,7 @@ function Nav() {
               </li>
               <li className="nav-item">
                 <Link className="nav-link" to="/">
-                  Shows
+                  Home
                 </Link>
               </li>
             </>
