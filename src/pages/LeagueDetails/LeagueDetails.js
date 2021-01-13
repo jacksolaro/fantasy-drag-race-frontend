@@ -344,7 +344,7 @@ function LeagueDetails() {
           if (resultsData) {
             if (resultsData[`episode1`]) {
               if (
-                resultsData[`episode1`]["airDate"]["seconds"] <
+                resultsData[`episode1`]["airDate"]["seconds"] * 1000 <
                 new Date().getTime()
               ) {
                 return (
@@ -394,7 +394,7 @@ function LeagueDetails() {
         if (resultsData) {
           if (resultsData[`episode1`]) {
             if (
-              resultsData[`episode1`]["airDate"]["seconds"] <
+              resultsData[`episode1`]["airDate"]["seconds"] * 1000 <
               new Date().getTime()
             ) {
               return (
