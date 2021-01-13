@@ -7,7 +7,7 @@
   text-align: center;
   background-color: #0099ff;
   padding: 20px;
-  margin-bottom: 20px;
+  /* margin-bottom: 20px; */
   color: white;
 }
 
@@ -55,6 +55,7 @@
   width: 90%;
   padding: 20px;
   border-radius: 20px;
+  margin-bottom: 30px;
 }
 
 .leagueDetails__dashboard {

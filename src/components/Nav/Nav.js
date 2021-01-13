@@ -50,6 +50,7 @@ function Nav() {
         <Drawer
           anchor="right"
           open={isExpanded}
+          onOpen={toggleDrawer("right", true)}
           onClose={toggleDrawer("right", false)}
         >
           <div className="drawer">

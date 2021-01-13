@@ -543,7 +543,7 @@ function LeagueDetails() {
                 {renderSeasonPicks()}
               </Grid>
             </div>
-            <br></br>
+
             <div className="leagueDetails__leaderboard">
               <Grid item xs={12} md={12}>
                 <div>
