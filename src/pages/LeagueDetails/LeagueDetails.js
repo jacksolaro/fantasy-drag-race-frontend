@@ -43,6 +43,7 @@ function LeagueDetails() {
 
   // RETRIEVE THE LEAGUE DATA (NAME, MEMBERS, SHOW ID, RESULTS, ETC)
   useEffect(() => {
+    let mounted = true;
     db.collection("leagues")
       .doc(params.id)
       .get()
@@ -53,31 +54,44 @@ function LeagueDetails() {
           .doc(doc.data().showID)
           .get()
           .then((doc) => {
-            console.log("RESULTS DATA", doc.data().results);
-            setResultsData(doc.data().results);
+            if (mounted) {
+              console.log("RESULTS DATA", doc.data().results);
+              setResultsData(doc.data().results);
+            }
             // console.log(resultsData.episode1.airDate);
           });
       })
       .catch((error) => console.log("Error", error));
+
+    return function cleanup() {
+      mounted = false;
+    };
   }, []);
 
   // RETRIEVE ALL PICK DATA FOR USERS IN LEAGUE
   useEffect(() => {
     setLoading(true);
+    let mounted = true;
     let pickDataArr = [];
     db.collection("leagues")
       .doc(params.id)
       .collection("picks")
       .get()
       .then(function (querySnapshot) {
-        querySnapshot.forEach(function (doc) {
-          pickDataArr.push(doc.data());
-          console.log("DOC DATA", doc.data());
-        });
-        setPickData(pickDataArr);
-        setLoading(false);
+        if (mounted) {
+          setLoading(false);
+          querySnapshot.forEach(function (doc) {
+            pickDataArr.push(doc.data());
+            console.log("DOC DATA", doc.data());
+          });
+          setPickData(pickDataArr);
+        }
       })
       .catch((error) => console.log("Error", error));
+
+    return function cleanup() {
+      mounted = false;
+    };
   }, []);
 
   // // RETRIEVE CURRENT DATE AND TIME
@@ -112,7 +126,7 @@ function LeagueDetails() {
               {/* <p>{resultsData[`episode${episodeNum}`]["airDate"]}</p> */}
               <Table aria-label="simple table" size="small">
                 <TableHead>
-                  <TableRow>
+                  <TableRow key="episodeHeaders">
                     <TableCell>Category</TableCell>
                     <TableCell>Queen Image</TableCell>
                     <TableCell>Your Pick</TableCell>
@@ -120,9 +134,9 @@ function LeagueDetails() {
                     <TableCell>Points Possible</TableCell>
                   </TableRow>
                 </TableHead>
-                {episodePicks[0].picks.map((pick) => (
-                  <TableBody>
-                    <TableRow key={pick.queenID}>
+                <TableBody>
+                  {episodePicks[0].picks.map((pick, index) => (
+                    <TableRow key={index}>
                       <TableCell component="th" scope="row">
                         {pick.pointCategory}
                       </TableCell>
@@ -160,8 +174,8 @@ function LeagueDetails() {
                       </TableCell>
                       <TableCell>{pick.pointValue}</TableCell>
                     </TableRow>
-                  </TableBody>
-                ))}
+                  ))}
+                </TableBody>
               </Table>
             </TableContainer>
           );
@@ -303,6 +317,7 @@ function LeagueDetails() {
               item
               xs={12}
               md={3}
+              key={pick.queenID}
             >
               <Typography align="center" variant="h6">
                 {pick.pointCategory}
@@ -476,7 +491,7 @@ function LeagueDetails() {
         <TableContainer>
           <Table aria-label="simple table">
             <TableHead>
-              <TableRow>
+              <TableRow key="scoreHeaders">
                 <TableCell>#</TableCell>
                 <TableCell>NAME</TableCell>
                 <TableCell align="right">SCORE</TableCell>
@@ -486,7 +501,7 @@ function LeagueDetails() {
               {scores
                 .sort((a, b) => (a.score < b.score ? 1 : -1))
                 .map((row, index) => (
-                  <TableRow key={row.userID}>
+                  <TableRow key={index}>
                     <TableCell component="th" scope="row">
                       {index + 1}
                     </TableCell>
@@ -556,7 +571,7 @@ function LeagueDetails() {
                     boundaryCount={1}
                     color="primary"
                   />
-                  <Typography align="center" variant="p">
+                  <Typography align="center" variant="subtitle1">
                     EPISODE AIR DATE:
                   </Typography>
                   <p>
