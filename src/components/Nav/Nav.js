@@ -67,16 +67,12 @@ function Nav() {
         <ul>
           {!currentUser && (
             <>
-              <li className="nav-item">
-                <Link className="nav-link" to="/signup">
-                  Sign Up
-                </Link>
-              </li>
-              <li className="nav-item">
-                <Link className="nav-link" to="/login">
-                  Log In
-                </Link>
-              </li>
+              <Link className="nav-link" to="/login">
+                <li className="nav-item button__logout">Log In</li>
+              </Link>
+              <Link className="nav-link" to="/signup">
+                <li className="nav-item button__logout">Sign Up</li>
+              </Link>
             </>
           )}
           {currentUser && (

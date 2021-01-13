@@ -110,6 +110,7 @@ li a:hover {
 .button__logout {
   border: 2px solid white;
   border-radius: 5px;
+  transition: ease 0.2s;
 }
 
 .button__logout:hover {
@@ -117,6 +118,7 @@ li a:hover {
   background-color: white;
   border-radius: 5px;
   color: #0099ff;
+  transition: ease 0.2s;
 }
 
 /* MEDIA QUERIES */
