@@ -106,6 +106,7 @@ function CreateLeague() {
                     showID: "YhoWk1cQLR1WN3qAGgYG",
                     showTitle: "RuPaul's Drag Race",
                     showSeasonNum: "13",
+                    showCountry: "US",
                   })}
                 >
                   RuPaul's Drag Race US S13
@@ -114,7 +115,8 @@ function CreateLeague() {
                   value={JSON.stringify({
                     showID: "K0baDwCtjiQ1Eo7zLHMQ",
                     showTitle: "RuPaul's Drag Race",
-                    showSeasonNum: "13",
+                    showSeasonNum: "2",
+                    showCountry: "UK",
                   })}
                 >
                   RuPaul's Drag Race UK S2

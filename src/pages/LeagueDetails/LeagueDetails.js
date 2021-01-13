@@ -29,6 +29,7 @@ function LeagueDetails() {
 
   // RETRIEVE THE LEAGUE DATA (NAME, MEMBERS, SHOW ID, RESULTS, ETC)
   useEffect(() => {
+    // setLoading(true);
     let mounted = true;
     db.collection("leagues")
       .doc(params.id)
@@ -43,6 +44,7 @@ function LeagueDetails() {
             if (mounted) {
               console.log("RESULTS DATA", doc.data().results);
               setResultsData(doc.data().results);
+              // setLoading(false);
             }
           });
       })
@@ -64,12 +66,12 @@ function LeagueDetails() {
       .get()
       .then(function (querySnapshot) {
         if (mounted) {
-          setLoading(false);
           querySnapshot.forEach(function (doc) {
             pickDataArr.push(doc.data());
             console.log("DOC DATA", doc.data());
           });
           setPickData(pickDataArr);
+          setLoading(false);
         }
       })
       .catch((error) => console.log("Error", error));
@@ -169,7 +171,7 @@ function LeagueDetails() {
           if (resultsData) {
             if (resultsData[`episode${page}`]) {
               if (
-                resultsData[`episode${page}`]["airDate"]["seconds"] <
+                resultsData[`episode${page}`]["airDate"]["seconds"] * 1000 <
                 new Date().getTime()
               ) {
                 return (
@@ -223,7 +225,7 @@ function LeagueDetails() {
         if (resultsData) {
           if (resultsData[`episode${page}`]) {
             if (
-              resultsData[`episode${page}`]["airDate"]["seconds"] <
+              resultsData[`episode${page}`]["airDate"]["seconds"] * 1000 <
               new Date().getTime()
             ) {
               return (
@@ -517,6 +519,14 @@ function LeagueDetails() {
 
         {/* <h1>{currTime}</h1> */}
         <p>RuPaul's Drag Race, Season 13</p>
+        {/* <p>
+          {loading
+            ? "Loading"
+            : `
+           ${leagueData.showDetails.showTitle} 
+          ${leagueData.showDetails.showCountry}, Season 
+          ${leagueData.showDetails.showSeasonNum}`}
+        </p> */}
         <p>LEAGUE CODE: {params.id}</p>
       </div>
 
