@@ -37,7 +37,7 @@ function LeagueDetails() {
         console.log("LEAGUE DATA", doc.data());
         setLeagueData(doc.data());
         db.collection("shows")
-          .doc(doc.data().showID)
+          .doc(doc.data().showDetails.showID)
           .get()
           .then((doc) => {
             if (mounted) {

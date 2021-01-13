@@ -8,7 +8,13 @@ import { db } from "../../firebase.js";
 import { useHistory } from "react-router-dom";
 import "./CreateLeague.css";
 import { makeStyles } from "@material-ui/core/styles";
-import { Button } from "@material-ui/core";
+import {
+  Button,
+  FormControl,
+  InputLabel,
+  MenuItem,
+  Select,
+} from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
   submit: {
@@ -23,6 +29,7 @@ function CreateLeague() {
   const [formData, setFormData] = React.useState({
     leagueName: "",
     leagueDescription: "",
+    showDetails: "",
   });
   const history = useHistory();
   const { currentUser } = useAuth();
@@ -40,7 +47,7 @@ function CreateLeague() {
       .add({
         leagueName: formData.leagueName,
         // TODO: SHOW ID IS HARDCODED, NEED TO UPDATE EVENTUALLY
-        showID: "YhoWk1cQLR1WN3qAGgYG",
+        showDetails: JSON.parse(formData.showDetails),
         members: [currentUser.uid],
         scores: [
           {
@@ -84,6 +91,38 @@ function CreateLeague() {
           minim veniam
         </p>
         <form onSubmit={handleSubmit}>
+          <div>
+            <FormControl>
+              <InputLabel id="demo-simple-select-label">Show</InputLabel>
+              <Select
+                labelId="showDetails"
+                id="showDetails"
+                name="showDetails"
+                value={formData.showDetails}
+                onChange={handleChange}
+              >
+                <MenuItem
+                  value={JSON.stringify({
+                    showID: "YhoWk1cQLR1WN3qAGgYG",
+                    showTitle: "RuPaul's Drag Race",
+                    showSeasonNum: "13",
+                  })}
+                >
+                  RuPaul's Drag Race US S13
+                </MenuItem>
+                <MenuItem
+                  value={JSON.stringify({
+                    showID: "K0baDwCtjiQ1Eo7zLHMQ",
+                    showTitle: "RuPaul's Drag Race",
+                    showSeasonNum: "13",
+                  })}
+                >
+                  RuPaul's Drag Race UK S2
+                </MenuItem>
+              </Select>
+            </FormControl>
+          </div>
+
           <div>
             <TextField
               required
