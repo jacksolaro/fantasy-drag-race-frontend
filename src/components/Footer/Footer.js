@@ -26,8 +26,8 @@ function Footer() {
                 {footer.title}
               </Typography>
               <ul className="footer__ul">
-                {footer.description.map((item) => (
-                  <div className="footer__liWrapper">
+                {footer.description.map((item, index) => (
+                  <div className="footer__liWrapper" key={index}>
                     <li key={item} className="footer__li">
                       <Link href="#" variant="subtitle1" color="textSecondary">
                         {item}

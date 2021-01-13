@@ -4,7 +4,7 @@ import leaguePageBkg from "../../assets/images/bkg-3.jpg";
 import { useAuth } from "../../contexts/AuthContext";
 import { db } from "../../firebase.js";
 import { Link } from "react-router-dom";
-import { Box, Card, Container, Grid, Typography } from "@material-ui/core";
+import { Box, Container, Grid, Typography } from "@material-ui/core";
 import "./Leagues.css";
 import AddCircleOutlineRoundedIcon from "@material-ui/icons/AddCircleOutlineRounded";
 import AssignmentTwoToneIcon from "@material-ui/icons/AssignmentTwoTone";
