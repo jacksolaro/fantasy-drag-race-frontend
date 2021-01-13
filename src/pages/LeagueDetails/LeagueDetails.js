@@ -517,16 +517,14 @@ function LeagueDetails() {
       <div className="leagueDetails__header">
         <h1>{leagueData.leagueName}</h1>
 
-        {/* <h1>{currTime}</h1> */}
-        <p>RuPaul's Drag Race, Season 13</p>
-        {/* <p>
-          {loading
-            ? "Loading"
-            : `
-           ${leagueData.showDetails.showTitle} 
-          ${leagueData.showDetails.showCountry}, Season 
-          ${leagueData.showDetails.showSeasonNum}`}
-        </p> */}
+        <p>
+          {leagueData.showDetails
+            ? `
+            ${leagueData.showDetails.showTitle} 
+           ${leagueData.showDetails.showCountry}, Season 
+           ${leagueData.showDetails.showSeasonNum}`
+            : "LOADING"}
+        </p>
         <p>LEAGUE CODE: {params.id}</p>
       </div>
 
