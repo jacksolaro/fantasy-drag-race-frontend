@@ -1,5 +1,6 @@
 import {
   Button,
+  Container,
   FormControl,
   InputLabel,
   MenuItem,
@@ -113,7 +114,7 @@ function SelectSeasonRoster() {
   }
 
   return (
-    <div>
+    <Container>
       <h1>Select Season Roster</h1>
       <p>
         These are your picks for this season. Once you lock these in, you cannot
@@ -156,11 +157,19 @@ function SelectSeasonRoster() {
           pointCategoryDescription="Select who you think will be the first eliminated. You will get points if you guess this correctly. If there is no elimination on episode one, points will be assigned when the first queen is eliminated."
         />
 
-        <Button type="submit" variant="contained" color="primary">
+        <br></br>
+        <Button
+          type="submit"
+          variant="contained"
+          style={{ backgroundColor: "#0099FF", color: "white" }}
+        >
           Submit Season Picks
         </Button>
       </form>
-    </div>
+      <br></br>
+      <br></br>
+      <br></br>
+    </Container>
   );
 }
 
