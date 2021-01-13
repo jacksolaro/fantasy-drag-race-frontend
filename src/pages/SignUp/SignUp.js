@@ -5,7 +5,7 @@ import CssBaseline from "@material-ui/core/CssBaseline";
 import TextField from "@material-ui/core/TextField";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Checkbox from "@material-ui/core/Checkbox";
-import Link from "@material-ui/core/Link";
+import { Link } from "react-router-dom";
 import Paper from "@material-ui/core/Paper";
 import Box from "@material-ui/core/Box";
 import Grid from "@material-ui/core/Grid";
@@ -15,7 +15,7 @@ import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import { useAuth } from "../../contexts/AuthContext";
 import { useHistory } from "react-router-dom";
-import signupArt from "../../assets/images/derby_signup_art-01.png";
+import derbyLogoBlue from "../../assets/images/derby_logo_blue-01.png";
 
 function Copyright() {
   return (
@@ -36,7 +36,7 @@ const useStyles = makeStyles((theme) => ({
   },
   image: {
     backgroundImage:
-      "url(https://firebasestorage.googleapis.com/v0/b/derby-584f8.appspot.com/o/assets%2Fderby_signup_art-01.png?alt=media&token=3193a2a5-6e2c-4449-a784-116395cfcdaa)",
+      "url(https://firebasestorage.googleapis.com/v0/b/derby-584f8.appspot.com/o/assets%2Fderby_signup_art-01.png?alt=media&token=f3620c50-c597-4dd9-9439-adb577dece21)",
     backgroundRepeat: "no-repeat",
     backgroundColor:
       theme.palette.type === "light"
@@ -61,6 +61,8 @@ const useStyles = makeStyles((theme) => ({
   },
   submit: {
     margin: theme.spacing(3, 0, 2),
+    height: 50,
+    backgroundColor: "#0099ff",
   },
 }));
 
@@ -117,11 +119,18 @@ export default function SignUp() {
       <Grid item xs={false} sm={4} md={7} className={classes.image} />
       <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
         <div className={classes.paper}>
-          <Avatar className={classes.avatar}>
+          {/* <Avatar className={classes.avatar}>
             <LockOutlinedIcon />
-          </Avatar>
+          </Avatar> */}
+          <Link to="/">
+            <img
+              src={derbyLogoBlue}
+              alt="derby logo"
+              style={{ width: 400 }}
+            ></img>
+          </Link>
           <Typography component="h1" variant="h3">
-            Sign up
+            Sign Up
           </Typography>
           {error && <Alert severity="error">{error}</Alert>}
           <form className={classes.form} noValidate onSubmit={handleSubmit}>
