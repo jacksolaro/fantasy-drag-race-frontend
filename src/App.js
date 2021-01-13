@@ -36,7 +36,9 @@ function App() {
       <AuthProvider>
         <nav>
           {!(
-            location.pathname === "/login" || location.pathname === "/signup"
+            location.pathname === "/login" ||
+            location.pathname === "/signup" ||
+            location.pathname === "/forgot-password"
           ) && <Nav></Nav>}
           {/* <Nav></Nav> */}
         </nav>
@@ -83,7 +85,9 @@ function App() {
 
       <footer>
         {!(
-          location.pathname === "/login" || location.pathname === "/signup"
+          location.pathname === "/login" ||
+          location.pathname === "/signup" ||
+          location.pathname === "/forgot-password"
         ) && <Footer />}
       </footer>
     </div>

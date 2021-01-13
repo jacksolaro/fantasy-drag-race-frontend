@@ -116,6 +116,10 @@ export default function ForgotPassword() {
           <Typography component="h1" variant="h5">
             Password Reset
           </Typography>
+          <Typography component="h2" variant="h6">
+            Enter your email address below and follow the instructions via email
+            to reset your password
+          </Typography>
           {error && <Alert severity="error">{error}</Alert>}
           {message && <Alert severity="success">{message}</Alert>}
           <form className={classes.form} noValidate onSubmit={handleSubmit}>
