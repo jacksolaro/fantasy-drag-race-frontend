@@ -49,13 +49,6 @@ function CreateLeague() {
         // TODO: SHOW ID IS HARDCODED, NEED TO UPDATE EVENTUALLY
         showDetails: JSON.parse(formData.showDetails),
         members: [currentUser.uid],
-        scores: [
-          {
-            email: currentUser.email,
-            score: 0,
-            userID: currentUser.uid,
-          },
-        ],
       })
       .then(function (docRef) {
         db.collection("leagues")
@@ -81,25 +74,23 @@ function CreateLeague() {
       <Jumbotron
         image={createLeagueBkg}
         height="300"
-        headline="CREATE A LEAGUE"
+        headline="CREATE LEAGUE"
       ></Jumbotron>
       <Container maxWidth="md">
         <h1>Create a League</h1>
-        <p>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-          eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-          minim veniam
-        </p>
+        <p>Select a show and provide some details to create a league!</p>
         <form onSubmit={handleSubmit}>
           <div>
             <FormControl>
               <InputLabel id="demo-simple-select-label">Show</InputLabel>
               <Select
+                required
                 labelId="showDetails"
                 id="showDetails"
                 name="showDetails"
                 value={formData.showDetails}
                 onChange={handleChange}
+                style={{ width: 300 }}
               >
                 <MenuItem
                   value={JSON.stringify({

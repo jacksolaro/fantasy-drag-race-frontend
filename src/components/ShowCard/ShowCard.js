@@ -24,6 +24,7 @@ function ShowCard(props) {
         <Typography variant="body2" color="textSecondary" component="p">
           {props.season}
         </Typography>
+        <br></br>
         <Grid container spacing={0} justify="center" alignItems="center">
           {props.isActive ? (
             <>
@@ -34,6 +35,7 @@ function ShowCard(props) {
                   href="/createleague"
                   target=""
                   className="leagueBtn"
+                  style={{ backgroundColor: "#0099FF" }}
                 >
                   Create League
                 </Button>
@@ -45,6 +47,7 @@ function ShowCard(props) {
                   href="/joinleague"
                   target=""
                   className="leagueBtn"
+                  style={{ backgroundColor: "#f46291" }}
                 >
                   Join League
                 </Button>

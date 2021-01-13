@@ -41,7 +41,7 @@ function Home() {
           <ShowCard
             title="RuPaul's Drag Race"
             season="UK Season 2"
-            isActive={false}
+            isActive={true}
             posterIMG="https://firebasestorage.googleapis.com/v0/b/derby-584f8.appspot.com/o/seasonPosters%2FRDRUK1.jpg?alt=media&token=e494bd19-4eba-4aa7-bfb0-a68bfb3dd38b"
           />
         </Grid>

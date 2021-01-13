@@ -62,6 +62,7 @@ function QueenSelect(props) {
               {props.pointCategory}
             </InputLabel>
             <Select
+              required
               labelId={props.pointCategoryId}
               id={props.pointCategoryId}
               name={props.pointCategoryId}
