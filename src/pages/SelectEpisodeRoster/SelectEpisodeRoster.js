@@ -1,5 +1,6 @@
 import {
   Button,
+  Container,
   FormControl,
   InputLabel,
   MenuItem,
@@ -113,11 +114,11 @@ function SelectEpisodeRoster() {
   }
 
   return (
-    <div>
+    <Container>
       <h1>Select Episode Roster</h1>
       <p>
-        These are your picks for this episode. Once you lock these in, you
-        cannot change them for the remainder of the season.
+        These are your picks for this episode. Submitting these picks will lock
+        them in for this episode.
       </p>
 
       <form onSubmit={handleSubmit}>
@@ -184,7 +185,9 @@ function SelectEpisodeRoster() {
           pointCategory="Top Queen #2"
           pointCategoryId="topQueen2"
           pointValue="5"
-          pointCategoryDescription=""
+          pointCategoryDescription="This is the top queen #1 of the week (in no particular order). If
+          there is a number of queens in the top other than 2, you will
+          receive points for each queen you have that is in the top."
         />
 
         {/* Bottom #1 Select */}
@@ -195,7 +198,7 @@ function SelectEpisodeRoster() {
           pointCategory="Bottom Queen #1"
           pointCategoryId="bottomQueen1"
           pointValue="5"
-          pointCategoryDescription="This is the bottom two queens of the week (in no particular order).
+          pointCategoryDescription="This is the bottom queen #1 of the week (in no particular order).
           If there is a number of queens in the bottom other than 2, you will
           receive points for each queen you have that is in the bottom."
         />
@@ -208,7 +211,9 @@ function SelectEpisodeRoster() {
           pointCategory="Bottom Queen #2"
           pointCategoryId="bottomQueen2"
           pointValue="5"
-          pointCategoryDescription=""
+          pointCategoryDescription="This is the bottom queen #2 of the week (in no particular order).
+          If there is a number of queens in the bottom other than 2, you will
+          receive points for each queen you have that is in the bottom."
         />
 
         {/* Eliminated Queen Select */}
@@ -224,12 +229,19 @@ function SelectEpisodeRoster() {
           if you have selected one of the winners. If double shantay, no
           points will be awarded."
         />
-
-        <Button type="submit" variant="contained" color="primary">
+        <br></br>
+        <Button
+          type="submit"
+          variant="contained"
+          style={{ backgroundColor: "#0099FF", color: "white" }}
+        >
           Submit Episode Picks
         </Button>
       </form>
-    </div>
+      <br></br>
+      <br></br>
+      <br></br>
+    </Container>
   );
 }
 

@@ -1,4 +1,12 @@
-import { FormControl, InputLabel, MenuItem, Select } from "@material-ui/core";
+import {
+  Box,
+  FormControl,
+  Grid,
+  InputLabel,
+  MenuItem,
+  Select,
+  Typography,
+} from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import React from "react";
 import "./QueenSelect.css";
@@ -6,15 +14,18 @@ import "./QueenSelect.css";
 const useStyles = makeStyles({
   root: {
     backgroundColor: "white",
-    minWidth: 400,
+    minWidth: 250,
     "& .MuiPaper-root": {
       backgroundColor: "white",
     },
     "& .MuiMenu-list": {
       backgroundColor: "white",
     },
+    "& .MuiMenuItem-root": {
+      float: "left",
+    },
     formControl: {
-      minWidth: 400,
+      width: 250,
       backgroundColor: "white",
     },
   },
@@ -25,9 +36,24 @@ function QueenSelect(props) {
   return (
     <div>
       {/* Episode Winner Select */}
-      <div>
-        <h2>{props.pointCategory}</h2>
-        <h3>{props.pointValue} Points</h3>
+      <div className="QueenSelect__Card">
+        <Grid container>
+          <Grid item xs={8} sm={8}>
+            <Typography gutterBottom variant="h5" component="h2">
+              {props.pointCategory}
+            </Typography>
+          </Grid>
+          <Grid item xs={4} sm={4} align="right">
+            <Typography
+              gutterBottom
+              variant="subtitle1"
+              component="subtitle1"
+              className="QueenSelect__PointValue"
+            >
+              {props.pointValue} POINTS
+            </Typography>
+          </Grid>
+        </Grid>
         <p>{props.pointCategoryDescription}</p>
 
         <div>
@@ -43,7 +69,11 @@ function QueenSelect(props) {
               onChange={props.handleChange}
             >
               {props.queensArr.map((queen) => (
-                <div value={queen} key={queen.queenName}>
+                <div
+                  value={queen}
+                  key={queen.queenName}
+                  className={classes.root}
+                >
                   <MenuItem className={classes.root}>
                     <img
                       className="SelectEpisodeRoster__selectImg"

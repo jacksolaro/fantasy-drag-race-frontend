@@ -1,3 +1,21 @@
 .MuiPaper-root {
   background-color: white !important;
 }
+
+.QueenSelect__Card {
+  border-radius: 20px;
+  padding: 20px;
+  margin-bottom: 10px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+}
+.SelectEpisodeRoster__selectImg {
+  padding-right: 20px;
+}
+
+.QueenSelect__PointValue {
+  background-color: #0099ff;
+  padding: 5px;
+  border-radius: 10px;
+  color: white;
+  font-weight: 600 !important;
+}
