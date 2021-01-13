@@ -4,10 +4,10 @@ import leaguePageBkg from "../../assets/images/bkg-3.jpg";
 import { useAuth } from "../../contexts/AuthContext";
 import { db } from "../../firebase.js";
 import { Link } from "react-router-dom";
-import { Box, Container, Grid, Typography } from "@material-ui/core";
+import { Box, Button, Container, Grid, Typography } from "@material-ui/core";
 import "./Leagues.css";
 import AddCircleOutlineRoundedIcon from "@material-ui/icons/AddCircleOutlineRounded";
-import AssignmentTwoToneIcon from "@material-ui/icons/AssignmentTwoTone";
+import GroupTwoToneIcon from "@material-ui/icons/GroupTwoTone";
 
 function Leagues() {
   const { currentUser } = useAuth();
@@ -26,15 +26,49 @@ function Leagues() {
       <Jumbotron
         image={leaguePageBkg}
         height="300"
-        headline="YOUR LEAGUES"
+        headline="LEAGUES"
       ></Jumbotron>
       <Container>
         <h1>YOUR LEAGUES</h1>
-        <p>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-          eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-          minim veniam
-        </p>
+
+        <Grid container spacing={4}>
+          <Grid item xs={12} md={6} align="left">
+            <p>
+              Below are the leagues you are a part of! Don't see any leagues? Go
+              ahead and create or join one!
+            </p>
+          </Grid>
+          <Grid item xs={12} md={6} align="right">
+            {/* <TextField
+              id="joinLeague"
+              label=""
+              value="Enter League ID"
+              variant="outlined"
+              InputProps={{
+                endAdornment: (
+                  <Button variant="contained" style={{ color: "#0099FF" }}>
+                    JOIN
+                  </Button>
+                ),
+              }}
+            /> */}
+            <Link to="/joinLeague" style={{ textDecoration: "none" }}>
+              <Button
+                variant="contained"
+                style={{ backgroundColor: "#0099FF", color: "white" }}
+              >
+                JOIN LEAGUE
+              </Button>
+            </Link>
+
+            {/* <div class="search">
+              <input type="text" class="searchTerm" placeholder="League ID" />
+              <button type="submit" class="searchButton">
+                JOIN
+              </button>
+            </div> */}
+          </Grid>
+        </Grid>
         <Grid container spacing={4}>
           <Grid item xs={12} md={3} align="center">
             <Link to="/createleague" style={{ textDecoration: "none" }}>
@@ -69,10 +103,10 @@ function Leagues() {
               >
                 <div className="Leagues__Card">
                   <div>
-                    <AssignmentTwoToneIcon
+                    <GroupTwoToneIcon
                       className="Leagues__Icon"
                       style={{ fontSize: 100 }}
-                    ></AssignmentTwoToneIcon>
+                    ></GroupTwoToneIcon>
                     <Typography
                       gutterBottom
                       variant="h4"
