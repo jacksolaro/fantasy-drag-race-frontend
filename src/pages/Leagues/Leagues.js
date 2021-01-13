@@ -95,8 +95,8 @@ function Leagues() {
               </div>
             </Link>
           </Grid>
-          {leagues.map((league) => (
-            <Grid item xs={12} md={3} align="center">
+          {leagues.map((league, index) => (
+            <Grid item xs={12} md={3} align="center" key={index}>
               <Link
                 to={`/leagues/${league.id}`}
                 style={{ textDecoration: "none", color: "#0099ff" }}
