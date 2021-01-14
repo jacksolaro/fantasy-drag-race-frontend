@@ -103,10 +103,12 @@ function SelectEpisodeRoster() {
             .doc(doc.id)
             .update({
               picks: firebase.firestore.FieldValue.arrayUnion(submittedArr),
+            })
+            .then(() => {
+              console.log("Success ", doc.id, " => ", doc.data());
+              console.log("STEP 2");
+              history.push(`/leagues/${params.id}`);
             });
-          console.log("Success ", doc.id, " => ", doc.data());
-          console.log("STEP 2");
-          history.push(`/leagues/${params.id}`);
         });
       })
       .catch(function (error) {

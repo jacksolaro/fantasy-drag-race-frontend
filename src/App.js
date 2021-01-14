@@ -1,5 +1,5 @@
 import "./App.css";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
   BrowserRouter as Router,
   Switch,
@@ -27,13 +27,23 @@ import { Create } from "@material-ui/icons";
 
 function App() {
   const location = useLocation();
+  const [user, setUser] = useState();
+  firebase.auth().onAuthStateChanged(function (currUser) {
+    if (currUser) {
+      setUser(currUser);
+      console.log("yep");
+    } else {
+      setUser();
+      console.log("nope");
+    }
+  });
 
-  var user = firebase.auth().currentUser;
-  if (user) {
-    console.log("yeah");
-  } else {
-    console.log("nah");
-  }
+  // var user = firebase.auth().currentUser;
+  // if (user) {
+  //   console.log("yeah");
+  // } else {
+  //   console.log("nah");
+  // }
 
   // FOR TESTING PURPOSES
   // function HeaderView() {
