@@ -20,7 +20,7 @@ function LeagueDetails() {
   const [loading, setLoading] = useState(false);
   const [leagueData, setLeagueData] = useState([{}]);
   const [resultsData, setResultsData] = useState([{}]);
-  const [pickData, setPickData] = useState([{}]);
+  const [pickData, setPickData] = useState([]);
   const [page, setPage] = React.useState(1);
 
   const handlePageChange = (event, value) => {
@@ -60,55 +60,90 @@ function LeagueDetails() {
     setLoading(true);
     let mounted = true;
     let pickDataArr = [];
+    // setPickData([]);
+    // db.collection("leagues")
+    //   .doc(params.id)
+    //   .collection("picks")
+    //   .get()
+    //   .then(function (querySnapshot) {
+    //     if (mounted) {
+    //       querySnapshot.forEach(function (doc) {
+    //         pickDataArr.push(doc.data());
+    //         console.log("DOC DATA", doc.data());
+    //       });
+    //       setPickData(pickDataArr);
+    //       setLoading(false);
+    //     }
+    //   })
+    //   .catch((error) => {
+    //     setPickData([]);
+    //     setLoading(false);
+    //     console.log("Error", error);
+    //   });
+
     db.collection("leagues")
       .doc(params.id)
       .collection("picks")
       .get()
-      .then(function (querySnapshot) {
+      .then((docsArr) => {
         if (mounted) {
-          querySnapshot.forEach(function (doc) {
+          console.log("DOCS", docsArr.docs);
+          docsArr.docs.map((doc) => {
+            console.log("DOC", doc.data());
             pickDataArr.push(doc.data());
-            console.log("DOC DATA", doc.data());
           });
-          setPickData(pickDataArr);
-          setLoading(false);
         }
+        setPickData(pickDataArr);
+        setLoading(false);
       })
-      .catch((error) => console.log("Error", error));
+      .catch((error) => {
+        setPickData([]);
+        setLoading(false);
+        console.log("Error", error);
+      });
 
     return function cleanup() {
       mounted = false;
     };
   }, []);
 
-  // // RETRIEVE CURRENT DATE AND TIME
-  // useEffect(() => {
-  //   setInterval(() => {
-  //     setCurrTime(Date().toLocaleString());
-  //   }, 1000);
-  // });
-
   // TAKES ALL THE USERS EPISODE ROSTERS, RENDERS THEM ON PAGE AND DISPLAYS POINTS
   function renderEpisodePicks(episodeNum) {
-    // If page is loading, display Loading
     if (loading) {
       return <div className="episodePaginationNoResultBox">LOADING</div>;
-      // If not loading, do the following
     } else {
-      if (pickData[0].picks !== undefined) {
-        // retrieve user data
+      // if the season has already started, return notice
+      if (resultsData?.[`episode${page}`]?.airDate?.seconds !== undefined) {
+        if (
+          resultsData[`episode${page}`]["airDate"]["seconds"] * 1000 <
+          new Date().getTime()
+        ) {
+          return (
+            <p>
+              This episode has passed. You may no longer make selections for
+              this episode.
+            </p>
+          );
+        }
+      } else {
+        console.log("renderEpisodePicksFunction - PickData", pickData);
+
         const userData = JSON.parse(JSON.stringify(pickData)).filter(
           (user) => user.userID === currentUser.uid
         );
 
-        // set episodePicks to the array of the users picks for that episode
-        const episodePicks = JSON.parse(
-          JSON.stringify(userData[0].picks)
-        ).filter((list) => list.category === `episode${episodeNum}`);
+        console.log("renderEpisodePicksFunction - UserData", userData);
 
-        // If episode picks is not empty, render the episode picks
-        if (episodePicks.length > 0) {
-          return (
+        if (userData[0]?.picks !== undefined) {
+          const episodePicks = JSON.parse(
+            JSON.stringify(userData[0].picks)
+          ).filter((list) => list.category === `episode${episodeNum}`);
+          console.log(
+            "renderEpisodePicksFunction - episodePicks",
+            episodePicks
+          );
+
+          return episodePicks[0].picks.map((pick) => (
             <TableContainer>
               {/* <p>{resultsData[`episode${episodeNum}`]["airDate"]}</p> */}
               <Table aria-label="simple table" size="small">
@@ -166,133 +201,55 @@ function LeagueDetails() {
                 </TableBody>
               </Table>
             </TableContainer>
-          );
-        } else {
-          if (resultsData) {
-            if (resultsData[`episode${page}`]) {
-              if (
-                resultsData[`episode${page}`]["airDate"]["seconds"] * 1000 <
-                new Date().getTime()
-              ) {
-                return (
-                  <p>
-                    This episode has passed. You may no longer make selections
-                    for this episode.
-                  </p>
-                );
-              } else {
-                return (
-                  <div className="episodePaginationNoResultBox">
-                    <div>
-                      <AddCircleOutlineRoundedIcon />
-                    </div>
-                    <Link
-                      to={`/leagues/${params.id}/selectepisoderoster/${page}`}
-                    >
-                      &ensp; Select Roster for Episode {page}
-                    </Link>
-                  </div>
-                );
-              }
-            } else {
-              return (
-                <div className="episodePaginationNoResultBox">
-                  <div>
-                    <AddCircleOutlineRoundedIcon />
-                  </div>
-                  <Link
-                    to={`/leagues/${params.id}/selectepisoderoster/${page}`}
-                  >
-                    &ensp; Select Roster for Episode {page}
-                  </Link>
-                </div>
-              );
-            }
-          } else {
-            return (
-              <div className="episodePaginationNoResultBox">
-                <div>
-                  <AddCircleOutlineRoundedIcon />
-                </div>
-                <Link to={`/leagues/${params.id}/selectepisoderoster/${page}`}>
-                  &ensp; Select Roster for Episode {page}
-                </Link>
-              </div>
-            );
-          }
-        }
-      } else {
-        if (resultsData) {
-          if (resultsData[`episode${page}`]) {
-            if (
-              resultsData[`episode${page}`]["airDate"]["seconds"] * 1000 <
-              new Date().getTime()
-            ) {
-              return (
-                <p>
-                  This episode has passed. You may no longer make selections for
-                  this episode.
-                </p>
-              );
-            } else {
-              return (
-                <div className="episodePaginationNoResultBox">
-                  <div>
-                    <AddCircleOutlineRoundedIcon />
-                  </div>
-                  <Link
-                    to={`/leagues/${params.id}/selectepisoderoster/${page}`}
-                  >
-                    &ensp; Select Roster for Episode {page}
-                  </Link>
-                </div>
-              );
-            }
-          } else {
-            return (
-              <div className="episodePaginationNoResultBox">
-                <div>
-                  <AddCircleOutlineRoundedIcon />
-                </div>
-                <Link to={`/leagues/${params.id}/selectepisoderoster/${page}`}>
-                  &ensp; Select Roster for Episode {page}
-                </Link>
-              </div>
-            );
-          }
-        } else {
-          return (
-            <div className="episodePaginationNoResultBox">
-              <div>
-                <AddCircleOutlineRoundedIcon />
-              </div>
-              <Link to={`/leagues/${params.id}/selectepisoderoster/${page}`}>
-                &ensp; Select Roster for Episode {page}
-              </Link>
-            </div>
-          );
+          ));
         }
       }
+      return (
+        <div className="episodePaginationNoResultBox">
+          <div>
+            <AddCircleOutlineRoundedIcon />
+          </div>
+          <Link to={`/leagues/${params.id}/selectepisoderoster/${page}`}>
+            &ensp; Select Roster for Episode {page}
+          </Link>
+        </div>
+      );
     }
   }
 
-  // TAKES ALL THE USERS SEASON ROSTERS, RENDERS THEM ON PAGE AND DISPLAYS POINTS
+  // TAKES THE USER'S SEASON ROSTER, RENDERS THEM ON PAGE AND DISPLAYS POINTS
   function renderSeasonPicks() {
     if (loading) {
       return <div className="episodePaginationNoResultBox">LOADING</div>;
     } else {
-      console.log("pickData", pickData);
+      // if the season has already started, return notice
+      if (resultsData?.episode1?.airDate?.seconds !== undefined) {
+        if (
+          resultsData[`episode1`]["airDate"]["seconds"] * 1000 <
+          new Date().getTime()
+        ) {
+          return (
+            <p>
+              Sorry this season has already begun. You may no longer make season
+              selections
+            </p>
+          );
+        }
+      } else {
+        console.log("renderEpisodePicksFunction - PickData", pickData);
 
-      if (pickData[0].picks !== undefined) {
         const userData = JSON.parse(JSON.stringify(pickData)).filter(
           (user) => user.userID === currentUser.uid
         );
 
-        const seasonPicks = JSON.parse(
-          JSON.stringify(userData[0].picks)
-        ).filter((list) => list.category === `season`);
+        console.log("renderEpisodePicksFunction - UserData", userData);
 
-        if (seasonPicks.length > 0) {
+        if (userData[0]?.picks !== undefined) {
+          const seasonPicks = JSON.parse(
+            JSON.stringify(userData[0].picks)
+          ).filter((list) => list.category === `season`);
+          console.log("renderEpisodePicksFunction - seasonPicks", seasonPicks);
+
           return seasonPicks[0].picks.map((pick) => (
             <Grid
               className={
@@ -340,93 +297,6 @@ function LeagueDetails() {
               </p>
             </Grid>
           ));
-        } else {
-          if (resultsData) {
-            if (resultsData[`episode1`]) {
-              if (
-                resultsData[`episode1`]["airDate"]["seconds"] * 1000 <
-                new Date().getTime()
-              ) {
-                return (
-                  <p>
-                    Sorry this season has already begun. You may no longer make
-                    season selections
-                  </p>
-                );
-              } else {
-                return (
-                  <div className="episodePaginationNoResultBox">
-                    <div>
-                      <AddCircleOutlineRoundedIcon />
-                    </div>
-                    <Link to={`/leagues/${params.id}/selectseasonroster/`}>
-                      &ensp; Select Roster for Season
-                    </Link>
-                  </div>
-                );
-              }
-            } else {
-              return (
-                <div className="episodePaginationNoResultBox">
-                  <div>
-                    <AddCircleOutlineRoundedIcon />
-                  </div>
-                  <Link to={`/leagues/${params.id}/selectseasonroster/`}>
-                    &ensp; Select Roster for Episode
-                  </Link>
-                </div>
-              );
-            }
-          } else {
-            return (
-              <div className="episodePaginationNoResultBox">
-                <div>
-                  <AddCircleOutlineRoundedIcon />
-                </div>
-                <Link to={`/leagues/${params.id}/selectseasonroster/`}>
-                  &ensp; Select Roster for Season
-                </Link>
-              </div>
-            );
-          }
-        }
-      } else {
-        if (resultsData) {
-          if (resultsData[`episode1`]) {
-            if (
-              resultsData[`episode1`]["airDate"]["seconds"] * 1000 <
-              new Date().getTime()
-            ) {
-              return (
-                <p>
-                  Sorry this season has already begun. You may no longer make
-                  season selections
-                </p>
-              );
-            } else {
-              return (
-                <div className="episodePaginationNoResultBox">
-                  <div>
-                    <AddCircleOutlineRoundedIcon />
-                  </div>
-                  <Link to={`/leagues/${params.id}/selectseasonroster/`}>
-                    &ensp; Select Roster for Season
-                  </Link>
-                </div>
-              );
-            }
-          } else {
-            return (
-              <div className="episodePaginationNoResultBox">
-                <div>
-                  <AddCircleOutlineRoundedIcon />
-                </div>
-                <Link to={`/leagues/${params.id}/selectseasonroster/`}>
-                  &ensp; Select Roster for Season
-                </Link>
-              </div>
-            );
-          }
         } else {
           return (
             <div className="episodePaginationNoResultBox">
