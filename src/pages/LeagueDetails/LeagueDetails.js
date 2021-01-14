@@ -125,25 +125,23 @@ function LeagueDetails() {
             </p>
           );
         }
-      } else {
-        console.log("renderEpisodePicksFunction - PickData", pickData);
+      }
+      console.log("renderEpisodePicksFunction - PickData", pickData);
 
-        const userData = JSON.parse(JSON.stringify(pickData)).filter(
-          (user) => user.userID === currentUser.uid
-        );
+      const userData = JSON.parse(JSON.stringify(pickData)).filter(
+        (user) => user.userID === currentUser.uid
+      );
 
-        console.log("renderEpisodePicksFunction - UserData", userData);
+      console.log("renderEpisodePicksFunction - UserData", userData);
 
-        if (userData[0]?.picks !== undefined) {
-          const episodePicks = JSON.parse(
-            JSON.stringify(userData[0].picks)
-          ).filter((list) => list.category === `episode${episodeNum}`);
-          console.log(
-            "renderEpisodePicksFunction - episodePicks",
-            episodePicks
-          );
+      if (userData[0]?.picks !== undefined) {
+        const episodePicks = JSON.parse(
+          JSON.stringify(userData[0].picks)
+        ).filter((list) => list.category === `episode${episodeNum}`);
+        console.log("renderEpisodePicksFunction - episodePicks", episodePicks);
 
-          return episodePicks[0].picks.map((pick) => (
+        if (episodePicks[0]?.picks !== undefined) {
+          return (
             <TableContainer>
               {/* <p>{resultsData[`episode${episodeNum}`]["airDate"]}</p> */}
               <Table aria-label="simple table" size="small">
@@ -201,7 +199,7 @@ function LeagueDetails() {
                 </TableBody>
               </Table>
             </TableContainer>
-          ));
+          );
         }
       }
       return (
@@ -235,21 +233,23 @@ function LeagueDetails() {
             </p>
           );
         }
-      } else {
-        console.log("renderEpisodePicksFunction - PickData", pickData);
+      }
 
-        const userData = JSON.parse(JSON.stringify(pickData)).filter(
-          (user) => user.userID === currentUser.uid
-        );
+      console.log("renderEpisodePicksFunction - PickData", pickData);
 
-        console.log("renderEpisodePicksFunction - UserData", userData);
+      const userData = JSON.parse(JSON.stringify(pickData)).filter(
+        (user) => user.userID === currentUser.uid
+      );
 
-        if (userData[0]?.picks !== undefined) {
-          const seasonPicks = JSON.parse(
-            JSON.stringify(userData[0].picks)
-          ).filter((list) => list.category === `season`);
-          console.log("renderEpisodePicksFunction - seasonPicks", seasonPicks);
+      console.log("renderEpisodePicksFunction - UserData", userData);
 
+      if (userData[0]?.picks !== undefined) {
+        const seasonPicks = JSON.parse(
+          JSON.stringify(userData[0].picks)
+        ).filter((list) => list.category === `season`);
+        console.log("renderEpisodePicksFunction - seasonPicks", seasonPicks);
+
+        if (seasonPicks[0]?.picks !== undefined) {
           return seasonPicks[0].picks.map((pick) => (
             <Grid
               className={
@@ -297,19 +297,18 @@ function LeagueDetails() {
               </p>
             </Grid>
           ));
-        } else {
-          return (
-            <div className="episodePaginationNoResultBox">
-              <div>
-                <AddCircleOutlineRoundedIcon />
-              </div>
-              <Link to={`/leagues/${params.id}/selectseasonroster/`}>
-                &ensp; Select Roster for Season
-              </Link>
-            </div>
-          );
         }
       }
+      return (
+        <div className="episodePaginationNoResultBox">
+          <div>
+            <AddCircleOutlineRoundedIcon />
+          </div>
+          <Link to={`/leagues/${params.id}/selectseasonroster/`}>
+            &ensp; Select Roster for Season
+          </Link>
+        </div>
+      );
     }
   }
 

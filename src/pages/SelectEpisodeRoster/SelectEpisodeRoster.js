@@ -61,15 +61,6 @@ function SelectEpisodeRoster() {
             setQueens(queensArr);
           });
       });
-    // .then(function (querySnapshot) {
-    //   querySnapshot.forEach(function (doc) {
-    //     queensArr.push(doc.data());
-    //     console.log("queens", queens);
-    //     console.log("queensArr", queensArr);
-    //   });
-    //   setQueens(queensArr);
-    // });
-    // });
   }, []);
 
   const handleChange = (pointValue, pointCategory, event) => {
