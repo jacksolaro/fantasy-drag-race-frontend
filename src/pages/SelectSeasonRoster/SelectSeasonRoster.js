@@ -42,19 +42,24 @@ function SelectSeasonRoster() {
 
   useEffect(() => {
     const queensArr = [];
-    db.collection("shows")
-      .doc("RPDR")
-      .collection("seasons")
-      .doc("US_Reg_13")
-      .collection("queens")
+    db.collection("leagues")
+      .doc(params.id)
       .get()
-      .then(function (querySnapshot) {
-        querySnapshot.forEach(function (doc) {
-          queensArr.push(doc.data());
-          console.log("queens", queens);
-          console.log("queensArr", queensArr);
-        });
-        setQueens(queensArr);
+      .then(function (doc) {
+        console.log("SCHWOOOOP", doc.data());
+        db.collection("shows")
+          .doc(doc.data().showDetails.showID)
+          .collection("contestants")
+          .get()
+          .then(function (docsArr) {
+            console.log(docsArr.docs[0].data());
+            docsArr.docs.map((doc) => {
+              queensArr.push(doc.data());
+              console.log("queens", queens);
+              console.log("queensArr", queensArr);
+            });
+            setQueens(queensArr);
+          });
       });
   }, []);
 
