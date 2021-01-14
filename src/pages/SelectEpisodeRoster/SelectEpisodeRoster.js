@@ -124,7 +124,6 @@ function SelectEpisodeRoster() {
       <form onSubmit={handleSubmit}>
         {/* Episode Winner Select */}
         <QueenSelect
-          required
           queensArr={queens}
           handleChange={(event) => handleChange(20, "Episode Winner", event)}
           currPickValue={episodePicks.episodeWinner}

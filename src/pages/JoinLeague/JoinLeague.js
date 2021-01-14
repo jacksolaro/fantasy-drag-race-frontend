@@ -65,7 +65,7 @@ function JoinLeague() {
     <div className="JoinLeague__Wrapper">
       <Jumbotron
         image={joinLeagueBkg}
-        height="300"
+        height="350"
         headline="JOIN A LEAGUE"
       ></Jumbotron>
       <Container maxWidth="md">
