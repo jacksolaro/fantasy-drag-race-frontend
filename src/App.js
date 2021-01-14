@@ -6,6 +6,7 @@ import {
   Route,
   Link,
   useLocation,
+  Redirect,
 } from "react-router-dom";
 import Footer from "./components/Footer/Footer.js";
 import Leagues from "./pages/Leagues/Leagues.js";
@@ -15,14 +16,24 @@ import JoinLeague from "./pages/JoinLeague/JoinLeague";
 import SignUp from "./pages/SignUp/SignUp";
 import Login from "./pages/Login/Login";
 import { AuthProvider } from "./contexts/AuthContext";
+import { useAuth } from "./contexts/AuthContext";
 import Nav from "./components/Nav/Nav";
 import ForgotPassword from "./components/ForgotPassword/ForgotPassword";
 import LeagueDetails from "./pages/LeagueDetails/LeagueDetails.js";
 import SelectSeasonRoster from "./pages/SelectSeasonRoster/SelectSeasonRoster";
 import SelectEpisodeRoster from "./pages/SelectEpisodeRoster/SelectEpisodeRoster";
+import firebase from "./firebase.js";
+import { Create } from "@material-ui/icons";
 
 function App() {
   const location = useLocation();
+
+  var user = firebase.auth().currentUser;
+  if (user) {
+    console.log("yeah");
+  } else {
+    console.log("nah");
+  }
 
   // FOR TESTING PURPOSES
   // function HeaderView() {
@@ -40,56 +51,64 @@ function App() {
             location.pathname === "/signup" ||
             location.pathname === "/forgot-password"
           ) && <Nav></Nav>}
-          {/* <Nav></Nav> */}
         </nav>
         {/* FOR TESTING PURPOSES --- UNCOMMENT TO SEE CURRENT PAGE */}
         {/* {HeaderView()} */}
         <Switch>
-          <Route
-            path={`${process.env.PUBLIC_URL}/leagues/:id/selectseasonroster`}
-          >
-            <SelectSeasonRoster />
+          <Route path={`/leagues/:id/selectseasonroster`}>
+            {user ? (
+              <SelectSeasonRoster />
+            ) : (
+              <Redirect to={{ pathname: "/signup" }} />
+            )}
           </Route>
-          <Route
-            path={`${process.env.PUBLIC_URL}/leagues/:id/selectepisoderoster/:episodeNum`}
-          >
-            <SelectEpisodeRoster />
+          <Route path={`/leagues/:id/selectepisoderoster/:episodeNum`}>
+            {user ? (
+              <SelectEpisodeRoster />
+            ) : (
+              <Redirect to={{ pathname: "/signup" }} />
+            )}
           </Route>
-          <Route path={`${process.env.PUBLIC_URL}/leagues/:id`}>
-            <LeagueDetails />
+          <Route path={`/leagues/:id`}>
+            {user ? (
+              <LeagueDetails />
+            ) : (
+              <Redirect to={{ pathname: "/signup" }} />
+            )}
           </Route>
-          <Route path={`${process.env.PUBLIC_URL}/signup`}>
-            <SignUp />
+          <Route path={`/signup`} component={SignUp}>
+            {/* <SignUp /> */}
           </Route>
-          <Route path={`${process.env.PUBLIC_URL}/forgot-password`}>
+          <Route path={`/forgot-password`}>
             <ForgotPassword />
           </Route>
-          <Route path={`${process.env.PUBLIC_URL}/login`}>
+          <Route path={`/login`}>
             <Login />
           </Route>
-          <Route path={`${process.env.PUBLIC_URL}/leagues`}>
-            <Leagues />
+          <Route path={`/leagues`}>
+            {user ? <Leagues /> : <Redirect to={{ pathname: "/signup" }} />}
           </Route>
-          <Route path={`${process.env.PUBLIC_URL}/createleague`}>
-            <CreateLeague />
+          <Route path={`/createleague`}>
+            {user ? (
+              <CreateLeague />
+            ) : (
+              <Redirect to={{ pathname: "/signup" }} />
+            )}
           </Route>
-          <Route path={`${process.env.PUBLIC_URL}/joinleague`}>
-            <JoinLeague />
+          <Route path={`/joinleague`}>
+            {user ? <JoinLeague /> : <Redirect to={{ pathname: "/signup" }} />}
           </Route>
-          <Route path={`${process.env.PUBLIC_URL}/`}>
+          <Route path={`/`}>
             <Home />
           </Route>
           <Route component={Home} />
         </Switch>
-      </AuthProvider>
-
-      <footer>
         {!(
           location.pathname === "/login" ||
           location.pathname === "/signup" ||
           location.pathname === "/forgot-password"
         ) && <Footer />}
-      </footer>
+      </AuthProvider>
     </div>
     // </Router>
   );

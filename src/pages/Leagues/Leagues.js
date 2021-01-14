@@ -70,7 +70,7 @@ function Leagues() {
           </Grid>
         </Grid>
         <Grid container spacing={4}>
-          <Grid item xs={12} md={3} align="center">
+          <Grid item xs={12} md={4} align="center">
             <Link to="/createleague" style={{ textDecoration: "none" }}>
               <div
                 className="Leagues__Card Leagues__CreateLeagueCard"
@@ -96,10 +96,10 @@ function Leagues() {
             </Link>
           </Grid>
           {leagues.map((league, index) => (
-            <Grid item xs={12} md={3} align="center" key={index}>
+            <Grid item xs={12} md={4} align="center" key={index}>
               <Link
                 to={`/leagues/${league.id}`}
-                style={{ textDecoration: "none", color: "#0099ff" }}
+                style={{ textDecoration: "none", color: "#00497a" }}
               >
                 <div className="Leagues__Card">
                   <div>
@@ -124,7 +124,12 @@ function Leagues() {
                       align="center"
                     >
                       <Box fontWeight="" m={1}>
-                        RuPaul's Drag Race US S13
+                        {league.data().showDetails
+                          ? `
+            ${league.data().showDetails.showTitle} 
+           ${league.data().showDetails.showCountry}, Season 
+           ${league.data().showDetails.showSeasonNum}`
+                          : "LOADING"}
                       </Box>
                     </Typography>
                   </div>

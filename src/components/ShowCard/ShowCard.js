@@ -1,11 +1,6 @@
 import React from "react";
-import Card from "@material-ui/core/Card";
-import CardActionArea from "@material-ui/core/CardActionArea";
-import CardActions from "@material-ui/core/CardActions";
-import CardContent from "@material-ui/core/CardContent";
-import CardMedia from "@material-ui/core/CardMedia";
 import Typography from "@material-ui/core/Typography";
-import s13Poster from "../../assets/images/rpdr_s13_poster.jpg";
+import { Link } from "react-router-dom";
 import { Grid, Button } from "@material-ui/core/";
 import "./ShowCard.css";
 
@@ -29,28 +24,30 @@ function ShowCard(props) {
           {props.isActive ? (
             <>
               <Grid item xs={6} align="center">
-                <Button
-                  variant="contained"
-                  color="primary"
-                  href="/createleague"
-                  target=""
-                  className="leagueBtn"
-                  style={{ backgroundColor: "#0099FF" }}
-                >
-                  Create League
-                </Button>
+                <Link to="/createleague" style={{ textDecoration: "none" }}>
+                  <Button
+                    variant="contained"
+                    color="primary"
+                    target=""
+                    className="leagueBtn"
+                    style={{ backgroundColor: "#0099FF" }}
+                  >
+                    Create League
+                  </Button>
+                </Link>
               </Grid>
               <Grid item xs={6} align="center">
-                <Button
-                  variant="contained"
-                  color="secondary"
-                  href="/joinleague"
-                  target=""
-                  className="leagueBtn"
-                  style={{ backgroundColor: "#f46291" }}
-                >
-                  Join League
-                </Button>
+                <Link to="/joinleague" style={{ textDecoration: "none" }}>
+                  <Button
+                    variant="contained"
+                    color="secondary"
+                    target=""
+                    className="leagueBtn"
+                    style={{ backgroundColor: "#f46291" }}
+                  >
+                    Join League
+                  </Button>
+                </Link>
               </Grid>
             </>
           ) : (

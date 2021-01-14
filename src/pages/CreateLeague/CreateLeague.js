@@ -123,6 +123,9 @@ function CreateLeague() {
               id="leagueName"
               label="League Name"
               defaultValue=""
+              inputProps={{
+                maxLength: 32,
+              }}
               onChange={handleChange}
             />
           </div>
@@ -133,6 +136,9 @@ function CreateLeague() {
               id="leagueDescription"
               label="League Description"
               defaultValue=""
+              inputProps={{
+                maxLength: 32,
+              }}
               onChange={handleChange}
             />
           </div>
