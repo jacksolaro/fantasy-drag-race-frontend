@@ -105,8 +105,8 @@ function SelectSeasonRoster() {
               picks: firebase.firestore.FieldValue.arrayUnion(submittedArr),
             });
           console.log("Success ", doc.id, " => ", doc.data());
-          history.push(`/leagues/${params.id}`);
           console.log("STEP 2");
+          history.push(`/leagues/${params.id}`);
         });
       })
       .catch(function (error) {
