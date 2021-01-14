@@ -1,46 +1,19 @@
-<!--
-*** Thanks for checking out the Best-README-Template. If you have a suggestion
-*** that would make this better, please fork the repo and create a pull request
-*** or simply open an issue with the tag "enhancement".
-*** Thanks again! Now go create something AMAZING! :D
--->
-
-<!-- PROJECT SHIELDS -->
-<!--
-*** I'm using markdown "reference style" links for readability.
-*** Reference links are enclosed in brackets [ ] instead of parentheses ( ).
-*** See the bottom of this document for the declaration of the reference variables
-*** for contributors-url, forks-url, etc. This is an optional, concise syntax you may use.
-*** https://www.markdownguide.org/basic-syntax/#reference-style-links
--->
-
-[![Contributors][contributors-shield]][contributors-url]
-[![Forks][forks-shield]][forks-url]
-[![Stargazers][stars-shield]][stars-url]
-[![Issues][issues-shield]][issues-url]
-[![MIT License][license-shield]][license-url]
-[![LinkedIn][linkedin-shield]][linkedin-url]
-
 <!-- PROJECT LOGO -->
 <br />
 <p align="center">
   <a href="https://github.com/othneildrew/Best-README-Template">
-    <img src="images/logo.png" alt="Logo" width="80" height="80">
+    <img src="https://github.com/jacksolaro/fantasy-drag-race-frontend/blob/main/src/assets/images/derby_logo_blue-01.png?raw=true" alt="Logo" width="250" height="100">
   </a>
 
-  <h3 align="center">Best-README-Template</h3>
+  <h3 align="center">Derby Leagues</h3>
 
   <p align="center">
-    An awesome README template to jumpstart your projects!
     <br />
-    <a href="https://github.com/othneildrew/Best-README-Template"><strong>Explore the docs »</strong></a>
-    <br />
-    <br />
-    <a href="https://github.com/othneildrew/Best-README-Template">View Demo</a>
+    <a href="https://github.com/jacksolaro/fantasy-drag-race-frontend/blob/main/src/assets/images/Derby.gif">View Demo</a>
     ·
-    <a href="https://github.com/othneildrew/Best-README-Template/issues">Report Bug</a>
+    <a href="https://forms.gle/p6pyLEFUr3NAP7NE6">Report Bug</a>
     ·
-    <a href="https://github.com/othneildrew/Best-README-Template/issues">Request Feature</a>
+    <a href="https://forms.gle/xwQpscx9uXTRLgYF9">Request Feature</a>
   </p>
 </p>
 
@@ -52,13 +25,6 @@
       <a href="#about-the-project">About The Project</a>
       <ul>
         <li><a href="#built-with">Built With</a></li>
-      </ul>
-    </li>
-    <li>
-      <a href="#getting-started">Getting Started</a>
-      <ul>
-        <li><a href="#prerequisites">Prerequisites</a></li>
-        <li><a href="#installation">Installation</a></li>
       </ul>
     </li>
     <li><a href="#usage">Usage</a></li>
@@ -74,7 +40,7 @@
 
 ## About The Project
 
-![Product Name Screen Shot](https://drive.google.com/file/d/130fHE1uv9Xo7LaHIdPgKWr30c-an5s-i/view)
+![Product Name Screen Shot](https://github.com/jacksolaro/fantasy-drag-race-frontend/blob/main/src/assets/images/Derby.gif?raw=true)
 
 After losing just about every season of Fantasy Football that I have ever played, I decided there has to be an application that allows me to compete in something that I have extensive knowledge of ... reality tv shows. This was the catalyst that created Derby Leagues, an online platform where you can go head-to-head against friends in a fantasy sports style competition but for hit TV shows.
 
