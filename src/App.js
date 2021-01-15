@@ -1,13 +1,6 @@
 import "./App.css";
-import React, { useEffect, useState } from "react";
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  Link,
-  useLocation,
-  Redirect,
-} from "react-router-dom";
+import React, { useState } from "react";
+import { Switch, Route, useLocation, Redirect } from "react-router-dom";
 import Footer from "./components/Footer/Footer.js";
 import Leagues from "./pages/Leagues/Leagues.js";
 import Home from "./pages/Home/Home.js";
@@ -16,14 +9,12 @@ import JoinLeague from "./pages/JoinLeague/JoinLeague";
 import SignUp from "./pages/SignUp/SignUp";
 import Login from "./pages/Login/Login";
 import { AuthProvider } from "./contexts/AuthContext";
-import { useAuth } from "./contexts/AuthContext";
 import Nav from "./components/Nav/Nav";
 import ForgotPassword from "./components/ForgotPassword/ForgotPassword";
 import LeagueDetails from "./pages/LeagueDetails/LeagueDetails.js";
 import SelectSeasonRoster from "./pages/SelectSeasonRoster/SelectSeasonRoster";
 import SelectEpisodeRoster from "./pages/SelectEpisodeRoster/SelectEpisodeRoster";
 import firebase from "./firebase.js";
-import { Create } from "@material-ui/icons";
 
 function App() {
   const location = useLocation();
@@ -31,10 +22,8 @@ function App() {
   firebase.auth().onAuthStateChanged(function (currUser) {
     if (currUser) {
       setUser(currUser);
-      console.log("yep");
     } else {
       setUser();
-      console.log("nope");
     }
   });
 
@@ -52,7 +41,6 @@ function App() {
   // }
 
   return (
-    // <Router>
     <div>
       <AuthProvider>
         <nav>
@@ -60,7 +48,7 @@ function App() {
             location.pathname === "/login" ||
             location.pathname === "/signup" ||
             location.pathname === "/forgot-password"
-          ) && <Nav></Nav>}
+          ) && <Nav currentUser={user}></Nav>}
         </nav>
         {/* FOR TESTING PURPOSES --- UNCOMMENT TO SEE CURRENT PAGE */}
         {/* {HeaderView()} */}
@@ -120,7 +108,6 @@ function App() {
         ) && <Footer />}
       </AuthProvider>
     </div>
-    // </Router>
   );
 }
 

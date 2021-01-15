@@ -112,20 +112,6 @@ function LeagueDetails() {
     if (loading) {
       return <div className="episodePaginationNoResultBox">LOADING</div>;
     } else {
-      // if the season has already started, return notice
-      if (resultsData?.[`episode${page}`]?.airDate?.seconds !== undefined) {
-        if (
-          resultsData[`episode${page}`]["airDate"]["seconds"] * 1000 <
-          new Date().getTime()
-        ) {
-          return (
-            <p>
-              This episode has passed. You may no longer make selections for
-              this episode.
-            </p>
-          );
-        }
-      }
       console.log("renderEpisodePicksFunction - PickData", pickData);
 
       const userData = JSON.parse(JSON.stringify(pickData)).filter(
@@ -202,6 +188,21 @@ function LeagueDetails() {
           );
         }
       }
+      // if the season has already started, return notice
+      if (resultsData?.[`episode${page}`]?.airDate?.seconds !== undefined) {
+        if (
+          resultsData[`episode${page}`]["airDate"]["seconds"] * 1000 <
+          new Date().getTime()
+        ) {
+          return (
+            <p>
+              This episode has passed. You may no longer make selections for
+              this episode.
+            </p>
+          );
+        }
+      }
+
       return (
         <div className="episodePaginationNoResultBox">
           <div>
@@ -220,21 +221,6 @@ function LeagueDetails() {
     if (loading) {
       return <div className="episodePaginationNoResultBox">LOADING</div>;
     } else {
-      // if the season has already started, return notice
-      if (resultsData?.episode1?.airDate?.seconds !== undefined) {
-        if (
-          resultsData[`episode1`]["airDate"]["seconds"] * 1000 <
-          new Date().getTime()
-        ) {
-          return (
-            <p>
-              Sorry this season has already begun. You may no longer make season
-              selections
-            </p>
-          );
-        }
-      }
-
       console.log("renderEpisodePicksFunction - PickData", pickData);
 
       const userData = JSON.parse(JSON.stringify(pickData)).filter(
@@ -299,6 +285,22 @@ function LeagueDetails() {
           ));
         }
       }
+
+      // if the season has already started, return notice
+      if (resultsData?.episode1?.airDate?.seconds !== undefined) {
+        if (
+          resultsData[`episode1`]["airDate"]["seconds"] * 1000 <
+          new Date().getTime()
+        ) {
+          return (
+            <p>
+              Sorry this season has already begun. You may no longer make season
+              selections
+            </p>
+          );
+        }
+      }
+
       return (
         <div className="episodePaginationNoResultBox">
           <div>

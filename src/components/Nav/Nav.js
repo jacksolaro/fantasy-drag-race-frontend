@@ -8,8 +8,8 @@ import derbyLogo from "../../assets/images/derby_logo_white-01.png";
 
 import { useAuth } from "../../contexts/AuthContext";
 
-function Nav() {
-  const { currentUser, logout } = useAuth();
+function Nav(props) {
+  const { logout } = useAuth();
   const [error, setError] = useState("");
   const history = useHistory();
 
@@ -55,7 +55,7 @@ function Nav() {
         >
           <div className="drawer">
             <ul className="drawer__list">
-              {!currentUser && (
+              {!props.currentUser && (
                 <>
                   <Link to="/login">
                     <li className="drawer__item">Log In</li>
@@ -65,7 +65,7 @@ function Nav() {
                   </Link>
                 </>
               )}
-              {currentUser && (
+              {props.currentUser && (
                 <>
                   <Link className="drawer__item" to="/">
                     Home
@@ -85,7 +85,7 @@ function Nav() {
         </Drawer>
 
         <ul>
-          {!currentUser && (
+          {!props.currentUser && (
             <>
               <Link className="nav-link" to="/login">
                 <li className="nav-item button__logout">Log In</li>
@@ -95,7 +95,7 @@ function Nav() {
               </Link>
             </>
           )}
-          {currentUser && (
+          {props.currentUser && (
             <>
               <Link className="nav-link" to="/" onClick={handleLogout}>
                 <li className="nav-item button__logout">Log Out</li>
