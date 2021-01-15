@@ -18,7 +18,7 @@ function Footer() {
           justify="space-evenly"
           className="Footer__Container"
         >
-          <Grid item xs={6} sm={4}>
+          <Grid item xs={12} sm={12}>
             <Link to="/">
               <img src={derbyLogoWhite} className="Footer__Logo"></img>
             </Link>
@@ -35,12 +35,26 @@ function Footer() {
               <Link to="https://jacksolaro.com/" className="Footer__Icon">
                 <LanguageIcon></LanguageIcon>
               </Link>
+              <a
+                href="https://forms.gle/xwQpscx9uXTRLgYF9"
+                target="_blank"
+                style={{ color: "white" }}
+              >
+                <p>Submit A Feature Request</p>
+              </a>
+              <a
+                href="https://forms.gle/p6pyLEFUr3NAP7NE6"
+                target="_blank"
+                style={{ color: "white" }}
+              >
+                <p>Report a Bug</p>
+              </a>
+              <Box mt={0} style={{ color: "white" }}>
+                © Jack Solaro 2020
+              </Box>
             </div>
           </Grid>
         </Grid>
-        <Box mt={0} style={{ color: "white" }}>
-          © Jack Solaro 2020
-        </Box>
       </Container>
     </footer>
   );
