@@ -50,7 +50,12 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  text-decoration: none;
+  transition: ease 0.25s;
+}
+
+.episodePaginationNoResultBox:hover {
+  background-color: #002984;
+  transition: ease 0.25s;
 }
 
 .leagueDetails__leaderboard {
