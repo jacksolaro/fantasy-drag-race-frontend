@@ -6,7 +6,7 @@ import derbyLogo from "../../assets/images/derby_logo_pink-01.png";
 import Typography from "@material-ui/core/Typography";
 import Container from "@material-ui/core/Container";
 import ShowCard from "../../components/ShowCard/ShowCard";
-import { Grid } from "@material-ui/core";
+import { Box, Grid } from "@material-ui/core";
 import HomeInstructions from "../../components/HomeInstructions/HomeInstructions";
 import "./Home.css";
 
@@ -21,9 +21,11 @@ function Home() {
         logo={derbyLogo}
       ></HomeJumbotron>
       {/* <Container maxWidth="lg"> */}
-      <Typography gutterBottom variant="h4" component="h2" align="center">
-        CURRENT & UPCOMING SHOWS
-      </Typography>
+      <Box fontWeight={500}>
+        <Typography gutterBottom variant="h4" component="h2" align="center">
+          CURRENT & UPCOMING SHOWS
+        </Typography>
+      </Box>
       <Typography gutterBottom variant="h6" component="h6" align="center">
         Are you ready to get off to the races? Check out the shows below to
         create or join a league!

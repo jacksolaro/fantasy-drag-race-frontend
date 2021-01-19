@@ -23,29 +23,38 @@ function Footer() {
               <img src={derbyLogoWhite} className="Footer__Logo"></img>
             </Link>
             <div>
-              <Link to="https://github.com/jacksolaro" className="Footer__Icon">
+              <a
+                href="https://github.com/jacksolaro"
+                target="_blank"
+                className="Footer__Icon"
+              >
                 <GitHubIcon></GitHubIcon>
-              </Link>
-              <Link
-                to="https://www.linkedin.com/in/jacksolaro/"
+              </a>
+              <a
+                href="https://www.linkedin.com/in/jacksolaro/"
+                target="_blank"
                 className="Footer__Icon"
               >
                 <LinkedInIcon></LinkedInIcon>
-              </Link>
-              <Link to="https://jacksolaro.com/" className="Footer__Icon">
+              </a>
+              <a
+                href="https://jacksolaro.com/"
+                target="_blank"
+                className="Footer__Icon"
+              >
                 <LanguageIcon></LanguageIcon>
-              </Link>
+              </a>
               <a
                 href="https://forms.gle/xwQpscx9uXTRLgYF9"
                 target="_blank"
-                style={{ color: "white" }}
+                className="Footer__Icon"
               >
                 <p>Submit A Feature Request</p>
               </a>
               <a
                 href="https://forms.gle/p6pyLEFUr3NAP7NE6"
                 target="_blank"
-                style={{ color: "white" }}
+                className="Footer__Icon"
               >
                 <p>Report a Bug</p>
               </a>
