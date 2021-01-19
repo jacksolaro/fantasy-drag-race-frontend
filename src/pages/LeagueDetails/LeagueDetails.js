@@ -204,14 +204,17 @@ function LeagueDetails() {
       }
 
       return (
-        <div className="episodePaginationNoResultBox">
-          <div>
-            <AddCircleOutlineRoundedIcon />
-          </div>
-          <Link to={`/leagues/${params.id}/selectepisoderoster/${page}`}>
+        <Link
+          style={{ textDecoration: "none", color: "white" }}
+          to={`/leagues/${params.id}/selectepisoderoster/${page}`}
+        >
+          <div className="episodePaginationNoResultBox">
+            <div>
+              <AddCircleOutlineRoundedIcon />
+            </div>
             &ensp; Select Roster for Episode {page}
-          </Link>
-        </div>
+          </div>
+        </Link>
       );
     }
   }

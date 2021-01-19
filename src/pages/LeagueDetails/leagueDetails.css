@@ -40,14 +40,17 @@
 }
 
 .episodePaginationNoResultBox {
-  width: 90%;
-  background-color: white;
-  height: 400px;
+  /* width: 90%; */
+  background-color: #0099ff;
+  color: white;
+  padding: 20px;
+  /* height: 400px; */
   border-radius: 10px;
-  border: 1px solid black;
+  /* border: 1px solid black; */
   display: flex;
   align-items: center;
   justify-content: center;
+  text-decoration: none;
 }
 
 .leagueDetails__leaderboard {
