@@ -22,5 +22,6 @@
 
 .QueenSelect__Eliminated {
   filter: grayscale();
-  background-color: gray;
+  /* background-color: lightgray !important; */
+  text-decoration: line-through;
 }

@@ -90,7 +90,11 @@ function QueenSelect(props) {
                       src={queen.queenIMG}
                       alt={`image of ${queen.queenName}`}
                     ></img>
-                    <p className="SelectEpisodeRoster__selectName">
+                    <p
+                      className={`SelectEpisodeRoster__selectName ${
+                        queen.isEliminated ? "QueenSelect__Eliminated" : ""
+                      }`}
+                    >
                       {queen.queenName}
                     </p>
                   </MenuItem>
