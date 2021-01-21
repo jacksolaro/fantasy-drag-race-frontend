@@ -19,3 +19,8 @@
   color: white;
   font-weight: 600 !important;
 }
+
+.QueenSelect__Eliminated {
+  filter: grayscale();
+  background-color: gray;
+}

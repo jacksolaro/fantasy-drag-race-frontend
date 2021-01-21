@@ -25,8 +25,11 @@ const useStyles = makeStyles({
       float: "left",
     },
     formControl: {
-      width: 250,
+      width: "100%",
       backgroundColor: "white",
+    },
+    eliminatedSelect: {
+      backgroundColor: "gray",
     },
   },
 });
@@ -75,9 +78,15 @@ function QueenSelect(props) {
                   key={queen.queenName}
                   className={classes.root}
                 >
-                  <MenuItem className={classes.root}>
+                  <MenuItem
+                    className={
+                      (classes.root,
+                      `${queen.isEliminated ? "QueenSelect__Eliminated" : ""}`)
+                    }
+                    style={{ width: "100%" }}
+                  >
                     <img
-                      className="SelectEpisodeRoster__selectImg"
+                      className={`SelectEpisodeRoster__selectImg`}
                       src={queen.queenIMG}
                       alt={`image of ${queen.queenName}`}
                     ></img>
