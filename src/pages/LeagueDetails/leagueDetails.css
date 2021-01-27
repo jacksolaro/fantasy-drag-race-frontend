@@ -5,8 +5,16 @@
 .leagueDetails__header {
   align-items: center;
   text-align: center;
-  background-color: #0099ff;
-  padding: 20px;
+  background: rgb(0, 108, 180);
+  background: linear-gradient(
+    133deg,
+    rgba(0, 108, 180, 1) 0%,
+    rgba(116, 91, 215, 1) 29%,
+    rgba(178, 118, 255, 1) 65%,
+    rgba(219, 172, 255, 1) 100%
+  );
+  margin-top: -74px;
+  padding: 100px 10px 50px 10px;
   /* margin-bottom: 20px; */
   color: white;
 }
