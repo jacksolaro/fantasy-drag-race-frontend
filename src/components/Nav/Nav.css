@@ -2,14 +2,26 @@
 NAV STYLING
 ======================================== */
 
-.nav {
-  width: 100%;
+/* .nav { */
+/* width: 100%;
   height: 54px;
-  z-index: 2;
+  z-index: 3;
   display: flex;
   justify-content: space-between;
   background-color: #0099ff;
-  /* position: absolute; */
+  opacity: 0;
+  position: absolute; */
+/* } */
+
+.nav {
+  /* width: 100%; */
+  height: 54px;
+  margin-top: 20px;
+  z-index: 3;
+  display: flex;
+  justify-content: space-between;
+  /* opacity: 0;
+  position: absolute; */
 }
 
 .nav-hamburger {
@@ -17,6 +29,7 @@ NAV STYLING
 }
 
 .nav-logo {
+  padding-left: 10px;
   display: block;
   color: white;
   text-align: center;
@@ -36,11 +49,13 @@ ul {
   list-style-type: none;
   margin: 0;
   padding: 10px;
+  z-index: 2;
 }
 
 li {
   float: right;
-  margin-right: 15px;
+  margin-right: 20px;
+  z-index: 2;
 }
 
 li a {
@@ -49,6 +64,7 @@ li a {
   text-align: center;
   text-decoration: none;
   font-weight: bold;
+  z-index: 2;
 }
 
 li a:hover {
@@ -106,6 +122,7 @@ li a:hover {
   text-align: center;
   text-decoration: none;
   font-weight: bold;
+  z-index: 2;
 }
 
 .button__logout {

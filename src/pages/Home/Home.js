@@ -17,7 +17,7 @@ function Home() {
         image={homeBkg}
         headline="Welcome to Derby"
         subtitle="Competitive, Fantasy-Style TV Bracket Play"
-        height="400"
+        height="700"
         logo={derbyLogo}
       ></HomeJumbotron>
       {/* <Container maxWidth="lg"> */}
