@@ -117,8 +117,8 @@ li a:hover {
 }
 
 .nav-item {
-  padding-top: 5px;
-  padding-bottom: 7px;
+  padding-top: 10px;
+  padding-bottom: 10px;
   padding-left: 10px;
   padding-right: 10px;
 
@@ -130,15 +130,16 @@ li a:hover {
 }
 
 .button__logout {
-  border: 2px solid white;
-  border-radius: 5px;
+  border: 2px solid #0099ff;
+  background-color: #0099ff;
+  padding: 10px 30px;
+  border-radius: 30px;
   transition: ease 0.2s;
 }
 
 .button__logout:hover {
   border: 2px solid white;
   background-color: white;
-  border-radius: 5px;
   color: #0099ff;
   transition: ease 0.2s;
 }
