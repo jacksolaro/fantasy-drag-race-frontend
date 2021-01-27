@@ -25,7 +25,7 @@ function Leagues() {
     <div className="Leagues__Wrapper">
       <Jumbotron
         image={leaguePageBkg}
-        height="300"
+        height="400"
         headline="LEAGUES"
       ></Jumbotron>
       <Container>
