@@ -21,7 +21,7 @@ function Home() {
         logo={derbyLogo}
       ></HomeJumbotron>
       {/* <Container maxWidth="lg"> */}
-      <Box fontWeight={500}>
+      <Box fontWeight={500} style={{ padding: "50px" }}>
         <Typography gutterBottom variant="h4" component="h2" align="center">
           CURRENT & UPCOMING SHOWS
         </Typography>
