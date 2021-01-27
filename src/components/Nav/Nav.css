@@ -65,13 +65,17 @@ li a {
   text-decoration: none;
   font-weight: bold;
   z-index: 2;
+  border-bottom: 2px solid transparent;
+  transition: ease 0.5s;
 }
 
 li a:hover {
   display: block;
-  color: #00497a;
+  color: white;
   text-align: center;
   text-decoration: none;
+  border-bottom: 2px solid white;
+  transition: ease 0.5s;
 }
 
 .active {
