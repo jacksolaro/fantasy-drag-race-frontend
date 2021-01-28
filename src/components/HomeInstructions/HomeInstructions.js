@@ -8,10 +8,11 @@ import SupervisedUserCircleIcon from "@material-ui/icons/SupervisedUserCircle";
 function HomeInstructions() {
   return (
     <section className="HomeInstructions__Section">
-      <Typography gutterBottom variant="h4" component="h2" align="center">
+      <h2 className="HeaderText__h2">HOW DOES DERBY WORK?</h2>
+      {/* <Typography gutterBottom variant="h4" component="h2" align="center">
         HOW DOES DERBY WORK?
-      </Typography>
-      <Typography gutterBottom variant="h6" component="h6" align="center">
+      </Typography> */}
+      <Typography gutterBottom variant="h5" component="h5" align="center">
         It's simple, really! All you have to do is Create, Choose, and Compete!
       </Typography>
       <div>
@@ -25,7 +26,7 @@ function HomeInstructions() {
           >
             <AddBoxIcon className="HomeInstructions__Icon"></AddBoxIcon>
             <Typography gutterBottom variant="h4" component="h2" align="center">
-              1. Create a League
+              Create a League
             </Typography>
             <Typography gutterBottom variant="h6" component="h6" align="left">
               Start off by creating or joining a league. This creates a space
@@ -42,7 +43,7 @@ function HomeInstructions() {
           >
             <BallotIcon className="HomeInstructions__Icon"></BallotIcon>
             <Typography gutterBottom variant="h4" component="h2" align="center">
-              2. Choose Your Roster
+              Choose Your Roster
             </Typography>
             <Typography gutterBottom variant="h6" component="h6" align="left">
               To earn points, you will select rosters of your favorite reality
@@ -59,7 +60,7 @@ function HomeInstructions() {
           >
             <SupervisedUserCircleIcon className="HomeInstructions__Icon"></SupervisedUserCircleIcon>
             <Typography gutterBottom variant="h4" component="h2" align="center">
-              3. Compete with Friends
+              Compete with Friends
             </Typography>
             <Typography gutterBottom variant="h6" component="h6" align="left">
               And that's it! You're ready to compete against your friends!

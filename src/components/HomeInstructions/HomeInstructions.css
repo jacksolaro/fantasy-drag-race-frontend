@@ -1,13 +1,15 @@
 .HomeInstructions__Section {
   margin-top: 100px;
-  margin-bottom: 100px;
-  /* background-color: #f15bb5; */
+  padding: 25px 50px 100px 50px;
+  background-color: rgb(238, 238, 238);
+  color: black;
 }
 
 .HomeInstructions__Icon {
   width: 150px !important;
   height: 150px !important;
   padding: 20px;
+  color: #0099ff;
   /* transform: scale(5); */
 }
 
