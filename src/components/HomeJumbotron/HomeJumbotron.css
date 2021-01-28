@@ -1,3 +1,8 @@
+html,
+body {
+  scroll-behavior: smooth;
+}
+
 .homeJumbotron__main {
   position: relative;
   display: block;
@@ -7,6 +12,7 @@
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
+  background-attachment: fixed;
   backdrop-filter: brightness(0.4);
   background-image: url("https://firebasestorage.googleapis.com/v0/b/derby-584f8.appspot.com/o/assets%2Fderby_homeBKG2%20(1).jpg?alt=media&token=230c3b84-2d50-42b8-b69f-6877e520784e");
 }
@@ -36,6 +42,13 @@
 /* .homeJumbotron__logo {
   max-height: 150px;
 } */
+
+/* Turn off parallax scrolling for all tablets and phones. Increase/decrease the pixels if needed */
+@media only screen and (max-device-width: 1366px) {
+  .parallax {
+    background-attachment: scroll;
+  }
+}
 
 @media only screen and (max-width: 600px) {
   .homeJumbotron__title {

@@ -21,11 +21,12 @@ function Home() {
         logo={derbyLogo}
       ></HomeJumbotron>
       {/* <Container maxWidth="lg"> */}
-      <Box fontWeight={500} style={{ padding: "50px" }}>
-        <Typography gutterBottom variant="h4" component="h2" align="center">
+      <h2 className="HeaderText__h2">CURRENT & UPCOMING SHOWS</h2>
+      {/* <Box fontWeight="fontWeightBold" style={{ paddingTop: "50px" }}>
+        <Typography gutterBottom variant="h2" align="center">
           CURRENT & UPCOMING SHOWS
         </Typography>
-      </Box>
+      </Box> */}
       <Typography gutterBottom variant="h6" component="h6" align="center">
         Are you ready to get off to the races? Check out the shows below to
         create or join a league!
