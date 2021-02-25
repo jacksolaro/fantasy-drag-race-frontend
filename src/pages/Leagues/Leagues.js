@@ -52,12 +52,12 @@ function Leagues() {
                 ),
               }}
             /> */}
-            <Link to="/joinLeague" style={{ textDecoration: "none" }}>
+            <Link to="/createLeague" style={{ textDecoration: "none" }}>
               <Button
                 variant="contained"
                 style={{ backgroundColor: "#0099FF", color: "white" }}
               >
-                JOIN LEAGUE
+                + CREATE A LEAGUE
               </Button>
             </Link>
 
@@ -71,7 +71,7 @@ function Leagues() {
         </Grid>
         <Grid container spacing={4}>
           <Grid item xs={12} md={4} align="center">
-            <Link to="/createleague" style={{ textDecoration: "none" }}>
+            <Link to="/joinleague" style={{ textDecoration: "none" }}>
               <div
                 className="Leagues__Card Leagues__CreateLeagueCard"
                 style={{ backgroundColor: "#0099ff" }}
@@ -88,7 +88,7 @@ function Leagues() {
                     align="center"
                   >
                     <Box fontWeight="fontWeightBold" m={1}>
-                      CREATE A LEAGUE
+                      JOIN A LEAGUE
                     </Box>
                   </Typography>
                 </div>
