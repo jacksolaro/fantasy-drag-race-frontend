@@ -29,44 +29,23 @@ function Leagues() {
         headline="LEAGUES"
       ></Jumbotron>
       <Container>
-        <h1>YOUR LEAGUES</h1>
-
+        <h1>CURRENT LEAGUES</h1>
         <Grid container spacing={4}>
-          <Grid item xs={12} md={6} align="left">
+          <Grid item xs={12} md={9} align="left">
             <p>
               Below are the leagues you are a part of! Don't see any leagues? Go
               ahead and create or join one!
             </p>
           </Grid>
-          <Grid item xs={12} md={6} align="right">
-            {/* <TextField
-              id="joinLeague"
-              label=""
-              value="Enter League ID"
-              variant="outlined"
-              InputProps={{
-                endAdornment: (
-                  <Button variant="contained" style={{ color: "#0099FF" }}>
-                    JOIN
-                  </Button>
-                ),
-              }}
-            /> */}
+          <Grid item xs={12} md={3} align="right">
             <Link to="/createLeague" style={{ textDecoration: "none" }}>
               <Button
                 variant="contained"
                 style={{ backgroundColor: "#0099FF", color: "white" }}
               >
-                + CREATE A LEAGUE
+                CREATE A LEAGUE
               </Button>
             </Link>
-
-            {/* <div class="search">
-              <input type="text" class="searchTerm" placeholder="League ID" />
-              <button type="submit" class="searchButton">
-                JOIN
-              </button>
-            </div> */}
           </Grid>
         </Grid>
         <Grid container spacing={4}>
@@ -137,6 +116,17 @@ function Leagues() {
               </Link>
             </Grid>
           ))}
+        </Grid>
+        <br></br>
+        <h1>PAST LEAGUES</h1>
+        <Grid container>
+          <Grid item xs={12} md={12} align="center">
+            <br></br>
+            <br></br>
+            <p>You have no past leagues at this time.</p>
+            <br></br>
+            <br></br>
+          </Grid>
         </Grid>
       </Container>
     </div>
