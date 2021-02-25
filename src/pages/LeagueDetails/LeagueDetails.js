@@ -167,17 +167,19 @@ function LeagueDetails() {
                       </TableCell>
                       <TableCell>{pick.queenName}</TableCell>
                       <TableCell>
-                        {resultsData[`${episodePicks[0].category}`]
-                          ? resultsData[`${episodePicks[0].category}`][
-                              `${pick.id}`
-                            ]
+                        <p className="pointsBadge">
+                          {resultsData[`${episodePicks[0].category}`]
                             ? resultsData[`${episodePicks[0].category}`][
                                 `${pick.id}`
-                              ].includes(pick.queenID)
-                              ? pick.pointValue
-                              : 0
-                            : "?"
-                          : "?"}
+                              ]
+                              ? resultsData[`${episodePicks[0].category}`][
+                                  `${pick.id}`
+                                ].includes(pick.queenID)
+                                ? pick.pointValue
+                                : 0
+                              : "?"
+                            : "?"}
+                        </p>
                       </TableCell>
                       <TableCell>{pick.pointValue}</TableCell>
                     </TableRow>
@@ -441,7 +443,7 @@ function LeagueDetails() {
                     count={12}
                     defaultPage={1}
                     boundaryCount={1}
-                    color="primary"
+                    color="#0099FF"
                   />
                   <Typography align="center" variant="subtitle1">
                     EPISODE AIR DATE:

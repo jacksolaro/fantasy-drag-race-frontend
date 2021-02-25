@@ -114,6 +114,8 @@ li a:hover {
 
 .nav__hamburger {
   display: none;
+  z-index: 3;
+  padding: 10px 20px;
 }
 
 .nav-item {

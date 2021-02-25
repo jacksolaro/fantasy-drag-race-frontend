@@ -116,7 +116,7 @@ function Nav(props) {
         <div className="nav__hamburger">
           <MenuIcon
             onClick={toggleDrawer("right", true)}
-            style={{ color: "#FFFFFF", padding: 10 }}
+            style={{ color: "#FFFFFF" }}
             fontSize="large"
           />
         </div>

@@ -1,6 +1,6 @@
 .HomeInstructions__Section {
   margin-top: 100px;
-  padding: 25px 50px 100px 50px;
+  padding: 25px 25px 100px 25px;
   background-color: rgb(238, 238, 238);
   color: black;
 }
@@ -14,5 +14,5 @@
 }
 
 .HomeInstructions__Card {
-  padding: 40px;
+  padding: 20px;
 }

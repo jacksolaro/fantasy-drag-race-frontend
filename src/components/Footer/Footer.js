@@ -44,20 +44,24 @@ function Footer() {
               >
                 <LanguageIcon></LanguageIcon>
               </a>
-              <a
-                href="https://forms.gle/xwQpscx9uXTRLgYF9"
-                target="_blank"
-                className="Footer__Icon"
-              >
-                <p>Submit A Feature Request</p>
-              </a>
-              <a
-                href="https://forms.gle/p6pyLEFUr3NAP7NE6"
-                target="_blank"
-                className="Footer__Icon"
-              >
-                <p>Report a Bug</p>
-              </a>
+              <p>
+                <a
+                  href="https://forms.gle/xwQpscx9uXTRLgYF9"
+                  target="_blank"
+                  className="Footer__Icon"
+                >
+                  Submit A Feature Request
+                </a>
+              </p>
+              <p>
+                <a
+                  href="https://forms.gle/p6pyLEFUr3NAP7NE6"
+                  target="_blank"
+                  className="Footer__Icon"
+                >
+                  Report a Bug
+                </a>
+              </p>
               <Box mt={0} style={{ color: "white" }}>
                 © Jack Solaro 2020
               </Box>
