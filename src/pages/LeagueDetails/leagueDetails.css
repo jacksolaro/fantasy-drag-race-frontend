@@ -5,13 +5,12 @@
 .leagueDetails__header {
   align-items: center;
   text-align: center;
-  background: rgb(0, 108, 180);
+  background: rgb(102, 159, 255);
   background: linear-gradient(
-    133deg,
-    rgba(0, 108, 180, 1) 0%,
-    rgba(116, 91, 215, 1) 29%,
-    rgba(178, 118, 255, 1) 65%,
-    rgba(219, 172, 255, 1) 100%
+    350deg,
+    rgba(102, 159, 255, 1) 0%,
+    rgba(131, 94, 255, 1) 28%,
+    rgba(232, 94, 255, 1) 100%
   );
   margin-top: -74px;
   padding: 100px 10px 50px 10px;
@@ -85,5 +84,5 @@
   padding: 8px;
   border-radius: 5px;
   font-weight: 800;
-  text-align: center ;
+  text-align: center;
 }

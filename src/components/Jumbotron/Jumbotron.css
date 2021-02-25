@@ -7,15 +7,13 @@
   background-repeat: no-repeat;
   background-size: cover;
   /* background-color: #454545; */
-  background: rgb(69, 69, 69);
+  background: rgb(102, 159, 255);
   background: linear-gradient(
     350deg,
-    rgba(69, 69, 69, 1) 0%,
-    rgba(0, 90, 150, 1) 28%,
-    rgba(0, 153, 255, 1) 100%
+    rgba(102, 159, 255, 1) 0%,
+    rgba(131, 94, 255, 1) 28%,
+    rgba(232, 94, 255, 1) 100%
   );
-  -webkit-clip-path: polygon(0 0, 100% 0, 100% 80%, 0 100%);
-  clip-path: polygon(0 0, 100% 0, 100% 80%, 0 100%);
 }
 
 .jumbotron__content {
