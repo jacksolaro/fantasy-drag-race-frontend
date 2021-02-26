@@ -167,7 +167,7 @@ function LeagueDetails() {
                       </TableCell>
                       <TableCell>{pick.queenName}</TableCell>
                       <TableCell>
-                        <p className="pointsBadge">
+                        <p className="">
                           {resultsData[`${episodePicks[0].category}`]
                             ? resultsData[`${episodePicks[0].category}`][
                                 `${pick.id}`
