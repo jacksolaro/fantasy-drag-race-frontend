@@ -57,6 +57,7 @@ function LeagueDetails() {
 
   // RETRIEVE ALL PICK DATA FOR USERS IN LEAGUE
   useEffect(() => {
+    window.scrollTo(0, 0);
     setLoading(true);
     let mounted = true;
     let pickDataArr = [];

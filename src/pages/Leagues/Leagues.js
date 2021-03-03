@@ -14,6 +14,7 @@ function Leagues() {
   const [leagues, setLeagues] = useState([]);
 
   useEffect(() => {
+    window.scrollTo(0, 0);
     db.collection("leagues")
       .where("members", "array-contains", currentUser.uid)
       .onSnapshot((snapshot) => {
