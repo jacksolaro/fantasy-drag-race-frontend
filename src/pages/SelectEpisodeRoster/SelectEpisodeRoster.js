@@ -5,6 +5,7 @@ import {
   InputLabel,
   MenuItem,
   Select,
+  Snackbar,
 } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import React, { useEffect, useState } from "react";
@@ -16,6 +17,7 @@ import { useParams } from "react-router-dom";
 import { useHistory } from "react-router-dom";
 import firebase from "firebase/app";
 import QueenSelect from "../../components/QueenSelect/QueenSelect";
+import { Alert } from "@material-ui/lab";
 
 const useStyles = makeStyles((theme) => ({
   formControl: {
@@ -37,8 +39,25 @@ function SelectEpisodeRoster() {
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const history = useHistory();
+  const [snackbarStatus, setSnackbarStatus] = React.useState({
+    isOpen: false,
+    status: "error",
+    text: "Error, your picks weren't submitted. Please try again.",
+  });
   const { currentUser } = useAuth();
   let params = useParams();
+
+  const handleSnackClose = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+
+    setSnackbarStatus({ ...snackbarStatus, isOpen: false });
+  };
+
+  const handleClick = () => {
+    setSnackbarStatus({ ...snackbarStatus, isOpen: true });
+  };
 
   useEffect(() => {
     const queensArr = [];
@@ -114,10 +133,22 @@ function SelectEpisodeRoster() {
       .catch(function (error) {
         setError("Error writing document: ", error);
         console.log("ERROR ", error);
+        setSnackbarStatus({
+          ...snackbarStatus,
+          status: "error",
+          text: "Error. Something went wrong!",
+          isOpen: true,
+        });
       });
 
     setLoading(false);
     console.log("STEP 3");
+    setSnackbarStatus({
+      ...snackbarStatus,
+      status: "success",
+      text: "Yay! Your picks were submitted!",
+      isOpen: true,
+    });
   }
 
   return (
@@ -127,6 +158,20 @@ function SelectEpisodeRoster() {
         These are your picks for this episode. Submitting these picks will lock
         them in for this episode.
       </p>
+      <Snackbar
+        open={snackbarStatus.isOpen}
+        autoHideDuration={6000}
+        onClose={handleSnackClose}
+      >
+        <Alert
+          onClose={handleSnackClose}
+          variant="filled"
+          severity={snackbarStatus.status}
+          color={snackbarStatus.status}
+        >
+          {snackbarStatus.text}
+        </Alert>
+      </Snackbar>
 
       <form onSubmit={handleSubmit}>
         {/* Episode Winner Select */}

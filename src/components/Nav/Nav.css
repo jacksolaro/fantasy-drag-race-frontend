@@ -83,7 +83,7 @@ li a:hover {
 }
 
 .MuiPaper-root {
-  background-color: #424242 !important;
+  /* background-color: #424242 !important; */
 }
 
 .drawer__list {
