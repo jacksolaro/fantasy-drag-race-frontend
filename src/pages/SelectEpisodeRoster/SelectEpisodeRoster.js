@@ -18,14 +18,18 @@ import { useHistory } from "react-router-dom";
 import firebase from "firebase/app";
 import QueenSelect from "../../components/QueenSelect/QueenSelect";
 import { Alert } from "@material-ui/lab";
+import { findByLabelText } from "@testing-library/react";
 
 const useStyles = makeStyles((theme) => ({
   formControl: {
     margin: theme.spacing(1),
-    minWidth: 400,
+    // minWidth: 400,
   },
   selectEmpty: {
     marginTop: theme.spacing(2),
+  },
+  menu: {
+    width: 300,
   },
 }));
 
@@ -173,41 +177,56 @@ function SelectEpisodeRoster() {
       </Snackbar>
 
       <form onSubmit={handleSubmit}>
-        <Select
-          required
-          defaultValue=""
-          labelId="labelID"
-          id="categoryID"
-          name="categoryID"
-          value={JSON.stringify(episodePicks.categoryID)}
-          onChange={handleChange}
-        >
-          {queens.map((queen) => (
-            <MenuItem
-              className={
-                (classes.root,
-                `${queen.isEliminated ? "QueenSelect__Eliminated" : ""}`)
-              }
-              style={{ width: "100%" }}
-              value={JSON.stringify(queen)}
-            >
-              <div key={queen.queenName} className={classes.root}>
-                <img
-                  className={`SelectEpisodeRoster__selectImg`}
-                  src={queen.queenIMG}
-                  alt={`image of ${queen.queenName}`}
-                ></img>
-                <p
-                  className={`SelectEpisodeRoster__selectName ${
-                    queen.isEliminated ? "QueenSelect__Eliminated" : ""
-                  }`}
-                >
-                  {queen.queenName}
-                </p>
-              </div>
-            </MenuItem>
-          ))}
-        </Select>
+        <FormControl style={{ width: "400px" }}>
+          <Select
+            required
+            defaultValue=""
+            labelId="labelID"
+            id="categoryID"
+            name="categoryID"
+            value={JSON.stringify(episodePicks.categoryID) || ""}
+            onChange={handleChange}
+            MenuProps={{ className: classes.menu }}
+          >
+            {queens.map((queen) => (
+              <MenuItem
+                className={`${
+                  queen.isEliminated ? "QueenSelect__Eliminated" : ""
+                }`}
+                value={JSON.stringify(queen)}
+                key={queen.queenName}
+                style={{ width: "100%" }}
+              >
+                <div style={{ display: "flex" }}>
+                  <img
+                    className={`SelectEpisodeRoster__selectImg`}
+                    src={queen.queenIMG}
+                    alt={`image of ${queen.queenName}`}
+                  ></img>
+                  <p
+                    className={`SelectEpisodeRoster__selectName ${
+                      queen.isEliminated ? "QueenSelect__Eliminated" : ""
+                    }`}
+                  >
+                    {queen.queenName}
+                  </p>
+                </div>
+              </MenuItem>
+            ))}
+          </Select>
+        </FormControl>
+
+        {/* Episode Winner Select */}
+        <QueenSelect
+          queensArr={queens}
+          handleChange={(event) => handleChange(event)}
+          currPickValue={JSON.stringify(episodePicks.categoryID) || ""}
+          pointCategory="Episode Winner"
+          pointCategoryId="episodeWinner"
+          pointValue="20"
+          pointCategoryDescription="This is the winner of the episode. If there is more than one winner,
+        points will be assigned if you have selected one of the winners."
+        />
 
         {/* TODO: PASTE BACK QUESTIONS */}
         <br></br>

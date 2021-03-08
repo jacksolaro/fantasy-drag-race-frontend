@@ -69,22 +69,19 @@ function QueenSelect(props) {
               labelId={props.pointCategoryId}
               id={props.pointCategoryId}
               name={props.pointCategoryId}
-              value={props.currPickValue}
+              value={props.currPickValue || ""}
               onChange={props.handleChange}
             >
               {props.queensArr.map((queen) => (
-                <div
+                <MenuItem
+                  className={`${
+                    queen.isEliminated ? "QueenSelect__Eliminated" : ""
+                  }`}
                   value={JSON.stringify(queen)}
                   key={queen.queenName}
-                  className={classes.root}
+                  style={{ width: "100%" }}
                 >
-                  <MenuItem
-                    className={
-                      (classes.root,
-                      `${queen.isEliminated ? "QueenSelect__Eliminated" : ""}`)
-                    }
-                    style={{ width: "100%" }}
-                  >
+                  <div style={{ display: "flex" }}>
                     <img
                       className={`SelectEpisodeRoster__selectImg`}
                       src={queen.queenIMG}
@@ -97,8 +94,8 @@ function QueenSelect(props) {
                     >
                       {queen.queenName}
                     </p>
-                  </MenuItem>
-                </div>
+                  </div>
+                </MenuItem>
               ))}
             </Select>
           </FormControl>
