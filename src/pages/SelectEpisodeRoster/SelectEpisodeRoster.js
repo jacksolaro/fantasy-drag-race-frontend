@@ -220,7 +220,7 @@ function SelectEpisodeRoster() {
         <QueenSelect
           queensArr={queens}
           handleChange={(event) => handleChange(event)}
-          currPickValue={JSON.stringify(episodePicks.categoryID) || ""}
+          currPickValue={JSON.stringify(episodePicks.episodeWinner) || ""}
           pointCategory="Episode Winner"
           pointCategoryId="episodeWinner"
           pointValue="20"
