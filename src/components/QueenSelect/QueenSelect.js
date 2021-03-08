@@ -74,7 +74,7 @@ function QueenSelect(props) {
             >
               {props.queensArr.map((queen) => (
                 <div
-                  value={queen}
+                  value={JSON.stringify(queen)}
                   key={queen.queenName}
                   className={classes.root}
                 >
