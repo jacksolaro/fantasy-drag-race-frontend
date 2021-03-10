@@ -177,45 +177,6 @@ function SelectEpisodeRoster() {
       </Snackbar>
 
       <form onSubmit={handleSubmit}>
-        <FormControl style={{ width: "400px" }}>
-          <Select
-            required
-            defaultValue=""
-            labelId="labelID"
-            id="categoryID"
-            name="categoryID"
-            value={JSON.stringify(episodePicks.categoryID) || ""}
-            onChange={handleChange}
-            MenuProps={{ className: classes.menu }}
-          >
-            {queens.map((queen) => (
-              <MenuItem
-                className={`${
-                  queen.isEliminated ? "QueenSelect__Eliminated" : ""
-                }`}
-                value={JSON.stringify(queen)}
-                key={queen.queenName}
-                style={{ width: "100%" }}
-              >
-                <div style={{ display: "flex" }}>
-                  <img
-                    className={`SelectEpisodeRoster__selectImg`}
-                    src={queen.queenIMG}
-                    alt={`image of ${queen.queenName}`}
-                  ></img>
-                  <p
-                    className={`SelectEpisodeRoster__selectName ${
-                      queen.isEliminated ? "QueenSelect__Eliminated" : ""
-                    }`}
-                  >
-                    {queen.queenName}
-                  </p>
-                </div>
-              </MenuItem>
-            ))}
-          </Select>
-        </FormControl>
-
         {pickQuestions.map((pickQuestion) => (
           <QueenSelect
             queensArr={queens}

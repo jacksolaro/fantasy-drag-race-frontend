@@ -26,6 +26,7 @@ const useStyles = makeStyles((theme) => ({
 
 function QueenSelect(props) {
   const classes = useStyles();
+  console.log("SCHWOOOOP", props.currPickValue);
   return (
     <div>
       {/* Episode Winner Select */}
@@ -68,8 +69,8 @@ function QueenSelect(props) {
                   className={`${
                     queen.isEliminated ? "QueenSelect__Eliminated" : ""
                   }`}
-                  value={JSON.stringify(queen)}
-                  key={queen.queenName}
+                  value={[JSON.stringify(queen)]}
+                  key={queen.queenID}
                   style={{ width: "100%" }}
                 >
                   <div style={{ display: "flex" }}>
