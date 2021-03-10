@@ -11,28 +11,18 @@ import { makeStyles } from "@material-ui/core/styles";
 import React from "react";
 import "./QueenSelect.css";
 
-const useStyles = makeStyles({
-  root: {
-    backgroundColor: "white",
-    minWidth: 250,
-    "& .MuiPaper-root": {
-      backgroundColor: "white",
-    },
-    "& .MuiMenu-list": {
-      backgroundColor: "white",
-    },
-    "& .MuiMenuItem-root": {
-      float: "left",
-    },
-    formControl: {
-      width: "100%",
-      backgroundColor: "white",
-    },
-    eliminatedSelect: {
-      backgroundColor: "gray",
-    },
+const useStyles = makeStyles((theme) => ({
+  formControl: {
+    margin: theme.spacing(1),
+    // minWidth: 400,
   },
-});
+  selectEmpty: {
+    marginTop: theme.spacing(2),
+  },
+  menu: {
+    width: 300,
+  },
+}));
 
 function QueenSelect(props) {
   const classes = useStyles();
@@ -60,7 +50,7 @@ function QueenSelect(props) {
         <p>{props.pointCategoryDescription}</p>
 
         <div>
-          <FormControl className={classes.root}>
+          <FormControl style={{ width: "300px" }}>
             <InputLabel id="demo-simple-select-label">
               {props.pointCategory}
             </InputLabel>
@@ -71,6 +61,7 @@ function QueenSelect(props) {
               name={props.pointCategoryId}
               value={props.currPickValue || ""}
               onChange={props.handleChange}
+              MenuProps={{ className: classes.menu }}
             >
               {props.queensArr.map((queen) => (
                 <MenuItem
