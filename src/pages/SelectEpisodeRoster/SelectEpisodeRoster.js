@@ -77,8 +77,6 @@ function SelectEpisodeRoster() {
             console.log(docsArr.docs[0].data());
             docsArr.docs.map((doc) => {
               queensArr.push(doc.data());
-              console.log("queens", queens);
-              console.log("queensArr", queensArr);
             });
             setQueens(queensArr);
           });
@@ -221,10 +219,19 @@ function SelectEpisodeRoster() {
         {pickQuestions.map((pickQuestion) => (
           <QueenSelect
             queensArr={queens}
-            handleChange={(event) => handleChange(event)}
-            currPickValue={JSON.stringify(episodePicks.episodeWinner) || ""}
+            handleChange={(event) =>
+              handleChange(
+                pickQuestion.pointValue,
+                pickQuestion.pointCategoryID,
+                event
+              )
+            }
+            currPickValue={
+              JSON.stringify(episodePicks[`${pickQuestion.pointCategoryId}`]) ||
+              ""
+            }
             pointCategory={pickQuestion.pointCategory}
-            pointCategoryId={pickQuestion.categoryID}
+            pointCategoryId={pickQuestion.pointCategoryId}
             pointValue={pickQuestion.pointValue}
             pointCategoryDescription={pickQuestion.pointCategoryDescription}
           />
