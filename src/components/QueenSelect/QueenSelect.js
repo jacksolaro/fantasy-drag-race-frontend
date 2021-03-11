@@ -69,7 +69,7 @@ function QueenSelect(props) {
                   className={`${
                     queen.isEliminated ? "QueenSelect__Eliminated" : ""
                   }`}
-                  value={[JSON.stringify(queen)]}
+                  value={queen.queenID}
                   key={queen.queenID}
                   style={{ width: "100%" }}
                 >

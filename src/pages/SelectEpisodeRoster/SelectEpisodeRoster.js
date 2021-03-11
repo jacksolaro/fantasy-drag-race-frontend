@@ -85,14 +85,19 @@ function SelectEpisodeRoster() {
 
   const handleChange = (pointValue, pointCategoryId, event) => {
     event.preventDefault();
-    console.log("EVENT", event);
-    console.log("pointCategoryId", pointCategoryId);
+    let contestantData = queens.find(
+      (contestant) => contestant.queenID === event.target.value
+    );
     const target = event.target;
-    const value = JSON.parse(event.target.value);
+    const value = event.target.value;
     const name = target.name;
     setEpisodePicks({
       ...episodePicks,
-      [name]: { contestantDetails: { ...value }, pointValue, pointCategoryId },
+      [name]: {
+        contestantDetails: { ...contestantData },
+        pointValue,
+        pointCategoryId,
+      },
     });
     console.log("EPISODE PICKS", episodePicks);
   };
@@ -189,11 +194,9 @@ function SelectEpisodeRoster() {
               )
             }
             currPickValue={
-              JSON.stringify(
-                episodePicks?.[`${pickQuestion.pointCategoryId}`]?.[
-                  "contestantDetails"
-                ]
-              ) || ""
+              episodePicks?.[`${pickQuestion.pointCategoryId}`]?.[
+                "contestantDetails"
+              ]["queenID"] || ""
             }
             pointCategory={pickQuestion.pointCategory}
             pointCategoryId={pickQuestion.pointCategoryId}
