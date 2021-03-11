@@ -83,7 +83,7 @@ function SelectEpisodeRoster() {
       });
   }, []);
 
-  const handleChange = (pointValue, pointCategoryId, event) => {
+  const handleChange = (pointValue, pointCategory, event) => {
     event.preventDefault();
     let contestantData = queens.find(
       (contestant) => contestant.queenID === event.target.value
@@ -94,9 +94,12 @@ function SelectEpisodeRoster() {
     setEpisodePicks({
       ...episodePicks,
       [name]: {
-        contestantDetails: { ...contestantData },
+        ...contestantData,
+        id: name,
+        // TODO: Next Season, store this value in an object for cleaner reference
+        // contestantData: {...contestantData},
         pointValue,
-        pointCategoryId,
+        pointCategory,
       },
     });
     console.log("EPISODE PICKS", episodePicks);
@@ -189,14 +192,13 @@ function SelectEpisodeRoster() {
             handleChange={(event) =>
               handleChange(
                 pickQuestion.pointValue,
-                pickQuestion.pointCategoryId,
+                pickQuestion.pointCategory,
                 event
               )
             }
             currPickValue={
-              episodePicks?.[`${pickQuestion.pointCategoryId}`]?.[
-                "contestantDetails"
-              ]["queenID"] || ""
+              episodePicks?.[`${pickQuestion.pointCategoryId}`]?.["queenID"] ||
+              ""
             }
             pointCategory={pickQuestion.pointCategory}
             pointCategoryId={pickQuestion.pointCategoryId}
