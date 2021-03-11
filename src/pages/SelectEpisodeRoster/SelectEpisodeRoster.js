@@ -83,15 +83,16 @@ function SelectEpisodeRoster() {
       });
   }, []);
 
-  const handleChange = (pointValue, pointCategory, event) => {
+  const handleChange = (pointValue, pointCategoryId, event) => {
     event.preventDefault();
     console.log("EVENT", event);
+    console.log("pointCategoryId", pointCategoryId);
     const target = event.target;
     const value = JSON.parse(event.target.value);
     const name = target.name;
     setEpisodePicks({
       ...episodePicks,
-      [name]: { ...value, pointValue, pointCategory },
+      [name]: { contestantDetails: { ...value }, pointValue, pointCategoryId },
     });
     console.log("EPISODE PICKS", episodePicks);
   };
@@ -183,13 +184,16 @@ function SelectEpisodeRoster() {
             handleChange={(event) =>
               handleChange(
                 pickQuestion.pointValue,
-                pickQuestion.pointCategoryID,
+                pickQuestion.pointCategoryId,
                 event
               )
             }
             currPickValue={
-              JSON.stringify(episodePicks[`${pickQuestion.pointCategoryId}`]) ||
-              ""
+              JSON.stringify(
+                episodePicks?.[`${pickQuestion.pointCategoryId}`]?.[
+                  "contestantDetails"
+                ]
+              ) || ""
             }
             pointCategory={pickQuestion.pointCategory}
             pointCategoryId={pickQuestion.pointCategoryId}

@@ -26,7 +26,7 @@ const useStyles = makeStyles((theme) => ({
 
 function QueenSelect(props) {
   const classes = useStyles();
-  console.log("SCHWOOOOP", props.currPickValue);
+  console.log("Current Pick value", props);
   return (
     <div>
       {/* Episode Winner Select */}
