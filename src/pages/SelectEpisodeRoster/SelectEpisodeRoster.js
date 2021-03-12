@@ -9,7 +9,6 @@ import {
 } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import React, { useEffect, useState } from "react";
-import s13Poster from "../../assets/images/rpdr_s13_poster.jpg";
 import "./SelectEpisodeRoster.css";
 import { db, storage } from "../../firebase.js";
 import { useAuth } from "../../contexts/AuthContext";
@@ -18,14 +17,18 @@ import { useHistory } from "react-router-dom";
 import firebase from "firebase/app";
 import QueenSelect from "../../components/QueenSelect/QueenSelect";
 import { Alert } from "@material-ui/lab";
+import pickQuestions from "../../utils/dragRaceEpisodePicksTemplate.json";
 
 const useStyles = makeStyles((theme) => ({
   formControl: {
     margin: theme.spacing(1),
-    minWidth: 400,
+    // minWidth: 400,
   },
   selectEmpty: {
     marginTop: theme.spacing(2),
+  },
+  menu: {
+    width: 300,
   },
 }));
 
@@ -41,8 +44,8 @@ function SelectEpisodeRoster() {
   const history = useHistory();
   const [snackbarStatus, setSnackbarStatus] = React.useState({
     isOpen: false,
-    status: "error",
-    text: "Error, your picks weren't submitted. Please try again.",
+    status: "",
+    text: "",
   });
   const { currentUser } = useAuth();
   let params = useParams();
@@ -74,8 +77,6 @@ function SelectEpisodeRoster() {
             console.log(docsArr.docs[0].data());
             docsArr.docs.map((doc) => {
               queensArr.push(doc.data());
-              console.log("queens", queens);
-              console.log("queensArr", queensArr);
             });
             setQueens(queensArr);
           });
@@ -84,20 +85,28 @@ function SelectEpisodeRoster() {
 
   const handleChange = (pointValue, pointCategory, event) => {
     event.preventDefault();
-    const { name, value } = event.target;
+    let contestantData = queens.find(
+      (contestant) => contestant.queenID === event.target.value
+    );
+    const target = event.target;
+    const value = event.target.value;
+    const name = target.name;
     setEpisodePicks({
       ...episodePicks,
-      [name]: { ...value, id: name, pointValue, pointCategory },
+      [name]: {
+        ...contestantData,
+        id: name,
+        // TODO: Next Season, store this value in an object for cleaner reference
+        // contestantData: {...contestantData},
+        pointValue,
+        pointCategory,
+      },
     });
+    console.log("EPISODE PICKS", episodePicks);
   };
 
   async function handleSubmit(e) {
     e.preventDefault();
-
-    // TODO: If current user isnt member of league, do not submit
-    // if (signUpFormState.password !== signUpFormState.passwordConfirm) {
-    //   return setError("Passwords do not match");
-    // }
 
     const submittedArr = {
       category: `episode${params.episodeNum}`,
@@ -126,7 +135,10 @@ function SelectEpisodeRoster() {
             .then(() => {
               console.log("Success ", doc.id, " => ", doc.data());
               console.log("STEP 2");
-              history.push(`/leagues/${params.id}`);
+              history.push({
+                pathname: `/leagues/${params.id}`,
+                data: snackbarStatus,
+              });
             });
         });
       })
@@ -174,113 +186,27 @@ function SelectEpisodeRoster() {
       </Snackbar>
 
       <form onSubmit={handleSubmit}>
-        {/* Episode Winner Select */}
-        <QueenSelect
-          queensArr={queens}
-          handleChange={(event) => handleChange(20, "Episode Winner", event)}
-          currPickValue={episodePicks.episodeWinner}
-          pointCategory="Episode Winner"
-          pointCategoryId="episodeWinner"
-          pointValue="20"
-          pointCategoryDescription="This is the winner of the episode. If there is more than one winner,
-        points will be assigned if you have selected one of the winners."
-        />
+        {pickQuestions.map((pickQuestion) => (
+          <QueenSelect
+            queensArr={queens}
+            handleChange={(event) =>
+              handleChange(
+                pickQuestion.pointValue,
+                pickQuestion.pointCategory,
+                event
+              )
+            }
+            currPickValue={
+              episodePicks?.[`${pickQuestion.pointCategoryId}`]?.["queenID"] ||
+              ""
+            }
+            pointCategory={pickQuestion.pointCategory}
+            pointCategoryId={pickQuestion.pointCategoryId}
+            pointValue={pickQuestion.pointValue}
+            pointCategoryDescription={pickQuestion.pointCategoryDescription}
+          />
+        ))}
 
-        {/* Maxi Challenge Winner Select */}
-        <QueenSelect
-          queensArr={queens}
-          handleChange={(event) =>
-            handleChange(10, "Maxi Challenge Winner", event)
-          }
-          currPickValue={episodePicks.maxiChallengeWinner}
-          pointCategory="Maxi Challenge Winner"
-          pointCategoryId="maxiChallengeWinner"
-          pointValue="10"
-          pointCategoryDescription="This is the winner of the main challenge of the episode. If there is
-          more than one winner, points will be awarded if you have selected
-          one of the winners."
-        />
-
-        {/* Mini Challenge Winner Select */}
-        <QueenSelect
-          queensArr={queens}
-          handleChange={(event) =>
-            handleChange(10, "Mini Challenge Winner", event)
-          }
-          currPickValue={episodePicks.miniChallengeWinner}
-          pointCategory="Mini Challenge Winner"
-          pointCategoryId="miniChallengeWinner"
-          pointValue="10"
-          pointCategoryDescription="This is the winner of the main challenge of the episode. If there is
-          more than one winner, points will be awarded if you have selected
-          one of the winners."
-        />
-
-        {/* Top #1 Select */}
-        <QueenSelect
-          queensArr={queens}
-          handleChange={(event) => handleChange(5, "Top Queen #1", event)}
-          currPickValue={episodePicks.topQueen1}
-          pointCategory="Top Queen #1"
-          pointCategoryId="topQueen1"
-          pointValue="5"
-          pointCategoryDescription="This is the top two queens of the week (in no particular order). If
-          there is a number of queens in the top other than 2, you will
-          receive points for each queen you have that is in the top."
-        />
-
-        {/* Top #2 Select */}
-        <QueenSelect
-          queensArr={queens}
-          handleChange={(event) => handleChange(5, "Top Queen #2", event)}
-          currPickValue={episodePicks.topQueen2}
-          pointCategory="Top Queen #2"
-          pointCategoryId="topQueen2"
-          pointValue="5"
-          pointCategoryDescription="This is the top queen #1 of the week (in no particular order). If
-          there is a number of queens in the top other than 2, you will
-          receive points for each queen you have that is in the top."
-        />
-
-        {/* Bottom #1 Select */}
-        <QueenSelect
-          queensArr={queens}
-          handleChange={(event) => handleChange(5, "Bottom Queen #1", event)}
-          currPickValue={episodePicks.bottomQueen1}
-          pointCategory="Bottom Queen #1"
-          pointCategoryId="bottomQueen1"
-          pointValue="5"
-          pointCategoryDescription="This is the bottom queen #1 of the week (in no particular order).
-          If there is a number of queens in the bottom other than 2, you will
-          receive points for each queen you have that is in the bottom."
-        />
-
-        {/* Bottom #2 Select */}
-        <QueenSelect
-          queensArr={queens}
-          handleChange={(event) => handleChange(5, "Bottom Queen #2", event)}
-          currPickValue={episodePicks.bottomQueen2}
-          pointCategory="Bottom Queen #2"
-          pointCategoryId="bottomQueen2"
-          pointValue="5"
-          pointCategoryDescription="This is the bottom queen #2 of the week (in no particular order).
-          If there is a number of queens in the bottom other than 2, you will
-          receive points for each queen you have that is in the bottom."
-        />
-
-        {/* Eliminated Queen Select */}
-        <QueenSelect
-          queensArr={queens}
-          handleChange={(event) => handleChange(10, "Eliminated Queen", event)}
-          currPickValue={episodePicks.eliminated}
-          pointCategory="Eliminated Queen"
-          pointCategoryId="eliminated"
-          pointValue="10"
-          pointCategoryDescription="This is the queen that you think will get eliminated this episode.
-          If there is more than one queens eliminated, points will be awarded
-          if you have selected one of the winners. If double shantay, no
-          points will be awarded."
-        />
         <br></br>
         <Button
           type="submit"

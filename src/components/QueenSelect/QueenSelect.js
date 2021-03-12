@@ -11,31 +11,22 @@ import { makeStyles } from "@material-ui/core/styles";
 import React from "react";
 import "./QueenSelect.css";
 
-const useStyles = makeStyles({
-  root: {
-    backgroundColor: "white",
-    minWidth: 250,
-    "& .MuiPaper-root": {
-      backgroundColor: "white",
-    },
-    "& .MuiMenu-list": {
-      backgroundColor: "white",
-    },
-    "& .MuiMenuItem-root": {
-      float: "left",
-    },
-    formControl: {
-      width: "100%",
-      backgroundColor: "white",
-    },
-    eliminatedSelect: {
-      backgroundColor: "gray",
-    },
+const useStyles = makeStyles((theme) => ({
+  formControl: {
+    margin: theme.spacing(1),
+    // minWidth: 400,
   },
-});
+  selectEmpty: {
+    marginTop: theme.spacing(2),
+  },
+  menu: {
+    width: 300,
+  },
+}));
 
 function QueenSelect(props) {
   const classes = useStyles();
+  console.log("Current Pick value", props);
   return (
     <div>
       {/* Episode Winner Select */}
@@ -60,7 +51,7 @@ function QueenSelect(props) {
         <p>{props.pointCategoryDescription}</p>
 
         <div>
-          <FormControl className={classes.root}>
+          <FormControl style={{ width: "300px" }}>
             <InputLabel id="demo-simple-select-label">
               {props.pointCategory}
             </InputLabel>
@@ -69,22 +60,20 @@ function QueenSelect(props) {
               labelId={props.pointCategoryId}
               id={props.pointCategoryId}
               name={props.pointCategoryId}
-              value={props.currPickValue}
+              value={props.currPickValue || ""}
               onChange={props.handleChange}
+              MenuProps={{ className: classes.menu }}
             >
               {props.queensArr.map((queen) => (
-                <div
-                  value={queen}
-                  key={queen.queenName}
-                  className={classes.root}
+                <MenuItem
+                  className={`${
+                    queen.isEliminated ? "QueenSelect__Eliminated" : ""
+                  }`}
+                  value={queen.queenID}
+                  key={queen.queenID}
+                  style={{ width: "100%" }}
                 >
-                  <MenuItem
-                    className={
-                      (classes.root,
-                      `${queen.isEliminated ? "QueenSelect__Eliminated" : ""}`)
-                    }
-                    style={{ width: "100%" }}
-                  >
+                  <div style={{ display: "flex" }}>
                     <img
                       className={`SelectEpisodeRoster__selectImg`}
                       src={queen.queenIMG}
@@ -97,8 +86,8 @@ function QueenSelect(props) {
                     >
                       {queen.queenName}
                     </p>
-                  </MenuItem>
-                </div>
+                  </div>
+                </MenuItem>
               ))}
             </Select>
           </FormControl>

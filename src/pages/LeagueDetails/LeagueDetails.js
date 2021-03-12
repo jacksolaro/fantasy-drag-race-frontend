@@ -14,7 +14,7 @@ import "./leagueDetails.css";
 import { Pagination } from "@material-ui/lab";
 import AddCircleOutlineRoundedIcon from "@material-ui/icons/AddCircleOutlineRounded";
 
-function LeagueDetails() {
+function LeagueDetails(props) {
   let params = useParams();
   const { currentUser } = useAuth();
   const [loading, setLoading] = useState(false);
@@ -23,13 +23,20 @@ function LeagueDetails() {
   const [pickData, setPickData] = useState([]);
   const [page, setPage] = React.useState(1);
 
+  // Changing Episode Pages
   const handlePageChange = (event, value) => {
     setPage(value);
   };
 
+  useEffect(() => {
+    if (this != undefined) {
+      console.log("defined");
+    }
+    console.log("undefined");
+  });
+
   // RETRIEVE THE LEAGUE DATA (NAME, MEMBERS, SHOW ID, RESULTS, ETC)
   useEffect(() => {
-    // setLoading(true);
     let mounted = true;
     db.collection("leagues")
       .doc(params.id)
@@ -44,7 +51,6 @@ function LeagueDetails() {
             if (mounted) {
               console.log("RESULTS DATA", doc.data().results);
               setResultsData(doc.data().results);
-              // setLoading(false);
             }
           });
       })

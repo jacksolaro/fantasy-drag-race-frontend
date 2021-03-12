@@ -1,0 +1,50 @@
+[
+    {
+        "pointCategory": "Episode Winner",
+        "pointCategoryId": "episodeWinner",
+        "pointValue": "20",
+        "pointCategoryDescription": "This is the winner of the episode. If there is more than one winner, points will be assigned if you have selected one of the winners."
+    },
+    {
+        "pointCategory": "Maxi Challenge Winner",
+        "pointCategoryId": "maxichallengewinner",
+        "pointValue": "10",
+        "pointCategoryDescription": "This is the winner of the main challenge of the episode. If there is more than one winner, points will be awarded if you have selected one of the winners."
+    },
+    {
+        "pointCategory": "Mini Challenge Winner",
+        "pointCategoryId": "miniChallengeWinner",
+        "pointValue": "10",
+        "pointCategoryDescription": "This is the winner of the main challenge of the episode. If there is more than one winner, points will be awarded if you have selected one of the winners."
+    },
+    {
+        "pointCategory": "Top Queen #1",
+        "pointCategoryId": "topQueen1",
+        "pointValue": "5",
+        "pointCategoryDescription": "This is the top two queens of the week (in no particular order). If there is a number of queens in the top other than 2, you will receive points for each queen you have that is in the top."
+    },
+    {
+        "pointCategory": "Top Queen #2",
+        "pointCategoryId": "topQueen2",
+        "pointValue": "5",
+        "pointCategoryDescription": "This is the top two queens of the week (in no particular order). If there is a number of queens in the top other than 2, you will receive points for each queen you have that is in the top."
+    },
+    {
+        "pointCategory": "Bottom Queen #1",
+        "pointCategoryId": "bottomQueen1",
+        "pointValue": "5",
+        "pointCategoryDescription": "This is the top two queens of the week (in no particular order). If there is a number of queens in the top other than 2, you will receive points for each queen you have that is in the top."
+    },
+    {
+        "pointCategory": "Bottom Queen #2",
+        "pointCategoryId": "bottomQueen2",
+        "pointValue": "5",
+        "pointCategoryDescription": "This is the bottom queen #1 of the week (in no particular order). If there is a number of queens in the bottom other than 2, you will receive points for each queen you have that is in the bottom."
+    },
+    {
+        "pointCategory": "Eliminated Queen",
+        "pointCategoryId": "eliminated",
+        "pointValue": "10",
+        "pointCategoryDescription": "This is the queen that you think will get eliminated this episode. If there is more than one queens eliminated, points will be awarded if you have selected one of the winners. If double shantay, no points will be awarded."
+    }
+]
