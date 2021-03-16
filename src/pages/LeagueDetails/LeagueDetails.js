@@ -8,11 +8,12 @@ import TableContainer from "@material-ui/core/TableContainer";
 import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import { Link } from "react-router-dom";
-import { Grid, Typography } from "@material-ui/core";
+import { Button, Grid, Typography } from "@material-ui/core";
 import { db } from "../../firebase.js";
 import "./leagueDetails.css";
 import { Pagination } from "@material-ui/lab";
 import AddCircleOutlineRoundedIcon from "@material-ui/icons/AddCircleOutlineRounded";
+import FileCopyIcon from "@material-ui/icons/FileCopy";
 
 function LeagueDetails(props) {
   let params = useParams();
@@ -411,7 +412,21 @@ function LeagueDetails(props) {
            ${leagueData.showDetails.showSeasonNum}`
             : "LOADING"}
         </p>
-        <p>LEAGUE CODE: {params.id}</p>
+        <p>
+          League Code: &nbsp;
+          <Button
+            style={{
+              color: "white",
+              padding: 10,
+              backgroundColor: "rgb(45,45,45,.1)",
+              borderRadius: "10px",
+            }}
+            onClick={() => navigator.clipboard.writeText(`${params.id}`)}
+          >
+            {params.id} &nbsp;
+            <FileCopyIcon fontSize="small"></FileCopyIcon>
+          </Button>
+        </p>
       </div>
 
       <div className="leagueDetails__dashboard">
