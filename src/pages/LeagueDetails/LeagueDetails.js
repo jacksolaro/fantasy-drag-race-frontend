@@ -205,7 +205,7 @@ function LeagueDetails(props) {
           new Date().getTime()
         ) {
           return (
-            <p>
+            <p style={{ color: "#AAA" }}>
               This episode has passed. You may no longer make selections for
               this episode.
             </p>
@@ -452,7 +452,10 @@ function LeagueDetails(props) {
               </Grid>
             </div>
 
-            <div className="leagueDetails__leaderboard">
+            <div
+              className="leagueDetails__leaderboard"
+              style={{ minHeight: "250px" }}
+            >
               <Grid item xs={12} md={12}>
                 <div>
                   <Typography align="center" variant="h5">
