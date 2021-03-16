@@ -53,7 +53,8 @@ function LeagueDetails(props) {
               console.log("RESULTS DATA", doc.data().results);
               setResultsData(doc.data().results);
             }
-          });
+          })
+          .then(() => findClosestDate());
       })
       .catch((error) => console.log("Error", error));
 
@@ -115,24 +116,43 @@ function LeagueDetails(props) {
     };
   }, []);
 
+  function findClosestDate() {
+    console.log("RESULTS ARR", resultsData);
+    let today = new Date();
+    let closest = 1;
+    Object.values(resultsData).forEach((episode) => {
+      if (episode.airDate?.seconds * 1000 < today.getTime()) {
+        console.log(
+          "CHECK: ",
+          new Date(episode.airDate?.seconds),
+          episode.airDate?.seconds * 1000,
+          today.getTime()
+        );
+        closest = episode.episodeNum;
+      }
+    });
+    console.log("NEXT EPISODE", closest);
+    setPage(closest);
+  }
+
   // TAKES ALL THE USERS EPISODE ROSTERS, RENDERS THEM ON PAGE AND DISPLAYS POINTS
   function renderEpisodePicks(episodeNum) {
     if (loading) {
       return <div className="episodePaginationNoResultBox">LOADING</div>;
     } else {
-      console.log("renderEpisodePicksFunction - PickData", pickData);
+      // console.log("renderEpisodePicksFunction - PickData", pickData);
 
       const userData = JSON.parse(JSON.stringify(pickData)).filter(
         (user) => user.userID === currentUser.uid
       );
 
-      console.log("renderEpisodePicksFunction - UserData", userData);
+      // console.log("renderEpisodePicksFunction - UserData", userData);
 
       if (userData[0]?.picks !== undefined) {
         const episodePicks = JSON.parse(
           JSON.stringify(userData[0].picks)
         ).filter((list) => list.category === `episode${episodeNum}`);
-        console.log("renderEpisodePicksFunction - episodePicks", episodePicks);
+        // console.log("renderEpisodePicksFunction - episodePicks", episodePicks);
 
         if (episodePicks[0]?.picks !== undefined) {
           return (
@@ -233,19 +253,19 @@ function LeagueDetails(props) {
     if (loading) {
       return <div className="episodePaginationNoResultBox">LOADING</div>;
     } else {
-      console.log("renderEpisodePicksFunction - PickData", pickData);
+      // console.log("renderEpisodePicksFunction - PickData", pickData);
 
       const userData = JSON.parse(JSON.stringify(pickData)).filter(
         (user) => user.userID === currentUser.uid
       );
 
-      console.log("renderEpisodePicksFunction - UserData", userData);
+      // console.log("renderEpisodePicksFunction - UserData", userData);
 
       if (userData[0]?.picks !== undefined) {
         const seasonPicks = JSON.parse(
           JSON.stringify(userData[0].picks)
         ).filter((list) => list.category === `season`);
-        console.log("renderEpisodePicksFunction - seasonPicks", seasonPicks);
+        // console.log("renderEpisodePicksFunction - seasonPicks", seasonPicks);
 
         if (seasonPicks[0]?.picks !== undefined) {
           return seasonPicks[0].picks.map((pick) => (
@@ -274,31 +294,11 @@ function LeagueDetails(props) {
                     ? "leagueDetails__rosterIMG2"
                     : "leagueDetails__rosterIMG2"
                 }
-                // {
-                //   resultsData[`${seasonPicks[0].category}`]
-                //     ? resultsData[`${seasonPicks[0].category}`][`${pick.id}`]
-                //       ? resultsData["season"][`${pick.id}`].includes(
-                //           pick.queenID
-                //         )
-                //         ? "leagueDetails__rosterIMG2"
-                //         : "leagueDetails__rosterIMG"
-                //       : "leagueDetails__rosterIMG"
-                //     : "leagueDetails__rosterIMG"
-                // }
                 src={pick.queenIMG}
                 alt={`${pick.queenName}`}
               ></img>
               <p>{pick.queenName}</p>
               <p className="pointsBadge">
-                {/* {resultsData?.[`${seasonPicks[0].category}`]
-                  ? resultsData?.[`${seasonPicks[0].category}`]?.[`${pick.id}`]
-                    ? resultsData?.["season"]?.[`${pick.id}`]?.includes(
-                        pick.queenID
-                      )
-                      ? pick.pointValue
-                      : 0
-                    : "TBD"
-                  : "TBD"} */}
                 {resultsData?.["season"]?.[`${pick.id}`]?.[0] != ""
                   ? resultsData?.["season"]?.[`${pick.id}`]?.includes(
                       pick.queenID
