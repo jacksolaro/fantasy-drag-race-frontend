@@ -452,6 +452,13 @@ function LeagueDetails(props) {
                     boundaryCount={1}
                     color="#0099FF"
                   />
+
+                  <p>
+                    {resultsData[`episode${page}`]?.["episodeName"] !==
+                    undefined
+                      ? resultsData[`episode${page}`]?.["episodeName"]
+                      : ""}
+                  </p>
                   <p>
                     Air Date: &nbsp;
                     {resultsData
@@ -461,8 +468,8 @@ function LeagueDetails(props) {
                               "seconds"
                             ] * 1000
                           ).toLocaleDateString("en-us")
-                        : "NO INFO ON AIR DATE YET"
-                      : "NO INFO ON AIR DATE YET"}
+                        : "TBD"
+                      : "TBD"}
                   </p>
 
                   {/* <p>
