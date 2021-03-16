@@ -156,25 +156,17 @@ function LeagueDetails(props) {
 
         if (episodePicks[0]?.picks !== undefined) {
           return (
-            <TableContainer>
-              {/* <p>{resultsData[`episode${episodeNum}`]["airDate"]}</p> */}
-              <Table aria-label="simple table" size="small">
-                <TableHead>
-                  <TableRow key="episodeHeaders">
-                    <TableCell>Category</TableCell>
-                    <TableCell>Queen Image</TableCell>
-                    <TableCell>Your Pick</TableCell>
-                    <TableCell>Points Awarded</TableCell>
-                    <TableCell>Points Possible</TableCell>
-                  </TableRow>
-                </TableHead>
-                <TableBody>
-                  {episodePicks[0].picks.map((pick, index) => (
-                    <TableRow key={index}>
-                      <TableCell component="th" scope="row">
-                        {pick.pointCategory}
-                      </TableCell>
-                      <TableCell>
+            <div className="episodePicks__container">
+              {episodePicks[0].picks.map((pick, index) => (
+                <>
+                  <Grid
+                    className="episodePicks__pointRow"
+                    container
+                    alignItems="center"
+                    justify="space-between"
+                  >
+                    <Grid item xs style={{ textAlign: "left" }}>
+                      <div style={{ display: "flex" }}>
                         <img
                           className={
                             resultsData[`${episodePicks[0].category}`]
@@ -192,29 +184,37 @@ function LeagueDetails(props) {
                           src={pick.queenIMG}
                           alt={`${pick.queenName}`}
                         ></img>
-                      </TableCell>
-                      <TableCell>{pick.queenName}</TableCell>
-                      <TableCell>
-                        <p className="">
-                          {resultsData[`${episodePicks[0].category}`]
+                        <div style={{ padding: "10px" }}>
+                          <p style={{ margin: "0px", fontSize: "1.5rem" }}>
+                            {pick.pointCategory}
+                          </p>
+                          <p style={{ margin: "0px" }}>{pick.queenName}</p>
+                        </div>
+                      </div>
+                    </Grid>
+                    <Grid item xs style={{ textAlign: "right" }}>
+                      <span style={{ fontSize: "42px", fontWeight: "bold" }}>
+                        +
+                        {resultsData[`${episodePicks[0].category}`]
+                          ? resultsData[`${episodePicks[0].category}`][
+                              `${pick.id}`
+                            ]
                             ? resultsData[`${episodePicks[0].category}`][
                                 `${pick.id}`
-                              ]
-                              ? resultsData[`${episodePicks[0].category}`][
-                                  `${pick.id}`
-                                ].includes(pick.queenID)
-                                ? pick.pointValue
-                                : 0
-                              : "TBD"
-                            : "TBD"}
-                        </p>
-                      </TableCell>
-                      <TableCell>{pick.pointValue}</TableCell>
-                    </TableRow>
-                  ))}
-                </TableBody>
-              </Table>
-            </TableContainer>
+                              ].includes(pick.queenID)
+                              ? pick.pointValue
+                              : 0
+                            : "TBD"
+                          : "TBD"}
+                      </span>
+                      / {pick.pointValue}
+                    </Grid>
+                  </Grid>
+                  <hr></hr>
+                </>
+              ))}
+            </div>
+            // POINTS CODE
           );
         }
       }

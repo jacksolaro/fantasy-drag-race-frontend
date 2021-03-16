@@ -86,3 +86,14 @@
   font-weight: 800;
   text-align: center;
 }
+
+.episodePicks__container {
+  /* border: 1px solid black; */
+  width: 100%;
+}
+
+.episodePicks__pointRow {
+  /* border: 1px solid black; */
+  width: 100%;
+  padding: 10px 10px;
+}
