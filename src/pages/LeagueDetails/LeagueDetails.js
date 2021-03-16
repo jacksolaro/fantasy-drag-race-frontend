@@ -185,8 +185,8 @@ function LeagueDetails(props) {
                                 ].includes(pick.queenID)
                                 ? pick.pointValue
                                 : 0
-                              : "?"
-                            : "?"}
+                              : "TBD"
+                            : "TBD"}
                         </p>
                       </TableCell>
                       <TableCell>{pick.pointValue}</TableCell>
@@ -206,8 +206,7 @@ function LeagueDetails(props) {
         ) {
           return (
             <p style={{ color: "#AAA" }}>
-              This episode has passed. You may no longer make selections for
-              this episode.
+              The window to select your roster for this episode is closed.
             </p>
           );
         }
@@ -252,10 +251,8 @@ function LeagueDetails(props) {
           return seasonPicks[0].picks.map((pick) => (
             <Grid
               className={
-                resultsData["season"]
-                  ? resultsData["season"][`${pick.id}`].includes(pick.queenID)
-                    ? "leagueDetails__rosterIMG2"
-                    : "leagueDetails__rosterIMG"
+                resultsData?.["season"]?.[`${pick.id}`]?.includes(pick.queenID)
+                  ? "leagueDetails__rosterIMG2"
                   : "leagueDetails__rosterIMG"
               }
               item
@@ -271,28 +268,44 @@ function LeagueDetails(props) {
               </Typography>
               <img
                 className={
-                  resultsData[`${seasonPicks[0].category}`]
-                    ? resultsData[`${seasonPicks[0].category}`][`${pick.id}`]
-                      ? resultsData["season"][`${pick.id}`].includes(
-                          pick.queenID
-                        )
-                        ? "leagueDetails__rosterIMG2"
-                        : "leagueDetails__rosterIMG"
-                      : "leagueDetails__rosterIMG"
-                    : "leagueDetails__rosterIMG"
+                  resultsData?.["season"]?.[`${pick.id}`]?.includes(
+                    pick.queenID
+                  )
+                    ? "leagueDetails__rosterIMG2"
+                    : "leagueDetails__rosterIMG2"
                 }
+                // {
+                //   resultsData[`${seasonPicks[0].category}`]
+                //     ? resultsData[`${seasonPicks[0].category}`][`${pick.id}`]
+                //       ? resultsData["season"][`${pick.id}`].includes(
+                //           pick.queenID
+                //         )
+                //         ? "leagueDetails__rosterIMG2"
+                //         : "leagueDetails__rosterIMG"
+                //       : "leagueDetails__rosterIMG"
+                //     : "leagueDetails__rosterIMG"
+                // }
                 src={pick.queenIMG}
                 alt={`${pick.queenName}`}
               ></img>
               <p>{pick.queenName}</p>
               <p className="pointsBadge">
-                {resultsData[`${seasonPicks[0].category}`]
-                  ? resultsData[`${seasonPicks[0].category}`][`${pick.id}`]
-                    ? resultsData["season"][`${pick.id}`].includes(pick.queenID)
+                {/* {resultsData?.[`${seasonPicks[0].category}`]
+                  ? resultsData?.[`${seasonPicks[0].category}`]?.[`${pick.id}`]
+                    ? resultsData?.["season"]?.[`${pick.id}`]?.includes(
+                        pick.queenID
+                      )
                       ? pick.pointValue
                       : 0
-                    : "?"
-                  : "?"}
+                    : "TBD"
+                  : "TBD"} */}
+                {resultsData?.["season"]?.[`${pick.id}`]?.[0] != ""
+                  ? resultsData?.["season"]?.[`${pick.id}`]?.includes(
+                      pick.queenID
+                    )
+                    ? pick.pointValue
+                    : 0
+                  : "TBD"}
               </p>
             </Grid>
           ));
