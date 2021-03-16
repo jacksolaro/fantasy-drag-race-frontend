@@ -207,7 +207,7 @@ function LeagueDetails(props) {
                             : "TBD"
                           : "TBD"}
                       </span>
-                      / {pick.pointValue}
+                      {/* / {pick.pointValue} */}
                     </Grid>
                   </Grid>
                   <hr></hr>
