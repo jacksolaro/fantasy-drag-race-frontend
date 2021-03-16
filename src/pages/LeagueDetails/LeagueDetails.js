@@ -23,6 +23,9 @@ function LeagueDetails(props) {
   const [resultsData, setResultsData] = useState([{}]);
   const [pickData, setPickData] = useState([]);
   const [page, setPage] = React.useState(1);
+  const [scores, setScores] = React.useState([]);
+
+  let episodeScore = 0;
 
   // Changing Episode Pages
   const handlePageChange = (event, value) => {
@@ -69,26 +72,6 @@ function LeagueDetails(props) {
     setLoading(true);
     let mounted = true;
     let pickDataArr = [];
-    // setPickData([]);
-    // db.collection("leagues")
-    //   .doc(params.id)
-    //   .collection("picks")
-    //   .get()
-    //   .then(function (querySnapshot) {
-    //     if (mounted) {
-    //       querySnapshot.forEach(function (doc) {
-    //         pickDataArr.push(doc.data());
-    //         console.log("DOC DATA", doc.data());
-    //       });
-    //       setPickData(pickDataArr);
-    //       setLoading(false);
-    //     }
-    //   })
-    //   .catch((error) => {
-    //     setPickData([]);
-    //     setLoading(false);
-    //     console.log("Error", error);
-    //   });
 
     db.collection("leagues")
       .doc(params.id)
@@ -98,7 +81,7 @@ function LeagueDetails(props) {
         if (mounted) {
           console.log("DOCS", docsArr.docs);
           docsArr.docs.map((doc) => {
-            console.log("DOC", doc.data());
+            // console.log("DOC", doc.data());
             pickDataArr.push(doc.data());
           });
         }
@@ -117,7 +100,7 @@ function LeagueDetails(props) {
   }, []);
 
   function findClosestDate() {
-    console.log("RESULTS ARR", resultsData);
+    // console.log("RESULTS ARR", resultsData);
     let today = new Date();
     let closest = 1;
     Object.values(resultsData).forEach((episode) => {
@@ -157,6 +140,45 @@ function LeagueDetails(props) {
         if (episodePicks[0]?.picks !== undefined) {
           return (
             <div className="episodePicks__container">
+              <Grid container>
+                <Grid item xs={12} sm={4}>
+                  <p>Episode Points</p>
+                  <p className="episodePicks__textEmphasis">{episodeScore}</p>
+                </Grid>
+                <Grid
+                  item
+                  xs={12}
+                  sm={4}
+                  style={{
+                    borderWidth: "0px 1px",
+                    borderColor: "#CCC",
+                    borderStyle: "solid",
+                  }}
+                >
+                  <p>Episode Title:</p>
+                  <p className="episodePicks__textEmphasis">
+                    {resultsData[`episode${page}`]?.["episodeName"] !==
+                    undefined
+                      ? resultsData[`episode${page}`]?.["episodeName"]
+                      : "TBD"}
+                  </p>
+                </Grid>
+                <Grid item xs={12} sm={4}>
+                  <p>Air Date:</p>
+                  <p className="episodePicks__textEmphasis">
+                    {resultsData
+                      ? resultsData[`episode${page}`]
+                        ? new Date(
+                            resultsData[`episode${page}`]["airDate"][
+                              "seconds"
+                            ] * 1000
+                          ).toLocaleDateString("en-us")
+                        : "TBD"
+                      : "TBD"}
+                  </p>
+                </Grid>
+              </Grid>
+              <hr></hr>
               {episodePicks[0].picks.map((pick, index) => (
                 <>
                   <Grid
@@ -193,7 +215,7 @@ function LeagueDetails(props) {
                       </div>
                     </Grid>
                     <Grid item xs style={{ textAlign: "right" }}>
-                      <span style={{ fontSize: "42px", fontWeight: "bold" }}>
+                      <span className="episodePicks__textEmphasis">
                         +
                         {resultsData[`${episodePicks[0].category}`]
                           ? resultsData[`${episodePicks[0].category}`][
@@ -202,7 +224,12 @@ function LeagueDetails(props) {
                             ? resultsData[`${episodePicks[0].category}`][
                                 `${pick.id}`
                               ].includes(pick.queenID)
-                              ? pick.pointValue
+                              ? (() => {
+                                  episodeScore += pick.pointValue;
+
+                                  console.log("episode Score", episodeScore);
+                                  return pick.pointValue;
+                                })()
                               : 0
                             : "TBD"
                           : "TBD"}
@@ -346,10 +373,12 @@ function LeagueDetails(props) {
   // CALCULATES SCORES, SORTS THEM, AND RENDERS THEM ON PAGE
   function renderScores() {
     let scores = [];
+    let episodeScores = [];
     let episodeSum, totalSum;
 
     pickData.map((user) => {
       totalSum = 0;
+      episodeScores = [];
       if (user.picks) {
         user.picks.map((scoreEvent) => {
           scoreEvent.picks.map((pick) => {
@@ -361,17 +390,22 @@ function LeagueDetails(props) {
                   )
                 ) {
                   totalSum += pick.pointValue;
+                  episodeSum += pick.pointValue;
                 }
               } else {
               }
             }
           });
+          let episodeNum = scoreEvent.category.replace("episode", "");
+          episodeScores.push({ episodeNum, episodeSum });
+          episodeSum = 0;
         });
       }
       scores.push({
         userID: user.userID,
         username: user.username,
         score: totalSum,
+        episodeScores: episodeScores,
       });
     });
 
@@ -484,25 +518,6 @@ function LeagueDetails(props) {
                     color="#0099FF"
                   />
 
-                  <p>
-                    {resultsData[`episode${page}`]?.["episodeName"] !==
-                    undefined
-                      ? resultsData[`episode${page}`]?.["episodeName"]
-                      : ""}
-                  </p>
-                  <p>
-                    Air Date: &nbsp;
-                    {resultsData
-                      ? resultsData[`episode${page}`]
-                        ? new Date(
-                            resultsData[`episode${page}`]["airDate"][
-                              "seconds"
-                            ] * 1000
-                          ).toLocaleDateString("en-us")
-                        : "TBD"
-                      : "TBD"}
-                  </p>
-
                   {/* <p>
                     {resultsData
                       ? resultsData[`episode${page}`]
@@ -513,6 +528,7 @@ function LeagueDetails(props) {
                         : "NO INFO ON AIR DATE YET"
                       : "NO INFO ON AIR DATE YET"}
                   </p> */}
+                  <hr></hr>
                   <Grid container container align="center" justify="center">
                     {renderEpisodePicks(page)}
                   </Grid>
