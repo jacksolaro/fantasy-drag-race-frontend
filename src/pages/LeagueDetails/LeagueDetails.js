@@ -452,10 +452,8 @@ function LeagueDetails(props) {
                     boundaryCount={1}
                     color="#0099FF"
                   />
-                  <Typography align="center" variant="subtitle1">
-                    EPISODE AIR DATE:
-                  </Typography>
                   <p>
+                    Air Date: &nbsp;
                     {resultsData
                       ? resultsData[`episode${page}`]
                         ? new Date(
