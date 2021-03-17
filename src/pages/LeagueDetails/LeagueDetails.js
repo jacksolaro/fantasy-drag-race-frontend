@@ -210,24 +210,15 @@ function LeagueDetails(props) {
   }
 
   function findCurrentEpisodeScore() {
-    // console.log(
-    //   "BEEEEEEEEP",
-    //   scores
-    //     .filter((user) => user.userID == currentUser.uid)[0]
-    //     .episodeScores.filter(
-    //       (episode) => episode.episodeNum == page
-    //     )[0].episodeSum
-    // )
     const scoresData = JSON.parse(JSON.stringify(scores)).filter(
       (user) => user.userID === currentUser.uid
     )[0];
 
-    // const episodeScores = JSON.parse(JSON.stringify(scoresData)).filter(
-    //   (episode) => episode.episodeNum == page
-    // )[0].episodeSum;
+    const episodeScore = scoresData?.episodeScores.filter(
+      (episode) => episode?.episodeNum == page
+    )[0]?.episodeSum;
 
-    // console.log("SCORES DATA", scoresData);
-    // console.log("SCORES DATA", episodeScores);
+    return episodeScore;
   }
 
   // TAKES ALL THE USERS EPISODE ROSTERS, RENDERS THEM ON PAGE AND DISPLAYS POINTS
