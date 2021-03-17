@@ -18,6 +18,7 @@ import FileCopyIcon from "@material-ui/icons/FileCopy";
 function LeagueDetails(props) {
   let params = useParams();
   const { currentUser } = useAuth();
+  const [fetchComplete, setFetchComplete] = useState(false);
   const [loading, setLoading] = useState(false);
   const [leagueData, setLeagueData] = useState([{}]);
   const [resultsData, setResultsData] = useState([{}]);
@@ -41,23 +42,27 @@ function LeagueDetails(props) {
   useEffect(() => {
     let mounted = true;
     getResultsData(mounted);
+    if (fetchComplete) {
+      getScoresData();
+    }
 
     return function cleanup() {
       mounted = false;
     };
-  }, []);
+  }, [fetchComplete]);
 
   async function getResultsData(mounted) {
     console.log("STARTING GET RESULTS");
-    getValues("leagues", `${params.id}`).then((leagueFetch) => {
-      setLeagueData(leagueFetch);
-      getValues("shows", `${leagueFetch.showDetails.showID}`).then(
-        (resultsFetch) => {
-          // console.log("RESULTS? ", resultsFetch.results);
-          setResultsData(resultsFetch.results, getPickData());
-        }
-      );
-    });
+    getValues("leagues", `${params.id}`)
+      .then((leagueFetch) => {
+        setLeagueData(leagueFetch);
+        getValues("shows", `${leagueFetch.showDetails.showID}`)
+          .then((resultsFetch) => {
+            setResultsData(resultsFetch.results, getPickData());
+          })
+          .catch((error) => console.log("Error", error));
+      })
+      .catch((error) => console.log("Error", error));
     // try {
     //   setLeagueData(response.data());
     //   let resultsFetch = await getValues(
@@ -112,12 +117,13 @@ function LeagueDetails(props) {
           // if (mounted) {
           // console.log("DOCS", docsArr.docs);
           docsArr.docs.map((doc) => {
-            console.log("DOC", doc.data());
+            // console.log("DOC", doc.data());
             pickDataArr.push(doc.data());
           });
           // }
-          setPickData(pickDataArr, getScoresData());
+          setPickData(pickDataArr);
           setLoading(false);
+          setFetchComplete(true);
         });
     } catch (error) {
       setPickData([]);
