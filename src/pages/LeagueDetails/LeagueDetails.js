@@ -25,8 +25,6 @@ function LeagueDetails(props) {
   const [page, setPage] = React.useState(1);
   const [scores, setScores] = React.useState([]);
 
-  let episodeScore = 0;
-
   // Changing Episode Pages
   const handlePageChange = (event, value) => {
     setPage(value);
@@ -34,70 +32,157 @@ function LeagueDetails(props) {
 
   useEffect(() => {
     if (this != undefined) {
-      console.log("defined");
+      // console.log("defined");
     }
-    console.log("undefined");
+    // console.log("undefined");
   });
 
   // RETRIEVE THE LEAGUE DATA (NAME, MEMBERS, SHOW ID, RESULTS, ETC)
   useEffect(() => {
     let mounted = true;
-    db.collection("leagues")
-      .doc(params.id)
-      .get()
-      .then((doc) => {
-        console.log("LEAGUE DATA", doc.data());
-        setLeagueData(doc.data());
-        db.collection("shows")
-          .doc(doc.data().showDetails.showID)
-          .get()
-          .then((doc) => {
-            if (mounted) {
-              console.log("RESULTS DATA", doc.data().results);
-              setResultsData(doc.data().results);
-            }
-          })
-          .then(() => findClosestDate());
-      })
-      .catch((error) => console.log("Error", error));
+    getResultsData(mounted);
 
     return function cleanup() {
       mounted = false;
     };
   }, []);
 
-  // RETRIEVE ALL PICK DATA FOR USERS IN LEAGUE
-  useEffect(() => {
+  async function getResultsData(mounted) {
+    console.log("STARTING GET RESULTS");
+    getValues("leagues", `${params.id}`).then((leagueFetch) => {
+      setLeagueData(leagueFetch);
+      getValues("shows", `${leagueFetch.showDetails.showID}`).then(
+        (resultsFetch) => {
+          // console.log("RESULTS? ", resultsFetch.results);
+          setResultsData(resultsFetch.results, getPickData());
+        }
+      );
+    });
+    // try {
+    //   setLeagueData(response.data());
+    //   let resultsFetch = await getValues(
+    //     "shows",
+    //     `${response.data().showDetails.showID}`
+    //   );
+    //   if (mounted) {
+    //     // console.log("RESULTS DATA", doc.data().results);
+    //     setResultsData(resultsFetch.results, getPickData());
+    //   }
+    //   // const response = await db
+    //   //   .collection("leagues")
+    //   //   .doc(params.id)
+    //   //   .get()
+    //   // .then((doc) => {
+    //   //   // console.log("LEAGUE DATA", doc.data());
+    //   //   setLeagueData(doc.data());
+    //   //   db.collection("shows")
+    //   //     .doc(doc.data().showDetails.showID)
+    //   //     .get()
+
+    //   //     .then((doc) => {
+    //   //       if (mounted) {
+    //   //         // console.log("RESULTS DATA", doc.data().results);
+    //   //         setResultsData(doc.data().results, getPickData());
+    //   //       }
+    //   //     });
+    //   // .then(() => findClosestDate());
+
+    //   // setResultsData(response);
+    //   setLoading(false);
+    // } catch (error) {
+    //   console.log("Error", error);
+    // }
+  }
+
+  async function getPickData(mounted) {
+    console.log("STARTING GET PICKS");
     window.scrollTo(0, 0);
     setLoading(true);
-    let mounted = true;
     let pickDataArr = [];
-
-    db.collection("leagues")
-      .doc(params.id)
-      .collection("picks")
-      .get()
-      .then((docsArr) => {
-        if (mounted) {
-          console.log("DOCS", docsArr.docs);
+    try {
+      const response = await db
+        .collection("leagues")
+        .doc(params.id)
+        .collection("picks")
+        .get()
+        // for (const doc of response.docs) {
+        //   pickDataArr.push(doc.data());
+        // }
+        .then((docsArr) => {
+          // if (mounted) {
+          // console.log("DOCS", docsArr.docs);
           docsArr.docs.map((doc) => {
-            // console.log("DOC", doc.data());
+            console.log("DOC", doc.data());
             pickDataArr.push(doc.data());
           });
-        }
-        setPickData(pickDataArr);
-        setLoading(false);
-      })
-      .catch((error) => {
-        setPickData([]);
-        setLoading(false);
-        console.log("Error", error);
-      });
+          // }
+          setPickData(pickDataArr, getScoresData());
+          setLoading(false);
+        });
+    } catch (error) {
+      setPickData([]);
+      setLoading(false);
+      console.log("Error", error);
+    }
+  }
 
-    return function cleanup() {
-      mounted = false;
-    };
-  }, []);
+  async function getScoresData() {
+    console.log("STARTING GET SCORES");
+    try {
+      let scoresArr = [];
+      let episodeScores = [];
+      let episodeSum, totalSum;
+      console.log("INSIDE GET SCORES - PICKS", pickData);
+      console.log("INSIDE GET SCORES - RESULTS", resultsData);
+      pickData.map((user) => {
+        totalSum = 0;
+        episodeScores = [];
+        if (user.picks) {
+          user.picks.map((scoreEvent) => {
+            scoreEvent.picks.map((pick) => {
+              if (resultsData[`${scoreEvent.category}`]) {
+                if (resultsData[`${scoreEvent.category}`][`${pick.id}`]) {
+                  if (
+                    resultsData[`${scoreEvent.category}`][
+                      `${pick.id}`
+                    ].includes(pick.queenID)
+                  ) {
+                    totalSum += pick.pointValue;
+                    episodeSum += pick.pointValue;
+                  }
+                } else {
+                }
+              }
+            });
+            let episodeNum = scoreEvent.category.replace("episode", "");
+            episodeScores.push({ episodeNum, episodeSum });
+            episodeSum = 0;
+          });
+        }
+        scoresArr.push({
+          userID: user.userID,
+          username: user.username,
+          score: totalSum,
+          episodeScores: episodeScores,
+        });
+      });
+      setScores(scoresArr);
+      console.log("SCORES SET (CHECK 3)", scores);
+    } catch (err) {
+      console.log(err);
+    }
+  }
+
+  function getValues(collectionName, docName) {
+    return db
+      .collection(collectionName)
+      .doc(docName)
+      .get()
+      .then(function (doc) {
+        if (doc.exists) return doc.data();
+        return Promise.reject("No such document");
+      });
+  }
 
   function findClosestDate() {
     // console.log("RESULTS ARR", resultsData);
@@ -105,17 +190,38 @@ function LeagueDetails(props) {
     let closest = 1;
     Object.values(resultsData).forEach((episode) => {
       if (episode.airDate?.seconds * 1000 < today.getTime()) {
-        console.log(
-          "CHECK: ",
-          new Date(episode.airDate?.seconds),
-          episode.airDate?.seconds * 1000,
-          today.getTime()
-        );
+        // console.log(
+        //   "CHECK: ",
+        //   new Date(episode.airDate?.seconds),
+        //   episode.airDate?.seconds * 1000,
+        //   today.getTime()
+        // );
         closest = episode.episodeNum;
       }
     });
-    console.log("NEXT EPISODE", closest);
+    // console.log("NEXT EPISODE", closest);
     setPage(closest);
+  }
+
+  function findCurrentEpisodeScore() {
+    // console.log(
+    //   "BEEEEEEEEP",
+    //   scores
+    //     .filter((user) => user.userID == currentUser.uid)[0]
+    //     .episodeScores.filter(
+    //       (episode) => episode.episodeNum == page
+    //     )[0].episodeSum
+    // )
+    const scoresData = JSON.parse(JSON.stringify(scores)).filter(
+      (user) => user.userID === currentUser.uid
+    )[0];
+
+    // const episodeScores = JSON.parse(JSON.stringify(scoresData)).filter(
+    //   (episode) => episode.episodeNum == page
+    // )[0].episodeSum;
+
+    // console.log("SCORES DATA", scoresData);
+    // console.log("SCORES DATA", episodeScores);
   }
 
   // TAKES ALL THE USERS EPISODE ROSTERS, RENDERS THEM ON PAGE AND DISPLAYS POINTS
@@ -140,45 +246,6 @@ function LeagueDetails(props) {
         if (episodePicks[0]?.picks !== undefined) {
           return (
             <div className="episodePicks__container">
-              <Grid container>
-                <Grid item xs={12} sm={4}>
-                  <p>Episode Points</p>
-                  <p className="episodePicks__textEmphasis">{episodeScore}</p>
-                </Grid>
-                <Grid
-                  item
-                  xs={12}
-                  sm={4}
-                  style={{
-                    borderWidth: "0px 1px",
-                    borderColor: "#CCC",
-                    borderStyle: "solid",
-                  }}
-                >
-                  <p>Episode Title:</p>
-                  <p className="episodePicks__textEmphasis">
-                    {resultsData[`episode${page}`]?.["episodeName"] !==
-                    undefined
-                      ? resultsData[`episode${page}`]?.["episodeName"]
-                      : "TBD"}
-                  </p>
-                </Grid>
-                <Grid item xs={12} sm={4}>
-                  <p>Air Date:</p>
-                  <p className="episodePicks__textEmphasis">
-                    {resultsData
-                      ? resultsData[`episode${page}`]
-                        ? new Date(
-                            resultsData[`episode${page}`]["airDate"][
-                              "seconds"
-                            ] * 1000
-                          ).toLocaleDateString("en-us")
-                        : "TBD"
-                      : "TBD"}
-                  </p>
-                </Grid>
-              </Grid>
-              <hr></hr>
               {episodePicks[0].picks.map((pick, index) => (
                 <>
                   <Grid
@@ -224,12 +291,7 @@ function LeagueDetails(props) {
                             ? resultsData[`${episodePicks[0].category}`][
                                 `${pick.id}`
                               ].includes(pick.queenID)
-                              ? (() => {
-                                  episodeScore += pick.pointValue;
-
-                                  console.log("episode Score", episodeScore);
-                                  return pick.pointValue;
-                                })()
+                              ? pick.pointValue
                               : 0
                             : "TBD"
                           : "TBD"}
@@ -245,7 +307,7 @@ function LeagueDetails(props) {
           );
         }
       }
-      // if the season has already started, return notice
+      // if the episode has already started, return notice
       if (resultsData?.[`episode${page}`]?.airDate?.seconds !== undefined) {
         if (
           resultsData[`episode${page}`]["airDate"]["seconds"] * 1000 <
@@ -372,43 +434,6 @@ function LeagueDetails(props) {
 
   // CALCULATES SCORES, SORTS THEM, AND RENDERS THEM ON PAGE
   function renderScores() {
-    let scores = [];
-    let episodeScores = [];
-    let episodeSum, totalSum;
-
-    pickData.map((user) => {
-      totalSum = 0;
-      episodeScores = [];
-      if (user.picks) {
-        user.picks.map((scoreEvent) => {
-          scoreEvent.picks.map((pick) => {
-            if (resultsData[`${scoreEvent.category}`]) {
-              if (resultsData[`${scoreEvent.category}`][`${pick.id}`]) {
-                if (
-                  resultsData[`${scoreEvent.category}`][`${pick.id}`].includes(
-                    pick.queenID
-                  )
-                ) {
-                  totalSum += pick.pointValue;
-                  episodeSum += pick.pointValue;
-                }
-              } else {
-              }
-            }
-          });
-          let episodeNum = scoreEvent.category.replace("episode", "");
-          episodeScores.push({ episodeNum, episodeSum });
-          episodeSum = 0;
-        });
-      }
-      scores.push({
-        userID: user.userID,
-        username: user.username,
-        score: totalSum,
-        episodeScores: episodeScores,
-      });
-    });
-
     if (scores) {
       return (
         <TableContainer>
@@ -529,6 +554,49 @@ function LeagueDetails(props) {
                       : "NO INFO ON AIR DATE YET"}
                   </p> */}
                   <hr></hr>
+
+                  <Grid container>
+                    <Grid item xs={12} sm={4}>
+                      <p>Episode Points</p>
+                      <p className="episodePicks__textEmphasis">
+                        {findCurrentEpisodeScore()}
+                      </p>
+                    </Grid>
+                    <Grid
+                      item
+                      xs={12}
+                      sm={4}
+                      style={{
+                        borderWidth: "0px 1px",
+                        borderColor: "#CCC",
+                        borderStyle: "solid",
+                      }}
+                    >
+                      <p>Episode Title:</p>
+                      <p className="episodePicks__textEmphasis">
+                        {resultsData[`episode${page}`]?.["episodeName"] !==
+                        undefined
+                          ? resultsData[`episode${page}`]?.["episodeName"]
+                          : "TBD"}
+                      </p>
+                    </Grid>
+                    <Grid item xs={12} sm={4}>
+                      <p>Air Date:</p>
+                      <p className="episodePicks__textEmphasis">
+                        {resultsData
+                          ? resultsData[`episode${page}`]
+                            ? new Date(
+                                resultsData[`episode${page}`]["airDate"][
+                                  "seconds"
+                                ] * 1000
+                              ).toLocaleDateString("en-us")
+                            : "TBD"
+                          : "TBD"}
+                      </p>
+                    </Grid>
+                  </Grid>
+                  <hr></hr>
+
                   <Grid container container align="center" justify="center">
                     {renderEpisodePicks(page)}
                   </Grid>
