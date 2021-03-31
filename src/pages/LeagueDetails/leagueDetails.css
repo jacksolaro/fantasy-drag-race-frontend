@@ -109,3 +109,25 @@ hr {
   font-weight: bold;
   margin-top: 0;
 }
+
+.episodePicks__pointCategoryLabel {
+  margin: 0px;
+  font-size: 1.5rem;
+}
+
+@media only screen and (max-width: 600px) {
+  .leagueDetails__dashboard {
+    padding: 0px;
+  }
+  /* .leagueDetails__rosterIMG {
+    height: 100px;
+    width: 100px;
+  }
+  .leagueDetails__rosterIMG2 {
+    height: 100px;
+    width: 100px;
+  } */
+  .episodePicks__pointCategoryLabel {
+    font-size: 1rem;
+  }
+}

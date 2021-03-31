@@ -251,7 +251,7 @@ function LeagueDetails(props) {
                     alignItems="center"
                     justify="space-between"
                   >
-                    <Grid item xs style={{ textAlign: "left" }}>
+                    <Grid item xs={10} style={{ textAlign: "left" }}>
                       <div style={{ display: "flex" }}>
                         <img
                           className={
@@ -271,14 +271,14 @@ function LeagueDetails(props) {
                           alt={`${pick.queenName}`}
                         ></img>
                         <div style={{ padding: "10px" }}>
-                          <p style={{ margin: "0px", fontSize: "1.5rem" }}>
+                          <p className="episodePicks__pointCategoryLabel">
                             {pick.pointCategory}
                           </p>
                           <p style={{ margin: "0px" }}>{pick.queenName}</p>
                         </div>
                       </div>
                     </Grid>
-                    <Grid item xs style={{ textAlign: "right" }}>
+                    <Grid item xs={2} style={{ textAlign: "right" }}>
                       <span className="episodePicks__textEmphasis">
                         +
                         {resultsData[`${episodePicks[0].category}`]
