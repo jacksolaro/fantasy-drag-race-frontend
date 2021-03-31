@@ -86,3 +86,48 @@
   font-weight: 800;
   text-align: center;
 }
+
+.episodePicks__container {
+  /* border: 1px solid black; */
+  width: 100%;
+}
+
+.episodePicks__pointRow {
+  /* border: 1px solid black; */
+  width: 100%;
+  padding: 10px 10px;
+}
+
+hr {
+  background-color: #ccc;
+  height: 1px;
+  border: none;
+}
+
+.episodePicks__textEmphasis {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-top: 0;
+}
+
+.episodePicks__pointCategoryLabel {
+  margin: 0px;
+  font-size: 1.5rem;
+}
+
+@media only screen and (max-width: 600px) {
+  .leagueDetails__dashboard {
+    padding: 0px;
+  }
+  /* .leagueDetails__rosterIMG {
+    height: 100px;
+    width: 100px;
+  }
+  .leagueDetails__rosterIMG2 {
+    height: 100px;
+    width: 100px;
+  } */
+  .episodePicks__pointCategoryLabel {
+    font-size: 1rem;
+  }
+}
