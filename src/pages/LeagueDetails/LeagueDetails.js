@@ -218,7 +218,7 @@ function LeagueDetails(props) {
       (episode) => episode?.episodeNum == page
     )[0]?.episodeSum;
 
-    return episodeScore;
+    return episodeScore || 0;
   }
 
   // TAKES ALL THE USERS EPISODE ROSTERS, RENDERS THEM ON PAGE AND DISPLAYS POINTS
@@ -534,7 +534,7 @@ function LeagueDetails(props) {
                     className="episodePagination"
                     page={page}
                     onChange={handlePageChange}
-                    count={12}
+                    count={14}
                     defaultPage={1}
                     boundaryCount={1}
                     color="#0099FF"
